@@ -1,6 +1,7 @@
 import { Logger } from "../../../Misc/logger";
 import { serialize, SerializationHelper } from "../../../Misc/decorators";
 import { Vector3, TmpVectors } from "../../../Maths/math.vector";
+import { Scalar } from "../../../Maths/math.scalar";
 import { Camera } from "../../../Cameras/camera";
 import { Effect } from "../../../Materials/effect";
 import { Texture } from "../../../Materials/Textures/texture";
@@ -69,6 +70,12 @@ export class SSAO2RenderingPipeline extends PostProcessRenderPipeline {
     @serialize()
     public minZAspect: number = 0.2;
 
+    /**
+     * Change the edge sharpness of the blur
+     */
+    @serialize()
+    public edgeSharpness: number = 1.0;
+
     @serialize("samples")
     private _samples: number = 8;
     /**
@@ -124,9 +131,9 @@ export class SSAO2RenderingPipeline extends PostProcessRenderPipeline {
     */
     public set expensiveBlur(b: boolean) {
         this._blurHPostProcess.updateEffect("#define BILATERAL_BLUR\n#define BILATERAL_BLUR_H\n#define SAMPLES 16\n#define EXPENSIVE " + (b ? "1" : "0") + "\n",
-            null, ["textureSampler", "depthSampler", "normalSampler"]);
+            null, ["textureSampler", "depthSampler"]);
         this._blurVPostProcess.updateEffect("#define BILATERAL_BLUR\n#define SAMPLES 16\n#define EXPENSIVE " + (b ? "1" : "0") + "\n",
-            null, ["textureSampler", "depthSampler", "normalSampler"]);
+            null, ["textureSampler", "depthSampler"]);
         this._expensiveBlur = b;
     }
 
@@ -264,37 +271,31 @@ export class SSAO2RenderingPipeline extends PostProcessRenderPipeline {
         this._samplerOffsets = [];
         var expensive = this.expensiveBlur;
 
-        for (var i = -8; i < 8; i++) {
-            this._samplerOffsets.push(i * 2 + 0.5);
-        }
-
-        this._blurHPostProcess = new PostProcess("BlurH", "ssao2", ["outSize", "samplerOffsets", "near", "far", "radius"], ["depthSampler", "normalSampler"], ssaoRatio, null, Texture.TRILINEAR_SAMPLINGMODE, this._scene.getEngine(), false, "#define BILATERAL_BLUR\n#define BILATERAL_BLUR_H\n#define SAMPLES 16\n#define EXPENSIVE " + (expensive ? "1" : "0") + "\n");
+        this._blurHPostProcess = new PostProcess("BlurH", "ssao2", ["outSize", "edgeSharpness", "near", "far", "radius"], ["depthSampler"], ssaoRatio, null, Texture.TRILINEAR_SAMPLINGMODE, this._scene.getEngine(), false, "#define BILATERAL_BLUR\n#define BILATERAL_BLUR_H\n#define SAMPLES 16\n#define EXPENSIVE " + (expensive ? "1" : "0") + "\n");
         this._blurHPostProcess.onApply = (effect: Effect) => {
             if (!this._scene.activeCamera) {
                 return;
             }
 
-            effect.setFloat("outSize", this._blurHPostProcess.width);
+            effect.setFloat("outSize", this._ssaoCombinePostProcess.width > 0 ? this._ssaoCombinePostProcess.width : this._originalColorPostProcess.width);
             effect.setFloat("near", this._scene.activeCamera.minZ);
             effect.setFloat("far", this._scene.activeCamera.maxZ);
+            effect.setFloat("edgeSharpness", this.edgeSharpness);
             effect.setFloat("radius", this.radius);
             effect.setTexture("depthSampler", this._depthTexture);
-            effect.setTexture("normalSampler", this._normalTexture);
-            effect.setArray("samplerOffsets", this._samplerOffsets);
         };
 
-        this._blurVPostProcess = new PostProcess("BlurV", "ssao2", ["outSize", "samplerOffsets", "near", "far", "radius"], ["depthSampler", "normalSampler"], blurRatio, null, Texture.TRILINEAR_SAMPLINGMODE, this._scene.getEngine(), false, "#define BILATERAL_BLUR\n#define BILATERAL_BLUR_V\n#define SAMPLES 16\n#define EXPENSIVE " + (expensive ? "1" : "0") + "\n");
+        this._blurVPostProcess = new PostProcess("BlurV", "ssao2", ["outSize", "edgeSharpness", "near", "far", "radius"], ["depthSampler"], blurRatio, null, Texture.TRILINEAR_SAMPLINGMODE, this._scene.getEngine(), false, "#define BILATERAL_BLUR\n#define BILATERAL_BLUR_V\n#define SAMPLES 16\n#define EXPENSIVE " + (expensive ? "1" : "0") + "\n");
         this._blurVPostProcess.onApply = (effect: Effect) => {
             if (!this._scene.activeCamera) {
                 return;
             }
 
-            effect.setFloat("outSize", this._blurVPostProcess.height);
+            effect.setFloat("outSize", this._ssaoCombinePostProcess.height > 0 ? this._ssaoCombinePostProcess.height : this._originalColorPostProcess.height);
+            effect.setFloat("edgeSharpness", this.edgeSharpness);
             effect.setFloat("near", this._scene.activeCamera.minZ);
             effect.setFloat("far", this._scene.activeCamera.maxZ);
             effect.setFloat("radius", this.radius);
-            effect.setTexture("depthSampler", this._depthTexture);
-            effect.setTexture("normalSampler", this._normalTexture);
             effect.setArray("samplerOffsets", this._samplerOffsets);
 
         };
@@ -339,15 +340,22 @@ export class SSAO2RenderingPipeline extends PostProcessRenderPipeline {
         var vector;
 
         var i = 0;
+        var rand = (min: number, max: number) => {
+            return Math.random() * (max - min) + min;
+        };
         while (i < numSamples) {
-            if (numSamples < 16) {
-                vector = this._hemisphereSample_uniform(Math.random(), Math.random());
-            } else {
-                var rand = this._hammersley(i, numSamples);
-                vector = this._hemisphereSample_uniform(rand[0], rand[1]);
-            }
+            var k = new Vector3(
+                Math.random() * 2 - 1,
+                Math.random() * 2 - 1,
+                Math.random(),
+            );
+            k.normalize();
 
-            result.push(vector.x, vector.y, vector.z);
+            let scale = i / numSamples;
+            scale = Scalar.Lerp(0.1, 1.0, scale * scale);
+            k.scaleInPlace(scale);
+
+            result.push(k.x, k.y, k.z);
             i++;
         }
 
@@ -361,8 +369,8 @@ export class SSAO2RenderingPipeline extends PostProcessRenderPipeline {
 
         this._ssaoPostProcess = new PostProcess("ssao2", "ssao2",
             [
-                "sampleSphere", "samplesFactor", "randTextureTiles", "totalStrength", "radius",
-                "base", "range", "projection", "near", "far", "texelSize",
+                "sampleSphere", "samplesFactor", "totalStrength", "radius",
+                "noiseScale", "base", "range", "projection", "near", "far", "texelSize",
                 "xViewport", "yViewport", "maxZ", "minZAspect"
             ],
             ["randomSampler", "normalSampler"],
@@ -376,10 +384,10 @@ export class SSAO2RenderingPipeline extends PostProcessRenderPipeline {
             }
 
             effect.setArray3("sampleSphere", this._sampleSphere);
-            effect.setFloat("randTextureTiles", 32.0);
             effect.setFloat("samplesFactor", 1 / this.samples);
             effect.setFloat("totalStrength", this.totalStrength);
             effect.setFloat2("texelSize", 1 / this._ssaoPostProcess.width, 1 / this._ssaoPostProcess.height);
+            effect.setFloat2("noiseScale", this._ssaoPostProcess.width / 8, this._ssaoPostProcess.height / 8);
             effect.setFloat("radius", this.radius);
             effect.setFloat("maxZ", this.maxZ);
             effect.setFloat("minZAspect", this.minZAspect);
@@ -411,7 +419,7 @@ export class SSAO2RenderingPipeline extends PostProcessRenderPipeline {
     }
 
     private _createRandomTexture(): void {
-        var size = 128;
+        var size = 8;
 
         this._randomTexture = new DynamicTexture("SSAORandomTexture", size, this._scene, false, Texture.TRILINEAR_SAMPLINGMODE);
         this._randomTexture.wrapU = Texture.WRAP_ADDRESSMODE;
