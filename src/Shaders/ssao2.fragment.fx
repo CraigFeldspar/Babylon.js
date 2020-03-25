@@ -63,7 +63,7 @@ void main()
         depth = depth * depthSign;
         vec3 normal = texture2D(normalSampler, vUV).rgb; 
         float occlusion = 0.0;
-        float correctedRadius = min(radius, minZAspect * depth / near);
+        float correctedRadius = clamp(radius, minZAspect * depth / near, far);
 
         vec3 vViewRay = vec3((vUV.x * 2.0 - 1.0)*xViewport, (vUV.y * 2.0 - 1.0)*yViewport, depthSign);
         vec3 origin = vViewRay * depth;
