@@ -2937,13 +2937,13 @@ var _Exporter = /** @class */ (function () {
                 else {
                     camera.type = "perspective" /* PERSPECTIVE */;
                     camera.perspective = {};
-                    camera.perspective.aspectRatio = babylonNode.viewport.width / babylonNode.viewport.height;
+                    camera.perspective.aspectRatio = _this._babylonScene.getEngine().getRenderWidth() / _this._babylonScene.getEngine().getRenderHeight();
                     camera.perspective.yfov = babylonNode.fov;
                     camera.perspective.zfar = babylonNode.maxZ;
                     camera.perspective.znear = babylonNode.minZ;
                 }
                 _this._cameras.push(camera);
-                return _this.createCameraNode(node, babylonNode, convertToRightHandedSystem);
+                return _this.createCameraNode(node, babylonNode, convertToRightHandedSystem, _this._cameras.length - 1);
             }
             if (babylonNode instanceof babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["TransformNode"]) {
                 // Set transformation
@@ -2961,20 +2961,13 @@ var _Exporter = /** @class */ (function () {
             }
         });
     };
-    _Exporter.prototype.createCameraNode = function (node, cameraNode, convertToRightHandedSystem) {
+    _Exporter.prototype.createCameraNode = function (node, cameraNode, convertToRightHandedSystem, index) {
         if (!cameraNode.position.equalsToFloats(0, 0, 0)) {
             node.translation = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(cameraNode.position).asArray() : cameraNode.position.asArray();
         }
-        var rotationQuaternion = babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"].RotationYawPitchRoll(cameraNode.rotation.y, cameraNode.rotation.x, cameraNode.rotation.z);
-        if (cameraNode.rotationQuaternion) {
-            rotationQuaternion.multiplyInPlace(cameraNode.rotationQuaternion);
-        }
-        if (!(rotationQuaternion.x === 0 && rotationQuaternion.y === 0 && rotationQuaternion.z === 0 && rotationQuaternion.w === 1)) {
-            if (convertToRightHandedSystem) {
-                _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedQuaternionFromRef(rotationQuaternion);
-            }
-            node.rotation = rotationQuaternion.normalize().asArray();
-        }
+        var rotationQuaternion = babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"].FromRotationMatrix(cameraNode.getViewMatrix());
+        node.rotation = rotationQuaternion.normalize().asArray();
+        node.camera = index;
         return node;
     };
     _Exporter._ExtensionNames = new Array();

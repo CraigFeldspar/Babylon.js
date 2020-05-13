@@ -1563,14 +1563,14 @@ export class _Exporter {
                 } else {
                     camera.type = CameraType.PERSPECTIVE;
                     camera.perspective = {} as ICameraPerspective;
-                    camera.perspective.aspectRatio = babylonNode.viewport.width / babylonNode.viewport.height;
+                    camera.perspective.aspectRatio = this._babylonScene.getEngine().getRenderWidth() / this._babylonScene.getEngine().getRenderHeight();
                     camera.perspective.yfov = babylonNode.fov;
                     camera.perspective.zfar = babylonNode.maxZ;
                     camera.perspective.znear = babylonNode.minZ;
                 }
 
                 this._cameras.push(camera);
-                return this.createCameraNode(node, babylonNode, convertToRightHandedSystem);
+                return this.createCameraNode(node, babylonNode, convertToRightHandedSystem, this._cameras.length - 1);
             }
 
             if (babylonNode instanceof TransformNode) {
@@ -1591,21 +1591,13 @@ export class _Exporter {
         });
     }
 
-    private createCameraNode(node: INode, cameraNode: TargetCamera, convertToRightHandedSystem: boolean) : INode {
+    private createCameraNode(node: INode, cameraNode: TargetCamera, convertToRightHandedSystem: boolean, index: number) : INode {
         if (!cameraNode.position.equalsToFloats(0, 0, 0)) {
             node.translation = convertToRightHandedSystem ? _GLTFUtilities._GetRightHandedPositionVector3(cameraNode.position).asArray() : cameraNode.position.asArray();
         }
-        let rotationQuaternion = Quaternion.RotationYawPitchRoll(cameraNode.rotation.y, cameraNode.rotation.x, cameraNode.rotation.z);
-        if (cameraNode.rotationQuaternion) {
-            rotationQuaternion.multiplyInPlace(cameraNode.rotationQuaternion);
-        }
-        if (!(rotationQuaternion.x === 0 && rotationQuaternion.y === 0 && rotationQuaternion.z === 0 && rotationQuaternion.w === 1)) {
-            if (convertToRightHandedSystem) {
-                _GLTFUtilities._GetRightHandedQuaternionFromRef(rotationQuaternion);
-
-            }
-            node.rotation = rotationQuaternion.normalize().asArray();
-        }
+        let rotationQuaternion = Quaternion.FromRotationMatrix(cameraNode.getViewMatrix());
+        node.rotation = rotationQuaternion.normalize().asArray();
+        node.camera = index;
 
         return node;
     }
