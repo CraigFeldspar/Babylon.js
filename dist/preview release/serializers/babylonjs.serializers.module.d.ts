@@ -573,6 +573,10 @@ declare module "babylonjs-serializers/glTF/2.0/glTFExporter" {
          */
         private _meshes;
         /**
+         * Stores all the cameras information.
+         */
+        private _cameras;
+        /**
          * Stores all the generated material information, which represents the appearance of each primitive
          */
         _materials: IMaterial[];
@@ -857,6 +861,7 @@ declare module "babylonjs-serializers/glTF/2.0/glTFExporter" {
          * @returns glTF node
          */
         private createNodeAsync;
+        private createCameraNode;
     }
     /**
      * @hidden
@@ -1821,6 +1826,10 @@ declare module BABYLON.GLTF2.Exporter {
          */
         private _meshes;
         /**
+         * Stores all the cameras information.
+         */
+        private _cameras;
+        /**
          * Stores all the generated material information, which represents the appearance of each primitive
          */
         _materials: IMaterial[];
@@ -2105,6 +2114,7 @@ declare module BABYLON.GLTF2.Exporter {
          * @returns glTF node
          */
         private createNodeAsync;
+        private createCameraNode;
     }
     /**
      * @hidden

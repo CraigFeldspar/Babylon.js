@@ -97,10 +97,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ({
 
 /***/ "../../node_modules/tslib/tslib.es6.js":
-/*!***********************************************************!*\
-  !*** E:/Repos/Babylon.js/node_modules/tslib/tslib.es6.js ***!
-  \***********************************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault */
+/*!****************************************************!*\
+  !*** E:/babylonjs/node_modules/tslib/tslib.es6.js ***!
+  \****************************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -125,6 +125,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -193,10 +195,11 @@ function __metadata(metadataKey, metadataValue) {
 }
 
 function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 }
@@ -234,14 +237,15 @@ function __exportStar(m, exports) {
 }
 
 function __values(o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
     if (m) return m.call(o);
-    return {
+    if (o && typeof o.length === "number") return {
         next: function () {
             if (o && i >= o.length) o = void 0;
             return { value: o && o[i++], done: !o };
         }
     };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 }
 
 function __read(o, n) {
@@ -320,6 +324,21 @@ function __importStar(mod) {
 
 function __importDefault(mod) {
     return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function __classPrivateFieldGet(receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+}
+
+function __classPrivateFieldSet(receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
 }
 
 
@@ -1787,6 +1806,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * Converts Babylon Scene into glTF 2.0.
  * @hidden
@@ -1810,6 +1830,7 @@ var _Exporter = /** @class */ (function () {
         this._bufferViews = [];
         this._accessors = [];
         this._meshes = [];
+        this._cameras = [];
         this._scenes = [];
         this._nodes = [];
         this._images = [];
@@ -2372,6 +2393,9 @@ var _Exporter = /** @class */ (function () {
         if (this._meshes && this._meshes.length) {
             this._glTF.meshes = this._meshes;
         }
+        if (this._cameras && this._cameras.length) {
+            this._glTF.cameras = this._cameras;
+        }
         if (this._scenes && this._scenes.length) {
             this._glTF.scenes = this._scenes;
             this._glTF.scene = 0;
@@ -2912,7 +2936,7 @@ var _Exporter = /** @class */ (function () {
         var glTFNodeIndex;
         var glTFNode;
         var directDescendents;
-        var nodes = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spreadArrays"])(babylonScene.transformNodes, babylonScene.meshes, babylonScene.lights);
+        var nodes = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spreadArrays"])(babylonScene.transformNodes, babylonScene.meshes, babylonScene.lights, babylonScene.cameras);
         var rootNodesToLeftHanded = [];
         this._convertToRightHandedSystem = !babylonScene.useRightHandedSystem;
         this._convertToRightHandedSystemMap = {};
@@ -3082,6 +3106,23 @@ var _Exporter = /** @class */ (function () {
             if (babylonNode.name) {
                 node.name = babylonNode.name;
             }
+            if (babylonNode instanceof babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["TargetCamera"]) {
+                var camera = {};
+                if (babylonNode.mode === babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["TargetCamera"].ORTHOGRAPHIC_CAMERA) {
+                    camera.type = "orthographic" /* ORTHOGRAPHIC */;
+                    // TODO
+                }
+                else {
+                    camera.type = "perspective" /* PERSPECTIVE */;
+                    camera.perspective = {};
+                    camera.perspective.aspectRatio = babylonNode.viewport.width / babylonNode.viewport.height;
+                    camera.perspective.yfov = babylonNode.fov;
+                    camera.perspective.zfar = babylonNode.maxZ;
+                    camera.perspective.znear = babylonNode.minZ;
+                }
+                _this._cameras.push(camera);
+                return _this.createCameraNode(node, babylonNode, convertToRightHandedSystem);
+            }
             if (babylonNode instanceof babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["TransformNode"]) {
                 // Set transformation
                 _this.setNodeTransformation(node, babylonNode, convertToRightHandedSystem);
@@ -3097,6 +3138,22 @@ var _Exporter = /** @class */ (function () {
                 return node;
             }
         });
+    };
+    _Exporter.prototype.createCameraNode = function (node, cameraNode, convertToRightHandedSystem) {
+        if (!cameraNode.position.equalsToFloats(0, 0, 0)) {
+            node.translation = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(cameraNode.position).asArray() : cameraNode.position.asArray();
+        }
+        var rotationQuaternion = babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"].RotationYawPitchRoll(cameraNode.rotation.y, cameraNode.rotation.x, cameraNode.rotation.z);
+        if (cameraNode.rotationQuaternion) {
+            rotationQuaternion.multiplyInPlace(cameraNode.rotationQuaternion);
+        }
+        if (!(rotationQuaternion.x === 0 && rotationQuaternion.y === 0 && rotationQuaternion.z === 0 && rotationQuaternion.w === 1)) {
+            if (convertToRightHandedSystem) {
+                _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedQuaternionFromRef(rotationQuaternion);
+            }
+            node.rotation = rotationQuaternion.normalize().asArray();
+        }
+        return node;
     };
     _Exporter._ExtensionNames = new Array();
     _Exporter._ExtensionFactories = {};
