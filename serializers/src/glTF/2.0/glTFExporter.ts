@@ -1595,7 +1595,48 @@ export class _Exporter {
         if (!cameraNode.position.equalsToFloats(0, 0, 0)) {
             node.translation = convertToRightHandedSystem ? _GLTFUtilities._GetRightHandedPositionVector3(cameraNode.position).asArray() : cameraNode.position.asArray();
         }
-        let rotationQuaternion = Quaternion.FromRotationMatrix(cameraNode.getViewMatrix());
+
+        let target = cameraNode.getTarget();
+        let eye = cameraNode.position;
+        let up = cameraNode.upVector;
+
+        const xAxis = new Vector3();
+        const yAxis = new Vector3();
+        const zAxis = new Vector3();
+
+        // Y axis
+        target.subtractToRef(eye, yAxis);
+        yAxis.normalize();
+
+        // X axis
+        Vector3.CrossToRef(up, yAxis, xAxis);
+
+        const xSquareLength = xAxis.lengthSquared();
+        if (xSquareLength === 0) {
+            xAxis.x = 1.0;
+        } else {
+            xAxis.normalizeFromLength(Math.sqrt(xSquareLength));
+        }
+
+        // Z axis
+        Vector3.CrossToRef(xAxis, yAxis, zAxis);
+        zAxis.normalize();
+
+        // Eye angles
+        var ex = -Vector3.Dot(xAxis, eye);
+        var ey = -Vector3.Dot(yAxis, eye);
+        var ez = -Vector3.Dot(zAxis, eye);
+
+        let result = new Matrix();
+        Matrix.FromValuesToRef(
+            xAxis.x, yAxis.x, zAxis.x, 0.0,
+            xAxis.y, yAxis.y, zAxis.y, 0.0,
+            xAxis.z, yAxis.z, zAxis.z, 0.0,
+            ex, ey, ez, 1.0,
+            result
+        );
+
+        let rotationQuaternion = Quaternion.FromRotationMatrix(result);
         node.rotation = rotationQuaternion.normalize().asArray();
         node.camera = index;
 

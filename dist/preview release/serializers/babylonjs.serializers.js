@@ -3143,7 +3143,34 @@ var _Exporter = /** @class */ (function () {
         if (!cameraNode.position.equalsToFloats(0, 0, 0)) {
             node.translation = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(cameraNode.position).asArray() : cameraNode.position.asArray();
         }
-        var rotationQuaternion = babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"].FromRotationMatrix(cameraNode.getViewMatrix());
+        var target = cameraNode.getTarget();
+        var eye = cameraNode.position;
+        var up = cameraNode.upVector;
+        var xAxis = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
+        var yAxis = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
+        var zAxis = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
+        // Y axis
+        target.subtractToRef(eye, yAxis);
+        yAxis.normalize();
+        // X axis
+        babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"].CrossToRef(up, yAxis, xAxis);
+        var xSquareLength = xAxis.lengthSquared();
+        if (xSquareLength === 0) {
+            xAxis.x = 1.0;
+        }
+        else {
+            xAxis.normalizeFromLength(Math.sqrt(xSquareLength));
+        }
+        // Z axis
+        babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"].CrossToRef(xAxis, yAxis, zAxis);
+        zAxis.normalize();
+        // Eye angles
+        var ex = -babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"].Dot(xAxis, eye);
+        var ey = -babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"].Dot(yAxis, eye);
+        var ez = -babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"].Dot(zAxis, eye);
+        var result = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Matrix"]();
+        babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Matrix"].FromValuesToRef(xAxis.x, yAxis.x, zAxis.x, 0.0, xAxis.y, yAxis.y, zAxis.y, 0.0, xAxis.z, yAxis.z, zAxis.z, 0.0, ex, ey, ez, 1.0, result);
+        var rotationQuaternion = babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"].FromRotationMatrix(result);
         node.rotation = rotationQuaternion.normalize().asArray();
         node.camera = index;
         return node;
