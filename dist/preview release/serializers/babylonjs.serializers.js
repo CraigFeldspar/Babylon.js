@@ -97,10 +97,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ({
 
 /***/ "../../node_modules/tslib/tslib.es6.js":
-/*!****************************************************!*\
-  !*** E:/babylonjs/node_modules/tslib/tslib.es6.js ***!
-  \****************************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
+/*!****************************************************************!*\
+  !*** C:/Users/Ben/git/babylon/node_modules/tslib/tslib.es6.js ***!
+  \****************************************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -125,8 +125,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -195,11 +193,10 @@ function __metadata(metadataKey, metadataValue) {
 }
 
 function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 }
@@ -237,15 +234,14 @@ function __exportStar(m, exports) {
 }
 
 function __values(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
     if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
+    return {
         next: function () {
             if (o && i >= o.length) o = void 0;
             return { value: o && o[i++], done: !o };
         }
     };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 }
 
 function __read(o, n) {
@@ -324,21 +320,6 @@ function __importStar(mod) {
 
 function __importDefault(mod) {
     return (mod && mod.__esModule) ? mod : { default: mod };
-}
-
-function __classPrivateFieldGet(receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to get private field on non-instance");
-    }
-    return privateMap.get(receiver);
-}
-
-function __classPrivateFieldSet(receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to set private field on non-instance");
-    }
-    privateMap.set(receiver, value);
-    return value;
 }
 
 
@@ -3144,33 +3125,38 @@ var _Exporter = /** @class */ (function () {
             node.translation = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(cameraNode.position).asArray() : cameraNode.position.asArray();
         }
         var target = cameraNode.getTarget();
-        var eye = cameraNode.position;
+        var position = cameraNode.position;
         var up = cameraNode.upVector;
-        var xAxis = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
-        var yAxis = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
-        var zAxis = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
-        // Y axis
-        target.subtractToRef(eye, yAxis);
-        yAxis.normalize();
-        // X axis
-        babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"].CrossToRef(up, yAxis, xAxis);
-        var xSquareLength = xAxis.lengthSquared();
-        if (xSquareLength === 0) {
-            xAxis.x = 1.0;
+        var matrix = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Matrix"]();
+        var rotation = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
+        var rotationQuaternion = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"]();
+        if (position.z === target.z) {
+            position.z += 1e-5;
+        }
+        babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Matrix"].LookAtLHToRef(position, target, up, matrix);
+        matrix.invert();
+        rotation.x = Math.atan(matrix.m[6] / matrix.m[10]);
+        var vDir = target.subtract(position);
+        if (vDir.x >= 0.0) {
+            rotation.y = (-Math.atan(vDir.z / vDir.x) + Math.PI / 2.0);
         }
         else {
-            xAxis.normalizeFromLength(Math.sqrt(xSquareLength));
+            rotation.y = (-Math.atan(vDir.z / vDir.x) - Math.PI / 2.0);
         }
-        // Z axis
-        babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"].CrossToRef(xAxis, yAxis, zAxis);
-        zAxis.normalize();
-        // Eye angles
-        var ex = -babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"].Dot(xAxis, eye);
-        var ey = -babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"].Dot(yAxis, eye);
-        var ez = -babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"].Dot(zAxis, eye);
-        var result = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Matrix"]();
-        babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Matrix"].FromValuesToRef(xAxis.x, yAxis.x, zAxis.x, 0.0, xAxis.y, yAxis.y, zAxis.y, 0.0, xAxis.z, yAxis.z, zAxis.z, 0.0, ex, ey, ez, 1.0, result);
-        var rotationQuaternion = babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"].FromRotationMatrix(result);
+        rotation.z = 0;
+        if (isNaN(rotation.x)) {
+            rotation.x = 0;
+        }
+        if (isNaN(rotation.y)) {
+            rotation.y = 0;
+        }
+        if (isNaN(rotation.z)) {
+            rotation.z = 0;
+        }
+        babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"].RotationYawPitchRollToRef(rotation.y, rotation.x, rotation.z, rotationQuaternion);
+        if (convertToRightHandedSystem) {
+            _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedQuaternionFromRef(rotationQuaternion);
+        }
         node.rotation = rotationQuaternion.normalize().asArray();
         node.camera = index;
         return node;
@@ -4770,7 +4756,7 @@ var _GLTFUtilities = /** @class */ (function () {
 /*!***************************!*\
   !*** ./glTF/2.0/index.ts ***!
   \***************************/
-/*! exports provided: _GLTFAnimation, GLTFData, _Exporter, _BinaryWriter, __IGLTFExporterExtensionV2, _GLTFMaterialExporter, GLTF2Export, _GLTFUtilities, KHR_texture_transform, KHR_lights_punctual, KHR_materials_sheen */
+/*! exports provided: GLTFData, GLTF2Export, _GLTFAnimation, _Exporter, _BinaryWriter, __IGLTFExporterExtensionV2, _GLTFMaterialExporter, _GLTFUtilities, KHR_texture_transform, KHR_lights_punctual, KHR_materials_sheen */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4859,7 +4845,7 @@ var __IGLTFExporterExtension = 0; // I am here to allow dts to be created
 /*!***********************!*\
   !*** ./glTF/index.ts ***!
   \***********************/
-/*! exports provided: __IGLTFExporterExtension, _GLTFAnimation, GLTFData, _Exporter, _BinaryWriter, __IGLTFExporterExtensionV2, _GLTFMaterialExporter, GLTF2Export, _GLTFUtilities, KHR_texture_transform, KHR_lights_punctual, KHR_materials_sheen */
+/*! exports provided: __IGLTFExporterExtension, GLTFData, GLTF2Export, _GLTFAnimation, _Exporter, _BinaryWriter, __IGLTFExporterExtensionV2, _GLTFMaterialExporter, _GLTFUtilities, KHR_texture_transform, KHR_lights_punctual, KHR_materials_sheen */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4868,9 +4854,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "__IGLTFExporterExtension", function() { return _glTFFileExporter__WEBPACK_IMPORTED_MODULE_0__["__IGLTFExporterExtension"]; });
 
 /* harmony import */ var _2_0__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./2.0 */ "./glTF/2.0/index.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFAnimation", function() { return _2_0__WEBPACK_IMPORTED_MODULE_1__["_GLTFAnimation"]; });
-
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTFData", function() { return _2_0__WEBPACK_IMPORTED_MODULE_1__["GLTFData"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTF2Export", function() { return _2_0__WEBPACK_IMPORTED_MODULE_1__["GLTF2Export"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFAnimation", function() { return _2_0__WEBPACK_IMPORTED_MODULE_1__["_GLTFAnimation"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_Exporter", function() { return _2_0__WEBPACK_IMPORTED_MODULE_1__["_Exporter"]; });
 
@@ -4879,8 +4867,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "__IGLTFExporterExtensionV2", function() { return _2_0__WEBPACK_IMPORTED_MODULE_1__["__IGLTFExporterExtensionV2"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFMaterialExporter", function() { return _2_0__WEBPACK_IMPORTED_MODULE_1__["_GLTFMaterialExporter"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTF2Export", function() { return _2_0__WEBPACK_IMPORTED_MODULE_1__["GLTF2Export"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFUtilities", function() { return _2_0__WEBPACK_IMPORTED_MODULE_1__["_GLTFUtilities"]; });
 
@@ -4900,7 +4886,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************!*\
   !*** ./index.ts ***!
   \******************/
-/*! exports provided: OBJExport, __IGLTFExporterExtension, _GLTFAnimation, GLTFData, _Exporter, _BinaryWriter, __IGLTFExporterExtensionV2, _GLTFMaterialExporter, GLTF2Export, _GLTFUtilities, KHR_texture_transform, KHR_lights_punctual, KHR_materials_sheen, STLExport */
+/*! exports provided: __IGLTFExporterExtension, GLTFData, GLTF2Export, OBJExport, _GLTFAnimation, _Exporter, _BinaryWriter, __IGLTFExporterExtensionV2, _GLTFMaterialExporter, _GLTFUtilities, STLExport, KHR_texture_transform, KHR_lights_punctual, KHR_materials_sheen */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4911,9 +4897,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _glTF__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./glTF */ "./glTF/index.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "__IGLTFExporterExtension", function() { return _glTF__WEBPACK_IMPORTED_MODULE_1__["__IGLTFExporterExtension"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFAnimation", function() { return _glTF__WEBPACK_IMPORTED_MODULE_1__["_GLTFAnimation"]; });
-
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTFData", function() { return _glTF__WEBPACK_IMPORTED_MODULE_1__["GLTFData"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTF2Export", function() { return _glTF__WEBPACK_IMPORTED_MODULE_1__["GLTF2Export"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFAnimation", function() { return _glTF__WEBPACK_IMPORTED_MODULE_1__["_GLTFAnimation"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_Exporter", function() { return _glTF__WEBPACK_IMPORTED_MODULE_1__["_Exporter"]; });
 
@@ -4922,8 +4910,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "__IGLTFExporterExtensionV2", function() { return _glTF__WEBPACK_IMPORTED_MODULE_1__["__IGLTFExporterExtensionV2"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFMaterialExporter", function() { return _glTF__WEBPACK_IMPORTED_MODULE_1__["_GLTFMaterialExporter"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTF2Export", function() { return _glTF__WEBPACK_IMPORTED_MODULE_1__["GLTF2Export"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFUtilities", function() { return _glTF__WEBPACK_IMPORTED_MODULE_1__["_GLTFUtilities"]; });
 
@@ -4947,7 +4933,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************!*\
   !*** ./legacy/legacy-glTF2Serializer.ts ***!
   \******************************************/
-/*! exports provided: __IGLTFExporterExtension, _GLTFAnimation, GLTFData, _Exporter, _BinaryWriter, __IGLTFExporterExtensionV2, _GLTFMaterialExporter, GLTF2Export, _GLTFUtilities, KHR_texture_transform, KHR_lights_punctual, KHR_materials_sheen */
+/*! exports provided: __IGLTFExporterExtension, GLTFData, GLTF2Export, _GLTFAnimation, _Exporter, _BinaryWriter, __IGLTFExporterExtensionV2, _GLTFMaterialExporter, _GLTFUtilities, KHR_texture_transform, KHR_lights_punctual, KHR_materials_sheen */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4959,9 +4945,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _glTF_2_0__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../glTF/2.0 */ "./glTF/2.0/index.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "__IGLTFExporterExtension", function() { return _glTF_glTFFileExporter__WEBPACK_IMPORTED_MODULE_0__["__IGLTFExporterExtension"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFAnimation", function() { return _glTF_2_0__WEBPACK_IMPORTED_MODULE_4__["_GLTFAnimation"]; });
-
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTFData", function() { return _glTF_2_0__WEBPACK_IMPORTED_MODULE_4__["GLTFData"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTF2Export", function() { return _glTF_2_0__WEBPACK_IMPORTED_MODULE_4__["GLTF2Export"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFAnimation", function() { return _glTF_2_0__WEBPACK_IMPORTED_MODULE_4__["_GLTFAnimation"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_Exporter", function() { return _glTF_2_0__WEBPACK_IMPORTED_MODULE_4__["_Exporter"]; });
 
@@ -4970,8 +4958,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "__IGLTFExporterExtensionV2", function() { return _glTF_2_0__WEBPACK_IMPORTED_MODULE_4__["__IGLTFExporterExtensionV2"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFMaterialExporter", function() { return _glTF_2_0__WEBPACK_IMPORTED_MODULE_4__["_GLTFMaterialExporter"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTF2Export", function() { return _glTF_2_0__WEBPACK_IMPORTED_MODULE_4__["GLTF2Export"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFUtilities", function() { return _glTF_2_0__WEBPACK_IMPORTED_MODULE_4__["_GLTFUtilities"]; });
 
@@ -5091,7 +5077,7 @@ if (typeof globalObject !== "undefined") {
 /*!**************************!*\
   !*** ./legacy/legacy.ts ***!
   \**************************/
-/*! exports provided: __IGLTFExporterExtension, _GLTFAnimation, GLTFData, _Exporter, _BinaryWriter, __IGLTFExporterExtensionV2, _GLTFMaterialExporter, GLTF2Export, _GLTFUtilities, KHR_texture_transform, KHR_lights_punctual, KHR_materials_sheen, OBJExport, STLExport */
+/*! exports provided: __IGLTFExporterExtension, GLTFData, GLTF2Export, _GLTFAnimation, _Exporter, _BinaryWriter, __IGLTFExporterExtensionV2, _GLTFMaterialExporter, _GLTFUtilities, OBJExport, STLExport, KHR_texture_transform, KHR_lights_punctual, KHR_materials_sheen */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5100,9 +5086,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./legacy-glTF2Serializer */ "./legacy/legacy-glTF2Serializer.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "__IGLTFExporterExtension", function() { return _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__["__IGLTFExporterExtension"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFAnimation", function() { return _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__["_GLTFAnimation"]; });
-
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTFData", function() { return _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__["GLTFData"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTF2Export", function() { return _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__["GLTF2Export"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFAnimation", function() { return _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__["_GLTFAnimation"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_Exporter", function() { return _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__["_Exporter"]; });
 
@@ -5111,8 +5099,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "__IGLTFExporterExtensionV2", function() { return _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__["__IGLTFExporterExtensionV2"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFMaterialExporter", function() { return _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__["_GLTFMaterialExporter"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GLTF2Export", function() { return _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__["GLTF2Export"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "_GLTFUtilities", function() { return _legacy_glTF2Serializer__WEBPACK_IMPORTED_MODULE_1__["_GLTFUtilities"]; });
 

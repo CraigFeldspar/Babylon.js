@@ -1012,7 +1012,6 @@ export class _Exporter {
         if (!(rotationQuaternion.x === 0 && rotationQuaternion.y === 0 && rotationQuaternion.z === 0 && rotationQuaternion.w === 1)) {
             if (convertToRightHandedSystem) {
                 _GLTFUtilities._GetRightHandedQuaternionFromRef(rotationQuaternion);
-
             }
             node.rotation = rotationQuaternion.normalize().asArray();
         }
@@ -1595,55 +1594,56 @@ export class _Exporter {
         if (!cameraNode.position.equalsToFloats(0, 0, 0)) {
             node.translation = convertToRightHandedSystem ? _GLTFUtilities._GetRightHandedPositionVector3(cameraNode.position).asArray() : cameraNode.position.asArray();
         }
-
         let target = cameraNode.getTarget();
-        let eye = cameraNode.position;
+        let position = cameraNode.position;
         let up = cameraNode.upVector;
+        let matrix = new Matrix();
+        let rotation = new Vector3();
+        let rotationQuaternion = new Quaternion();
 
-        const xAxis = new Vector3();
-        const yAxis = new Vector3();
-        const zAxis = new Vector3();
-
-        // Y axis
-        target.subtractToRef(eye, yAxis);
-        yAxis.normalize();
-
-        // X axis
-        Vector3.CrossToRef(up, yAxis, xAxis);
-
-        const xSquareLength = xAxis.lengthSquared();
-        if (xSquareLength === 0) {
-            xAxis.x = 1.0;
-        } else {
-            xAxis.normalizeFromLength(Math.sqrt(xSquareLength));
+        if (position.z === target.z) {
+            position.z += 1e-5;
         }
 
-        // Z axis
-        Vector3.CrossToRef(xAxis, yAxis, zAxis);
-        zAxis.normalize();
+        Matrix.LookAtLHToRef(position, target, up, matrix);
+        matrix.invert();
 
-        // Eye angles
-        var ex = -Vector3.Dot(xAxis, eye);
-        var ey = -Vector3.Dot(yAxis, eye);
-        var ez = -Vector3.Dot(zAxis, eye);
+        rotation.x = Math.atan(matrix.m[6] / matrix.m[10]);
 
-        let result = new Matrix();
-        Matrix.FromValuesToRef(
-            xAxis.x, yAxis.x, zAxis.x, 0.0,
-            xAxis.y, yAxis.y, zAxis.y, 0.0,
-            xAxis.z, yAxis.z, zAxis.z, 0.0,
-            ex, ey, ez, 1.0,
-            result
-        );
+        var vDir = target.subtract(position);
 
-        let rotationQuaternion = Quaternion.FromRotationMatrix(result);
+        if (vDir.x >= 0.0) {
+            rotation.y = (-Math.atan(vDir.z / vDir.x) + Math.PI / 2.0);
+        } else {
+            rotation.y = (-Math.atan(vDir.z / vDir.x) - Math.PI / 2.0);
+        }
+
+        rotation.z = 0;
+
+        if (isNaN(rotation.x)) {
+            rotation.x = 0;
+        }
+
+        if (isNaN(rotation.y)) {
+            rotation.y = 0;
+        }
+
+        if (isNaN(rotation.z)) {
+            rotation.z = 0;
+        }
+
+        Quaternion.RotationYawPitchRollToRef(rotation.y, rotation.x, rotation.z, rotationQuaternion);
+
+        if (convertToRightHandedSystem) {
+            _GLTFUtilities._GetRightHandedQuaternionFromRef(rotationQuaternion);
+        }
+        
         node.rotation = rotationQuaternion.normalize().asArray();
         node.camera = index;
 
         return node;
     }
 }
-
 
 /**
  * @hidden
