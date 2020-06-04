@@ -994,11 +994,17 @@ export class _Exporter {
      * @param convertToRightHandedSystem Converts the values to right-handed
      */
     private setNodeTransformation(node: INode, babylonTransformNode: TransformNode, convertToRightHandedSystem: boolean): void {
+        let pivot;
         if (!babylonTransformNode.getPivotPoint().equalsToFloats(0, 0, 0)) {
             Tools.Warn("Pivot points are not supported in the glTF serializer");
+            pivot = convertToRightHandedSystem ? _GLTFUtilities._GetRightHandedPositionVector3(babylonTransformNode.getPivotPoint().clone()) : babylonTransformNode.getPivotPoint().clone();
         }
-        if (!babylonTransformNode.position.equalsToFloats(0, 0, 0)) {
-            node.translation = convertToRightHandedSystem ? _GLTFUtilities._GetRightHandedPositionVector3(babylonTransformNode.position).asArray() : babylonTransformNode.position.asArray();
+        if (!babylonTransformNode.position.equalsToFloats(0, 0, 0) || pivot) {
+            let translation = convertToRightHandedSystem ? _GLTFUtilities._GetRightHandedPositionVector3(babylonTransformNode.position) : babylonTransformNode.position;
+            if (pivot) {
+                translation.subtractInPlace(pivot);
+            }
+            node.translation = translation.asArray();
         }
 
         if (!babylonTransformNode.scaling.equalsToFloats(1, 1, 1)) {

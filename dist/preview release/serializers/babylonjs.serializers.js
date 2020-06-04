@@ -2569,11 +2569,17 @@ var _Exporter = /** @class */ (function () {
      * @param convertToRightHandedSystem Converts the values to right-handed
      */
     _Exporter.prototype.setNodeTransformation = function (node, babylonTransformNode, convertToRightHandedSystem) {
+        var pivot;
         if (!babylonTransformNode.getPivotPoint().equalsToFloats(0, 0, 0)) {
             babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Tools"].Warn("Pivot points are not supported in the glTF serializer");
+            pivot = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(babylonTransformNode.getPivotPoint().clone()) : babylonTransformNode.getPivotPoint().clone();
         }
-        if (!babylonTransformNode.position.equalsToFloats(0, 0, 0)) {
-            node.translation = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(babylonTransformNode.position).asArray() : babylonTransformNode.position.asArray();
+        if (!babylonTransformNode.position.equalsToFloats(0, 0, 0) || pivot) {
+            var translation = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(babylonTransformNode.position) : babylonTransformNode.position;
+            if (pivot) {
+                translation.subtractInPlace(pivot);
+            }
+            node.translation = translation.asArray();
         }
         if (!babylonTransformNode.scaling.equalsToFloats(1, 1, 1)) {
             node.scale = babylonTransformNode.scaling.asArray();
