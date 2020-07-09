@@ -10,6 +10,7 @@ uniform Material
     uniform vec3 vReflectivityInfos;
     uniform vec2 vMicroSurfaceSamplerInfos;
     uniform vec2 vReflectionInfos;
+    uniform vec2 vReflectionFilteringInfo;
     uniform vec3 vReflectionPosition;
     uniform vec3 vReflectionSize;
     uniform vec3 vBumpInfos;
@@ -59,6 +60,7 @@ uniform Material
     uniform mat4 sheenMatrix;
 
     uniform vec3 vRefractionMicrosurfaceInfos;
+    uniform vec2 vRefractionFilteringInfo;
     uniform vec4 vRefractionInfos;
     uniform mat4 refractionMatrix;
     uniform vec2 vThicknessInfos;
@@ -67,6 +69,10 @@ uniform Material
     uniform vec3 vDiffusionDistance;
     uniform vec4 vTintColor;
     uniform vec3 vSubSurfaceIntensity;
+    uniform float scatteringDiffusionProfile;
+
+    uniform vec4 vDetailInfos;
+    uniform mat4 detailMatrix;
 };
 
 uniform Scene {

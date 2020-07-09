@@ -13,7 +13,7 @@ interface IRenderTargetProvider {
 
 /**
  * Manages an XRSession to work with Babylon's engine
- * @see https://doc.babylonjs.com/how_to/webxr
+ * @see https://doc.babylonjs.com/how_to/webxr_session_manager
  */
 export class WebXRSessionManager implements IDisposable {
     private _referenceSpace: XRReferenceSpace;
@@ -223,9 +223,8 @@ export class WebXRSessionManager implements IDisposable {
                 this.currentFrame = xrFrame;
                 this.currentTimestamp = timestamp;
                 if (xrFrame) {
-                    this.onXRFrameObservable.notifyObservers(xrFrame);
-                    // only run the render loop if a frame exists
                     engine.framebufferDimensionsObject = this.baseLayer!;
+                    this.onXRFrameObservable.notifyObservers(xrFrame);
                     engine._renderLoop();
                     engine.framebufferDimensionsObject = null;
                 }

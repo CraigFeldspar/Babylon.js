@@ -17,12 +17,13 @@ import { IColor4Like } from '../Maths/math.like';
 import { Scene } from "../scene";
 import { RenderTargetCreationOptions } from "../Materials/Textures/renderTargetCreationOptions";
 import { IPipelineContext } from './IPipelineContext';
-import { NativeShaderProcessor } from './Native/nativeShaderProcessor';
 import { Logger } from "../Misc/logger";
 import { Constants } from './constants';
 import { ThinEngine, ISceneLike } from './thinEngine';
 import { IWebRequest } from '../Misc/interfaces/iWebRequest';
 import { EngineStore } from './engineStore';
+import { ShaderCodeInliner } from "./Processors/shaderCodeInliner";
+import { WebGL2ShaderProcessor } from '../Engines/WebGL/webGL2ShaderProcessors';
 
 interface INativeEngine {
     dispose(): void;
@@ -33,13 +34,15 @@ interface INativeEngine {
     deleteVertexArray(vertexArray: any): void;
     bindVertexArray(vertexArray: any): void;
 
-    createIndexBuffer(data: ArrayBufferView): any;
+    createIndexBuffer(data: ArrayBufferView, dynamic: boolean): any;
     deleteIndexBuffer(buffer: any): void;
     recordIndexBuffer(vertexArray: any, buffer: any): void;
+    updateDynamicIndexBuffer(buffer: any, data: ArrayBufferView, startingIndex: number): void;
 
-    createVertexBuffer(data: ArrayBufferView): any;
+    createVertexBuffer(data: ArrayBufferView, dynamic: boolean): any;
     deleteVertexBuffer(buffer: any): void;
     recordVertexBuffer(vertexArray: any, buffer: any, location: number, byteOffset: number, byteStride: number, numElements: number, type: number, normalized: boolean): void;
+    updateDynamicVertexBuffer(buffer: any, data: ArrayBufferView, byteOffset: number, byteLength: number): void;
 
     createProgram(vertexShader: string, fragmentShader: string): any;
     getUniforms(shaderProgram: any, uniformsNames: string[]): WebGLUniformLocation[];
@@ -267,7 +270,7 @@ export class NativeEngine extends Engine {
         }
 
         // Shader processor
-        this._shaderProcessor = new NativeShaderProcessor();
+        this._shaderProcessor = new WebGL2ShaderProcessor();
     }
 
     public dispose(): void {
@@ -280,7 +283,8 @@ export class NativeEngine extends Engine {
      * @hidden
      */
     protected _queueNewFrame(bindedRenderFunction: any, requester?: any): number {
-        if (requester.requestAnimationFrame) {
+        // Use the provided requestAnimationFrame, unless the requester is the window. In that case, we will default to the Babylon Native version of requestAnimationFrame.
+        if (requester.requestAnimationFrame && requester !== window) {
             requester.requestAnimationFrame(bindedRenderFunction);
         } else {
             this._native.requestAnimationFrame(bindedRenderFunction);
@@ -334,22 +338,22 @@ export class NativeEngine extends Engine {
         this._native.clear(mode);
     }
 
-    public createIndexBuffer(indices: IndicesArray): NativeDataBuffer {
+    public createIndexBuffer(indices: IndicesArray, updateable?: boolean): NativeDataBuffer {
         const data = this._normalizeIndexData(indices);
         const buffer = new NativeDataBuffer();
         buffer.references = 1;
         buffer.is32Bits = (data.BYTES_PER_ELEMENT === 4);
-        buffer.nativeIndexBuffer = this._native.createIndexBuffer(data);
+        buffer.nativeIndexBuffer = this._native.createIndexBuffer(data, updateable ?? false);
         if (buffer.nativeVertexBuffer === this.INVALID_HANDLE) {
             throw new Error("Could not create a native index buffer.");
         }
         return buffer;
     }
 
-    public createVertexBuffer(data: DataArray): NativeDataBuffer {
+    public createVertexBuffer(data: DataArray, updateable?: boolean): NativeDataBuffer {
         const buffer = new NativeDataBuffer();
         buffer.references = 1;
-        buffer.nativeVertexBuffer = this._native.createVertexBuffer(ArrayBuffer.isView(data) ? data : new Float32Array(data));
+        buffer.nativeVertexBuffer = this._native.createVertexBuffer(ArrayBuffer.isView(data) ? data : new Float32Array(data), updateable ?? false);
         if (buffer.nativeVertexBuffer === this.INVALID_HANDLE) {
             throw new Error("Could not create a native vertex buffer.");
         }
@@ -372,7 +376,15 @@ export class NativeEngine extends Engine {
                 if (vertexBuffer) {
                     const buffer = vertexBuffer.getBuffer() as Nullable<NativeDataBuffer>;
                     if (buffer) {
-                        this._native.recordVertexBuffer(vertexArray, buffer.nativeVertexBuffer, location, vertexBuffer.byteOffset, vertexBuffer.byteStride, vertexBuffer.getSize(), vertexBuffer.type, vertexBuffer.normalized);
+                        this._native.recordVertexBuffer(
+                            vertexArray,
+                            buffer.nativeVertexBuffer,
+                            location,
+                            vertexBuffer.byteOffset,
+                            vertexBuffer.byteStride,
+                            vertexBuffer.getSize(),
+                            vertexBuffer.type,
+                            vertexBuffer.normalized);
                     }
                 }
             }
@@ -471,10 +483,19 @@ export class NativeEngine extends Engine {
 
     public createShaderProgram(pipelineContext: IPipelineContext, vertexCode: string, fragmentCode: string, defines: Nullable<string>, context?: WebGLRenderingContext, transformFeedbackVaryings: Nullable<string[]> = null): any {
         this.onBeforeShaderCompilationObservable.notifyObservers(this);
-        const program = this._native.createProgram(
-            ThinEngine._ConcatenateShader(vertexCode, defines),
-            ThinEngine._ConcatenateShader(fragmentCode, defines)
-        );
+
+        const vertexInliner = new ShaderCodeInliner(vertexCode);
+        vertexInliner.processCode();
+        vertexCode = vertexInliner.code;
+
+        const fragmentInliner = new ShaderCodeInliner(fragmentCode);
+        fragmentInliner.processCode();
+        fragmentCode = fragmentInliner.code;
+
+        vertexCode = ThinEngine._ConcatenateShader(vertexCode, defines);
+        fragmentCode = ThinEngine._ConcatenateShader(fragmentCode, defines);
+
+        const program = this._native.createProgram(vertexCode, fragmentCode);
         this.onAfterShaderCompilationObservable.notifyObservers(this);
         return program;
     }
@@ -625,7 +646,7 @@ export class NativeEngine extends Engine {
      * Sets the current alpha mode
      * @param mode defines the mode to use (one of the BABYLON.Constants.ALPHA_XXX)
      * @param noDepthWriteChange defines if depth writing state should remains unchanged (false by default)
-     * @see http://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
+     * @see https://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
      */
     public setAlphaMode(mode: number, noDepthWriteChange: boolean = false): void {
         if (this._alphaMode === mode) {
@@ -643,7 +664,7 @@ export class NativeEngine extends Engine {
 
     /**
      * Gets the current alpha mode
-     * @see http://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
+     * @see https://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
      * @returns the current alpha mode
      */
     public getAlphaMode(): number {
@@ -1280,11 +1301,14 @@ export class NativeEngine extends Engine {
     }
 
     public createDynamicVertexBuffer(data: DataArray): DataBuffer {
-        throw new Error("createDynamicVertexBuffer not yet implemented.");
+        return this.createVertexBuffer(data, true);
     }
 
     public updateDynamicIndexBuffer(indexBuffer: DataBuffer, indices: IndicesArray, offset: number = 0): void {
-        throw new Error("updateDynamicIndexBuffer not yet implemented.");
+        const buffer = indexBuffer as NativeDataBuffer;
+        const data = this._normalizeIndexData(indices);
+        buffer.is32Bits = (data.BYTES_PER_ELEMENT === 4);
+        this._native.updateDynamicIndexBuffer(buffer.nativeIndexBuffer, data, offset);
     }
 
     /**
@@ -1295,7 +1319,13 @@ export class NativeEngine extends Engine {
      * @param byteLength the byte length of the data (optional)
      */
     public updateDynamicVertexBuffer(vertexBuffer: DataBuffer, data: DataArray, byteOffset?: number, byteLength?: number): void {
-        throw new Error("updateDynamicVertexBuffer not yet implemented.");
+        const buffer = vertexBuffer as NativeDataBuffer;
+        const dataView = ArrayBuffer.isView(data) ? data : new Float32Array(data);
+        this._native.updateDynamicVertexBuffer(
+            buffer.nativeVertexBuffer,
+            dataView,
+            byteOffset ?? 0,
+            byteLength ?? dataView.byteLength);
     }
 
     // TODO: Refactor to share more logic with base Engine implementation.

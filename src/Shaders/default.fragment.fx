@@ -218,6 +218,10 @@ void main(void) {
 	baseColor.rgb *= vColor.rgb;
 #endif
 
+#ifdef DETAIL
+    baseColor.rgb = baseColor.rgb * 2.0 * mix(0.5, detailColor.r, vDetailInfos.y);
+#endif
+
 #define CUSTOM_FRAGMENT_UPDATE_DIFFUSE
 
 	// Ambient color
@@ -258,7 +262,7 @@ void main(void) {
     #ifdef RGBDLIGHTMAP
         lightmapColor.rgb = fromRGBD(lightmapColor);
     #endif
-	lightmapColor.rgb *= vLightmapInfos.y
+	lightmapColor.rgb *= vLightmapInfos.y;
 #endif
 
 #include<lightFragment>[0..maxSimultaneousLights]
@@ -471,4 +475,5 @@ color.rgb = max(color.rgb, 0.);
 
 #define CUSTOM_FRAGMENT_BEFORE_FRAGCOLOR
 	gl_FragColor = color;
+
 }

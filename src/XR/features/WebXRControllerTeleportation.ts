@@ -25,6 +25,7 @@ import { Color3 } from '../../Maths/math.color';
 import { Scene } from '../../scene';
 import { UtilityLayerRenderer } from '../../Rendering/utilityLayerRenderer';
 import { PointerEventTypes } from '../../Events/pointerEvents';
+import { setAndStartTimer } from '../../Misc/timer';
 
 /**
  * The options container for the teleportation module
@@ -236,6 +237,9 @@ export class WebXRMotionControllerTeleportation extends WebXRAbstractFeature {
             return false;
         }
 
+        // Safety reset
+        this._currentTeleportationControllerId = '';
+
         this._options.xrInput.controllers.forEach(this._attachController);
         this._addNewAttachObserver(this._options.xrInput.onControllerAddedObservable, this._attachController);
         this._addNewAttachObserver(this._options.xrInput.onControllerRemovedObservable, (controller) => {
@@ -256,6 +260,7 @@ export class WebXRMotionControllerTeleportation extends WebXRAbstractFeature {
         });
 
         this._setTargetMeshVisibility(false);
+        this._currentTeleportationControllerId = '';
 
         return true;
     }
@@ -429,20 +434,14 @@ export class WebXRMotionControllerTeleportation extends WebXRAbstractFeature {
                                     controllerData.teleportationState.baseRotation = this._options.xrInput.xrCamera.rotationQuaternion.toEulerAngles().y;
                                     controllerData.teleportationState.currentRotation = 0;
                                     const timeToSelect = this._options.timeToTeleport || 3000;
-                                    let timer = 0;
-                                    const observer = this._xrSessionManager.onXRFrameObservable.add(() => {
-                                        if (!mainComponent.pressed) {
-                                            this._xrSessionManager.onXRFrameObservable.remove(observer);
-                                            return;
-                                        }
-                                        timer += this._xrSessionManager.scene.getEngine().getDeltaTime();
-                                        if (timer >= timeToSelect && this._currentTeleportationControllerId === controllerData.xrController.uniqueId && controllerData.teleportationState.forward) {
-                                            this._teleportForward(xrController.uniqueId);
-                                        }
-
-                                        // failsafe
-                                        if (timer >= timeToSelect) {
-                                            this._xrSessionManager.onXRFrameObservable.remove(observer);
+                                    setAndStartTimer({
+                                        timeout: timeToSelect,
+                                        contextObservable: this._xrSessionManager.onXRFrameObservable,
+                                        breakCondition: () => !mainComponent.pressed,
+                                        onEnded: () => {
+                                            if (this._currentTeleportationControllerId === controllerData.xrController.uniqueId && controllerData.teleportationState.forward) {
+                                                this._teleportForward(xrController.uniqueId);
+                                            }
                                         }
                                     });
                                 } else {
@@ -526,15 +525,13 @@ export class WebXRMotionControllerTeleportation extends WebXRAbstractFeature {
                     controllerData.teleportationState.baseRotation = this._options.xrInput.xrCamera.rotationQuaternion.toEulerAngles().y;
                     controllerData.teleportationState.currentRotation = 0;
                     const timeToSelect = this._options.timeToTeleport || 3000;
-                    let timer = 0;
-                    const observer = this._xrSessionManager.onXRFrameObservable.add(() => {
-                        timer += this._xrSessionManager.scene.getEngine().getDeltaTime();
-                        if (timer >= timeToSelect && this._currentTeleportationControllerId === controllerData.xrController.uniqueId && controllerData.teleportationState.forward) {
-                            this._teleportForward(xrController.uniqueId);
-                        }
-
-                        if (timer >= timeToSelect) {
-                            this._xrSessionManager.onXRFrameObservable.remove(observer);
+                    setAndStartTimer({
+                        timeout: timeToSelect,
+                        contextObservable: this._xrSessionManager.onXRFrameObservable,
+                        onEnded: () => {
+                            if (this._currentTeleportationControllerId === controllerData.xrController.uniqueId && controllerData.teleportationState.forward) {
+                                this._teleportForward(xrController.uniqueId);
+                            }
                         }
                     });
                 } else if (pointerInfo.type === PointerEventTypes.POINTERUP) {

@@ -903,88 +903,88 @@ declare module BABYLON {
         static readonly MATERIAL_CounterClockWiseSideOrientation: number;
         /**
          * Nothing
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_NothingTrigger: number;
         /**
          * On pick
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnPickTrigger: number;
         /**
          * On left pick
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnLeftPickTrigger: number;
         /**
          * On right pick
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnRightPickTrigger: number;
         /**
          * On center pick
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnCenterPickTrigger: number;
         /**
          * On pick down
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnPickDownTrigger: number;
         /**
          * On double pick
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnDoublePickTrigger: number;
         /**
          * On pick up
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnPickUpTrigger: number;
         /**
          * On pick out.
          * This trigger will only be raised if you also declared a OnPickDown
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnPickOutTrigger: number;
         /**
          * On long press
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnLongPressTrigger: number;
         /**
          * On pointer over
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnPointerOverTrigger: number;
         /**
          * On pointer out
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnPointerOutTrigger: number;
         /**
          * On every frame
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnEveryFrameTrigger: number;
         /**
          * On intersection enter
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnIntersectionEnterTrigger: number;
         /**
          * On intersection exit
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnIntersectionExitTrigger: number;
         /**
          * On key down
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnKeyDownTrigger: number;
         /**
          * On key up
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly ACTION_OnKeyUpTrigger: number;
         /**
@@ -1063,9 +1063,10 @@ declare module BABYLON {
         /**
          * This returns if the loader support the current file information.
          * @param extension defines the file extension of the file being loaded
+         * @param mimeType defines the optional mime type of the file being loaded
          * @returns true if the loader can load the specified file
          */
-        canLoad(extension: string): boolean;
+        canLoad(extension: string, mimeType?: string): boolean;
         /**
          * Uploads the cube texture data to the WebGL texture. It has already been bound.
          * @param data contains the texture data
@@ -1257,7 +1258,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to enable access to offline support
-     * @see http://doc.babylonjs.com/how_to/caching_resources_in_indexeddb
+     * @see https://doc.babylonjs.com/how_to/caching_resources_in_indexeddb
      */
     export interface IOfflineProvider {
         /**
@@ -1913,7 +1914,7 @@ declare module BABYLON {
 }
 declare module BABYLON {
     /**
-     * Represens a plane by the equation ax + by + cz + d = 0
+     * Represents a plane by the equation ax + by + cz + d = 0
      */
     export class Plane {
         private static _TmpMatrix;
@@ -2008,7 +2009,7 @@ declare module BABYLON {
          * @returns a new Plane the normal vector to this plane at the given origin point.
          * Note : the vector "normal" is updated because normalized.
          */
-        static FromPositionAndNormal(origin: DeepImmutable<Vector3>, normal: DeepImmutable<Vector3>): Plane;
+        static FromPositionAndNormal(origin: DeepImmutable<Vector3>, normal: Vector3): Plane;
         /**
          * Calculates the distance from a plane and a point
          * @param origin origin of the plane to be constructed
@@ -2408,39 +2409,32 @@ declare module BABYLON {
      * Reminder: js uses a left handed forward facing system
      */
     export class Vector3 {
-        /**
-         * Defines the first coordinates (on X axis)
-         */
-        x: number;
-        /**
-         * Defines the second coordinates (on Y axis)
-         */
-        y: number;
-        /**
-         * Defines the third coordinates (on Z axis)
-         */
-        z: number;
         private static _UpReadOnly;
         private static _ZeroReadOnly;
+        /** @hidden */
+        _x: number;
+        /** @hidden */
+        _y: number;
+        /** @hidden */
+        _z: number;
+        /** @hidden */
+        _isDirty: boolean;
+        /** Gets or sets the x coordinate */
+        get x(): number;
+        set x(value: number);
+        /** Gets or sets the y coordinate */
+        get y(): number;
+        set y(value: number);
+        /** Gets or sets the z coordinate */
+        get z(): number;
+        set z(value: number);
         /**
          * Creates a new Vector3 object from the given x, y, z (floats) coordinates.
          * @param x defines the first coordinates (on X axis)
          * @param y defines the second coordinates (on Y axis)
          * @param z defines the third coordinates (on Z axis)
          */
-        constructor(
-        /**
-         * Defines the first coordinates (on X axis)
-         */
-        x?: number, 
-        /**
-         * Defines the second coordinates (on Y axis)
-         */
-        y?: number, 
-        /**
-         * Defines the third coordinates (on Z axis)
-         */
-        z?: number);
+        constructor(x?: number, y?: number, z?: number);
         /**
          * Creates a string representation of the Vector3
          * @returns a string with the Vector3 coordinates.
@@ -2769,7 +2763,7 @@ declare module BABYLON {
          * @param reference define the Vector3 to update
          * @returns the updated Vector3
          */
-        normalizeToRef(reference: DeepImmutable<Vector3>): Vector3;
+        normalizeToRef(reference: Vector3): Vector3;
         /**
          * Creates a new Vector3 copied from the current Vector3
          * @returns the new Vector3
@@ -3045,7 +3039,7 @@ declare module BABYLON {
          * @param right defines the right operand
          * @param result defines the Vector3 where to store the result
          */
-        static CrossToRef(left: Vector3, right: Vector3, result: Vector3): void;
+        static CrossToRef(left: DeepImmutable<Vector3>, right: DeepImmutable<Vector3>, result: Vector3): void;
         /**
          * Returns a new Vector3 as the normalization of the given vector
          * @param vector defines the Vector3 to normalize
@@ -3597,17 +3591,31 @@ declare module BABYLON {
     /**
      * Class used to store quaternion data
      * @see https://en.wikipedia.org/wiki/Quaternion
-     * @see http://doc.babylonjs.com/features/position,_rotation,_scaling
+     * @see https://doc.babylonjs.com/features/position,_rotation,_scaling
      */
     export class Quaternion {
-        /** defines the first component (0 by default) */
-        x: number;
-        /** defines the second component (0 by default) */
-        y: number;
-        /** defines the third component (0 by default) */
-        z: number;
-        /** defines the fourth component (1.0 by default) */
-        w: number;
+        /** @hidden */
+        _x: number;
+        /** @hidden */
+        _y: number;
+        /** @hidden */
+        _z: number;
+        /** @hidden */
+        _w: number;
+        /** @hidden */
+        _isDirty: boolean;
+        /** Gets or sets the x coordinate */
+        get x(): number;
+        set x(value: number);
+        /** Gets or sets the y coordinate */
+        get y(): number;
+        set y(value: number);
+        /** Gets or sets the z coordinate */
+        get z(): number;
+        set z(value: number);
+        /** Gets or sets the w coordinate */
+        get w(): number;
+        set w(value: number);
         /**
          * Creates a new Quaternion from the given floats
          * @param x defines the first component (0 by default)
@@ -3615,15 +3623,7 @@ declare module BABYLON {
          * @param z defines the third component (0 by default)
          * @param w defines the fourth component (1.0 by default)
          */
-        constructor(
-        /** defines the first component (0 by default) */
-        x?: number, 
-        /** defines the second component (0 by default) */
-        y?: number, 
-        /** defines the third component (0 by default) */
-        z?: number, 
-        /** defines the fourth component (1.0 by default) */
-        w?: number);
+        constructor(x?: number, y?: number, z?: number, w?: number);
         /**
          * Gets a string representation for the current quaternion
          * @returns a string with the Quaternion coordinates
@@ -5171,7 +5171,7 @@ declare module BABYLON {
     /**
      * This represents the main contract an easing function should follow.
      * Easing functions are used throughout the animation system.
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export interface IEasingFunction {
         /**
@@ -5186,7 +5186,7 @@ declare module BABYLON {
     }
     /**
      * Base class used for every default easing function.
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class EasingFunction implements IEasingFunction {
         /**
@@ -5227,7 +5227,7 @@ declare module BABYLON {
     /**
      * Easing function with a circle shape (see link below).
      * @see https://easings.net/#easeInCirc
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class CircleEase extends EasingFunction implements IEasingFunction {
         /** @hidden */
@@ -5236,7 +5236,7 @@ declare module BABYLON {
     /**
      * Easing function with a ease back shape (see link below).
      * @see https://easings.net/#easeInBack
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class BackEase extends EasingFunction implements IEasingFunction {
         /** Defines the amplitude of the function */
@@ -5255,7 +5255,7 @@ declare module BABYLON {
     /**
      * Easing function with a bouncing shape (see link below).
      * @see https://easings.net/#easeInBounce
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class BounceEase extends EasingFunction implements IEasingFunction {
         /** Defines the number of bounces */
@@ -5279,7 +5279,7 @@ declare module BABYLON {
     /**
      * Easing function with a power of 3 shape (see link below).
      * @see https://easings.net/#easeInCubic
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class CubicEase extends EasingFunction implements IEasingFunction {
         /** @hidden */
@@ -5288,7 +5288,7 @@ declare module BABYLON {
     /**
      * Easing function with an elastic shape (see link below).
      * @see https://easings.net/#easeInElastic
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class ElasticEase extends EasingFunction implements IEasingFunction {
         /** Defines the number of oscillations*/
@@ -5312,7 +5312,7 @@ declare module BABYLON {
     /**
      * Easing function with an exponential shape (see link below).
      * @see https://easings.net/#easeInExpo
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class ExponentialEase extends EasingFunction implements IEasingFunction {
         /** Defines the exponent of the function */
@@ -5331,7 +5331,7 @@ declare module BABYLON {
     /**
      * Easing function with a power shape (see link below).
      * @see https://easings.net/#easeInQuad
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class PowerEase extends EasingFunction implements IEasingFunction {
         /** Defines the power of the function */
@@ -5350,7 +5350,7 @@ declare module BABYLON {
     /**
      * Easing function with a power of 2 shape (see link below).
      * @see https://easings.net/#easeInQuad
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class QuadraticEase extends EasingFunction implements IEasingFunction {
         /** @hidden */
@@ -5359,7 +5359,7 @@ declare module BABYLON {
     /**
      * Easing function with a power of 4 shape (see link below).
      * @see https://easings.net/#easeInQuart
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class QuarticEase extends EasingFunction implements IEasingFunction {
         /** @hidden */
@@ -5368,7 +5368,7 @@ declare module BABYLON {
     /**
      * Easing function with a power of 5 shape (see link below).
      * @see https://easings.net/#easeInQuint
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class QuinticEase extends EasingFunction implements IEasingFunction {
         /** @hidden */
@@ -5377,7 +5377,7 @@ declare module BABYLON {
     /**
      * Easing function with a sin shape (see link below).
      * @see https://easings.net/#easeInSine
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class SineEase extends EasingFunction implements IEasingFunction {
         /** @hidden */
@@ -5386,7 +5386,7 @@ declare module BABYLON {
     /**
      * Easing function with a bezier shape (see link below).
      * @see http://cubic-bezier.com/#.17,.67,.83,.67
-     * @see http://doc.babylonjs.com/babylon101/animations#easing-functions
+     * @see https://doc.babylonjs.com/babylon101/animations#easing-functions
      */
     export class BezierCurveEase extends EasingFunction implements IEasingFunction {
         /** Defines the x component of the start tangent in the bezier curve */
@@ -6314,7 +6314,7 @@ declare module BABYLON {
     /**
      * This represents the input manager used within a camera.
      * It helps dealing with all the different kind of input attached to a camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class CameraInputsManager<TCamera extends Camera> {
         /**
@@ -6346,7 +6346,7 @@ declare module BABYLON {
         constructor(camera: TCamera);
         /**
          * Add an input method to a camera
-         * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+         * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
          * @param input camera input method
          */
         add(input: ICameraInput<TCamera>): void;
@@ -7215,21 +7215,21 @@ declare module BABYLON {
         interface ThinEngine {
             /**
              * Create an uniform buffer
-             * @see http://doc.babylonjs.com/features/webgl2#uniform-buffer-objets
+             * @see https://doc.babylonjs.com/features/webgl2#uniform-buffer-objets
              * @param elements defines the content of the uniform buffer
              * @returns the webGL uniform buffer
              */
             createUniformBuffer(elements: FloatArray): DataBuffer;
             /**
              * Create a dynamic uniform buffer
-             * @see http://doc.babylonjs.com/features/webgl2#uniform-buffer-objets
+             * @see https://doc.babylonjs.com/features/webgl2#uniform-buffer-objets
              * @param elements defines the content of the uniform buffer
              * @returns the webGL uniform buffer
              */
             createDynamicUniformBuffer(elements: FloatArray): DataBuffer;
             /**
              * Update an existing uniform buffer
-             * @see http://doc.babylonjs.com/features/webgl2#uniform-buffer-objets
+             * @see https://doc.babylonjs.com/features/webgl2#uniform-buffer-objets
              * @param uniformBuffer defines the target uniform buffer
              * @param elements defines the content to update
              * @param offset defines the offset in the uniform buffer where update should start
@@ -7717,7 +7717,7 @@ declare module BABYLON {
         /**
          * Gets or sets the center of the bounding box associated with the cube texture.
          * It must define where the camera used to render the texture was set
-         * @see http://doc.babylonjs.com/how_to/reflect#using-local-cubemap-mode
+         * @see https://doc.babylonjs.com/how_to/reflect#using-local-cubemap-mode
          */
         boundingBoxPosition: Vector3;
         private _boundingBoxSize;
@@ -7730,7 +7730,7 @@ declare module BABYLON {
         set boundingBoxSize(value: Vector3);
         /**
          * Returns the bounding box size
-         * @see http://doc.babylonjs.com/how_to/reflect#using-local-cubemap-mode
+         * @see https://doc.babylonjs.com/how_to/reflect#using-local-cubemap-mode
          */
         get boundingBoxSize(): Vector3;
         protected _rotationY: number;
@@ -7753,8 +7753,6 @@ declare module BABYLON {
         private _textureMatrix;
         private _format;
         private _createPolynomials;
-        /** @hidden */
-        _prefiltered: boolean;
         /**
          * Creates a cube texture from an array of image urls
          * @param files defines an array of image urls
@@ -7791,10 +7789,6 @@ declare module BABYLON {
          * @return the cube texture
          */
         constructor(rootUrl: string, sceneOrEngine: Scene | ThinEngine, extensions?: Nullable<string[]>, noMipmap?: boolean, files?: Nullable<string[]>, onLoad?: Nullable<() => void>, onError?: Nullable<(message?: string, exception?: any) => void>, format?: number, prefiltered?: boolean, forcedExtension?: any, createPolynomials?: boolean, lodScale?: number, lodOffset?: number);
-        /**
-         * Gets a boolean indicating if the cube texture contains prefiltered mips (used to simulate roughness with PBR)
-         */
-        get isPrefiltered(): boolean;
         /**
          * Get the current class name of the texture useful for serialization or dynamic coding.
          * @returns "CubeTexture"
@@ -9347,7 +9341,7 @@ declare module BABYLON {
     }
     /**
      * The action to be carried out following a trigger
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions#available-actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions#available-actions
      */
     export class Action implements IAction {
         /** the trigger, with or without parameters, for the action */
@@ -9438,7 +9432,7 @@ declare module BABYLON {
          * Internal only
          * @hidden
          */
-        static _GetTargetProperty: (target: Node | Scene) => {
+        static _GetTargetProperty: (target: Scene | Node) => {
             name: string;
             targetType: string;
             value: string;
@@ -9658,7 +9652,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * This defines an action responsible to toggle a boolean once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class SwitchBooleanAction extends Action {
         /**
@@ -9692,7 +9686,7 @@ declare module BABYLON {
     /**
      * This defines an action responsible to set a the state field of the target
      *  to a desired value once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class SetStateAction extends Action {
         /**
@@ -9722,7 +9716,7 @@ declare module BABYLON {
     /**
      * This defines an action responsible to set a property of the target
      *  to a desired value once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class SetValueAction extends Action {
         /**
@@ -9761,7 +9755,7 @@ declare module BABYLON {
     /**
      * This defines an action responsible to increment the target value
      *  to a desired value once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class IncrementValueAction extends Action {
         /**
@@ -9799,7 +9793,7 @@ declare module BABYLON {
     }
     /**
      * This defines an action responsible to start an animation once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class PlayAnimationAction extends Action {
         /**
@@ -9840,7 +9834,7 @@ declare module BABYLON {
     }
     /**
      * This defines an action responsible to stop an animation once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class StopAnimationAction extends Action {
         private _target;
@@ -9866,7 +9860,7 @@ declare module BABYLON {
     }
     /**
      * This defines an action responsible that does nothing once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class DoNothingAction extends Action {
         /**
@@ -9888,7 +9882,7 @@ declare module BABYLON {
     }
     /**
      * This defines an action responsible to trigger several actions once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class CombineAction extends Action {
         /**
@@ -9917,7 +9911,7 @@ declare module BABYLON {
     }
     /**
      * This defines an action responsible to run code (external event) once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class ExecuteCodeAction extends Action {
         /**
@@ -9938,7 +9932,7 @@ declare module BABYLON {
     }
     /**
      * This defines an action responsible to set the parent property of the target once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class SetParentAction extends Action {
         private _parent;
@@ -9969,93 +9963,93 @@ declare module BABYLON {
     /**
      * Action Manager manages all events to be triggered on a given mesh or the global scene.
      * A single scene can have many Action Managers to handle predefined actions on specific meshes.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class ActionManager extends AbstractActionManager {
         /**
          * Nothing
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly NothingTrigger: number;
         /**
          * On pick
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnPickTrigger: number;
         /**
          * On left pick
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnLeftPickTrigger: number;
         /**
          * On right pick
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnRightPickTrigger: number;
         /**
          * On center pick
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnCenterPickTrigger: number;
         /**
          * On pick down
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnPickDownTrigger: number;
         /**
          * On double pick
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnDoublePickTrigger: number;
         /**
          * On pick up
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnPickUpTrigger: number;
         /**
          * On pick out.
          * This trigger will only be raised if you also declared a OnPickDown
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnPickOutTrigger: number;
         /**
          * On long press
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnLongPressTrigger: number;
         /**
          * On pointer over
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnPointerOverTrigger: number;
         /**
          * On pointer out
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnPointerOutTrigger: number;
         /**
          * On every frame
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnEveryFrameTrigger: number;
         /**
          * On intersection enter
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnIntersectionEnterTrigger: number;
         /**
          * On intersection exit
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnIntersectionExitTrigger: number;
         /**
          * On key down
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnKeyDownTrigger: number;
         /**
          * On key up
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions#triggers
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions#triggers
          */
         static readonly OnKeyUpTrigger: number;
         private _scene;
@@ -10148,7 +10142,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to represent a sprite
-     * @see http://doc.babylonjs.com/babylon101/sprites
+     * @see https://doc.babylonjs.com/babylon101/sprites
      */
     export class Sprite implements IAnimatable {
         /** defines the name */
@@ -10258,13 +10252,25 @@ declare module BABYLON {
          * @param delay defines the start delay (in ms)
          * @param onAnimationEnd defines a callback to call when animation ends
          */
-        playAnimation(from: number, to: number, loop: boolean, delay: number, onAnimationEnd: () => void): void;
+        playAnimation(from: number, to: number, loop: boolean, delay: number, onAnimationEnd?: Nullable<() => void>): void;
         /** Stops current animation (if any) */
         stopAnimation(): void;
         /** @hidden */
         _animate(deltaTime: number): void;
         /** Release associated resources */
         dispose(): void;
+        /**
+         * Serializes the sprite to a JSON object
+         * @returns the JSON object
+         */
+        serialize(): any;
+        /**
+         * Parses a JSON object to create a new sprite
+         * @param parsedSprite The JSON object to parse
+         * @param manager defines the hosting manager
+         * @returns the new sprite
+         */
+        static Parse(parsedSprite: any, manager: SpriteManager): Sprite;
     }
 }
 declare module BABYLON {
@@ -10297,6 +10303,8 @@ declare module BABYLON {
         bv: number;
         /** The index of the face on the mesh that was picked, or the index of the Line if the picked Mesh is a LinesMesh */
         faceId: number;
+        /** The index of the face on the subMesh that was picked, or the index of the Line if the picked Mesh is a LinesMesh */
+        subMeshFaceId: number;
         /** Id of the the submesh that was picked */
         subMeshId: number;
         /** If a sprite was picked, this will be the sprite the pick collided with */
@@ -10457,7 +10465,7 @@ declare module BABYLON {
         * @param world a matrix to transform the ray to. Default is the identity matrix.
         * @returns the new ray
         */
-        static CreateNewFromTo(origin: DeepImmutable<Vector3>, end: DeepImmutable<Vector3>, world?: DeepImmutable<Matrix>): Ray;
+        static CreateNewFromTo(origin: Vector3, end: Vector3, world?: DeepImmutable<Matrix>): Ray;
         /**
          * Transforms a ray by a matrix
          * @param ray ray to transform
@@ -10515,6 +10523,7 @@ declare module BABYLON {
         static readonly NAME_GAMEPAD: string;
         static readonly NAME_SIMPLIFICATIONQUEUE: string;
         static readonly NAME_GEOMETRYBUFFERRENDERER: string;
+        static readonly NAME_PREPASSRENDERER: string;
         static readonly NAME_DEPTHRENDERER: string;
         static readonly NAME_POSTPROCESSRENDERPIPELINEMANAGER: string;
         static readonly NAME_SPRITE: string;
@@ -10531,6 +10540,7 @@ declare module BABYLON {
         static readonly STEP_CAMERADRAWRENDERTARGET_EFFECTLAYER: number;
         static readonly STEP_BEFORECAMERADRAW_EFFECTLAYER: number;
         static readonly STEP_BEFORECAMERADRAW_LAYER: number;
+        static readonly STEP_BEFORECAMERADRAW_PREPASS: number;
         static readonly STEP_BEFORERENDERTARGETDRAW_LAYER: number;
         static readonly STEP_BEFORERENDERINGMESH_OUTLINE: number;
         static readonly STEP_AFTERRENDERINGMESH_OUTLINE: number;
@@ -10544,12 +10554,14 @@ declare module BABYLON {
         static readonly STEP_AFTERCAMERADRAW_LENSFLARESYSTEM: number;
         static readonly STEP_AFTERCAMERADRAW_EFFECTLAYER_DRAW: number;
         static readonly STEP_AFTERCAMERADRAW_LAYER: number;
+        static readonly STEP_AFTERCAMERADRAW_PREPASS: number;
         static readonly STEP_AFTERRENDER_AUDIO: number;
         static readonly STEP_GATHERRENDERTARGETS_DEPTHRENDERER: number;
         static readonly STEP_GATHERRENDERTARGETS_GEOMETRYBUFFERRENDERER: number;
         static readonly STEP_GATHERRENDERTARGETS_SHADOWGENERATOR: number;
         static readonly STEP_GATHERRENDERTARGETS_POSTPROCESSRENDERPIPELINEMANAGER: number;
         static readonly STEP_GATHERACTIVECAMERARENDERTARGETS_DEPTHRENDERER: number;
+        static readonly STEP_BEFORECLEARSTAGE_PREPASS: number;
         static readonly STEP_POINTERMOVE_SPRITE: number;
         static readonly STEP_POINTERDOWN_SPRITE: number;
         static readonly STEP_POINTERUP_SPRITE: number;
@@ -10696,7 +10708,7 @@ declare module BABYLON {
             _tempSpritePickingRay: Nullable<Ray>;
             /**
              * All of the sprite managers added to this scene
-             * @see http://doc.babylonjs.com/babylon101/sprites
+             * @see https://doc.babylonjs.com/babylon101/sprites
              */
             spriteManagers: Array<ISpriteManager>;
             /**
@@ -10854,7 +10866,7 @@ declare module BABYLON {
         scene: Scene;
         /**
          * Specifies the rendering group id for this mesh (0 by default)
-         * @see http://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered#rendering-groups
+         * @see https://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered#rendering-groups
          */
         renderingGroupId: number;
         /**
@@ -10893,11 +10905,15 @@ declare module BABYLON {
     }
     /**
      * Class used to manage multiple sprites on the same spritesheet
-     * @see http://doc.babylonjs.com/babylon101/sprites
+     * @see https://doc.babylonjs.com/babylon101/sprites
      */
     export class SpriteManager implements ISpriteManager {
         /** defines the manager's name */
         name: string;
+        /** Define the Url to load snippets */
+        static SnippetUrl: string;
+        /** Snippet ID if the manager was created from the snippet server */
+        snippetId: string;
         /** Gets the list of sprites */
         sprites: Sprite[];
         /** Gets or sets the rendering group id (0 by default) */
@@ -10952,10 +10968,9 @@ declare module BABYLON {
          */
         get scene(): Scene;
         /**
-         * Gets or sets the capacity of the manager
+         * Gets the capacity of the manager
          */
         get capacity(): number;
-        set capacity(value: number);
         /**
          * Gets or sets the spritesheet texture
          */
@@ -11022,6 +11037,37 @@ declare module BABYLON {
          * Release associated resources
          */
         dispose(): void;
+        /**
+         * Serializes the sprite manager to a JSON object
+         * @param serializeTexture defines if the texture must be serialized as well
+         * @returns the JSON object
+         */
+        serialize(serializeTexture?: boolean): any;
+        /**
+         * Parses a JSON object to create a new sprite manager.
+         * @param parsedManager The JSON object to parse
+         * @param scene The scene to create the sprite managerin
+         * @param rootUrl The root url to use to load external dependencies like texture
+         * @returns the new sprite manager
+         */
+        static Parse(parsedManager: any, scene: Scene, rootUrl: string): SpriteManager;
+        /**
+         * Creates a sprite manager from a snippet saved in a remote file
+         * @param name defines the name of the sprite manager to create (can be null or empty to use the one from the json data)
+         * @param url defines the url to load from
+         * @param scene defines the hosting scene
+         * @param rootUrl defines the root URL to use to load textures and relative dependencies
+         * @returns a promise that will resolve to the new sprite manager
+         */
+        static ParseFromFileAsync(name: Nullable<string>, url: string, scene: Scene, rootUrl?: string): Promise<SpriteManager>;
+        /**
+         * Creates a sprite manager from a snippet saved by the sprite editor
+         * @param snippetId defines the snippet to load
+         * @param scene defines the hosting scene
+         * @param rootUrl defines the root URL to use to load textures and relative dependencies
+         * @returns a promise that will resolve to the new sprite manager
+         */
+        static CreateFromSnippetAsync(snippetId: string, scene: Scene, rootUrl?: string): Promise<SpriteManager>;
     }
 }
 declare module BABYLON {
@@ -11148,124 +11194,6 @@ declare module BABYLON {
          * @param updateFunc defines the callback function used to get the final value from the selected gradients
          */
         static GetCurrentGradient(ratio: number, gradients: IValueGradient[], updateFunc: (current: IValueGradient, next: IValueGradient, scale: number) => void): void;
-    }
-}
-declare module BABYLON {
-        interface ThinEngine {
-            /**
-             * Creates a dynamic texture
-             * @param width defines the width of the texture
-             * @param height defines the height of the texture
-             * @param generateMipMaps defines if the engine should generate the mip levels
-             * @param samplingMode defines the required sampling mode (Texture.NEAREST_SAMPLINGMODE by default)
-             * @returns the dynamic texture inside an InternalTexture
-             */
-            createDynamicTexture(width: number, height: number, generateMipMaps: boolean, samplingMode: number): InternalTexture;
-            /**
-             * Update the content of a dynamic texture
-             * @param texture defines the texture to update
-             * @param canvas defines the canvas containing the source
-             * @param invertY defines if data must be stored with Y axis inverted
-             * @param premulAlpha defines if alpha is stored as premultiplied
-             * @param format defines the format of the data
-             * @param forceBindTexture if the texture should be forced to be bound eg. after a graphics context loss (Default: false)
-             */
-            updateDynamicTexture(texture: Nullable<InternalTexture>, canvas: HTMLCanvasElement | OffscreenCanvas, invertY: boolean, premulAlpha?: boolean, format?: number, forceBindTexture?: boolean): void;
-        }
-}
-declare module BABYLON {
-    /**
-     * Helper class used to generate a canvas to manipulate images
-     */
-    export class CanvasGenerator {
-        /**
-         * Create a new canvas (or offscreen canvas depending on the context)
-         * @param width defines the expected width
-         * @param height defines the expected height
-         * @return a new canvas or offscreen canvas
-         */
-        static CreateCanvas(width: number, height: number): HTMLCanvasElement | OffscreenCanvas;
-    }
-}
-declare module BABYLON {
-    /**
-     * A class extending Texture allowing drawing on a texture
-     * @see http://doc.babylonjs.com/how_to/dynamictexture
-     */
-    export class DynamicTexture extends Texture {
-        private _generateMipMaps;
-        private _canvas;
-        private _context;
-        /**
-         * Creates a DynamicTexture
-         * @param name defines the name of the texture
-         * @param options provides 3 alternatives for width and height of texture, a canvas, object with width and height properties, number for both width and height
-         * @param scene defines the scene where you want the texture
-         * @param generateMipMaps defines the use of MinMaps or not (default is false)
-         * @param samplingMode defines the sampling mode to use (default is Texture.TRILINEAR_SAMPLINGMODE)
-         * @param format defines the texture format to use (default is Engine.TEXTUREFORMAT_RGBA)
-         */
-        constructor(name: string, options: any, scene: Scene | null | undefined, generateMipMaps: boolean, samplingMode?: number, format?: number);
-        /**
-         * Get the current class name of the texture useful for serialization or dynamic coding.
-         * @returns "DynamicTexture"
-         */
-        getClassName(): string;
-        /**
-         * Gets the current state of canRescale
-         */
-        get canRescale(): boolean;
-        private _recreate;
-        /**
-         * Scales the texture
-         * @param ratio the scale factor to apply to both width and height
-         */
-        scale(ratio: number): void;
-        /**
-         * Resizes the texture
-         * @param width the new width
-         * @param height the new height
-         */
-        scaleTo(width: number, height: number): void;
-        /**
-         * Gets the context of the canvas used by the texture
-         * @returns the canvas context of the dynamic texture
-         */
-        getContext(): CanvasRenderingContext2D;
-        /**
-         * Clears the texture
-         */
-        clear(): void;
-        /**
-         * Updates the texture
-         * @param invertY defines the direction for the Y axis (default is true - y increases downwards)
-         * @param premulAlpha defines if alpha is stored as premultiplied (default is false)
-         */
-        update(invertY?: boolean, premulAlpha?: boolean): void;
-        /**
-         * Draws text onto the texture
-         * @param text defines the text to be drawn
-         * @param x defines the placement of the text from the left
-         * @param y defines the placement of the text from the top when invertY is true and from the bottom when false
-         * @param font defines the font to be used with font-style, font-size, font-name
-         * @param color defines the color used for the text
-         * @param clearColor defines the color for the canvas, use null to not overwrite canvas
-         * @param invertY defines the direction for the Y axis (default is true - y increases downwards)
-         * @param update defines whether texture is immediately update (default is true)
-         */
-        drawText(text: string, x: number | null | undefined, y: number | null | undefined, font: string, color: string | null, clearColor: string, invertY?: boolean, update?: boolean): void;
-        /**
-         * Clones the texture
-         * @returns the clone of the texture.
-         */
-        clone(): DynamicTexture;
-        /**
-         * Serializes the dynamic texture.  The scene should be ready before the dynamic texture is serialized
-         * @returns a serialized dynamic texture object
-         */
-        serialize(): any;
-        /** @hidden */
-        _rebuild(): void;
     }
 }
 declare module BABYLON {
@@ -11562,7 +11490,7 @@ declare module BABYLON {
         interface AbstractScene {
             /**
              * The list of procedural textures added to the scene
-             * @see http://doc.babylonjs.com/how_to/how_to_use_procedural_textures
+             * @see https://doc.babylonjs.com/how_to/how_to_use_procedural_textures
              */
             proceduralTextures: Array<ProceduralTexture>;
         }
@@ -11622,7 +11550,7 @@ declare module BABYLON {
     /**
      * Procedural texturing is a way to programmatically create a texture. There are 2 types of procedural textures: code-only, and code that references some classic 2D images, sometimes calmpler' images.
      * This is the base class of any Procedural texture and contains most of the shareable code.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_procedural_textures
+     * @see https://doc.babylonjs.com/how_to/how_to_use_procedural_textures
      */
     export class ProceduralTexture extends Texture {
         isCube: boolean;
@@ -11678,7 +11606,7 @@ declare module BABYLON {
          * Instantiates a new procedural texture.
          * Procedural texturing is a way to programmatically create a texture. There are 2 types of procedural textures: code-only, and code that references some classic 2D images, sometimes called 'refMaps' or 'sampler' images.
          * This is the base class of any Procedural texture and contains most of the shareable code.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_procedural_textures
+         * @see https://doc.babylonjs.com/how_to/how_to_use_procedural_textures
          * @param name  Define the name of the texture
          * @param size Define the size of the texture to create
          * @param fragment Define the fragment shader to use to generate the texture or null if it is defined later
@@ -12491,7 +12419,7 @@ declare module BABYLON {
         private _rampGradientsTexture;
         private _useRampGradients;
         /** Gets or sets a boolean indicating that ramp gradients must be used
-         * @see http://doc.babylonjs.com/babylon101/particles#ramp-gradients
+         * @see https://doc.babylonjs.com/babylon101/particles#ramp-gradients
          */
         get useRampGradients(): boolean;
         set useRampGradients(value: boolean);
@@ -14368,7 +14296,7 @@ declare module BABYLON {
          */
         getRampGradients(): Nullable<Array<Color3Gradient>>;
         /** Gets or sets a boolean indicating that ramp gradients must be used
-         * @see http://doc.babylonjs.com/babylon101/particles#ramp-gradients
+         * @see https://doc.babylonjs.com/babylon101/particles#ramp-gradients
          */
         useRampGradients: boolean;
         /**
@@ -14500,6 +14428,9 @@ declare module BABYLON {
          * Object will rotate to face the camera's position instead of orientation
          */
         static BILLBOARDMODE_USE_POSITION: number;
+        private static _TmpRotation;
+        private static _TmpScaling;
+        private static _TmpTranslation;
         private _forward;
         private _forwardInverted;
         private _up;
@@ -14970,7 +14901,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to store bone information
-     * @see http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
+     * @see https://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
      */
     export class Bone extends Node {
         /**
@@ -15655,13 +15586,13 @@ declare module BABYLON {
         reset(): void;
         /**
          * Allows the animatable to blend with current running animations
-         * @see http://doc.babylonjs.com/babylon101/animations#animation-blending
+         * @see https://doc.babylonjs.com/babylon101/animations#animation-blending
          * @param blendingSpeed defines the blending speed to use
          */
         enableBlending(blendingSpeed: number): void;
         /**
          * Disable animation blending
-         * @see http://doc.babylonjs.com/babylon101/animations#animation-blending
+         * @see https://doc.babylonjs.com/babylon101/animations#animation-blending
          */
         disableBlending(): void;
         /**
@@ -15828,7 +15759,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to handle skinning animations
-     * @see http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
+     * @see https://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
      */
     export class Skeleton implements IAnimatable {
         /** defines the skeleton name */
@@ -16036,7 +15967,7 @@ declare module BABYLON {
         /**
          * Enable animation blending for this skeleton
          * @param blendingSpeed defines the blending speed to apply
-         * @see http://doc.babylonjs.com/babylon101/animations#animation-blending
+         * @see https://doc.babylonjs.com/babylon101/animations#animation-blending
          */
         enableBlending(blendingSpeed?: number): void;
         /**
@@ -16125,6 +16056,13 @@ declare module BABYLON {
          * The source mesh of the instance
          */
         get sourceMesh(): Mesh;
+        /**
+         * Creates a new InstancedMesh object from the mesh model.
+         * @see https://doc.babylonjs.com/how_to/how_to_use_instances
+         * @param name defines the name of the new instance
+         * @returns a new InstancedMesh
+         */
+        createInstance(name: string): InstancedMesh;
         /**
          * Is this node ready to be used/rendered
          * @param completeCheck defines if a complete check (including materials and lights) has to be done (false by default)
@@ -16254,6 +16192,10 @@ declare module BABYLON {
              * @param stride defines the stride in floats
              */
             registerInstancedBuffer(kind: string, stride: number): void;
+            /**
+             * true to use the edge renderer for all instances of this mesh
+             */
+            edgesShareWithInstances: boolean;
             /** @hidden */
             _userInstancedBuffersStorage: {
                 data: {
@@ -16319,7 +16261,7 @@ declare module BABYLON {
      *
      * This returned material effects how the mesh will look based on the code in the shaders.
      *
-     * @see http://doc.babylonjs.com/how_to/shader_material
+     * @see https://doc.babylonjs.com/how_to/shader_material
      */
     export class ShaderMaterial extends Material {
         private _shaderPath;
@@ -16348,11 +16290,15 @@ declare module BABYLON {
         private _renderId;
         private _multiview;
         private _cachedDefines;
+        /** Define the Url to load snippets */
+        static SnippetUrl: string;
+        /** Snippet ID if the material was created from the snippet server */
+        snippetId: string;
         /**
          * Instantiate a new shader material.
          * The ShaderMaterial object has the necessary methods to pass data from your scene to the Vertex and Fragment Shaders and returns a material that can be applied to any mesh.
          * This returned material effects how the mesh will look based on the code in the shaders.
-         * @see http://doc.babylonjs.com/how_to/shader_material
+         * @see https://doc.babylonjs.com/how_to/shader_material
          * @param name Define the name of the material in the scene
          * @param scene Define the scene the material belongs to
          * @param shaderPath Defines  the route to the shader code in one of three ways:
@@ -16536,7 +16482,7 @@ declare module BABYLON {
          * @param useInstances specifies that instances should be used
          * @returns a boolean indicating that the submesh is ready or not
          */
-        isReadyForSubMesh(mesh: AbstractMesh, subMesh: BaseSubMesh, useInstances?: boolean): boolean;
+        isReadyForSubMesh(mesh: AbstractMesh, subMesh: SubMesh, useInstances?: boolean): boolean;
         /**
          * Checks if the material is ready to render the requested mesh
          * @param mesh Define the mesh to render
@@ -16602,6 +16548,23 @@ declare module BABYLON {
          * @returns a new material
          */
         static Parse(source: any, scene: Scene, rootUrl: string): ShaderMaterial;
+        /**
+         * Creates a new ShaderMaterial from a snippet saved in a remote file
+         * @param name defines the name of the ShaderMaterial to create (can be null or empty to use the one from the json data)
+         * @param url defines the url to load from
+         * @param scene defines the hosting scene
+         * @param rootUrl defines the root URL to use to load textures and relative dependencies
+         * @returns a promise that will resolve to the new ShaderMaterial
+         */
+        static ParseFromFileAsync(name: Nullable<string>, url: string, scene: Scene, rootUrl?: string): Promise<ShaderMaterial>;
+        /**
+         * Creates a ShaderMaterial from a snippet saved by the Inspector
+         * @param snippetId defines the snippet to load
+         * @param scene defines the hosting scene
+         * @param rootUrl defines the root URL to use to load textures and relative dependencies
+         * @returns a promise that will resolve to the new ShaderMaterial
+         */
+        static CreateFromSnippetAsync(snippetId: string, scene: Scene, rootUrl?: string): Promise<ShaderMaterial>;
     }
 }
 declare module BABYLON {
@@ -16703,7 +16666,7 @@ declare module BABYLON {
         clone(name: string, newParent?: Nullable<Node>, doNotCloneChildren?: boolean): LinesMesh;
         /**
          * Creates a new InstancedLinesMesh object from the mesh model.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_instances
+         * @see https://doc.babylonjs.com/how_to/how_to_use_instances
          * @param name defines the name of the new instance
          * @returns a new InstancedLinesMesh
          */
@@ -16741,6 +16704,10 @@ declare module BABYLON {
     };
 }
 declare module BABYLON {
+        interface Scene {
+            /** @hidden */
+            _edgeRenderLineShader: Nullable<ShaderMaterial>;
+        }
         interface AbstractMesh {
             /**
              * Gets the edgesRenderer associated with the mesh
@@ -16786,6 +16753,10 @@ declare module BABYLON {
          * @return true if ready, otherwise false.
          */
         isReady(): boolean;
+        /**
+         * List of instances to render in case the source mesh has instances
+         */
+        customInstances: SmartArray<Matrix>;
     }
     /**
      * This class is used to generate edges of the mesh that could then easily be rendered in a scene.
@@ -16810,11 +16781,19 @@ declare module BABYLON {
         protected _buffers: {
             [key: string]: Nullable<VertexBuffer>;
         };
+        protected _buffersForInstances: {
+            [key: string]: Nullable<VertexBuffer>;
+        };
         protected _checkVerticesInsteadOfIndices: boolean;
         private _meshRebuildObserver;
         private _meshDisposeObserver;
         /** Gets or sets a boolean indicating if the edgesRenderer is active */
         isEnabled: boolean;
+        /**
+         * List of instances to render in case the source mesh has instances
+         */
+        customInstances: SmartArray<Matrix>;
+        private static GetShader;
         /**
          * Creates an instance of the EdgesRenderer. It is primarily use to display edges of a mesh.
          * Beware when you use this class with complex objects as the adjacencies computation can be really long
@@ -16904,7 +16883,7 @@ declare module BABYLON {
         private _renderAlphaTest;
         private _renderTransparent;
         /** @hidden */
-        _edgesRenderers: SmartArray<IEdgesRenderer>;
+        _edgesRenderers: SmartArrayNoDuplicate<IEdgesRenderer>;
         onBeforeTransparentRendering: () => void;
         /**
          * Set the opaque sort comparison function.
@@ -18096,12 +18075,14 @@ declare module BABYLON {
     /**
      * A target camera takes a mesh or position as a target and continues to look at it while it moves.
      * This is the base of the follow, arc rotate cameras and Free camera
-     * @see http://doc.babylonjs.com/features/cameras
+     * @see https://doc.babylonjs.com/features/cameras
      */
     export class TargetCamera extends Camera {
         private static _RigCamTransformMatrix;
         private static _TargetTransformMatrix;
         private static _TargetFocalPoint;
+        private _tmpUpVector;
+        private _tmpTargetVector;
         /**
          * Define the current direction the camera is moving to
          */
@@ -18110,6 +18091,8 @@ declare module BABYLON {
          * Define the current rotation the camera is rotating to
          */
         cameraRotation: Vector2;
+        /** Gets or sets a boolean indicating that the scaling of the parent hierarchy will not be taken in account by the camera */
+        ignoreParentScaling: boolean;
         /**
          * When set, the up vector of the camera will be updated by the rotation of the camera
          */
@@ -18161,15 +18144,13 @@ declare module BABYLON {
         _referencePoint: Vector3;
         /** @hidden */
         _transformedReferencePoint: Vector3;
-        protected _globalCurrentTarget: Vector3;
-        protected _globalCurrentUpVector: Vector3;
         /** @hidden */
         _reset: () => void;
         private _defaultUp;
         /**
          * Instantiates a target camera that takes a mesh or position as a target and continues to look at it while it moves.
          * This is the base of the follow, arc rotate cameras and Free camera
-         * @see http://doc.babylonjs.com/features/cameras
+         * @see https://doc.babylonjs.com/features/cameras
          * @param name Defines the name of the camera in the scene
          * @param position Defines the start position of the camera in the scene
          * @param scene Defines the scene the camera belongs to
@@ -18328,7 +18309,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the keyboard inputs to control the movement of a free camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FreeCameraKeyboardMoveInput implements ICameraInput<FreeCamera> {
         /**
@@ -18527,7 +18508,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the mouse inputs to control the movement of a free camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FreeCameraMouseInput implements ICameraInput<FreeCamera> {
         /**
@@ -18564,7 +18545,7 @@ declare module BABYLON {
         _allowCameraRotation: boolean;
         /**
          * Manage the mouse inputs to control the movement of a free camera.
-         * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+         * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
          * @param touchEnabled Defines if touch is enabled or not
          */
         constructor(
@@ -18603,7 +18584,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the touch inputs to control the movement of a free camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FreeCameraTouchInput implements ICameraInput<FreeCamera> {
         /**
@@ -18658,7 +18639,7 @@ declare module BABYLON {
     /**
      * Default Inputs manager for the FreeCamera.
      * It groups all the default supported inputs for ease of use.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FreeCameraInputsManager extends CameraInputsManager<FreeCamera> {
         /**
@@ -18701,13 +18682,13 @@ declare module BABYLON {
     /**
      * This represents a free type of camera. It can be useful in First Person Shooter game for instance.
      * Please consider using the new UniversalCamera instead as it adds more functionality like the gamepad.
-     * @see http://doc.babylonjs.com/features/cameras#universal-camera
+     * @see https://doc.babylonjs.com/features/cameras#universal-camera
      */
     export class FreeCamera extends TargetCamera {
         /**
          * Define the collision ellipsoid of the camera.
          * This is helpful to simulate a camera body like the player body around the camera
-         * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity#arcrotatecamera
+         * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity#arcrotatecamera
          */
         ellipsoid: Vector3;
         /**
@@ -18785,7 +18766,7 @@ declare module BABYLON {
          * Instantiates a Free Camera.
          * This represents a free type of camera. It can be useful in First Person Shooter game for instance.
          * Please consider using the new UniversalCamera instead as it adds more functionality like touch to this camera.
-         * @see http://doc.babylonjs.com/features/cameras#universal-camera
+         * @see https://doc.babylonjs.com/features/cameras#universal-camera
          * @param name Define the name of the camera in the scene
          * @param position Define the start position of the camera in the scene
          * @param scene Define the scene the camera belongs to
@@ -19584,7 +19565,7 @@ declare module BABYLON {
              * Call this function to switch to webVR mode
              * Will do nothing if webVR is not supported or if there is no webVR device
              * @param options the webvr options provided to the camera. mainly used for multiview
-             * @see http://doc.babylonjs.com/how_to/webvr_camera
+             * @see https://doc.babylonjs.com/how_to/webvr_camera
              */
             enableVR(options: WebVROptions): void;
             /** @hidden */
@@ -19708,7 +19689,7 @@ declare module BABYLON {
     /**
      * This represents a WebVR camera.
      * The WebVR camera is Babylon's simple interface to interaction with Windows Mixed Reality, HTC Vive and Oculus Rift.
-     * @example http://doc.babylonjs.com/how_to/webvr_camera
+     * @example https://doc.babylonjs.com/how_to/webvr_camera
      */
     export class WebVRFreeCamera extends FreeCamera implements PoseControlled {
         private webVROptions;
@@ -19959,8 +19940,10 @@ declare module BABYLON {
          * @param defines specifies the list of active defines
          * @param useInstances defines if instances have to be turned on
          * @param useClipPlane defines if clip plane have to be turned on
+         * @param useInstances defines if instances have to be turned on
+         * @param useThinInstances defines if thin instances have to be turned on
          */
-        static PrepareDefinesForFrameBoundValues(scene: Scene, engine: Engine, defines: any, useInstances: boolean, useClipPlane?: Nullable<boolean>): void;
+        static PrepareDefinesForFrameBoundValues(scene: Scene, engine: Engine, defines: any, useInstances: boolean, useClipPlane?: Nullable<boolean>, useThinInstances?: boolean): void;
         /**
          * Prepares the defines for bones
          * @param mesh The mesh containing the geometry data we will draw
@@ -19990,6 +19973,13 @@ declare module BABYLON {
          * @param defines The defines to update
          */
         static PrepareDefinesForMultiview(scene: Scene, defines: any): void;
+        /**
+         * Prepares the defines related to the prepass
+         * @param scene The scene we are intending to draw
+         * @param defines The defines to update
+         * @param shouldRenderToMRT Indicates if this material renders to several textures in the prepass
+         */
+        static PrepareDefinesForPrePass(scene: Scene, defines: any, shouldRenderToMRT: boolean): void;
         /**
          * Prepares the defines related to the light information passed in parameter
          * @param scene The scene we are intending to draw
@@ -20360,6 +20350,10 @@ declare module BABYLON {
          * Gets or sets a boolean indicating that this connection point can be omitted
          */
         isOptional: boolean;
+        /**
+         * Gets or sets a boolean indicating that this connection point is exposed on a frame
+         */
+        isExposedOnFrame: boolean;
         /**
          * Gets or sets a string indicating that this uniform must be defined under a #ifdef
          */
@@ -21417,8 +21411,9 @@ declare module BABYLON {
          * @param nodeMaterial defines the node material requesting the update
          * @param defines defines the material defines to update
          * @param useInstances specifies that instances should be used
+         * @param subMesh defines which submesh to render
          */
-        prepareDefines(mesh: AbstractMesh, nodeMaterial: NodeMaterial, defines: NodeMaterialDefines, useInstances?: boolean): void;
+        prepareDefines(mesh: AbstractMesh, nodeMaterial: NodeMaterial, defines: NodeMaterialDefines, useInstances?: boolean, subMesh?: SubMesh): void;
         /**
          * Lets the block try to connect some inputs automatically
          * @param material defines the hosting NodeMaterial
@@ -21471,7 +21466,7 @@ declare module BABYLON {
         serialize(): any;
         /** @hidden */
         _deserialize(serializationObject: any, scene: Scene, rootUrl: string): void;
-        private _deserializePortDisplayNames;
+        private _deserializePortDisplayNamesAndExposedOnFrame;
         /**
          * Release resources
          */
@@ -21486,12 +21481,6 @@ declare module BABYLON {
     export class PushMaterial extends Material {
         protected _activeEffect: Effect;
         protected _normalMatrix: Matrix;
-        /**
-         * Gets or sets a boolean indicating that the material is allowed to do shader hot swapping.
-         * This means that the material can keep using a previous shader while a new one is being compiled.
-         * This is mostly used when shader parallel compilation is supported (true by default)
-         */
-        allowShaderHotSwapping: boolean;
         constructor(name: string, scene: Scene);
         getEffect(): Effect;
         isReady(mesh?: AbstractMesh, useInstances?: boolean): boolean;
@@ -21566,6 +21555,15 @@ declare module BABYLON {
          */
         get transform(): NodeMaterialConnectionPoint;
         protected _buildBlock(state: NodeMaterialBuildState): this;
+        /**
+         * Update defines for shader compilation
+         * @param mesh defines the mesh to be rendered
+         * @param nodeMaterial defines the node material requesting the update
+         * @param defines defines the material defines to update
+         * @param useInstances specifies that instances should be used
+         * @param subMesh defines which submesh to render
+         */
+        prepareDefines(mesh: AbstractMesh, nodeMaterial: NodeMaterial, defines: NodeMaterialDefines, useInstances?: boolean, subMesh?: SubMesh): void;
         serialize(): any;
         _deserialize(serializationObject: any, scene: Scene, rootUrl: string): void;
         protected _dumpPropertiesCode(): string;
@@ -22134,6 +22132,12 @@ declare module BABYLON {
          * @returns the post process created
          */
         createPostProcess(camera: Nullable<Camera>, options?: number | PostProcessOptions, samplingMode?: number, engine?: Engine, reusable?: boolean, textureType?: number, textureFormat?: number): PostProcess;
+        /**
+         * Create the post process effect from the material
+         * @param postProcess The post process to create the effect for
+         */
+        createEffectForPostProcess(postProcess: PostProcess): void;
+        private _createEffectOrPostProcess;
         private _createEffectForParticles;
         /**
          * Create the effect to be used as the custom effect for a particle system
@@ -22237,8 +22241,9 @@ declare module BABYLON {
          * Clear the current graph and load a new one from a serialization object
          * @param source defines the JSON representation of the material
          * @param rootUrl defines the root URL to use to load textures and relative dependencies
+         * @param merge defines whether or not the source must be merged or replace the current content
          */
-        loadFromSerialization(source: any, rootUrl?: string): void;
+        loadFromSerialization(source: any, rootUrl?: string, merge?: boolean): void;
         /**
          * Makes a duplicate of the current material.
          * @param name - name to use for the new material.
@@ -22359,9 +22364,9 @@ declare module BABYLON {
          *
          * | Value | Type                                | Description |
          * | ----- | ----------------------------------- | ----------- |
-         * | 1     | SCALEMODE_FLOOR                     | [engine.scalemode_floor](http://doc.babylonjs.com/api/classes/babylon.engine#scalemode_floor) |
-         * | 2     | SCALEMODE_NEAREST                   | [engine.scalemode_nearest](http://doc.babylonjs.com/api/classes/babylon.engine#scalemode_nearest) |
-         * | 3     | SCALEMODE_CEILING                   | [engine.scalemode_ceiling](http://doc.babylonjs.com/api/classes/babylon.engine#scalemode_ceiling) |
+         * | 1     | SCALEMODE_FLOOR                     | [engine.scalemode_floor](https://doc.babylonjs.com/api/classes/babylon.engine#scalemode_floor) |
+         * | 2     | SCALEMODE_NEAREST                   | [engine.scalemode_nearest](https://doc.babylonjs.com/api/classes/babylon.engine#scalemode_nearest) |
+         * | 3     | SCALEMODE_CEILING                   | [engine.scalemode_ceiling](https://doc.babylonjs.com/api/classes/babylon.engine#scalemode_ceiling) |
          *
          */
         scaleMode: number;
@@ -22380,7 +22385,7 @@ declare module BABYLON {
         */
         adaptScaleToCurrentViewport: boolean;
         private _camera;
-        private _scene;
+        protected _scene: Scene;
         private _engine;
         private _options;
         private _reusable;
@@ -22793,7 +22798,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * This represents a texture in babylon. It can be easily loaded from a network, base64 or html input.
-     * @see http://doc.babylonjs.com/babylon101/materials#texture
+     * @see https://doc.babylonjs.com/babylon101/materials#texture
      */
     export class Texture extends BaseTexture {
         /**
@@ -22872,37 +22877,37 @@ declare module BABYLON {
         url: Nullable<string>;
         /**
          * Define an offset on the texture to offset the u coordinates of the UVs
-         * @see http://doc.babylonjs.com/how_to/more_materials#offsetting
+         * @see https://doc.babylonjs.com/how_to/more_materials#offsetting
          */
         uOffset: number;
         /**
          * Define an offset on the texture to offset the v coordinates of the UVs
-         * @see http://doc.babylonjs.com/how_to/more_materials#offsetting
+         * @see https://doc.babylonjs.com/how_to/more_materials#offsetting
          */
         vOffset: number;
         /**
          * Define an offset on the texture to scale the u coordinates of the UVs
-         * @see http://doc.babylonjs.com/how_to/more_materials#tiling
+         * @see https://doc.babylonjs.com/how_to/more_materials#tiling
          */
         uScale: number;
         /**
          * Define an offset on the texture to scale the v coordinates of the UVs
-         * @see http://doc.babylonjs.com/how_to/more_materials#tiling
+         * @see https://doc.babylonjs.com/how_to/more_materials#tiling
          */
         vScale: number;
         /**
          * Define an offset on the texture to rotate around the u coordinates of the UVs
-         * @see http://doc.babylonjs.com/how_to/more_materials
+         * @see https://doc.babylonjs.com/how_to/more_materials
          */
         uAng: number;
         /**
          * Define an offset on the texture to rotate around the v coordinates of the UVs
-         * @see http://doc.babylonjs.com/how_to/more_materials
+         * @see https://doc.babylonjs.com/how_to/more_materials
          */
         vAng: number;
         /**
          * Define an offset on the texture to rotate around the w coordinates of the UVs (in case of 3d texture)
-         * @see http://doc.babylonjs.com/how_to/more_materials
+         * @see https://doc.babylonjs.com/how_to/more_materials
          */
         wAng: number;
         /**
@@ -22975,7 +22980,7 @@ declare module BABYLON {
         /**
          * Instantiates a new texture.
          * This represents a texture in babylon. It can be easily loaded from a network, base64 or html input.
-         * @see http://doc.babylonjs.com/babylon101/materials#texture
+         * @see https://doc.babylonjs.com/babylon101/materials#texture
          * @param url defines the url of the picture to load as a texture
          * @param sceneOrEngine defines the scene or engine the texture will belong to
          * @param noMipmap defines if the texture will require mip maps or not
@@ -23108,8 +23113,9 @@ declare module BABYLON {
          * @param forceFullscreenViewport force gl.viewport to be full screen eg. 0,0,textureWidth,textureHeight
          * @param faceIndex defines the face to render to if a cubemap is defined as the target
          * @param lodLevel defines which lod of the texture to render to
+         * @param doNotBindFrambuffer If set to true, assumes that the framebuffer has been bound previously
          */
-        directRender(postProcesses: PostProcess[], targetTexture?: Nullable<InternalTexture>, forceFullscreenViewport?: boolean, faceIndex?: number, lodLevel?: number): void;
+        directRender(postProcesses: PostProcess[], targetTexture?: Nullable<InternalTexture>, forceFullscreenViewport?: boolean, faceIndex?: number, lodLevel?: number, doNotBindFrambuffer?: boolean): void;
         /**
          * Finalize the result of the output of the postprocesses.
          * @param doNotPresent If true the result will not be displayed to the screen.
@@ -23579,6 +23585,15 @@ declare module BABYLON {
         useInstances: boolean;
     }
     /**
+     * Options passed when calling customShaderNameResolve
+     */
+    export interface ICustomShaderNameResolveOptions {
+        /**
+         * If provided, will be called two times with the vertex and fragment code so that this code can be updated before it is compiled by the GPU
+         */
+        processFinalCode?: Nullable<(shaderType: string, code: string) => string>;
+    }
+    /**
      * Base class for the main features of a material in Babylon.js
      */
     export class Material implements IAnimatable {
@@ -23668,13 +23683,29 @@ declare module BABYLON {
          */
         static readonly MATERIAL_ALPHATESTANDBLEND: number;
         /**
+         * The Whiteout method is used to blend normals.
+         * Details of the algorithm can be found here: https://blog.selfshadow.com/publications/blending-in-detail/
+         */
+        static readonly MATERIAL_NORMALBLENDMETHOD_WHITEOUT: number;
+        /**
+         * The Reoriented Normal Mapping method is used to blend normals.
+         * Details of the algorithm can be found here: https://blog.selfshadow.com/publications/blending-in-detail/
+         */
+        static readonly MATERIAL_NORMALBLENDMETHOD_RNM: number;
+        /**
          * Custom callback helping to override the default shader used in the material.
          */
-        customShaderNameResolve: (shaderName: string, uniforms: string[], uniformBuffers: string[], samplers: string[], defines: MaterialDefines | string[], attributes?: string[]) => string;
+        customShaderNameResolve: (shaderName: string, uniforms: string[], uniformBuffers: string[], samplers: string[], defines: MaterialDefines | string[], attributes?: string[], options?: ICustomShaderNameResolveOptions) => string;
         /**
          * Custom shadow depth material to use for shadow rendering instead of the in-built one
          */
         shadowDepthWrapper: Nullable<ShadowDepthWrapper>;
+        /**
+         * Gets or sets a boolean indicating that the material is allowed (if supported) to do shader hot swapping.
+         * This means that the material can keep using a previous shader while a new one is being compiled.
+         * This is mostly used when shader parallel compilation is supported (true by default)
+         */
+        allowShaderHotSwapping: boolean;
         /**
          * The ID of the material
          */
@@ -23707,6 +23738,10 @@ declare module BABYLON {
          * The state of the material
          */
         state: string;
+        /**
+         * If the material should be rendered to several textures with MRT extension
+         */
+        get shouldRenderToMRT(): boolean;
         /**
          * The alpha value of the material
          */
@@ -23992,7 +24027,7 @@ declare module BABYLON {
          * @param useInstances specifies that instances should be used
          * @returns a boolean indicating that the submesh is ready or not
          */
-        isReadyForSubMesh(mesh: AbstractMesh, subMesh: BaseSubMesh, useInstances?: boolean): boolean;
+        isReadyForSubMesh(mesh: AbstractMesh, subMesh: SubMesh, useInstances?: boolean): boolean;
         /**
          * Returns the material effect
          * @returns the effect associated with the material
@@ -24165,8 +24200,12 @@ declare module BABYLON {
          */
         protected _markAllSubMeshesAsDirty(func: (defines: MaterialDefines) => void): void;
         /**
-     * Indicates that we need to re-calculated for all submeshes
-     */
+         * Indicates that the scene should check if the rendering now needs a prepass
+         */
+        protected _markScenePrePassDirty(): void;
+        /**
+         * Indicates that we need to re-calculated for all submeshes
+         */
         protected _markAllSubMeshesAsAllDirty(): void;
         /**
          * Indicates that image processing needs to be re-calculated for all submeshes
@@ -24228,7 +24267,7 @@ declare module BABYLON {
     /**
      * A multi-material is used to apply different materials to different parts of the same object without the need of
      * separate meshes. This can be use to improve performances.
-     * @see http://doc.babylonjs.com/how_to/multi_materials
+     * @see https://doc.babylonjs.com/how_to/multi_materials
      */
     export class MultiMaterial extends Material {
         private _subMaterials;
@@ -24247,7 +24286,7 @@ declare module BABYLON {
          * Instantiates a new Multi Material
          * A multi-material is used to apply different materials to different parts of the same object without the need of
          * separate meshes. This can be use to improve performances.
-         * @see http://doc.babylonjs.com/how_to/multi_materials
+         * @see https://doc.babylonjs.com/how_to/multi_materials
          * @param name Define the name in the scene
          * @param scene Define the scene the material belongs to
          */
@@ -24277,7 +24316,7 @@ declare module BABYLON {
          * @param useInstances Define whether or not the material is used with instances
          * @returns true if ready, otherwise false
          */
-        isReadyForSubMesh(mesh: AbstractMesh, subMesh: BaseSubMesh, useInstances?: boolean): boolean;
+        isReadyForSubMesh(mesh: AbstractMesh, subMesh: SubMesh, useInstances?: boolean): boolean;
         /**
          * Clones the current material and its related sub materials
          * @param name Define the name of the newly cloned material
@@ -24308,9 +24347,19 @@ declare module BABYLON {
 }
 declare module BABYLON {
     /**
-     * Base class for submeshes
+     * Defines a subdivision inside a mesh
      */
-    export class BaseSubMesh {
+    export class SubMesh implements ICullable {
+        /** the material index to use */
+        materialIndex: number;
+        /** vertex index start */
+        verticesStart: number;
+        /** vertices count */
+        verticesCount: number;
+        /** index start */
+        indexStart: number;
+        /** indices count */
+        indexCount: number;
         /** @hidden */
         _materialDefines: Nullable<MaterialDefines>;
         /** @hidden */
@@ -24335,21 +24384,6 @@ declare module BABYLON {
          * @param defines defines the set of defines used to compile this effect
          */
         setEffect(effect: Nullable<Effect>, defines?: Nullable<MaterialDefines>): void;
-    }
-    /**
-     * Defines a subdivision inside a mesh
-     */
-    export class SubMesh extends BaseSubMesh implements ICullable {
-        /** the material index to use */
-        materialIndex: number;
-        /** vertex index start */
-        verticesStart: number;
-        /** vertices count */
-        verticesCount: number;
-        /** index start */
-        indexStart: number;
-        /** indices count */
-        indexCount: number;
         /** @hidden */
         _linesIndexCount: number;
         private _mesh;
@@ -24394,6 +24428,7 @@ declare module BABYLON {
          * @param mesh defines the parent mesh
          * @param renderingMesh defines an optional rendering mesh
          * @param createBoundingBox defines if bounding box should be created for this submesh
+         * @param addToMesh defines a boolean indicating that the submesh must be added to the mesh.subMeshes array (true by default)
          */
         constructor(
         /** the material index to use */
@@ -24405,7 +24440,7 @@ declare module BABYLON {
         /** index start */
         indexStart: number, 
         /** indices count */
-        indexCount: number, mesh: AbstractMesh, renderingMesh?: Mesh, createBoundingBox?: boolean);
+        indexCount: number, mesh: AbstractMesh, renderingMesh?: Mesh, createBoundingBox?: boolean, addToMesh?: boolean);
         /**
          * Returns true if this submesh covers the entire parent mesh
          * @ignorenaming
@@ -24433,10 +24468,21 @@ declare module BABYLON {
          */
         getRenderingMesh(): Mesh;
         /**
+         * Returns the replacement mesh of the submesh
+         * @returns the replacement mesh (could be different from parent mesh)
+         */
+        getReplacementMesh(): Nullable<AbstractMesh>;
+        /**
+         * Returns the effective mesh of the submesh
+         * @returns the effective mesh (could be different from parent mesh)
+         */
+        getEffectiveMesh(): AbstractMesh;
+        /**
          * Returns the submesh material
          * @returns null or the current material
          */
         getMaterial(): Nullable<Material>;
+        private _IsMultiMaterial;
         /**
          * Sets a new updated BoundingInfo object to the submesh
          * @param data defines an optional position array to use to determine the bounding info
@@ -24627,6 +24673,11 @@ declare module BABYLON {
         static CreateGeometryForMesh(mesh: Mesh): Geometry;
         /** Get the list of meshes using this geometry */
         get meshes(): Mesh[];
+        /**
+         * If set to true (false by defaut), the bounding info applied to the meshes sharing this geometry will be the bounding info defined at the class level
+         * and won't be computed based on the vertex positions (which is what we get when useBoundingInfoFromGeometry = false)
+         */
+        useBoundingInfoFromGeometry: boolean;
         /**
          * Creates a new geometry
          * @param id defines the unique ID
@@ -25543,7 +25594,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Defines a target to use with MorphTargetManager
-     * @see http://doc.babylonjs.com/how_to/how_to_use_morphtargets
+     * @see https://doc.babylonjs.com/how_to/how_to_use_morphtargets
      */
     export class MorphTarget implements IAnimatable {
         /** defines the name of the target */
@@ -25683,7 +25734,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * This class is used to deform meshes using morphing between different targets
-     * @see http://doc.babylonjs.com/how_to/how_to_use_morphtargets
+     * @see https://doc.babylonjs.com/how_to/how_to_use_morphtargets
      */
     export class MorphTargetManager {
         private _targets;
@@ -25796,7 +25847,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to represent a specific level of detail of a mesh
-     * @see http://doc.babylonjs.com/how_to/how_to_use_lod
+     * @see https://doc.babylonjs.com/how_to/how_to_use_lod
      */
     export class MeshLODLevel {
         /** Defines the distance where this level should start being displayed */
@@ -25813,6 +25864,20 @@ declare module BABYLON {
         distance: number, 
         /** Defines the mesh to use to render this level */
         mesh: Nullable<Mesh>);
+    }
+}
+declare module BABYLON {
+    /**
+     * Helper class used to generate a canvas to manipulate images
+     */
+    export class CanvasGenerator {
+        /**
+         * Create a new canvas (or offscreen canvas depending on the context)
+         * @param width defines the expected width
+         * @param height defines the expected height
+         * @return a new canvas or offscreen canvas
+         */
+        static CreateCanvas(width: number, height: number): HTMLCanvasElement | OffscreenCanvas;
     }
 }
 declare module BABYLON {
@@ -26327,7 +26392,7 @@ declare module BABYLON {
     }
     /**
      * Interface used to define a physics engine
-     * @see http://doc.babylonjs.com/how_to/using_the_physics_engine
+     * @see https://doc.babylonjs.com/how_to/using_the_physics_engine
      */
     export interface IPhysicsEngine {
         /**
@@ -27100,6 +27165,16 @@ declare module BABYLON {
         hardwareInstancedRendering: boolean[];
     }
     /**
+     * @hidden
+     **/
+    class _ThinInstanceDataStorage {
+        instancesCount: number;
+        matrixBuffer: Nullable<Buffer>;
+        matrixBufferSize: number;
+        matrixData: Nullable<Float32Array>;
+        boundingVectors: Array<Vector3>;
+    }
+    /**
      * Class used to represent renderable models
      */
     export class Mesh extends AbstractMesh implements IGetSetVerticesData {
@@ -27213,16 +27288,17 @@ declare module BABYLON {
          */
         set onBeforeDraw(callback: () => void);
         get hasInstances(): boolean;
+        get hasThinInstances(): boolean;
         /**
          * Gets the delay loading state of the mesh (when delay loading is turned on)
-         * @see http://doc.babylonjs.com/how_to/using_the_incremental_loading_system
+         * @see https://doc.babylonjs.com/how_to/using_the_incremental_loading_system
          */
         delayLoadState: number;
         /**
          * Gets the list of instances created from this mesh
          * it is not supposed to be modified manually.
          * Note also that the order of the InstancedMesh wihin the array is not significant and might change.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_instances
+         * @see https://doc.babylonjs.com/how_to/how_to_use_instances
          */
         instances: InstancedMesh[];
         /**
@@ -27233,12 +27309,12 @@ declare module BABYLON {
         _binaryInfo: any;
         /**
          * User defined function used to change how LOD level selection is done
-         * @see http://doc.babylonjs.com/how_to/how_to_use_lod
+         * @see https://doc.babylonjs.com/how_to/how_to_use_lod
          */
         onLODLevelSelection: (distance: number, mesh: Mesh, selectedLevel: Nullable<Mesh>) => void;
         /**
          * Gets or sets the morph target manager
-         * @see http://doc.babylonjs.com/how_to/how_to_use_morphtargets
+         * @see https://doc.babylonjs.com/how_to/how_to_use_morphtargets
          */
         get morphTargetManager(): Nullable<MorphTargetManager>;
         set morphTargetManager(value: Nullable<MorphTargetManager>);
@@ -27252,6 +27328,8 @@ declare module BABYLON {
         _delayLoadingFunction: (any: any, mesh: Mesh) => void;
         /** @hidden */
         _instanceDataStorage: _InstanceDataStorage;
+        /** @hidden */
+        _thinInstanceDataStorage: _ThinInstanceDataStorage;
         private _effectiveMaterial;
         /** @hidden */
         _shouldGenerateFlatShading: boolean;
@@ -27493,6 +27571,9 @@ declare module BABYLON {
         _preActivateForIntermediateRendering(renderId: number): Mesh;
         /** @hidden */
         _registerInstanceForRenderId(instance: InstancedMesh, renderId: number): Mesh;
+        protected _afterComputeWorldMatrix(): void;
+        /** @hidden */
+        _postActivate(): void;
         /**
          * This method recomputes and sets a new BoundingInfo to the mesh unless it is locked.
          * This means the mesh underlying bounding box and sphere are recomputed.
@@ -27592,7 +27673,7 @@ declare module BABYLON {
         updateVerticesData(kind: string, data: FloatArray, updateExtends?: boolean, makeItUnique?: boolean): AbstractMesh;
         /**
          * This method updates the vertex positions of an updatable mesh according to the `positionFunction` returned values.
-         * @see http://doc.babylonjs.com/how_to/how_to_dynamically_morph_a_mesh#other-shapes-updatemeshpositions
+         * @see https://doc.babylonjs.com/how_to/how_to_dynamically_morph_a_mesh#other-shapes-updatemeshpositions
          * @param positionFunction is a simple JS function what is passed the mesh `positions` array. It doesn't need to return anything
          * @param computeNormals is a boolean (default true) to enable/disable the mesh normal recomputation after the vertex position update
          * @returns the current mesh
@@ -27656,6 +27737,8 @@ declare module BABYLON {
         _getInstancesRenderList(subMeshId: number, isReplacementMode?: boolean): _InstancesBatch;
         /** @hidden */
         _renderWithInstances(subMesh: SubMesh, fillMode: number, batch: _InstancesBatch, effect: Effect, engine: Engine): Mesh;
+        /** @hidden */
+        _renderWithThinInstances(subMesh: SubMesh, fillMode: number, effect: Effect, engine: Engine): void;
         /** @hidden */
         _processInstancedBuffers(visibleInstances: InstancedMesh[], renderSelf: boolean): void;
         /** @hidden */
@@ -27722,7 +27805,7 @@ declare module BABYLON {
          * The mesh normals are modified using the same transformation.
          * Note that, under the hood, this method sets a new VertexBuffer each call.
          * @param transform defines the transform matrix to use
-         * @see http://doc.babylonjs.com/resources/baking_transformations
+         * @see https://doc.babylonjs.com/resources/baking_transformations
          * @returns the current mesh
          */
         bakeTransformIntoVertices(transform: Matrix): Mesh;
@@ -27731,7 +27814,7 @@ declare module BABYLON {
          * The mesh World Matrix is then reset.
          * This method returns nothing but really modifies the mesh even if it's originally not set as updatable.
          * Note that, under the hood, this method sets a new VertexBuffer each call.
-         * @see http://doc.babylonjs.com/resources/baking_transformations
+         * @see https://doc.babylonjs.com/resources/baking_transformations
          * @param bakeIndependenlyOfChildren indicates whether to preserve all child nodes' World Matrix during baking
          * @returns the current mesh
          */
@@ -27760,6 +27843,8 @@ declare module BABYLON {
         dispose(doNotRecurse?: boolean, disposeMaterialAndTextures?: boolean): void;
         /** @hidden */
         _disposeInstanceSpecificData(): void;
+        /** @hidden */
+        _disposeThinInstanceSpecificData(): void;
         /**
          * Modifies the mesh geometry according to a displacement map.
          * A displacement map is a colored image. Each pixel color value (actually a gradient computed from red, green, blue values) will give the displacement to apply to each mesh vertex.
@@ -27830,7 +27915,7 @@ declare module BABYLON {
         static _PhysicsImpostorParser(scene: Scene, physicObject: IPhysicsEnabledObject, jsonObject: any): PhysicsImpostor;
         /**
          * Creates a new InstancedMesh object from the mesh model.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_instances
+         * @see https://doc.babylonjs.com/how_to/how_to_use_instances
          * @param name defines the name of the new instance
          * @returns a new InstancedMesh
          */
@@ -27868,7 +27953,7 @@ declare module BABYLON {
         static Parse(parsedMesh: any, scene: Scene, rootUrl: string): Mesh;
         /**
          * Creates a ribbon mesh. Please consider using the same method from the MeshBuilder class instead
-         * @see http://doc.babylonjs.com/how_to/parametric_shapes
+         * @see https://doc.babylonjs.com/how_to/parametric_shapes
          * @param name defines the name of the mesh to create
          * @param pathArray is a required array of paths, what are each an array of successive Vector3. The pathArray parameter depicts the ribbon geometry.
          * @param closeArray creates a seam between the first and the last paths of the path array (default is false)
@@ -27876,8 +27961,8 @@ declare module BABYLON {
          * @param offset is taken in account only if the `pathArray` is containing a single path
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
-         * @param instance defines an instance of an existing Ribbon object to be updated with the passed `pathArray` parameter (http://doc.babylonjs.com/how_to/How_to_dynamically_morph_a_mesh#ribbon)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param instance defines an instance of an existing Ribbon object to be updated with the passed `pathArray` parameter (https://doc.babylonjs.com/how_to/How_to_dynamically_morph_a_mesh#ribbon)
          * @returns a new Mesh
          */
         static CreateRibbon(name: string, pathArray: Vector3[][], closeArray: boolean, closePath: boolean, offset: number, scene?: Scene, updatable?: boolean, sideOrientation?: number, instance?: Mesh): Mesh;
@@ -27888,7 +27973,7 @@ declare module BABYLON {
           * @param tessellation sets the number of polygon sides (positive integer, default 64). So a tessellation valued to 3 will build a triangle, to 4 a square, etc
           * @param scene defines the hosting scene
           * @param updatable defines if the mesh must be flagged as updatable
-          * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+          * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
           * @returns a new Mesh
           */
         static CreateDisc(name: string, radius: number, tessellation: number, scene?: Nullable<Scene>, updatable?: boolean, sideOrientation?: number): Mesh;
@@ -27898,7 +27983,7 @@ declare module BABYLON {
          * @param size sets the size (float) of each box side (default 1)
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
          * @returns a new Mesh
          */
         static CreateBox(name: string, size: number, scene?: Nullable<Scene>, updatable?: boolean, sideOrientation?: number): Mesh;
@@ -27909,7 +27994,7 @@ declare module BABYLON {
           * @param diameter sets the diameter size (float) of the sphere (default 1)
           * @param scene defines the hosting scene
           * @param updatable defines if the mesh must be flagged as updatable
-          * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+          * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
           * @returns a new Mesh
           */
         static CreateSphere(name: string, segments: number, diameter: number, scene?: Scene, updatable?: boolean, sideOrientation?: number): Mesh;
@@ -27932,7 +28017,7 @@ declare module BABYLON {
          * @param subdivisions sets the number of rings along the cylinder height (positive integer, default 1)
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
          * @returns a new Mesh
          */
         static CreateCylinder(name: string, height: number, diameterTop: number, diameterBottom: number, tessellation: number, subdivisions: any, scene?: Scene, updatable?: any, sideOrientation?: number): Mesh;
@@ -27944,7 +28029,7 @@ declare module BABYLON {
          * @param tessellation sets the number of torus sides (postive integer, default 16)
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
          * @returns a new Mesh
          */
         static CreateTorus(name: string, diameter: number, thickness: number, tessellation: number, scene?: Scene, updatable?: boolean, sideOrientation?: number): Mesh;
@@ -27959,7 +28044,7 @@ declare module BABYLON {
          * @param q the number of windings on Y axis (positive integers, default 3)
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
          * @returns a new Mesh
          */
         static CreateTorusKnot(name: string, radius: number, tube: number, radialSegments: number, tubularSegments: number, p: number, q: number, scene?: Scene, updatable?: boolean, sideOrientation?: number): Mesh;
@@ -27969,7 +28054,7 @@ declare module BABYLON {
          * @param points is an array successive Vector3
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param instance is an instance of an existing LineMesh object to be updated with the passed `points` parameter (http://doc.babylonjs.com/how_to/How_to_dynamically_morph_a_mesh#lines-and-dashedlines).
+         * @param instance is an instance of an existing LineMesh object to be updated with the passed `points` parameter (https://doc.babylonjs.com/how_to/How_to_dynamically_morph_a_mesh#lines-and-dashedlines).
          * @returns a new Mesh
          */
         static CreateLines(name: string, points: Vector3[], scene?: Nullable<Scene>, updatable?: boolean, instance?: Nullable<LinesMesh>): LinesMesh;
@@ -27982,7 +28067,7 @@ declare module BABYLON {
          * @param dashNb is the intended total number of dashes (positive integer, default 200)
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param instance is an instance of an existing LineMesh object to be updated with the passed `points` parameter (http://doc.babylonjs.com/how_to/How_to_dynamically_morph_a_mesh#lines-and-dashedlines)
+         * @param instance is an instance of an existing LineMesh object to be updated with the passed `points` parameter (https://doc.babylonjs.com/how_to/How_to_dynamically_morph_a_mesh#lines-and-dashedlines)
          * @returns a new Mesh
          */
         static CreateDashedLines(name: string, points: Vector3[], dashSize: number, gapSize: number, dashNb: number, scene?: Nullable<Scene>, updatable?: boolean, instance?: LinesMesh): LinesMesh;
@@ -27993,27 +28078,27 @@ declare module BABYLON {
          * You can set the mesh side orientation with the values : Mesh.FRONTSIDE (default), Mesh.BACKSIDE or Mesh.DOUBLESIDE
          * The mesh can be set to updatable with the boolean parameter `updatable` (default false) if its internal geometry is supposed to change once created.
          * Remember you can only change the shape positions, not their number when updating a polygon.
-         * @see http://doc.babylonjs.com/how_to/parametric_shapes#non-regular-polygon
+         * @see https://doc.babylonjs.com/how_to/parametric_shapes#non-regular-polygon
          * @param name defines the name of the mesh to create
          * @param shape is a required array of successive Vector3 representing the corners of the polygon in th XoZ plane, that is y = 0 for all vectors
          * @param scene defines the hosting scene
          * @param holes is a required array of arrays of successive Vector3 used to defines holes in the polygon
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
          * @param earcutInjection can be used to inject your own earcut reference
          * @returns a new Mesh
          */
         static CreatePolygon(name: string, shape: Vector3[], scene: Scene, holes?: Vector3[][], updatable?: boolean, sideOrientation?: number, earcutInjection?: any): Mesh;
         /**
          * Creates an extruded polygon mesh, with depth in the Y direction. Please consider using the same method from the MeshBuilder class instead.
-         * @see http://doc.babylonjs.com/how_to/parametric_shapes#extruded-non-regular-polygon
+         * @see https://doc.babylonjs.com/how_to/parametric_shapes#extruded-non-regular-polygon
          * @param name defines the name of the mesh to create
          * @param shape is a required array of successive Vector3 representing the corners of the polygon in th XoZ plane, that is y = 0 for all vectors
          * @param depth defines the height of extrusion
          * @param scene defines the hosting scene
          * @param holes is a required array of arrays of successive Vector3 used to defines holes in the polygon
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
          * @param earcutInjection can be used to inject your own earcut reference
          * @returns a new Mesh
          */
@@ -28021,8 +28106,8 @@ declare module BABYLON {
         /**
          * Creates an extruded shape mesh.
          * The extrusion is a parametric shape. It has no predefined shape. Its final shape will depend on the input parameters. Please consider using the same method from the MeshBuilder class instead
-         * @see http://doc.babylonjs.com/how_to/parametric_shapes
-         * @see http://doc.babylonjs.com/how_to/parametric_shapes#extruded-shapes
+         * @see https://doc.babylonjs.com/how_to/parametric_shapes
+         * @see https://doc.babylonjs.com/how_to/parametric_shapes#extruded-shapes
          * @param name defines the name of the mesh to create
          * @param shape is a required array of successive Vector3. This array depicts the shape to be extruded in its local space : the shape must be designed in the xOy plane and will be extruded along the Z axis
          * @param path is a required array of successive Vector3. This is the axis curve the shape is extruded along
@@ -28031,8 +28116,8 @@ declare module BABYLON {
          * @param cap sets the way the extruded shape is capped. Possible values : Mesh.NO_CAP (default), Mesh.CAP_START, Mesh.CAP_END, Mesh.CAP_ALL
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
-         * @param instance is an instance of an existing ExtrudedShape object to be updated with the passed `shape`, `path`, `scale` or `rotation` parameters (http://doc.babylonjs.com/how_to/How_to_dynamically_morph_a_mesh#extruded-shape)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param instance is an instance of an existing ExtrudedShape object to be updated with the passed `shape`, `path`, `scale` or `rotation` parameters (https://doc.babylonjs.com/how_to/How_to_dynamically_morph_a_mesh#extruded-shape)
          * @returns a new Mesh
          */
         static ExtrudeShape(name: string, shape: Vector3[], path: Vector3[], scale: number, rotation: number, cap: number, scene?: Nullable<Scene>, updatable?: boolean, sideOrientation?: number, instance?: Mesh): Mesh;
@@ -28041,7 +28126,7 @@ declare module BABYLON {
          * The custom extrusion is a parametric shape.
          * It has no predefined shape. Its final shape will depend on the input parameters.
          * Please consider using the same method from the MeshBuilder class instead
-         * @see http://doc.babylonjs.com/how_to/parametric_shapes#extruded-shapes
+         * @see https://doc.babylonjs.com/how_to/parametric_shapes#extruded-shapes
          * @param name defines the name of the mesh to create
          * @param shape is a required array of successive Vector3. This array depicts the shape to be extruded in its local space : the shape must be designed in the xOy plane and will be extruded along the Z axis
          * @param path is a required array of successive Vector3. This is the axis curve the shape is extruded along
@@ -28052,8 +28137,8 @@ declare module BABYLON {
          * @param cap sets the way the extruded shape is capped. Possible values : Mesh.NO_CAP (default), Mesh.CAP_START, Mesh.CAP_END, Mesh.CAP_ALL
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
-         * @param instance is an instance of an existing ExtrudedShape object to be updated with the passed `shape`, `path`, `scale` or `rotation` parameters (http://doc.babylonjs.com/how_to/how_to_dynamically_morph_a_mesh#extruded-shape)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param instance is an instance of an existing ExtrudedShape object to be updated with the passed `shape`, `path`, `scale` or `rotation` parameters (https://doc.babylonjs.com/how_to/how_to_dynamically_morph_a_mesh#extruded-shape)
          * @returns a new Mesh
          */
         static ExtrudeShapeCustom(name: string, shape: Vector3[], path: Vector3[], scaleFunction: Function, rotationFunction: Function, ribbonCloseArray: boolean, ribbonClosePath: boolean, cap: number, scene: Scene, updatable?: boolean, sideOrientation?: number, instance?: Mesh): Mesh;
@@ -28067,7 +28152,7 @@ declare module BABYLON {
          * @param tessellation is the side number of the lathe.
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
          * @returns a new Mesh
          */
         static CreateLathe(name: string, shape: Vector3[], radius: number, tessellation: number, scene: Scene, updatable?: boolean, sideOrientation?: number): Mesh;
@@ -28077,7 +28162,7 @@ declare module BABYLON {
          * @param size sets the size (float) of both sides of the plane at once (default 1)
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
          * @returns a new Mesh
          */
         static CreatePlane(name: string, size: number, scene: Scene, updatable?: boolean, sideOrientation?: number): Mesh;
@@ -28117,7 +28202,7 @@ declare module BABYLON {
         /**
          * Creates a ground mesh from a height map.
          * Please consider using the same method from the MeshBuilder class instead
-         * @see http://doc.babylonjs.com/babylon101/height_map
+         * @see https://doc.babylonjs.com/babylon101/height_map
          * @param name defines the name of the mesh to create
          * @param url sets the URL of the height map image resource
          * @param width set the ground width size
@@ -28137,7 +28222,7 @@ declare module BABYLON {
          * The tube is a parametric shape.
          * It has no predefined shape. Its final shape will depend on the input parameters.
          * Please consider using the same method from the MeshBuilder class instead
-         * @see http://doc.babylonjs.com/how_to/parametric_shapes
+         * @see https://doc.babylonjs.com/how_to/parametric_shapes
          * @param name defines the name of the mesh to create
          * @param path is a required array of successive Vector3. It is the curve used as the axis of the tube
          * @param radius sets the tube radius size
@@ -28146,8 +28231,8 @@ declare module BABYLON {
          * @param cap sets the way the extruded shape is capped. Possible values : Mesh.NO_CAP (default), Mesh.CAP_START, Mesh.CAP_END, Mesh.CAP_ALL
          * @param scene defines the hosting scene
          * @param updatable defines if the mesh must be flagged as updatable
-         * @param sideOrientation defines the mesh side orientation (http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
-         * @param instance is an instance of an existing Tube object to be updated with the passed `pathArray` parameter (http://doc.babylonjs.com/how_to/How_to_dynamically_morph_a_mesh#tube)
+         * @param sideOrientation defines the mesh side orientation (https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation)
+         * @param instance is an instance of an existing Tube object to be updated with the passed `pathArray` parameter (https://doc.babylonjs.com/how_to/How_to_dynamically_morph_a_mesh#tube)
          * @returns a new Mesh
          */
         static CreateTube(name: string, path: Vector3[], radius: number, tessellation: number, radiusFunction: {
@@ -28165,7 +28250,7 @@ declare module BABYLON {
           * * To understand how to set `faceUV` or `faceColors`, please read this by considering the right number of faces of your polyhedron, instead of only 6 for the box : https://doc.babylonjs.com/how_to/createbox_per_face_textures_and_colors
           * * The parameter `flat` (boolean, default true). If set to false, it gives the polyhedron a single global face, so less vertices and shared normals. In this case, `faceColors` and `faceUV` are ignored
           * * You can also set the mesh side orientation with the values : Mesh.FRONTSIDE (default), Mesh.BACKSIDE or Mesh.DOUBLESIDE
-          * * If you create a double-sided mesh, you can choose what parts of the texture image to crop and stick respectively on the front and the back sides with the parameters `frontUVs` and `backUVs` (Vector4). Detail here : http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation
+          * * If you create a double-sided mesh, you can choose what parts of the texture image to crop and stick respectively on the front and the back sides with the parameters `frontUVs` and `backUVs` (Vector4). Detail here : https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation
           * * The mesh can be set to updatable with the boolean parameter `updatable` (default false) if its internal geometry is supposed to change once created
           * @param name defines the name of the mesh to create
           * @param options defines the options used to create the mesh
@@ -28191,13 +28276,13 @@ declare module BABYLON {
          * * The parameter `subdivisions` sets the number of subdivisions (postive integer, default 4). The more subdivisions, the more faces on the icosphere whatever its size
          * * The parameter `flat` (boolean, default true) gives each side its own normals. Set it to false to get a smooth continuous light reflection on the surface
          * * You can also set the mesh side orientation with the values : Mesh.FRONTSIDE (default), Mesh.BACKSIDE or Mesh.DOUBLESIDE
-         * * If you create a double-sided mesh, you can choose what parts of the texture image to crop and stick respectively on the front and the back sides with the parameters `frontUVs` and `backUVs` (Vector4). Detail here : http://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation
+         * * If you create a double-sided mesh, you can choose what parts of the texture image to crop and stick respectively on the front and the back sides with the parameters `frontUVs` and `backUVs` (Vector4). Detail here : https://doc.babylonjs.com/babylon101/discover_basic_elements#side-orientation
          * * The mesh can be set to updatable with the boolean parameter `updatable` (default false) if its internal geometry is supposed to change once created
          * @param name defines the name of the mesh
          * @param options defines the options used to create the mesh
          * @param scene defines the hosting scene
          * @returns a new Mesh
-         * @see http://doc.babylonjs.com/how_to/polyhedra_shapes#icosphere
+         * @see https://doc.babylonjs.com/how_to/polyhedra_shapes#icosphere
          */
         static CreateIcoSphere(name: string, options: {
             radius?: number;
@@ -28273,7 +28358,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * This is the base class of all the camera used in the application.
-     * @see http://doc.babylonjs.com/features/cameras
+     * @see https://doc.babylonjs.com/features/cameras
      */
     export class Camera extends Node {
         /** @hidden */
@@ -28500,7 +28585,7 @@ declare module BABYLON {
         /**
          * Instantiates a new camera object.
          * This should not be used directly but through the inherited cameras: ArcRotate, Free...
-         * @see http://doc.babylonjs.com/features/cameras
+         * @see https://doc.babylonjs.com/features/cameras
          * @param name Defines the name of the camera in the scene
          * @param position Defines the position of the camera
          * @param scene Defines the scene the camera belongs too
@@ -28596,7 +28681,7 @@ declare module BABYLON {
         private _cascadePostProcessesToRigCams;
         /**
          * Attach a post process to the camera.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_postprocesses#attach-postprocess
+         * @see https://doc.babylonjs.com/how_to/how_to_use_postprocesses#attach-postprocess
          * @param postProcess The post process to attach to the camera
          * @param insertAt The position of the post process in case several of them are in use in the scene
          * @returns the position the post process has been inserted at
@@ -28604,7 +28689,7 @@ declare module BABYLON {
         attachPostProcess(postProcess: PostProcess, insertAt?: Nullable<number>): number;
         /**
          * Detach a post process to the camera.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_postprocesses#attach-postprocess
+         * @see https://doc.babylonjs.com/how_to/how_to_use_postprocesses#attach-postprocess
          * @param postProcess The post process to detach from the camera
          */
         detachPostProcess(postProcess: PostProcess): void;
@@ -28878,7 +28963,7 @@ declare module BABYLON {
     };
     /**
      * This represents all the required information to add a fresnel effect on a material:
-     * @see http://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
+     * @see https://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
      */
     export class FresnelParameters {
         private _isEnabled;
@@ -28944,6 +29029,12 @@ declare module BABYLON {
          */
         static get DiffuseTextureEnabled(): boolean;
         static set DiffuseTextureEnabled(value: boolean);
+        private static _DetailTextureEnabled;
+        /**
+         * Are detail textures enabled in the application.
+         */
+        static get DetailTextureEnabled(): boolean;
+        static set DetailTextureEnabled(value: boolean);
         private static _AmbientTextureEnabled;
         /**
          * Are ambient textures enabled in the application.
@@ -29204,12 +29295,154 @@ declare module BABYLON {
     };
 }
 declare module BABYLON {
+    /**
+     * @hidden
+     */
+    export interface IMaterialDetailMapDefines {
+        DETAIL: boolean;
+        DETAILDIRECTUV: number;
+        DETAIL_NORMALBLENDMETHOD: number;
+        /** @hidden */
+        _areTexturesDirty: boolean;
+    }
+    /**
+     * Define the code related to the detail map parameters of a material
+     *
+     * Inspired from:
+     *   Unity: https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-definition@9.0/manual/Mask-Map-and-Detail-Map.html and https://docs.unity3d.com/Manual/StandardShaderMaterialParameterDetail.html
+     *   Unreal: https://docs.unrealengine.com/en-US/Engine/Rendering/Materials/HowTo/DetailTexturing/index.html
+     *   Cryengine: https://docs.cryengine.com/display/SDKDOC2/Detail+Maps
+     */
+    export class DetailMapConfiguration {
+        private _texture;
+        /**
+         * The detail texture of the material.
+         */
+        texture: Nullable<BaseTexture>;
+        /**
+         * Defines how strongly the detail diffuse/albedo channel is blended with the regular diffuse/albedo texture
+         * Bigger values mean stronger blending
+         */
+        diffuseBlendLevel: number;
+        /**
+         * Defines how strongly the detail roughness channel is blended with the regular roughness value
+         * Bigger values mean stronger blending. Only used with PBR materials
+         */
+        roughnessBlendLevel: number;
+        /**
+         * Defines how strong the bump effect from the detail map is
+         * Bigger values mean stronger effect
+         */
+        bumpLevel: number;
+        private _normalBlendMethod;
+        /**
+         * The method used to blend the bump and detail normals together
+         */
+        normalBlendMethod: number;
+        private _isEnabled;
+        /**
+         * Enable or disable the detail map on this material
+         */
+        isEnabled: boolean;
+        /** @hidden */
+        private _internalMarkAllSubMeshesAsTexturesDirty;
+        /** @hidden */
+        _markAllSubMeshesAsTexturesDirty(): void;
+        /**
+         * Instantiate a new detail map
+         * @param markAllSubMeshesAsTexturesDirty Callback to flag the material to dirty
+         */
+        constructor(markAllSubMeshesAsTexturesDirty: () => void);
+        /**
+         * Gets whether the submesh is ready to be used or not.
+         * @param defines the list of "defines" to update.
+         * @param scene defines the scene the material belongs to.
+         * @returns - boolean indicating that the submesh is ready or not.
+         */
+        isReadyForSubMesh(defines: IMaterialDetailMapDefines, scene: Scene): boolean;
+        /**
+         * Update the defines for detail map usage
+         * @param defines the list of "defines" to update.
+         * @param scene defines the scene the material belongs to.
+         */
+        prepareDefines(defines: IMaterialDetailMapDefines, scene: Scene): void;
+        /**
+         * Binds the material data.
+         * @param uniformBuffer defines the Uniform buffer to fill in.
+         * @param scene defines the scene the material belongs to.
+         * @param isFrozen defines whether the material is frozen or not.
+         */
+        bindForSubMesh(uniformBuffer: UniformBuffer, scene: Scene, isFrozen: boolean): void;
+        /**
+         * Checks to see if a texture is used in the material.
+         * @param texture - Base texture to use.
+         * @returns - Boolean specifying if a texture is used in the material.
+         */
+        hasTexture(texture: BaseTexture): boolean;
+        /**
+         * Returns an array of the actively used textures.
+         * @param activeTextures Array of BaseTextures
+         */
+        getActiveTextures(activeTextures: BaseTexture[]): void;
+        /**
+         * Returns the animatable textures.
+         * @param animatables Array of animatable textures.
+         */
+        getAnimatables(animatables: IAnimatable[]): void;
+        /**
+         * Disposes the resources of the material.
+         * @param forceDisposeTextures - Forces the disposal of all textures.
+         */
+        dispose(forceDisposeTextures?: boolean): void;
+        /**
+        * Get the current class name useful for serialization or dynamic coding.
+        * @returns "DetailMap"
+        */
+        getClassName(): string;
+        /**
+         * Add the required uniforms to the current list.
+         * @param uniforms defines the current uniform list.
+         */
+        static AddUniforms(uniforms: string[]): void;
+        /**
+         * Add the required samplers to the current list.
+         * @param samplers defines the current sampler list.
+         */
+        static AddSamplers(samplers: string[]): void;
+        /**
+         * Add the required uniforms to the current buffer.
+         * @param uniformBuffer defines the current uniform buffer.
+         */
+        static PrepareUniformBuffer(uniformBuffer: UniformBuffer): void;
+        /**
+         * Makes a duplicate of the current instance into another one.
+         * @param detailMap define the instance where to copy the info
+         */
+        copyTo(detailMap: DetailMapConfiguration): void;
+        /**
+         * Serializes this detail map instance
+         * @returns - An object with the serialized instance.
+         */
+        serialize(): any;
+        /**
+         * Parses a detail map setting from a serialized object.
+         * @param source - Serialized object.
+         * @param scene Defines the scene we are parsing for
+         * @param rootUrl Defines the rootUrl to load from
+         */
+        parse(source: any, scene: Scene, rootUrl: string): void;
+    }
+}
+declare module BABYLON {
     /** @hidden */
-    export class StandardMaterialDefines extends MaterialDefines implements IImageProcessingConfigurationDefines {
+    export class StandardMaterialDefines extends MaterialDefines implements IImageProcessingConfigurationDefines, IMaterialDetailMapDefines {
         MAINUV1: boolean;
         MAINUV2: boolean;
         DIFFUSE: boolean;
         DIFFUSEDIRECTUV: number;
+        DETAIL: boolean;
+        DETAILDIRECTUV: number;
+        DETAIL_NORMALBLENDMETHOD: number;
         AMBIENT: boolean;
         AMBIENTDIRECTUV: number;
         OPACITY: boolean;
@@ -29252,6 +29485,7 @@ declare module BABYLON {
         BonesPerMesh: number;
         BONETEXTURE: boolean;
         INSTANCES: boolean;
+        THIN_INSTANCES: boolean;
         GLOSSINESS: boolean;
         ROUGHNESS: boolean;
         EMISSIVEASILLUMINATION: boolean;
@@ -29288,6 +29522,8 @@ declare module BABYLON {
         PREMULTIPLYALPHA: boolean;
         ALPHATEST_AFTERALLALPHACOMPUTATIONS: boolean;
         ALPHABLEND: boolean;
+        PREPASS: boolean;
+        SCENE_MRT_COUNT: number;
         RGBDLIGHTMAP: boolean;
         RGBDREFLECTION: boolean;
         RGBDREFRACTION: boolean;
@@ -29322,7 +29558,7 @@ declare module BABYLON {
     /**
      * This is the default material used in Babylon. It is the best trade off between quality
      * and performances.
-     * @see http://doc.babylonjs.com/babylon101/materials
+     * @see https://doc.babylonjs.com/babylon101/materials
      */
     export class StandardMaterial extends PushMaterial {
         private _diffuseTexture;
@@ -29345,7 +29581,7 @@ declare module BABYLON {
         private _reflectionTexture;
         /**
          * Define the texture used to display the reflection.
-         * @see http://doc.babylonjs.com/how_to/reflect#how-to-obtain-reflections-and-refractions
+         * @see https://doc.babylonjs.com/how_to/reflect#how-to-obtain-reflections-and-refractions
          */
         reflectionTexture: Nullable<BaseTexture>;
         private _emissiveTexture;
@@ -29363,25 +29599,25 @@ declare module BABYLON {
         /**
          * Bump mapping is a technique to simulate bump and dents on a rendered surface.
          * These are made by creating a normal map from an image. The means to do this can be found on the web, a search for 'normal map generator' will bring up free and paid for methods of doing this.
-         * @see http://doc.babylonjs.com/how_to/more_materials#bump-map
+         * @see https://doc.babylonjs.com/how_to/more_materials#bump-map
          */
         bumpTexture: Nullable<BaseTexture>;
         private _lightmapTexture;
         /**
          * Complex lighting can be computationally expensive to compute at runtime.
          * To save on computation, lightmaps may be used to store calculated lighting in a texture which will be applied to a given mesh.
-         * @see http://doc.babylonjs.com/babylon101/lights#lightmaps
+         * @see https://doc.babylonjs.com/babylon101/lights#lightmaps
          */
         lightmapTexture: Nullable<BaseTexture>;
         private _refractionTexture;
         /**
          * Define the texture used to display the refraction.
-         * @see http://doc.babylonjs.com/how_to/reflect#how-to-obtain-reflections-and-refractions
+         * @see https://doc.babylonjs.com/how_to/reflect#how-to-obtain-reflections-and-refractions
          */
         refractionTexture: Nullable<BaseTexture>;
         /**
          * The color of the material lit by the environmental background lighting.
-         * @see http://doc.babylonjs.com/babylon101/materials#ambient-color-example
+         * @see https://doc.babylonjs.com/babylon101/materials#ambient-color-example
          */
         ambientColor: Color3;
         /**
@@ -29445,14 +29681,14 @@ declare module BABYLON {
         private _useParallax;
         /**
          * Is parallax enabled or not.
-         * @see http://doc.babylonjs.com/how_to/using_parallax_mapping
+         * @see https://doc.babylonjs.com/how_to/using_parallax_mapping
          */
         useParallax: boolean;
         private _useParallaxOcclusion;
         /**
          * Is parallax occlusion enabled or not.
          * If true, the outcome is way more realistic than traditional Parallax but you can expect a performance hit that worthes consideration.
-         * @see http://doc.babylonjs.com/how_to/using_parallax_mapping
+         * @see https://doc.babylonjs.com/how_to/using_parallax_mapping
          */
         useParallaxOcclusion: boolean;
         /**
@@ -29466,13 +29702,13 @@ declare module BABYLON {
         roughness: number;
         /**
          * In case of refraction, define the value of the index of refraction.
-         * @see http://doc.babylonjs.com/how_to/reflect#how-to-obtain-reflections-and-refractions
+         * @see https://doc.babylonjs.com/how_to/reflect#how-to-obtain-reflections-and-refractions
          */
         indexOfRefraction: number;
         /**
          * Invert the refraction texture alongside the y axis.
          * It can be useful with procedural textures or probe for instance.
-         * @see http://doc.babylonjs.com/how_to/reflect#how-to-obtain-reflections-and-refractions
+         * @see https://doc.babylonjs.com/how_to/reflect#how-to-obtain-reflections-and-refractions
          */
         invertRefractionY: boolean;
         /**
@@ -29487,37 +29723,37 @@ declare module BABYLON {
         private _diffuseFresnelParameters;
         /**
          * Define the diffuse fresnel parameters of the material.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
+         * @see https://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
          */
         diffuseFresnelParameters: FresnelParameters;
         private _opacityFresnelParameters;
         /**
          * Define the opacity fresnel parameters of the material.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
+         * @see https://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
          */
         opacityFresnelParameters: FresnelParameters;
         private _reflectionFresnelParameters;
         /**
          * Define the reflection fresnel parameters of the material.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
+         * @see https://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
          */
         reflectionFresnelParameters: FresnelParameters;
         private _refractionFresnelParameters;
         /**
          * Define the refraction fresnel parameters of the material.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
+         * @see https://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
          */
         refractionFresnelParameters: FresnelParameters;
         private _emissiveFresnelParameters;
         /**
          * Define the emissive fresnel parameters of the material.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
+         * @see https://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
          */
         emissiveFresnelParameters: FresnelParameters;
         private _useReflectionFresnelFromSpecular;
         /**
          * If true automatically deducts the fresnels values from the material specularity.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
+         * @see https://doc.babylonjs.com/how_to/how_to_use_fresnelparameters
          */
         useReflectionFresnelFromSpecular: boolean;
         private _useGlossinessFromSpecularMapAlpha;
@@ -29634,6 +29870,10 @@ declare module BABYLON {
          * corresponding to low luminance, medium luminance, and high luminance areas respectively.
          */
         set cameraColorCurves(value: Nullable<ColorCurves>);
+        /**
+         * Defines the detail map parameters for the material.
+         */
+        readonly detailMap: DetailMapConfiguration;
         protected _renderTargets: SmartArray<RenderTargetTexture>;
         protected _worldViewProjectionMatrix: Matrix;
         protected _globalAmbientColor: Color3;
@@ -29643,7 +29883,7 @@ declare module BABYLON {
          * Instantiates a new standard material.
          * This is the default material used in Babylon. It is the best trade off between quality
          * and performances.
-         * @see http://doc.babylonjs.com/babylon101/materials
+         * @see https://doc.babylonjs.com/babylon101/materials
          * @param name Define the name of the material in the scene
          * @param scene Define the scene the material belong to
          */
@@ -29661,7 +29901,7 @@ declare module BABYLON {
         /**
          * In case the depth buffer does not allow enough depth precision for your scene (might be the case in large scenes)
          * You can try switching to logarithmic depth.
-         * @see http://doc.babylonjs.com/how_to/using_logarithmic_depth_buffer
+         * @see https://doc.babylonjs.com/how_to/using_logarithmic_depth_buffer
          */
         get useLogarithmicDepth(): boolean;
         set useLogarithmicDepth(value: boolean);
@@ -29753,6 +29993,11 @@ declare module BABYLON {
         static get DiffuseTextureEnabled(): boolean;
         static set DiffuseTextureEnabled(value: boolean);
         /**
+         * Are detail textures enabled in the application.
+         */
+        static get DetailTextureEnabled(): boolean;
+        static set DetailTextureEnabled(value: boolean);
+        /**
          * Are ambient textures enabled in the application.
          */
         static get AmbientTextureEnabled(): boolean;
@@ -29811,7 +30056,7 @@ declare module BABYLON {
      * The SPS is also a particle system. It provides some methods to manage the particles.
      * However it is behavior agnostic. This means it has no emitter, no particle physics, no particle recycler. You have to implement your own behavior.
      *
-     * Full documentation here : http://doc.babylonjs.com/how_to/Solid_Particle_System
+     * Full documentation here : https://doc.babylonjs.com/how_to/Solid_Particle_System
      */
     export class SolidParticleSystem implements IDisposable {
         /**
@@ -29845,7 +30090,7 @@ declare module BABYLON {
         mesh: Mesh;
         /**
          * This empty object is intended to store some SPS specific or temporary values in order to lower the Garbage Collector activity.
-         * Please read : http://doc.babylonjs.com/how_to/Solid_Particle_System#garbage-collector-concerns
+         * Please read : https://doc.babylonjs.com/how_to/Solid_Particle_System#garbage-collector-concerns
          */
         vars: any;
         /**
@@ -29857,7 +30102,7 @@ declare module BABYLON {
          * This array is the first element of the pickedBySubMesh array : sps.pickBySubMesh[0].
          * It's not pertinent to use it when using a SPS with the support for MultiMaterial enabled.
          * Use the method SPS.pickedParticle(pickingInfo) instead.
-         * Please read : http://doc.babylonjs.com/how_to/Solid_Particle_System#pickable-particles
+         * Please read : https://doc.babylonjs.com/how_to/Solid_Particle_System#pickable-particles
          */
         pickedParticles: {
             idx: number;
@@ -29872,7 +30117,7 @@ declare module BABYLON {
          * `idx` is the picked particle index in the `SPS.particles` array
          * `faceId` is the picked face index counted within this particle.
          * It's better to use the method SPS.pickedParticle(pickingInfo) rather than using directly this array.
-         * Please read : http://doc.babylonjs.com/how_to/Solid_Particle_System#pickable-particles
+         * Please read : https://doc.babylonjs.com/how_to/Solid_Particle_System#pickable-particles
          */
         pickedBySubMesh: {
             idx: number;
@@ -30051,7 +30296,7 @@ declare module BABYLON {
         private _addParticle;
         /**
          * Adds some particles to the SPS from the model shape. Returns the shape id.
-         * Please read the doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#create-an-immutable-sps
+         * Please read the doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#create-an-immutable-sps
          * @param mesh is any Mesh object that will be used as a model for the solid particles.
          * @param nb (positive integer) the number of particles to be created from this model
          * @param options {positionFunction} is an optional javascript function to called for each particle on SPS creation.
@@ -30188,7 +30433,7 @@ declare module BABYLON {
         private _setDefaultMaterial;
         /**
          * Visibilty helper : Recomputes the visible size according to the mesh bounding box
-         * doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
+         * doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
          * @returns the SPS.
          */
         refreshVisibleSize(): SolidParticleSystem;
@@ -30196,27 +30441,27 @@ declare module BABYLON {
          * Visibility helper : Sets the size of a visibility box, this sets the underlying mesh bounding box.
          * @param size the size (float) of the visibility box
          * note : this doesn't lock the SPS mesh bounding box.
-         * doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
+         * doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
          */
         setVisibilityBox(size: number): void;
         /**
          * Gets whether the SPS as always visible or not
-         * doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
+         * doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
          */
         get isAlwaysVisible(): boolean;
         /**
          * Sets the SPS as always visible or not
-         * doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
+         * doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
          */
         set isAlwaysVisible(val: boolean);
         /**
          * Sets the SPS visibility box as locked or not. This enables/disables the underlying mesh bounding box updates.
-         * doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
+         * doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
          */
         set isVisibilityBoxLocked(val: boolean);
         /**
          * Gets if the SPS visibility box as locked or not. This enables/disables the underlying mesh bounding box updates.
-         * doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
+         * doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#sps-visibility
          */
         get isVisibilityBoxLocked(): boolean;
         /**
@@ -30318,13 +30563,13 @@ declare module BABYLON {
         /**
          * This function does nothing. It may be overwritten to set all the particle first values.
          * The SPS doesn't call this function, you may have to call it by your own.
-         * doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#particle-management
+         * doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#particle-management
          */
         initParticles(): void;
         /**
          * This function does nothing. It may be overwritten to recycle a particle.
          * The SPS doesn't call this function, you may have to call it by your own.
-         * doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#particle-management
+         * doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#particle-management
          * @param particle The particle to recycle
          * @returns the recycled particle
          */
@@ -30332,7 +30577,7 @@ declare module BABYLON {
         /**
          * Updates a particle : this function should  be overwritten by the user.
          * It is called on each particle by `setParticles()`. This is the place to code each particle behavior.
-         * doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#particle-management
+         * doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#particle-management
          * @example : just set a particle position or velocity and recycle conditions
          * @param particle The particle to update
          * @returns the updated particle
@@ -30344,7 +30589,7 @@ declare module BABYLON {
          * @param particle the current particle
          * @param vertex the current vertex of the current particle : a SolidParticleVertex object
          * @param pt the index of the current vertex in the particle shape
-         * doc : http://doc.babylonjs.com/how_to/Solid_Particle_System#update-each-particle-shape
+         * doc : https://doc.babylonjs.com/how_to/Solid_Particle_System#update-each-particle-shape
          * @example : just set a vertex particle position or color
          * @returns the sps
          */
@@ -30826,19 +31071,19 @@ declare module BABYLON {
         cullingStrategy: number;
         /**
          * Gets the number of facets in the mesh
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata#what-is-a-mesh-facet
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata#what-is-a-mesh-facet
          */
         get facetNb(): number;
         /**
          * Gets or set the number (integer) of subdivisions per axis in the partioning space
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata#tweaking-the-partitioning
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata#tweaking-the-partitioning
          */
         get partitioningSubdivisions(): number;
         set partitioningSubdivisions(nb: number);
         /**
          * The ratio (float) to apply to the bouding box size to set to the partioning space.
          * Ex : 1.01 (default) the partioning space is 1% bigger than the bounding box
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata#tweaking-the-partitioning
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata#tweaking-the-partitioning
          */
         get partitioningBBoxRatio(): number;
         set partitioningBBoxRatio(ratio: number);
@@ -30846,7 +31091,7 @@ declare module BABYLON {
          * Gets or sets a boolean indicating that the facets must be depth sorted on next call to `updateFacetData()`.
          * Works only for updatable meshes.
          * Doesn't work with multi-materials
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata#facet-depth-sort
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata#facet-depth-sort
          */
         get mustDepthSortFacets(): boolean;
         set mustDepthSortFacets(sort: boolean);
@@ -30854,13 +31099,13 @@ declare module BABYLON {
          * The location (Vector3) where the facet depth sort must be computed from.
          * By default, the active camera position.
          * Used only when facet depth sort is enabled
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata#facet-depth-sort
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata#facet-depth-sort
          */
         get facetDepthSortFrom(): Vector3;
         set facetDepthSortFrom(location: Vector3);
         /**
          * gets a boolean indicating if facetData is enabled
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata#what-is-a-mesh-facet
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata#what-is-a-mesh-facet
          */
         get isFacetDataEnabled(): boolean;
         /** @hidden */
@@ -30898,7 +31143,7 @@ declare module BABYLON {
          */
         set visibility(value: number);
         /** Gets or sets the alpha index used to sort transparent meshes
-         * @see http://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered#alpha-index
+         * @see https://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered#alpha-index
          */
         alphaIndex: number;
         /**
@@ -30912,7 +31157,7 @@ declare module BABYLON {
         /** Gets or sets a boolean indicating that bounding boxes of subMeshes must be rendered as well (false by default) */
         showSubMeshesBoundingBox: boolean;
         /** Gets or sets a boolean indicating if the mesh must be considered as a ray blocker for lens flares (false by default)
-         * @see http://doc.babylonjs.com/how_to/how_to_use_lens_flares
+         * @see https://doc.babylonjs.com/how_to/how_to_use_lens_flares
          */
         isBlocker: boolean;
         /**
@@ -30921,7 +31166,7 @@ declare module BABYLON {
         enablePointerMoveEvents: boolean;
         /**
          * Specifies the rendering group id for this mesh (0 by default)
-         * @see http://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered#rendering-groups
+         * @see https://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered#rendering-groups
          */
         renderingGroupId: number;
         private _material;
@@ -30930,7 +31175,7 @@ declare module BABYLON {
         set material(value: Nullable<Material>);
         /**
          * Gets or sets a boolean indicating that this mesh can receive realtime shadows
-         * @see http://doc.babylonjs.com/babylon101/shadows
+         * @see https://doc.babylonjs.com/babylon101/shadows
          */
         get receiveShadows(): boolean;
         set receiveShadows(value: boolean);
@@ -30967,7 +31212,7 @@ declare module BABYLON {
         useOctreeForCollisions: boolean;
         /**
          * Gets or sets the current layer mask (default is 0x0FFFFFFF)
-         * @see http://doc.babylonjs.com/how_to/layermasks_and_multi-cam_textures
+         * @see https://doc.babylonjs.com/how_to/layermasks_and_multi-cam_textures
          */
         get layerMask(): number;
         set layerMask(value: number);
@@ -30981,18 +31226,18 @@ declare module BABYLON {
         doNotSyncBoundingInfo: boolean;
         /**
          * Gets or sets the current action manager
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions
          */
         actionManager: Nullable<AbstractActionManager>;
         private _meshCollisionData;
         /**
          * Gets or sets the ellipsoid used to impersonate this mesh when using collision engine (default is (0.5, 1, 0.5))
-         * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
+         * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
          */
         ellipsoid: Vector3;
         /**
          * Gets or sets the ellipsoid offset used to impersonate this mesh when using collision engine (default is (0, 0, 0))
-         * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
+         * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
          */
         ellipsoidOffset: Vector3;
         /**
@@ -31038,7 +31283,7 @@ declare module BABYLON {
         _renderId: number;
         /**
          * Gets or sets the list of subMeshes
-         * @see http://doc.babylonjs.com/how_to/multi_materials
+         * @see https://doc.babylonjs.com/how_to/multi_materials
          */
         subMeshes: SubMesh[];
         /** @hidden */
@@ -31063,7 +31308,7 @@ declare module BABYLON {
         _transformMatrixTexture: Nullable<RawTexture>;
         /**
          * Gets or sets a skeleton to apply skining transformations
-         * @see http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
+         * @see https://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
          */
         set skeleton(value: Nullable<Skeleton>);
         get skeleton(): Nullable<Skeleton>;
@@ -31258,6 +31503,10 @@ declare module BABYLON {
          */
         get hasInstances(): boolean;
         /**
+         * Gets a boolean indicating if this mesh has thin instances
+         */
+        get hasThinInstances(): boolean;
+        /**
          * Perform relative position change from the point of view of behind the front of the mesh.
          * This is performed taking into account the meshes current rotation, so you do not have to care.
          * Supports definition of mesh facing forward or backward
@@ -31344,18 +31593,18 @@ declare module BABYLON {
         intersectsPoint(point: Vector3): boolean;
         /**
          * Gets or sets a boolean indicating that this mesh can be used in the collision engine
-         * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
+         * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
          */
         get checkCollisions(): boolean;
         set checkCollisions(collisionEnabled: boolean);
         /**
          * Gets Collider object used to compute collisions (not physics)
-         * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
+         * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
          */
         get collider(): Nullable<Collider>;
         /**
          * Move the mesh using collision engine
-         * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
+         * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
          * @param displacement defines the requested displacement vector
          * @returns the current mesh
          */
@@ -31376,7 +31625,7 @@ declare module BABYLON {
          * @param trianglePredicate defines an optional predicate used to select faces when a mesh intersection is detected
          * @param onlyBoundingInfo defines a boolean indicating if picking should only happen using bounding info (false by default)
          * @returns the picking info
-         * @see http://doc.babylonjs.com/babylon101/intersect_collisions_-_mesh
+         * @see https://doc.babylonjs.com/babylon101/intersect_collisions_-_mesh
          */
         intersects(ray: Ray, fastCheck?: boolean, trianglePredicate?: TrianglePickingPredicate, onlyBoundingInfo?: boolean): PickingInfo;
         /**
@@ -31417,27 +31666,27 @@ declare module BABYLON {
          * This method can be called within the render loop.
          * You don't need to call this method by yourself in the render loop when you update/morph a mesh with the methods CreateXXX() as they automatically manage this computation
          * @returns the current mesh
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         updateFacetData(): AbstractMesh;
         /**
          * Returns the facetLocalNormals array.
          * The normals are expressed in the mesh local spac
          * @returns an array of Vector3
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getFacetLocalNormals(): Vector3[];
         /**
          * Returns the facetLocalPositions array.
          * The facet positions are expressed in the mesh local space
          * @returns an array of Vector3
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getFacetLocalPositions(): Vector3[];
         /**
          * Returns the facetLocalPartioning array
          * @returns an array of array of numbers
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getFacetLocalPartitioning(): number[][];
         /**
@@ -31445,7 +31694,7 @@ declare module BABYLON {
          * This method allocates a new Vector3 per call
          * @param i defines the facet index
          * @returns a new Vector3
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getFacetPosition(i: number): Vector3;
         /**
@@ -31453,7 +31702,7 @@ declare module BABYLON {
          * @param i defines the facet index
          * @param ref defines the target vector
          * @returns the current mesh
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getFacetPositionToRef(i: number, ref: Vector3): AbstractMesh;
         /**
@@ -31461,7 +31710,7 @@ declare module BABYLON {
          * This method allocates a new Vector3 per call
          * @param i defines the facet index
          * @returns a new Vector3
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getFacetNormal(i: number): Vector3;
         /**
@@ -31469,7 +31718,7 @@ declare module BABYLON {
          * @param i defines the facet index
          * @param ref defines the target vector
          * @returns the current mesh
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getFacetNormalToRef(i: number, ref: Vector3): this;
         /**
@@ -31478,7 +31727,7 @@ declare module BABYLON {
          * @param y defines y coordinate
          * @param z defines z coordinate
          * @returns the array of facet indexes
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getFacetsAtLocalCoordinates(x: number, y: number, z: number): Nullable<number[]>;
         /**
@@ -31490,7 +31739,7 @@ declare module BABYLON {
          * @param y defines y coordinate
          * @param z defines z coordinate
          * @returns the face index if found (or null instead)
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getClosestFacetAtCoordinates(x: number, y: number, z: number, projected?: Vector3, checkFace?: boolean, facing?: boolean): Nullable<number>;
         /**
@@ -31502,19 +31751,19 @@ declare module BABYLON {
          * @param y defines y coordinate
          * @param z defines z coordinate
          * @returns the face index if found (or null instead)
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getClosestFacetAtLocalCoordinates(x: number, y: number, z: number, projected?: Vector3, checkFace?: boolean, facing?: boolean): Nullable<number>;
         /**
          * Returns the object "parameter" set with all the expected parameters for facetData computation by ComputeNormals()
          * @returns the parameters
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         getFacetDataParameters(): any;
         /**
          * Disables the feature FacetData and frees the related memory
          * @returns the current mesh
-         * @see http://doc.babylonjs.com/how_to/how_to_use_facetdata
+         * @see https://doc.babylonjs.com/how_to/how_to_use_facetdata
          */
         disableFacetData(): AbstractMesh;
         /**
@@ -31554,6 +31803,11 @@ declare module BABYLON {
          * @see https://www.babylonjs-playground.com/#19O9TU#0
          */
         enableEdgesRendering(epsilon?: number, checkVerticesInsteadOfIndices?: boolean): AbstractMesh;
+        /**
+         * This function returns all of the particle systems in the scene that use the mesh as an emitter.
+         * @returns an array of particle systems in the scene that use the mesh as an emitter
+         */
+        getConnectedParticleSystems(): IParticleSystem[];
     }
 }
 declare module BABYLON {
@@ -31651,7 +31905,7 @@ declare module BABYLON {
     /**
      * Abstract class used to decouple action Manager from scene and meshes.
      * Do not instantiate.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export abstract class AbstractActionManager implements IDisposable {
         /** Gets the list of active triggers */
@@ -31894,7 +32148,7 @@ declare module BABYLON {
         private _behaviors;
         /**
          * Attach a behavior to the node
-         * @see http://doc.babylonjs.com/features/behaviour
+         * @see https://doc.babylonjs.com/features/behaviour
          * @param behavior defines the behavior to attach
          * @param attachImmediately defines that the behavior must be attached even if the scene is still loading
          * @returns the current Node
@@ -31902,20 +32156,20 @@ declare module BABYLON {
         addBehavior(behavior: Behavior<Node>, attachImmediately?: boolean): Node;
         /**
          * Remove an attached behavior
-         * @see http://doc.babylonjs.com/features/behaviour
+         * @see https://doc.babylonjs.com/features/behaviour
          * @param behavior defines the behavior to attach
          * @returns the current Node
          */
         removeBehavior(behavior: Behavior<Node>): Node;
         /**
          * Gets the list of attached behaviors
-         * @see http://doc.babylonjs.com/features/behaviour
+         * @see https://doc.babylonjs.com/features/behaviour
          */
         get behaviors(): Behavior<Node>[];
         /**
          * Gets an attached behavior by name
          * @param name defines the name of the behavior to look for
-         * @see http://doc.babylonjs.com/features/behaviour
+         * @see https://doc.babylonjs.com/features/behaviour
          * @returns null if behavior was not found else the requested behavior
          */
         getBehaviorByName(name: string): Nullable<Behavior<Node>>;
@@ -32110,6 +32364,10 @@ declare module BABYLON {
          * When matrix interpolation is enabled, this boolean forces the system to use Matrix.DecomposeLerp instead of Matrix.Lerp. Interpolation is more precise but slower
          */
         static AllowMatrixDecomposeForInterpolation: boolean;
+        /** Define the Url to load snippets */
+        static SnippetUrl: string;
+        /** Snippet ID if the animation was created from the snippet server */
+        snippetId: string;
         /**
          * Stores the key frames of the animation
          */
@@ -32497,6 +32755,19 @@ declare module BABYLON {
          * @param destination Target to store the animations
          */
         static AppendSerializedAnimations(source: IAnimatable, destination: any): void;
+        /**
+         * Creates a new animation or an array of animations from a snippet saved in a remote file
+         * @param name defines the name of the animation to create (can be null or empty to use the one from the json data)
+         * @param url defines the url to load from
+         * @returns a promise that will resolve to the new animation or an array of animations
+         */
+        static ParseFromFileAsync(name: Nullable<string>, url: string): Promise<Animation | Array<Animation>>;
+        /**
+         * Creates an animation or an array of animations from a snippet saved by the Inspector
+         * @param snippetId defines the snippet to load
+         * @returns a promise that will resolve to the new animation or a new array of animations
+         */
+        static CreateFromSnippetAsync(snippetId: string): Promise<Animation | Array<Animation>>;
     }
 }
 declare module BABYLON {
@@ -32747,6 +33018,8 @@ declare module BABYLON {
          * Define the unique id of the texture in the scene.
          */
         get uid(): string;
+        /** @hidden */
+        _prefiltered: boolean;
         /**
          * Return a string representation of the texture.
          * @returns the texture as a string
@@ -32757,18 +33030,6 @@ declare module BABYLON {
          * @returns "BaseTexture"
          */
         getClassName(): string;
-        private _realTimeFiltering;
-        /**
-         * Enables realtime filtering on the texture.
-         */
-        get realTimeFiltering(): boolean;
-        set realTimeFiltering(b: boolean);
-        private _realTimeFilteringQuality;
-        /**
-         * Quality switch for realtime filtering
-         */
-        get realTimeFilteringQuality(): number;
-        set realTimeFilteringQuality(n: number);
         /**
          * Define the list of animation attached to the texture.
          */
@@ -32995,6 +33256,14 @@ declare module BABYLON {
          * See https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext/transformFeedbackVaryings
          */
         transformFeedbackVaryings?: Nullable<string[]>;
+        /**
+         * If provided, will be called two times with the vertex and fragment code so that this code can be updated before it is compiled by the GPU
+         */
+        processFinalCode?: Nullable<(shaderType: string, code: string) => string>;
+        /**
+         * Is this effect rendering to several color attachments ?
+         */
+        multiTarget?: boolean;
     }
     /**
      * Effect containing vertex and fragment shader that can be executed on an object.
@@ -33054,6 +33323,8 @@ declare module BABYLON {
         get onBindObservable(): Observable<Effect>;
         /** @hidden */
         _bonesComputationForcedToCPU: boolean;
+        /** @hidden */
+        _multiTarget: boolean;
         private static _uniqueIdSeed;
         private _engine;
         private _uniformBuffersNames;
@@ -33774,6 +34045,29 @@ declare module BABYLON {
         }
 }
 declare module BABYLON {
+        interface ThinEngine {
+            /**
+             * Creates a dynamic texture
+             * @param width defines the width of the texture
+             * @param height defines the height of the texture
+             * @param generateMipMaps defines if the engine should generate the mip levels
+             * @param samplingMode defines the required sampling mode (Texture.NEAREST_SAMPLINGMODE by default)
+             * @returns the dynamic texture inside an InternalTexture
+             */
+            createDynamicTexture(width: number, height: number, generateMipMaps: boolean, samplingMode: number): InternalTexture;
+            /**
+             * Update the content of a dynamic texture
+             * @param texture defines the texture to update
+             * @param canvas defines the canvas containing the source
+             * @param invertY defines if data must be stored with Y axis inverted
+             * @param premulAlpha defines if alpha is stored as premultiplied
+             * @param format defines the format of the data
+             * @param forceBindTexture if the texture should be forced to be bound eg. after a graphics context loss (Default: false)
+             */
+            updateDynamicTexture(texture: Nullable<InternalTexture>, canvas: HTMLCanvasElement | OffscreenCanvas, invertY: boolean, premulAlpha?: boolean, format?: number, forceBindTexture?: boolean): void;
+        }
+}
+declare module BABYLON {
     /**
      * Settings for finer control over video usage
      */
@@ -33924,22 +34218,22 @@ declare module BABYLON {
         limitDeviceRatio?: number;
         /**
          * Defines if webvr should be enabled automatically
-         * @see http://doc.babylonjs.com/how_to/webvr_camera
+         * @see https://doc.babylonjs.com/how_to/webvr_camera
          */
         autoEnableWebVR?: boolean;
         /**
          * Defines if webgl2 should be turned off even if supported
-         * @see http://doc.babylonjs.com/features/webgl2
+         * @see https://doc.babylonjs.com/features/webgl2
          */
         disableWebGL2Support?: boolean;
         /**
          * Defines if webaudio should be initialized as well
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music
          */
         audioEngine?: boolean;
         /**
          * Defines if animations should run using a deterministic lock step
-         * @see http://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
+         * @see https://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
          */
         deterministicLockstep?: boolean;
         /** Defines the maximum steps to use with deterministic lock step mode */
@@ -33960,6 +34254,10 @@ declare module BABYLON {
          * Defines that engine should compile shaders with high precision floats (if supported). True by default
          */
         useHighPrecisionFloats?: boolean;
+        /**
+         * Make the canvas XR Compatible for XR sessions
+         */
+        xrCompatible?: boolean;
     }
     /**
      * The base engine class (root of all engines)
@@ -34037,7 +34335,7 @@ declare module BABYLON {
         _uniformBuffers: UniformBuffer[];
         /**
          * Gets a boolean indicating that the engine supports uniform buffers
-         * @see http://doc.babylonjs.com/features/webgl2#uniform-buffer-objets
+         * @see https://doc.babylonjs.com/features/webgl2#uniform-buffer-objets
          */
         get supportsUniformBuffers(): boolean;
         /** @hidden */
@@ -34085,7 +34383,7 @@ declare module BABYLON {
         _doNotHandleContextLost: boolean;
         /**
          * Gets or sets a boolean indicating if resources should be retained to be able to handle context lost events
-         * @see http://doc.babylonjs.com/how_to/optimizing_your_scene#handling-webgl-context-lost
+         * @see https://doc.babylonjs.com/how_to/optimizing_your_scene#handling-webgl-context-lost
          */
         get doNotHandleContextLost(): boolean;
         set doNotHandleContextLost(value: boolean);
@@ -34343,8 +34641,9 @@ declare module BABYLON {
          * Force a specific size of the canvas
          * @param width defines the new canvas' width
          * @param height defines the new canvas' height
+         * @returns true if the size was changed
          */
-        setSize(width: number, height: number): void;
+        setSize(width: number, height: number): boolean;
         /**
          * Binds the frame buffer to the specified texture.
          * @param texture The texture to render to or null for the default canvas
@@ -34415,7 +34714,7 @@ declare module BABYLON {
         private _bindVertexBuffersAttributes;
         /**
          * Records a vertex array object
-         * @see http://doc.babylonjs.com/features/webgl2#vertex-array-objects
+         * @see https://doc.babylonjs.com/features/webgl2#vertex-array-objects
          * @param vertexBuffers defines the list of vertex buffers to store
          * @param indexBuffer defines the index buffer to store
          * @param effect defines the effect to store
@@ -34426,7 +34725,7 @@ declare module BABYLON {
         }, indexBuffer: Nullable<DataBuffer>, effect: Effect): WebGLVertexArrayObject;
         /**
          * Bind a specific vertex array object
-         * @see http://doc.babylonjs.com/features/webgl2#vertex-array-objects
+         * @see https://doc.babylonjs.com/features/webgl2#vertex-array-objects
          * @param vertexArrayObject defines the vertex array object to bind
          * @param indexBuffer defines the index buffer to bind
          */
@@ -35350,6 +35649,8 @@ declare module BABYLON {
         /** @hidden */
         _attachments: Nullable<number[]>;
         /** @hidden */
+        _textureArray: Nullable<InternalTexture[]>;
+        /** @hidden */
         _cachedCoordinatesMode: Nullable<number>;
         /** @hidden */
         _cachedWrapU: Nullable<number>;
@@ -35438,7 +35739,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to work with sound analyzer using fast fourier transform (FFT)
-     * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music
+     * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music
      */
     export class Analyser {
         /**
@@ -35534,7 +35835,7 @@ declare module BABYLON {
     /**
      * This represents an audio engine and it is responsible
      * to play, synchronize and analyse sounds throughout the application.
-     * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music
+     * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music
      */
     export interface IAudioEngine extends IDisposable {
         /**
@@ -35602,7 +35903,7 @@ declare module BABYLON {
         /**
          * Connect the audio engine to an audio analyser allowing some amazing
          * synchornization between the sounds/music and your visualization (VuMeter for instance).
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#using-the-analyser
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#using-the-analyser
          * @param analyser The analyser to connect to the engine
          */
         connectToAnalyser(analyser: Analyser): void;
@@ -35610,7 +35911,7 @@ declare module BABYLON {
     /**
      * This represents the default audio engine used in babylon.
      * It is responsible to play, synchronize and analyse sounds throughout the  application.
-     * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music
+     * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music
      */
     export class AudioEngine implements IAudioEngine {
         private _audioContext;
@@ -35706,7 +36007,7 @@ declare module BABYLON {
         /**
          * Connect the audio engine to an audio analyser allowing some amazing
          * synchornization between the sounds/music and your visualization (VuMeter for instance).
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#using-the-analyser
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#using-the-analyser
          * @param analyser The analyser to connect to the engine
          */
         connectToAnalyser(analyser: Analyser): void;
@@ -35715,7 +36016,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Interface used to present a loading screen while loading a scene
-     * @see http://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
+     * @see https://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
      */
     export interface ILoadingScreen {
         /**
@@ -35737,7 +36038,7 @@ declare module BABYLON {
     }
     /**
      * Class used for the default loading screen
-     * @see http://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
+     * @see https://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
      */
     export class DefaultLoadingScreen implements ILoadingScreen {
         private _renderingCanvas;
@@ -36003,12 +36304,12 @@ declare module BABYLON {
              * Sets the current alpha mode
              * @param mode defines the mode to use (one of the Engine.ALPHA_XXX)
              * @param noDepthWriteChange defines if depth writing state should remains unchanged (false by default)
-             * @see http://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
+             * @see https://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
              */
             setAlphaMode(mode: number, noDepthWriteChange?: boolean): void;
             /**
              * Gets the current alpha mode
-             * @see http://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
+             * @see https://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
              * @returns the current alpha mode
              */
             getAlphaMode(): number;
@@ -36338,7 +36639,7 @@ declare module BABYLON {
         onAfterShaderCompilationObservable: Observable<Engine>;
         /**
          * Gets the audio engine
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music
          * @ignorenaming
          */
         static audioEngine: IAudioEngine;
@@ -36372,7 +36673,7 @@ declare module BABYLON {
         private _performanceMonitor;
         /**
          * Gets the performance monitor attached to this engine
-         * @see http://doc.babylonjs.com/how_to/optimizing_your_scene#engineinstrumentation
+         * @see https://doc.babylonjs.com/how_to/optimizing_your_scene#engineinstrumentation
          */
         get performanceMonitor(): PerformanceMonitor;
         private _onFocus;
@@ -36419,13 +36720,13 @@ declare module BABYLON {
         getInputElementClientRect(): Nullable<ClientRect>;
         /**
          * Gets a boolean indicating that the engine is running in deterministic lock step mode
-         * @see http://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
+         * @see https://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
          * @returns true if engine is in deterministic lock step mode
          */
         isDeterministicLockStep(): boolean;
         /**
          * Gets the max steps when engine is running in deterministic lock step
-         * @see http://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
+         * @see https://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
          * @returns the max steps
          */
         getLockstepMaxSteps(): number;
@@ -36651,7 +36952,7 @@ declare module BABYLON {
         /**
          * Call this function to leave webVR mode
          * Will do nothing if webVR is not supported or if there is no webVR device
-         * @see http://doc.babylonjs.com/how_to/webvr_camera
+         * @see https://doc.babylonjs.com/how_to/webvr_camera
          */
         disableVR(): void;
         /**
@@ -36735,8 +37036,9 @@ declare module BABYLON {
          * Force a specific size of the canvas
          * @param width defines the new canvas' width
          * @param height defines the new canvas' height
+         * @returns true if the size was changed
          */
-        setSize(width: number, height: number): void;
+        setSize(width: number, height: number): boolean;
         /**
          * Updates a dynamic vertex buffer.
          * @param vertexBuffer the vertex buffer to update
@@ -36781,7 +37083,7 @@ declare module BABYLON {
         updateDynamicIndexBuffer(indexBuffer: DataBuffer, indices: IndicesArray, offset?: number): void;
         /**
          * Updates the sample count of a render target texture
-         * @see http://doc.babylonjs.com/features/webgl2#multisample-render-targets
+         * @see https://doc.babylonjs.com/features/webgl2#multisample-render-targets
          * @param texture defines the texture to update
          * @param samples defines the sample count to set
          * @returns the effective sample count (could be 0 if multisample render targets are not supported)
@@ -36813,32 +37115,32 @@ declare module BABYLON {
         private _disableTouchAction;
         /**
          * Display the loading screen
-         * @see http://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
+         * @see https://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
          */
         displayLoadingUI(): void;
         /**
          * Hide the loading screen
-         * @see http://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
+         * @see https://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
          */
         hideLoadingUI(): void;
         /**
          * Gets the current loading screen object
-         * @see http://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
+         * @see https://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
          */
         get loadingScreen(): ILoadingScreen;
         /**
          * Sets the current loading screen object
-         * @see http://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
+         * @see https://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
          */
         set loadingScreen(loadingScreen: ILoadingScreen);
         /**
          * Sets the current loading screen text
-         * @see http://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
+         * @see https://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
          */
         set loadingUIText(text: string);
         /**
          * Sets the current loading screen background color
-         * @see http://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
+         * @see https://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
          */
         set loadingUIBackgroundColor(color: string);
         /** Pointerlock and fullscreen */
@@ -37079,9 +37381,10 @@ declare module BABYLON {
         static MakeArray(obj: any, allowsNullUndefined?: boolean): Nullable<Array<any>>;
         /**
          * Gets the pointer prefix to use
+         * @param engine defines the engine we are finding the prefix for
          * @returns "pointer" if touch is enabled. Else returns "mouse"
          */
-        static GetPointerPrefix(): string;
+        static GetPointerPrefix(engine: Engine): string;
         /**
          * Sets the cors behavior on a dom element. This will add the required Tools.CorsBehavior to the element.
          * @param url define the url we are trying
@@ -37246,7 +37549,7 @@ declare module BABYLON {
         static Download(blob: Blob, fileName: string): void;
         /**
          * Captures a screenshot of the current rendering
-         * @see http://doc.babylonjs.com/how_to/render_scene_on_a_png
+         * @see https://doc.babylonjs.com/how_to/render_scene_on_a_png
          * @param engine defines the rendering engine
          * @param camera defines the source camera
          * @param size This parameter can be set to a single number or to an object with the
@@ -37263,7 +37566,7 @@ declare module BABYLON {
         static CreateScreenshot(engine: Engine, camera: Camera, size: IScreenshotSize | number, successCallback?: (data: string) => void, mimeType?: string): void;
         /**
          * Captures a screenshot of the current rendering
-         * @see http://doc.babylonjs.com/how_to/render_scene_on_a_png
+         * @see https://doc.babylonjs.com/how_to/render_scene_on_a_png
          * @param engine defines the rendering engine
          * @param camera defines the source camera
          * @param size This parameter can be set to a single number or to an object with the
@@ -37279,7 +37582,7 @@ declare module BABYLON {
         static CreateScreenshotAsync(engine: Engine, camera: Camera, size: IScreenshotSize | number, mimeType?: string): Promise<string>;
         /**
          * Generates an image screenshot from the specified camera.
-         * @see http://doc.babylonjs.com/how_to/render_scene_on_a_png
+         * @see https://doc.babylonjs.com/how_to/render_scene_on_a_png
          * @param engine The engine to use for rendering
          * @param camera The camera to use for rendering
          * @param size This parameter can be set to a single number or to an object with the
@@ -37299,7 +37602,7 @@ declare module BABYLON {
         static CreateScreenshotUsingRenderTarget(engine: Engine, camera: Camera, size: IScreenshotSize | number, successCallback?: (data: string) => void, mimeType?: string, samples?: number, antialiasing?: boolean, fileName?: string): void;
         /**
          * Generates an image screenshot from the specified camera.
-         * @see http://doc.babylonjs.com/how_to/render_scene_on_a_png
+         * @see https://doc.babylonjs.com/how_to/render_scene_on_a_png
          * @param engine The engine to use for rendering
          * @param camera The camera to use for rendering
          * @param size This parameter can be set to a single number or to an object with the
@@ -37792,6 +38095,11 @@ declare module BABYLON {
          */
         target: any;
         /**
+         * Returns the string "TargetedAnimation"
+         * @returns "TargetedAnimation"
+         */
+        getClassName(): string;
+        /**
          * Serialize the object
          * @returns the JSON object representing the current entity
          */
@@ -37884,9 +38192,13 @@ declare module BABYLON {
          */
         get animatables(): Array<Animatable>;
         /**
+         * Gets the list of target animations
+         */
+        get children(): TargetedAnimation[];
+        /**
          * Instantiates a new Animation Group.
          * This helps managing several animations at once.
-         * @see http://doc.babylonjs.com/how_to/group
+         * @see https://doc.babylonjs.com/how_to/group
          * @param name Defines the name of the group
          * @param scene Defines the scene the group belongs to
          */
@@ -37952,14 +38264,14 @@ declare module BABYLON {
          * Set animation weight for all animatables
          * @param weight defines the weight to use
          * @return the animationGroup
-         * @see http://doc.babylonjs.com/babylon101/animations#animation-weights
+         * @see https://doc.babylonjs.com/babylon101/animations#animation-weights
          */
         setWeightForAllAnimatables(weight: number): AnimationGroup;
         /**
          * Synchronize and normalize all animatables with a source animatable
          * @param root defines the root animatable to synchronize with
          * @return the animationGroup
-         * @see http://doc.babylonjs.com/babylon101/animations#animation-weights
+         * @see https://doc.babylonjs.com/babylon101/animations#animation-weights
          */
         syncAllAnimationsWith(root: Animatable): AnimationGroup;
         /**
@@ -38047,7 +38359,7 @@ declare module BABYLON {
     }
     /**
      * Represents a scene to be rendered by the engine.
-     * @see http://doc.babylonjs.com/features/scene
+     * @see https://doc.babylonjs.com/features/scene
      */
     export class Scene extends AbstractScene implements IAnimatable {
         /** The fog is deactivated */
@@ -38060,12 +38372,12 @@ declare module BABYLON {
         static readonly FOGMODE_LINEAR: number;
         /**
          * Gets or sets the minimum deltatime when deterministic lock step is enabled
-         * @see http://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
+         * @see https://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
          */
         static MinDeltaTime: number;
         /**
          * Gets or sets the maximum deltatime when deterministic lock step is enabled
-         * @see http://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
+         * @see https://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
          */
         static MaxDeltaTime: number;
         /**
@@ -38521,26 +38833,26 @@ declare module BABYLON {
         private _currentInternalStep;
         /**
          * Sets the step Id used by deterministic lock step
-         * @see http://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
+         * @see https://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
          * @param newStepId defines the step Id
          */
         setStepId(newStepId: number): void;
         /**
          * Gets the step Id used by deterministic lock step
-         * @see http://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
+         * @see https://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
          * @returns the step Id
          */
         getStepId(): number;
         /**
          * Gets the internal step used by deterministic lock step
-         * @see http://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
+         * @see https://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
          * @returns the internal step
          */
         getInternalStep(): number;
         private _fogEnabled;
         /**
         * Gets or sets a boolean indicating if fog is enabled on this scene
-        * @see http://doc.babylonjs.com/babylon101/environment#fog
+        * @see https://doc.babylonjs.com/babylon101/environment#fog
         * (Default is true)
         */
         set fogEnabled(value: boolean);
@@ -38548,7 +38860,7 @@ declare module BABYLON {
         private _fogMode;
         /**
         * Gets or sets the fog mode to use
-        * @see http://doc.babylonjs.com/babylon101/environment#fog
+        * @see https://doc.babylonjs.com/babylon101/environment#fog
         * | mode | value |
         * | --- | --- |
         * | FOGMODE_NONE | 0 |
@@ -38560,28 +38872,32 @@ declare module BABYLON {
         get fogMode(): number;
         /**
         * Gets or sets the fog color to use
-        * @see http://doc.babylonjs.com/babylon101/environment#fog
+        * @see https://doc.babylonjs.com/babylon101/environment#fog
         * (Default is Color3(0.2, 0.2, 0.3))
         */
         fogColor: Color3;
         /**
         * Gets or sets the fog density to use
-        * @see http://doc.babylonjs.com/babylon101/environment#fog
+        * @see https://doc.babylonjs.com/babylon101/environment#fog
         * (Default is 0.1)
         */
         fogDensity: number;
         /**
         * Gets or sets the fog start distance to use
-        * @see http://doc.babylonjs.com/babylon101/environment#fog
+        * @see https://doc.babylonjs.com/babylon101/environment#fog
         * (Default is 0)
         */
         fogStart: number;
         /**
         * Gets or sets the fog end distance to use
-        * @see http://doc.babylonjs.com/babylon101/environment#fog
+        * @see https://doc.babylonjs.com/babylon101/environment#fog
         * (Default is 1000)
         */
         fogEnd: number;
+        /**
+        * Flag indicating that the frame buffer binding is handled by another component
+        */
+        prePass: boolean;
         private _shadowsEnabled;
         /**
         * Gets or sets a boolean indicating if shadows are enabled on this scene
@@ -38636,7 +38952,7 @@ declare module BABYLON {
         lensFlaresEnabled: boolean;
         /**
         * Gets or sets a boolean indicating if collisions are enabled on this scene
-        * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
+        * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
         */
         collisionsEnabled: boolean;
         private _collisionCoordinator;
@@ -38644,7 +38960,7 @@ declare module BABYLON {
         get collisionCoordinator(): ICollisionCoordinator;
         /**
          * Defines the gravity applied to this scene (used only for collisions)
-         * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
+         * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity
          */
         gravity: Vector3;
         /**
@@ -38687,12 +39003,12 @@ declare module BABYLON {
         probesEnabled: boolean;
         /**
          * Gets or sets the current offline provider to use to store scene data
-         * @see http://doc.babylonjs.com/how_to/caching_resources_in_indexeddb
+         * @see https://doc.babylonjs.com/how_to/caching_resources_in_indexeddb
          */
         offlineProvider: IOfflineProvider;
         /**
          * Gets or sets the action manager associated with the scene
-         * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+         * @see https://doc.babylonjs.com/how_to/how_to_use_actions
         */
         actionManager: AbstractActionManager;
         private _meshesForIntersections;
@@ -38993,7 +39309,7 @@ declare module BABYLON {
         getTotalVertices(): number;
         /**
          * Gets the performance counter for total vertices
-         * @see http://doc.babylonjs.com/how_to/optimizing_your_scene#instrumentation
+         * @see https://doc.babylonjs.com/how_to/optimizing_your_scene#instrumentation
          */
         get totalVerticesPerfCounter(): PerfCounter;
         /**
@@ -39003,7 +39319,7 @@ declare module BABYLON {
         getActiveIndices(): number;
         /**
          * Gets the performance counter for active indices
-         * @see http://doc.babylonjs.com/how_to/optimizing_your_scene#instrumentation
+         * @see https://doc.babylonjs.com/how_to/optimizing_your_scene#instrumentation
          */
         get totalActiveIndicesPerfCounter(): PerfCounter;
         /**
@@ -39013,7 +39329,7 @@ declare module BABYLON {
         getActiveParticles(): number;
         /**
          * Gets the performance counter for active particles
-         * @see http://doc.babylonjs.com/how_to/optimizing_your_scene#instrumentation
+         * @see https://doc.babylonjs.com/how_to/optimizing_your_scene#instrumentation
          */
         get activeParticlesPerfCounter(): PerfCounter;
         /**
@@ -39023,7 +39339,7 @@ declare module BABYLON {
         getActiveBones(): number;
         /**
          * Gets the performance counter for active bones
-         * @see http://doc.babylonjs.com/how_to/optimizing_your_scene#instrumentation
+         * @see https://doc.babylonjs.com/how_to/optimizing_your_scene#instrumentation
          */
         get activeBonesPerfCounter(): PerfCounter;
         /**
@@ -40075,12 +40391,12 @@ declare module BABYLON {
          */
         rootNodes: Node[];
         /** All of the cameras added to this scene
-         * @see http://doc.babylonjs.com/babylon101/cameras
+         * @see https://doc.babylonjs.com/babylon101/cameras
          */
         cameras: Camera[];
         /**
         * All of the lights added to this scene
-        * @see http://doc.babylonjs.com/babylon101/lights
+        * @see https://doc.babylonjs.com/babylon101/lights
         */
         lights: Light[];
         /**
@@ -40089,12 +40405,12 @@ declare module BABYLON {
         meshes: AbstractMesh[];
         /**
          * The list of skeletons added to the scene
-         * @see http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
+         * @see https://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons
          */
         skeletons: Skeleton[];
         /**
         * All of the particle systems added to this scene
-        * @see http://doc.babylonjs.com/babylon101/particles
+        * @see https://doc.babylonjs.com/babylon101/particles
         */
         particleSystems: IParticleSystem[];
         /**
@@ -40103,12 +40419,12 @@ declare module BABYLON {
         animations: Animation[];
         /**
         * All of the animation groups added to this scene
-        * @see http://doc.babylonjs.com/how_to/group
+        * @see https://doc.babylonjs.com/how_to/group
         */
         animationGroups: AnimationGroup[];
         /**
         * All of the multi-materials added to this scene
-        * @see http://doc.babylonjs.com/how_to/multi_materials
+        * @see https://doc.babylonjs.com/how_to/multi_materials
         */
         multiMaterials: MultiMaterial[];
         /**
@@ -40116,12 +40432,12 @@ declare module BABYLON {
         * In the context of a Scene, it is not supposed to be modified manually.
         * Any addition or removal should be done using the addMaterial and removeMaterial Scene methods.
         * Note also that the order of the Material within the array is not significant and might change.
-        * @see http://doc.babylonjs.com/babylon101/materials
+        * @see https://doc.babylonjs.com/babylon101/materials
         */
         materials: Material[];
         /**
          * The list of morph target managers added to the scene
-         * @see http://doc.babylonjs.com/how_to/how_to_dynamically_morph_a_mesh
+         * @see https://doc.babylonjs.com/how_to/how_to_dynamically_morph_a_mesh
          */
         morphTargetManagers: MorphTargetManager[];
         /**
@@ -40133,7 +40449,7 @@ declare module BABYLON {
         * In the context of a Scene, it is not supposed to be modified manually.
         * Any addition or removal should be done using the addTransformNode and removeTransformNode Scene methods.
         * Note also that the order of the TransformNode wihin the array is not significant and might change.
-        * @see http://doc.babylonjs.com/how_to/transformnode
+        * @see https://doc.babylonjs.com/how_to/transformnode
         */
         transformNodes: TransformNode[];
         /**
@@ -40185,17 +40501,17 @@ declare module BABYLON {
         useCustomAttenuation?: boolean;
         /**
         * Define the roll off factor of spatial sounds.
-        * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+        * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
         */
         rolloffFactor?: number;
         /**
          * Define the reference distance the sound should be heard perfectly.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         refDistance?: number;
         /**
          * Define the distance attenuation model the sound will follow.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         distanceModel?: string;
         /**
@@ -40222,7 +40538,7 @@ declare module BABYLON {
     /**
      * Defines a sound that can be played in the application.
      * The sound can either be an ambient track or a simple sound played in reaction to a user action.
-     * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music
+     * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music
      */
     export class Sound {
         /**
@@ -40240,7 +40556,7 @@ declare module BABYLON {
         /**
          * Does the sound use a custom attenuation curve to simulate the falloff
          * happening when the source gets further away from the camera.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-your-own-custom-attenuation-function
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-your-own-custom-attenuation-function
          */
         useCustomAttenuation: boolean;
         /**
@@ -40257,27 +40573,27 @@ declare module BABYLON {
         isPaused: boolean;
         /**
          * Does this sound enables spatial sound.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         spatialSound: boolean;
         /**
          * Define the reference distance the sound should be heard perfectly.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         refDistance: number;
         /**
          * Define the roll off factor of spatial sounds.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         rolloffFactor: number;
         /**
          * Define the max distance the sound should be heard (intensity just became 0 at this point).
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         maxDistance: number;
         /**
          * Define the distance attenuation model the sound will follow.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         distanceModel: string;
         /**
@@ -40361,13 +40677,13 @@ declare module BABYLON {
         /**
          * Switch the panning model to HRTF:
          * Renders a stereo output of higher quality than equalpower — it uses a convolution with measured impulse responses from human subjects.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         switchPanningModelToHRTF(): void;
         /**
          * Switch the panning model to Equal Power:
          * Represents the equal-power panning algorithm, generally regarded as simple and efficient. equalpower is the default value.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         switchPanningModelToEqualPower(): void;
         private _switchPanningModel;
@@ -40415,7 +40731,7 @@ declare module BABYLON {
         /**
          * Sets a new custom attenuation function for the sound.
          * @param callback Defines the function used for the attenuation
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-your-own-custom-attenuation-function
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-your-own-custom-attenuation-function
          */
         setAttenuationFunction(callback: (currentVolume: number, currentDistance: number, maxDistance: number, refDistance: number, rolloffFactor: number) => number): void;
         /**
@@ -40454,12 +40770,12 @@ declare module BABYLON {
         /**
          * Attach the sound to a dedicated mesh
          * @param transformNode The transform node to connect the sound with
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#attaching-a-sound-to-a-mesh
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#attaching-a-sound-to-a-mesh
          */
         attachToMesh(transformNode: TransformNode): void;
         /**
          * Detach the sound from the previously attached mesh
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#attaching-a-sound-to-a-mesh
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#attaching-a-sound-to-a-mesh
          */
         detachFromMesh(): void;
         private _onRegisterAfterWorldMatrixUpdate;
@@ -40555,7 +40871,7 @@ declare module BABYLON {
     /**
      * This defines an action responsible to change the value of a property
      * by interpolating between its current value and the newly set one once triggered.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_actions
+     * @see https://doc.babylonjs.com/how_to/how_to_use_actions
      */
     export class InterpolateValueAction extends Action {
         /**
@@ -40628,7 +40944,7 @@ declare module BABYLON {
     /**
      * It could be useful to isolate your music & sounds on several tracks to better manage volume on a grouped instance of sounds.
      * It will be also used in a future release to apply effects on a specific track.
-     * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#using-sound-tracks
+     * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#using-sound-tracks
      */
     export class SoundTrack {
         /**
@@ -40646,7 +40962,7 @@ declare module BABYLON {
         private _isInitialized;
         /**
          * Creates a new sound track.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#using-sound-tracks
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#using-sound-tracks
          * @param scene Define the scene the sound track belongs to
          * @param options
          */
@@ -40676,19 +40992,19 @@ declare module BABYLON {
         /**
          * Switch the panning model to HRTF:
          * Renders a stereo output of higher quality than equalpower — it uses a convolution with measured impulse responses from human subjects.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         switchPanningModelToHRTF(): void;
         /**
          * Switch the panning model to Equal Power:
          * Represents the equal-power panning algorithm, generally regarded as simple and efficient. equalpower is the default value.
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#creating-a-spatial-3d-sound
          */
         switchPanningModelToEqualPower(): void;
         /**
          * Connect the sound track to an audio analyser allowing some amazing
          * synchornization between the sounds/music and your visualization (VuMeter for instance).
-         * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music#using-the-analyser
+         * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music#using-the-analyser
          * @param analyser The analyser to connect to the engine
          */
         connectToAnalyser(analyser: Analyser): void;
@@ -40714,7 +41030,7 @@ declare module BABYLON {
             mainSoundTrack: SoundTrack;
             /**
              * The list of sound tracks added to the scene
-             * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music
+             * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music
              */
             soundTracks: Nullable<Array<SoundTrack>>;
             /**
@@ -40725,17 +41041,17 @@ declare module BABYLON {
             getSoundByName(name: string): Nullable<Sound>;
             /**
              * Gets or sets if audio support is enabled
-             * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music
+             * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music
              */
             audioEnabled: boolean;
             /**
              * Gets or sets if audio will be output to headphones
-             * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music
+             * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music
              */
             headphone: boolean;
             /**
              * Gets or sets custom audio listener position provider
-             * @see http://doc.babylonjs.com/how_to/playing_sounds_and_music
+             * @see https://doc.babylonjs.com/how_to/playing_sounds_and_music
              */
             audioListenerPositionProvider: Nullable<() => Vector3>;
             /**
@@ -40907,7 +41223,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Add a bouncing effect to an ArcRotateCamera when reaching a specified minimum and maximum radius
-     * @see http://doc.babylonjs.com/how_to/camera_behaviors#bouncing-behavior
+     * @see https://doc.babylonjs.com/how_to/camera_behaviors#bouncing-behavior
      */
     export class BouncingBehavior implements Behavior<ArcRotateCamera> {
         /**
@@ -40988,7 +41304,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * The framing behavior (FramingBehavior) is designed to automatically position an ArcRotateCamera when its target is set to a mesh. It is also useful if you want to prevent the camera to go under a virtual horizontal plane.
-     * @see http://doc.babylonjs.com/how_to/camera_behaviors#framing-behavior
+     * @see https://doc.babylonjs.com/how_to/camera_behaviors#framing-behavior
      */
     export class FramingBehavior implements Behavior<ArcRotateCamera> {
         /**
@@ -41276,7 +41592,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the pointers inputs to control an arc rotate camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class ArcRotateCameraPointersInput extends BaseCameraPointersInput {
         /**
@@ -41371,7 +41687,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the keyboard inputs to control the movement of an arc rotate camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class ArcRotateCameraKeyboardMoveInput implements ICameraInput<ArcRotateCamera> {
         /**
@@ -41456,7 +41772,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the mouse wheel inputs to control an arc rotate camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class ArcRotateCameraMouseWheelInput implements ICameraInput<ArcRotateCamera> {
         /**
@@ -41502,7 +41818,7 @@ declare module BABYLON {
     /**
      * Default Inputs manager for the ArcRotateCamera.
      * It groups all the default supported inputs for ease of use.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class ArcRotateCameraInputsManager extends CameraInputsManager<ArcRotateCamera> {
         /**
@@ -41533,7 +41849,7 @@ declare module BABYLON {
      *
      * This camera always points towards a given target position and can be rotated around that target with the target as the centre of rotation. It can be controlled with cursors and mouse, or with touch events.
      * Think of this camera as one orbiting its target position, or more imaginatively as a spy satellite orbiting the earth. Its position relative to the target (earth) can be set by three parameters, alpha (radians) the longitudinal rotation, beta (radians) the latitudinal rotation and radius the distance from the target position.
-     * @see http://doc.babylonjs.com/babylon101/cameras#arc-rotate-camera
+     * @see https://doc.babylonjs.com/babylon101/cameras#arc-rotate-camera
      */
     export class ArcRotateCamera extends TargetCamera {
         /**
@@ -41754,36 +42070,36 @@ declare module BABYLON {
         private _bouncingBehavior;
         /**
          * Gets the bouncing behavior of the camera if it has been enabled.
-         * @see http://doc.babylonjs.com/how_to/camera_behaviors#bouncing-behavior
+         * @see https://doc.babylonjs.com/how_to/camera_behaviors#bouncing-behavior
          */
         get bouncingBehavior(): Nullable<BouncingBehavior>;
         /**
          * Defines if the bouncing behavior of the camera is enabled on the camera.
-         * @see http://doc.babylonjs.com/how_to/camera_behaviors#bouncing-behavior
+         * @see https://doc.babylonjs.com/how_to/camera_behaviors#bouncing-behavior
          */
         get useBouncingBehavior(): boolean;
         set useBouncingBehavior(value: boolean);
         private _framingBehavior;
         /**
          * Gets the framing behavior of the camera if it has been enabled.
-         * @see http://doc.babylonjs.com/how_to/camera_behaviors#framing-behavior
+         * @see https://doc.babylonjs.com/how_to/camera_behaviors#framing-behavior
          */
         get framingBehavior(): Nullable<FramingBehavior>;
         /**
          * Defines if the framing behavior of the camera is enabled on the camera.
-         * @see http://doc.babylonjs.com/how_to/camera_behaviors#framing-behavior
+         * @see https://doc.babylonjs.com/how_to/camera_behaviors#framing-behavior
          */
         get useFramingBehavior(): boolean;
         set useFramingBehavior(value: boolean);
         private _autoRotationBehavior;
         /**
          * Gets the auto rotation behavior of the camera if it has been enabled.
-         * @see http://doc.babylonjs.com/how_to/camera_behaviors#autorotation-behavior
+         * @see https://doc.babylonjs.com/how_to/camera_behaviors#autorotation-behavior
          */
         get autoRotationBehavior(): Nullable<AutoRotationBehavior>;
         /**
          * Defines if the auto rotation behavior of the camera is enabled on the camera.
-         * @see http://doc.babylonjs.com/how_to/camera_behaviors#autorotation-behavior
+         * @see https://doc.babylonjs.com/how_to/camera_behaviors#autorotation-behavior
          */
         get useAutoRotationBehavior(): boolean;
         set useAutoRotationBehavior(value: boolean);
@@ -41797,13 +42113,13 @@ declare module BABYLON {
         onCollide: (collidedMesh: AbstractMesh) => void;
         /**
          * Defines whether the camera should check collision with the objects oh the scene.
-         * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity#how-can-i-do-this
+         * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity#how-can-i-do-this
          */
         checkCollisions: boolean;
         /**
          * Defines the collision radius of the camera.
          * This simulates a sphere around the camera.
-         * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity#arcrotatecamera
+         * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity#arcrotatecamera
          */
         collisionRadius: Vector3;
         protected _collider: Collider;
@@ -41928,7 +42244,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * The autoRotation behavior (AutoRotationBehavior) is designed to create a smooth rotation of an ArcRotateCamera when there is no user interaction.
-     * @see http://doc.babylonjs.com/how_to/camera_behaviors#autorotation-behavior
+     * @see https://doc.babylonjs.com/how_to/camera_behaviors#autorotation-behavior
      */
     export class AutoRotationBehavior implements Behavior<ArcRotateCamera> {
         /**
@@ -42436,7 +42752,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to apply inverse kinematics to bones
-     * @see http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons#boneikcontroller
+     * @see https://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons#boneikcontroller
      */
     export class BoneIKController {
         private static _tmpVecs;
@@ -42520,7 +42836,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to make a bone look toward a point in space
-     * @see http://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons#bonelookcontroller
+     * @see https://doc.babylonjs.com/how_to/how_to_use_bones_and_skeletons#bonelookcontroller
      */
     export class BoneLookController {
         private static _tmpVecs;
@@ -42645,7 +42961,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the gamepad inputs to control an arc rotate camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class ArcRotateCameraGamepadInput implements ICameraInput<ArcRotateCamera> {
         /**
@@ -42712,7 +43028,7 @@ declare module BABYLON {
         }
     /**
      * Manage the device orientation inputs (gyroscope) to control an arc rotate camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class ArcRotateCameraVRDeviceOrientationInput implements ICameraInput<ArcRotateCamera> {
         /**
@@ -42768,7 +43084,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Listen to mouse events to control the camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FlyCameraMouseInput implements ICameraInput<FlyCamera> {
         /**
@@ -42817,7 +43133,7 @@ declare module BABYLON {
         /**
          * Listen to mouse events to control the camera.
          * @param touchEnabled Define if touch is enabled. (Default is true.)
-         * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+         * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
          */
         constructor(touchEnabled?: boolean);
         /**
@@ -42853,7 +43169,7 @@ declare module BABYLON {
     /**
      * Default Inputs manager for the FlyCamera.
      * It groups all the default supported inputs for ease of use.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FlyCameraInputsManager extends CameraInputsManager<FlyCamera> {
         /**
@@ -42883,7 +43199,7 @@ declare module BABYLON {
         /**
          * Define the collision ellipsoid of the camera.
          * This is helpful for simulating a camera body, like a player's body.
-         * @see http://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity#arcrotatecamera
+         * @see https://doc.babylonjs.com/babylon101/cameras,_mesh_collisions_and_gravity#arcrotatecamera
          */
         ellipsoid: Vector3;
         /**
@@ -43064,7 +43380,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Listen to keyboard events to control the camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FlyCameraKeyboardInput implements ICameraInput<FlyCamera> {
         /**
@@ -43133,7 +43449,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the mouse wheel inputs to control a follow camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FollowCameraMouseWheelInput implements ICameraInput<FollowCamera> {
         /**
@@ -43190,7 +43506,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the pointers inputs to control an follow camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FollowCameraPointersInput extends BaseCameraPointersInput {
         /**
@@ -43276,7 +43592,7 @@ declare module BABYLON {
     /**
      * Default Inputs manager for the FollowCamera.
      * It groups all the default supported inputs for ease of use.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FollowCameraInputsManager extends CameraInputsManager<FollowCamera> {
         /**
@@ -43310,7 +43626,7 @@ declare module BABYLON {
     /**
      * A follow camera takes a mesh as a target and follows it as it moves. Both a free camera version followCamera and
      * an arc rotate version arcFollowCamera are available.
-     * @see http://doc.babylonjs.com/features/cameras#follow-camera
+     * @see https://doc.babylonjs.com/features/cameras#follow-camera
      */
     export class FollowCamera extends TargetCamera {
         /**
@@ -43376,7 +43692,7 @@ declare module BABYLON {
         inputs: FollowCameraInputsManager;
         /**
          * Instantiates the follow camera.
-         * @see http://doc.babylonjs.com/features/cameras#follow-camera
+         * @see https://doc.babylonjs.com/features/cameras#follow-camera
          * @param name Define the name of the camera in the scene
          * @param position Define the position of the camera
          * @param scene Define the scene the camera belong to
@@ -43408,7 +43724,7 @@ declare module BABYLON {
     /**
      * Arc Rotate version of the follow camera.
      * It still follows a Defined mesh but in an Arc Rotate Camera fashion.
-     * @see http://doc.babylonjs.com/features/cameras#follow-camera
+     * @see https://doc.babylonjs.com/features/cameras#follow-camera
      */
     export class ArcFollowCamera extends TargetCamera {
         /** The longitudinal angle of the camera */
@@ -43417,12 +43733,12 @@ declare module BABYLON {
         beta: number;
         /** The radius of the camera from its target */
         radius: number;
-        /** Define the camera target (the messh it should follow) */
+        /** Define the camera target (the mesh it should follow) */
         target: Nullable<AbstractMesh>;
         private _cartesianCoordinates;
         /**
          * Instantiates a new ArcFollowCamera
-         * @see http://doc.babylonjs.com/features/cameras#follow-camera
+         * @see https://doc.babylonjs.com/features/cameras#follow-camera
          * @param name Define the name of the camera
          * @param alpha Define the rotation angle of the camera around the logitudinal axis
          * @param beta Define the rotation angle of the camera around the elevation axis
@@ -43437,7 +43753,7 @@ declare module BABYLON {
         beta: number, 
         /** The radius of the camera from its target */
         radius: number, 
-        /** Define the camera target (the messh it should follow) */
+        /** Define the camera target (the mesh it should follow) */
         target: Nullable<AbstractMesh>, scene: Scene);
         private _follow;
         /** @hidden */
@@ -43452,7 +43768,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the keyboard inputs to control the movement of a follow camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FollowCameraKeyboardMoveInput implements ICameraInput<FollowCamera> {
         /**
@@ -43597,7 +43913,7 @@ declare module BABYLON {
     /**
      * Takes information about the orientation of the device as reported by the deviceorientation event to orient the camera.
      * Screen rotation is taken into account.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FreeCameraDeviceOrientationInput implements ICameraInput<FreeCamera> {
         private _camera;
@@ -43619,7 +43935,7 @@ declare module BABYLON {
         _onDeviceOrientationChangedObservable: Observable<void>;
         /**
          * Instantiates a new input
-         * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+         * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
          */
         constructor();
         /**
@@ -43660,7 +43976,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Manage the gamepad inputs to control a free camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FreeCameraGamepadInput implements ICameraInput<FreeCamera> {
         /**
@@ -43734,6 +44050,47 @@ declare module BABYLON {
         Z = 2
     }
     /**
+     * Represents the different customization options available
+     * for VirtualJoystick
+     */
+    interface VirtualJoystickCustomizations {
+        /**
+         * Size of the joystick's puck
+         */
+        puckSize: number;
+        /**
+         * Size of the joystick's container
+         */
+        containerSize: number;
+        /**
+         * Color of the joystick && puck
+         */
+        color: string;
+        /**
+         * Image URL for the joystick's puck
+         */
+        puckImage?: string;
+        /**
+         * Image URL for the joystick's container
+         */
+        containerImage?: string;
+        /**
+         * Defines the unmoving position of the joystick container
+         */
+        position?: {
+            x: number;
+            y: number;
+        };
+        /**
+         * Defines whether or not the joystick container is always visible
+         */
+        alwaysVisible: boolean;
+        /**
+         * Defines whether or not to limit the movement of the puck to the joystick's container
+         */
+        limitToContainer: boolean;
+    }
+    /**
      * Class used to define virtual joystick (used in touch mode)
      */
     export class VirtualJoystick {
@@ -43757,11 +44114,17 @@ declare module BABYLON {
          * Canvas the virtual joystick will render onto, default z-index of this is 5
          */
         static Canvas: Nullable<HTMLCanvasElement>;
+        /**
+         * boolean indicating whether or not the joystick's puck's movement should be limited to the joystick's container area
+         */
+        limitToContainer: boolean;
         private static _globalJoystickIndex;
+        private static _alwaysVisibleSticks;
         private static vjCanvasContext;
         private static vjCanvasWidth;
         private static vjCanvasHeight;
         private static halfWidth;
+        private static _GetDefaultOptions;
         private _action;
         private _axisTargetedByLeftAndRight;
         private _axisTargetedByUpAndDown;
@@ -43775,6 +44138,16 @@ declare module BABYLON {
         private _deltaJoystickVector;
         private _leftJoystick;
         private _touches;
+        private _joystickPosition;
+        private _alwaysVisible;
+        private _puckImage;
+        private _containerImage;
+        private _joystickPuckSize;
+        private _joystickContainerSize;
+        private _clearPuckSize;
+        private _clearContainerSize;
+        private _clearPuckSizeOffset;
+        private _clearContainerSizeOffset;
         private _onPointerDownHandlerRef;
         private _onPointerMoveHandlerRef;
         private _onPointerUpHandlerRef;
@@ -43782,8 +44155,9 @@ declare module BABYLON {
         /**
          * Creates a new virtual joystick
          * @param leftJoystick defines that the joystick is for left hand (false by default)
+         * @param customizations Defines the options we want to customize the VirtualJoystick
          */
-        constructor(leftJoystick?: boolean);
+        constructor(leftJoystick?: boolean, customizations?: Partial<VirtualJoystickCustomizations>);
         /**
          * Defines joystick sensibility (ie. the ratio beteen a physical move and virtual joystick position change)
          * @param newJoystickSensibility defines the new sensibility
@@ -43793,10 +44167,35 @@ declare module BABYLON {
         private _onPointerMove;
         private _onPointerUp;
         /**
-        * Change the color of the virtual joystick
-        * @param newColor a string that must be a CSS color value (like "red") or the hexa value (like "#FF0000")
-        */
+         * Change the color of the virtual joystick
+         * @param newColor a string that must be a CSS color value (like "red") or the hexa value (like "#FF0000")
+         */
         setJoystickColor(newColor: string): void;
+        /**
+         * Size of the joystick's container
+         */
+        set containerSize(newSize: number);
+        get containerSize(): number;
+        /**
+         * Size of the joystick's puck
+         */
+        set puckSize(newSize: number);
+        get puckSize(): number;
+        /**
+         * Clears the set position of the joystick
+         */
+        clearPosition(): void;
+        /**
+         * Defines whether or not the joystick container is always visible
+         */
+        set alwaysVisible(value: boolean);
+        get alwaysVisible(): boolean;
+        /**
+        * Sets the constant position of the Joystick container
+        * @param x X axis coordinate
+        * @param y Y axis coordinate
+        */
+        setPosition(x: number, y: number): void;
         /**
          * Defines a callback to call when the joystick is touched
          * @param action defines the callback
@@ -43812,6 +44211,28 @@ declare module BABYLON {
          * @param axis defines the axis to use
          */
         setAxisForUpDown(axis: JoystickAxis): void;
+        /**
+         * Clears the canvas from the previous puck / container draw
+         */
+        private _clearPreviousDraw;
+        /**
+         * Loads `urlPath` to be used for the container's image
+         * @param urlPath defines the urlPath of an image to use
+         */
+        setContainerImage(urlPath: string): void;
+        /**
+         * Loads `urlPath` to be used for the puck's image
+         * @param urlPath defines the urlPath of an image to use
+         */
+        setPuckImage(urlPath: string): void;
+        /**
+         * Draws the Virtual Joystick's container
+         */
+        private _drawContainer;
+        /**
+         * Draws the Virtual Joystick's puck
+         */
+        private _drawPuck;
         private _drawVirtualJoystick;
         /**
          * Release internal HTML canvas
@@ -43829,7 +44250,7 @@ declare module BABYLON {
         }
     /**
      * Manage the Virtual Joystick inputs to control the movement of a free camera.
-     * @see http://doc.babylonjs.com/how_to/customizing_camera_inputs
+     * @see https://doc.babylonjs.com/how_to/customizing_camera_inputs
      */
     export class FreeCameraVirtualJoystickInput implements ICameraInput<FreeCamera> {
         /**
@@ -43880,7 +44301,7 @@ declare module BABYLON {
     /**
      * This represents a FPS type of camera controlled by touch.
      * This is like a universal camera minus the Gamepad controls.
-     * @see http://doc.babylonjs.com/features/cameras#universal-camera
+     * @see https://doc.babylonjs.com/features/cameras#universal-camera
      */
     export class TouchCamera extends FreeCamera {
         /**
@@ -43899,7 +44320,7 @@ declare module BABYLON {
          * Instantiates a new touch camera.
          * This represents a FPS type of camera controlled by touch.
          * This is like a universal camera minus the Gamepad controls.
-         * @see http://doc.babylonjs.com/features/cameras#universal-camera
+         * @see https://doc.babylonjs.com/features/cameras#universal-camera
          * @param name Define the name of the camera in the scene
          * @param position Define the start position of the camera in the scene
          * @param scene Define the scene the camera belongs to
@@ -44513,7 +44934,7 @@ declare module BABYLON {
             _gamepadManager: Nullable<GamepadManager>;
             /**
              * Gets the gamepad manager associated with the scene
-             * @see http://doc.babylonjs.com/how_to/how_to_use_gamepads
+             * @see https://doc.babylonjs.com/how_to/how_to_use_gamepads
              */
             gamepadManager: GamepadManager;
         }
@@ -44574,7 +44995,7 @@ declare module BABYLON {
     /**
      * The Universal Camera is the one to choose for first person shooter type games, and works with all the keyboard, mouse, touch and gamepads. This replaces the earlier Free Camera,
      * which still works and will still be found in many Playgrounds.
-     * @see http://doc.babylonjs.com/features/cameras#universal-camera
+     * @see https://doc.babylonjs.com/features/cameras#universal-camera
      */
     export class UniversalCamera extends TouchCamera {
         /**
@@ -44592,7 +45013,7 @@ declare module BABYLON {
         /**
          * The Universal Camera is the one to choose for first person shooter type games, and works with all the keyboard, mouse, touch and gamepads. This replaces the earlier Free Camera,
          * which still works and will still be found in many Playgrounds.
-         * @see http://doc.babylonjs.com/features/cameras#universal-camera
+         * @see https://doc.babylonjs.com/features/cameras#universal-camera
          * @param name Define the name of the camera in the scene
          * @param position Define the start position of the camera in the scene
          * @param scene Define the scene the camera belongs to
@@ -44609,14 +45030,14 @@ declare module BABYLON {
     /**
      * This represents a FPS type of camera. This is only here for back compat purpose.
      * Please use the UniversalCamera instead as both are identical.
-     * @see http://doc.babylonjs.com/features/cameras#universal-camera
+     * @see https://doc.babylonjs.com/features/cameras#universal-camera
      */
     export class GamepadCamera extends UniversalCamera {
         /**
          * Instantiates a new Gamepad Camera
          * This represents a FPS type of camera. This is only here for back compat purpose.
          * Please use the UniversalCamera instead as both are identical.
-         * @see http://doc.babylonjs.com/features/cameras#universal-camera
+         * @see https://doc.babylonjs.com/features/cameras#universal-camera
          * @param name Define the name of the camera in the scene
          * @param position Define the start position of the camera in the scene
          * @param scene Define the scene the camera belongs to
@@ -44719,7 +45140,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate anaglyphic rendering (based on ArcRotateCamera)
-     * @see http://doc.babylonjs.com/features/cameras#anaglyph-cameras
+     * @see https://doc.babylonjs.com/features/cameras#anaglyph-cameras
      */
     export class AnaglyphArcRotateCamera extends ArcRotateCamera {
         /**
@@ -44743,7 +45164,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate anaglyphic rendering (based on FreeCamera)
-     * @see http://doc.babylonjs.com/features/cameras#anaglyph-cameras
+     * @see https://doc.babylonjs.com/features/cameras#anaglyph-cameras
      */
     export class AnaglyphFreeCamera extends FreeCamera {
         /**
@@ -44764,7 +45185,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate anaglyphic rendering (based on GamepadCamera)
-     * @see http://doc.babylonjs.com/features/cameras#anaglyph-cameras
+     * @see https://doc.babylonjs.com/features/cameras#anaglyph-cameras
      */
     export class AnaglyphGamepadCamera extends GamepadCamera {
         /**
@@ -44785,7 +45206,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate anaglyphic rendering (based on UniversalCamera)
-     * @see http://doc.babylonjs.com/features/cameras#anaglyph-cameras
+     * @see https://doc.babylonjs.com/features/cameras#anaglyph-cameras
      */
     export class AnaglyphUniversalCamera extends UniversalCamera {
         /**
@@ -44806,7 +45227,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate stereoscopic rendering (based on ArcRotateCamera)
-     * @see http://doc.babylonjs.com/features/cameras
+     * @see https://doc.babylonjs.com/features/cameras
      */
     export class StereoscopicArcRotateCamera extends ArcRotateCamera {
         /**
@@ -44831,7 +45252,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate stereoscopic rendering (based on FreeCamera)
-     * @see http://doc.babylonjs.com/features/cameras
+     * @see https://doc.babylonjs.com/features/cameras
      */
     export class StereoscopicFreeCamera extends FreeCamera {
         /**
@@ -44853,7 +45274,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate stereoscopic rendering (based on GamepadCamera)
-     * @see http://doc.babylonjs.com/features/cameras
+     * @see https://doc.babylonjs.com/features/cameras
      */
     export class StereoscopicGamepadCamera extends GamepadCamera {
         /**
@@ -44875,7 +45296,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate stereoscopic rendering (based on UniversalCamera)
-     * @see http://doc.babylonjs.com/features/cameras
+     * @see https://doc.babylonjs.com/features/cameras
      */
     export class StereoscopicUniversalCamera extends UniversalCamera {
         /**
@@ -44899,14 +45320,14 @@ declare module BABYLON {
      * This represents a free type of camera. It can be useful in First Person Shooter game for instance.
      * It is identical to the Free Camera and simply adds by default a virtual joystick.
      * Virtual Joysticks are on-screen 2D graphics that are used to control the camera or other scene items.
-     * @see http://doc.babylonjs.com/features/cameras#virtual-joysticks-camera
+     * @see https://doc.babylonjs.com/features/cameras#virtual-joysticks-camera
      */
     export class VirtualJoysticksCamera extends FreeCamera {
         /**
          * Intantiates a VirtualJoysticksCamera. It can be useful in First Person Shooter game for instance.
          * It is identical to the Free Camera and simply adds by default a virtual joystick.
          * Virtual Joysticks are on-screen 2D graphics that are used to control the camera or other scene items.
-         * @see http://doc.babylonjs.com/features/cameras#virtual-joysticks-camera
+         * @see https://doc.babylonjs.com/features/cameras#virtual-joysticks-camera
          * @param name Define the name of the camera in the scene
          * @param position Define the start position of the camera in the scene
          * @param scene Define the scene the camera belongs to
@@ -44922,7 +45343,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * This represents all the required metrics to create a VR camera.
-     * @see http://doc.babylonjs.com/babylon101/cameras#device-orientation-camera
+     * @see https://doc.babylonjs.com/babylon101/cameras#device-orientation-camera
      */
     export class VRCameraMetrics {
         /**
@@ -45046,7 +45467,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate VR rendering (based on ArcRotateCamera)
-     * @see http://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
+     * @see https://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
      */
     export class VRDeviceOrientationArcRotateCamera extends ArcRotateCamera {
         /**
@@ -45071,7 +45492,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate VR rendering (based on FreeCamera)
-     * @see http://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
+     * @see https://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
      */
     export class VRDeviceOrientationFreeCamera extends DeviceOrientationCamera {
         /**
@@ -45093,7 +45514,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Camera used to simulate VR rendering (based on VRDeviceOrientationFreeCamera)
-     * @see http://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
+     * @see https://doc.babylonjs.com/babylon101/cameras#vr-device-orientation-cameras
      */
     export class VRDeviceOrientationGamepadCamera extends VRDeviceOrientationFreeCamera {
         /**
@@ -45110,6 +45531,88 @@ declare module BABYLON {
          * @returns VRDeviceOrientationGamepadCamera
          */
         getClassName(): string;
+    }
+}
+declare module BABYLON {
+    /**
+     * A class extending Texture allowing drawing on a texture
+     * @see https://doc.babylonjs.com/how_to/dynamictexture
+     */
+    export class DynamicTexture extends Texture {
+        private _generateMipMaps;
+        private _canvas;
+        private _context;
+        /**
+         * Creates a DynamicTexture
+         * @param name defines the name of the texture
+         * @param options provides 3 alternatives for width and height of texture, a canvas, object with width and height properties, number for both width and height
+         * @param scene defines the scene where you want the texture
+         * @param generateMipMaps defines the use of MinMaps or not (default is false)
+         * @param samplingMode defines the sampling mode to use (default is Texture.TRILINEAR_SAMPLINGMODE)
+         * @param format defines the texture format to use (default is Engine.TEXTUREFORMAT_RGBA)
+         */
+        constructor(name: string, options: any, scene: Scene | null | undefined, generateMipMaps: boolean, samplingMode?: number, format?: number);
+        /**
+         * Get the current class name of the texture useful for serialization or dynamic coding.
+         * @returns "DynamicTexture"
+         */
+        getClassName(): string;
+        /**
+         * Gets the current state of canRescale
+         */
+        get canRescale(): boolean;
+        private _recreate;
+        /**
+         * Scales the texture
+         * @param ratio the scale factor to apply to both width and height
+         */
+        scale(ratio: number): void;
+        /**
+         * Resizes the texture
+         * @param width the new width
+         * @param height the new height
+         */
+        scaleTo(width: number, height: number): void;
+        /**
+         * Gets the context of the canvas used by the texture
+         * @returns the canvas context of the dynamic texture
+         */
+        getContext(): CanvasRenderingContext2D;
+        /**
+         * Clears the texture
+         */
+        clear(): void;
+        /**
+         * Updates the texture
+         * @param invertY defines the direction for the Y axis (default is true - y increases downwards)
+         * @param premulAlpha defines if alpha is stored as premultiplied (default is false)
+         */
+        update(invertY?: boolean, premulAlpha?: boolean): void;
+        /**
+         * Draws text onto the texture
+         * @param text defines the text to be drawn
+         * @param x defines the placement of the text from the left
+         * @param y defines the placement of the text from the top when invertY is true and from the bottom when false
+         * @param font defines the font to be used with font-style, font-size, font-name
+         * @param color defines the color used for the text
+         * @param clearColor defines the color for the canvas, use null to not overwrite canvas
+         * @param invertY defines the direction for the Y axis (default is true - y increases downwards)
+         * @param update defines whether texture is immediately update (default is true)
+         */
+        drawText(text: string, x: number | null | undefined, y: number | null | undefined, font: string, color: string | null, clearColor: string, invertY?: boolean, update?: boolean): void;
+        /**
+         * Clones the texture
+         * @returns the clone of the texture.
+         */
+        clone(): DynamicTexture;
+        /**
+         * Serializes the dynamic texture.  The scene should be ready before the dynamic texture is serialized
+         * @returns a serialized dynamic texture object
+         */
+        serialize(): any;
+        private _IsCanvasElement;
+        /** @hidden */
+        _rebuild(): void;
     }
 }
 declare module BABYLON {
@@ -45148,6 +45651,10 @@ declare module BABYLON {
          * @param configuration
          */
         protected _attachImageProcessingConfiguration(configuration: Nullable<ImageProcessingConfiguration>, doNotBuild?: boolean): void;
+        /**
+         * If the post process is supported.
+         */
+        get isSupported(): boolean;
         /**
          * Gets Color curves setup used in the effect if colorCurvesEnabled is set to true .
          */
@@ -45541,6 +46048,7 @@ declare module BABYLON {
         private _options;
         private _canvas;
         private _engine;
+        private _originalCanvasSize;
         /**
          * Rendering context of the canvas which can be used to display/mirror xr content
          */
@@ -45549,6 +46057,10 @@ declare module BABYLON {
          * xr layer for the canvas
          */
         xrLayer: Nullable<XRWebGLLayer>;
+        /**
+         * Obseervers registered here will be triggered when the xr layer was initialized
+         */
+        onXRLayerInitObservable: Observable<XRWebGLLayer>;
         /**
          * Initializes the canvas to be added/removed upon entering/exiting xr
          * @param _xrSessionManager The XR Session manager
@@ -45567,13 +46079,14 @@ declare module BABYLON {
         initializeXRLayerAsync(xrSession: XRSession): Promise<XRWebGLLayer>;
         private _addCanvas;
         private _removeCanvas;
+        private _setCanvasSize;
         private _setManagedOutputCanvas;
     }
 }
 declare module BABYLON {
     /**
      * Manages an XRSession to work with Babylon's engine
-     * @see https://doc.babylonjs.com/how_to/webxr
+     * @see https://doc.babylonjs.com/how_to/webxr_session_manager
      */
     export class WebXRSessionManager implements IDisposable {
         /** The scene which the session should be created for */
@@ -45752,10 +46265,7 @@ declare module BABYLON {
          * @returns the class name
          */
         getClassName(): string;
-        /**
-         * Overriding the _getViewMatrix function, as it is computed by WebXR
-         */
-        _getViewMatrix(): Matrix;
+        private _rotate180;
         private _updateFromXRSession;
         private _updateNumberOfRigCameras;
         private _updateReferenceSpace;
@@ -45941,7 +46451,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Base set of functionality needed to create an XR experience (WebXRSessionManager, Camera, StateManagement, etc.)
-     * @see https://doc.babylonjs.com/how_to/webxr
+     * @see https://doc.babylonjs.com/how_to/webxr_experience_helpers
      */
     export class WebXRExperienceHelper implements IDisposable {
         private scene;
@@ -46171,34 +46681,21 @@ declare module BABYLON {
 }
 declare module BABYLON {
     /**
-     * Class used to represent data loading progression
+     * Interface used to represent data loading progression
      */
-    export class SceneLoaderProgressEvent {
-        /** defines if data length to load can be evaluated */
+    export interface ISceneLoaderProgressEvent {
+        /**
+         * Defines if data length to load can be evaluated
+         */
         readonly lengthComputable: boolean;
-        /** defines the loaded data length */
+        /**
+         * Defines the loaded data length
+         */
         readonly loaded: number;
-        /** defines the data length to load */
+        /**
+         * Defines the data length to load
+         */
         readonly total: number;
-        /**
-         * Create a new progress event
-         * @param lengthComputable defines if data length to load can be evaluated
-         * @param loaded defines the loaded data length
-         * @param total defines the data length to load
-         */
-        constructor(
-        /** defines if data length to load can be evaluated */
-        lengthComputable: boolean, 
-        /** defines the loaded data length */
-        loaded: number, 
-        /** defines the data length to load */
-        total: number);
-        /**
-         * Creates a new SceneLoaderProgressEvent from a ProgressEvent
-         * @param event defines the source event
-         * @returns a new SceneLoaderProgressEvent
-         */
-        static FromProgressEvent(event: ProgressEvent): SceneLoaderProgressEvent;
     }
     /**
      * Interface used by SceneLoader plugins to define supported file extensions
@@ -46253,7 +46750,7 @@ declare module BABYLON {
          * @param onError callback called when the file fails to load
          * @returns a file request object
          */
-        requestFile?(scene: Scene, url: string, onSuccess: (data: any, request?: WebRequest) => void, onProgress?: (ev: ProgressEvent) => void, useArrayBuffer?: boolean, onError?: (error: any) => void): IFileRequest;
+        requestFile?(scene: Scene, url: string, onSuccess: (data: any, request?: WebRequest) => void, onProgress?: (ev: ISceneLoaderProgressEvent) => void, useArrayBuffer?: boolean, onError?: (error: any) => void): IFileRequest;
         /**
          * The callback called when loading from a file object.
          * @param scene scene loading this file
@@ -46264,7 +46761,7 @@ declare module BABYLON {
          * @param onError defines the callback to call when an error occurs
          * @returns a file request object
          */
-        readFile?(scene: Scene, file: File, onSuccess: (data: any) => void, onProgress?: (ev: ProgressEvent) => any, useArrayBuffer?: boolean, onError?: (error: any) => void): IFileRequest;
+        readFile?(scene: Scene, file: File, onSuccess: (data: any) => void, onProgress?: (ev: ISceneLoaderProgressEvent) => any, useArrayBuffer?: boolean, onError?: (error: any) => void): IFileRequest;
         /**
          * The callback that returns true if the data can be directly loaded.
          * @param data string containing the file data
@@ -46336,7 +46833,7 @@ declare module BABYLON {
          * @param fileName Defines the name of the file to load
          * @returns The loaded meshes, particle systems, skeletons, and animation groups
          */
-        importMeshAsync(meshesNames: any, scene: Scene, data: any, rootUrl: string, onProgress?: (event: SceneLoaderProgressEvent) => void, fileName?: string): Promise<{
+        importMeshAsync(meshesNames: any, scene: Scene, data: any, rootUrl: string, onProgress?: (event: ISceneLoaderProgressEvent) => void, fileName?: string): Promise<{
             meshes: AbstractMesh[];
             particleSystems: IParticleSystem[];
             skeletons: Skeleton[];
@@ -46351,7 +46848,7 @@ declare module BABYLON {
          * @param fileName Defines the name of the file to load
          * @returns Nothing
          */
-        loadAsync(scene: Scene, data: any, rootUrl: string, onProgress?: (event: SceneLoaderProgressEvent) => void, fileName?: string): Promise<void>;
+        loadAsync(scene: Scene, data: any, rootUrl: string, onProgress?: (event: ISceneLoaderProgressEvent) => void, fileName?: string): Promise<void>;
         /**
          * Load into an asset container.
          * @param scene The scene to load into
@@ -46361,7 +46858,7 @@ declare module BABYLON {
          * @param fileName Defines the name of the file to load
          * @returns The loaded asset container
          */
-        loadAssetContainerAsync(scene: Scene, data: any, rootUrl: string, onProgress?: (event: SceneLoaderProgressEvent) => void, fileName?: string): Promise<AssetContainer>;
+        loadAssetContainerAsync(scene: Scene, data: any, rootUrl: string, onProgress?: (event: ISceneLoaderProgressEvent) => void, fileName?: string): Promise<AssetContainer>;
     }
     /**
      * Mode that determines how to handle old animation groups before loading new ones.
@@ -46386,7 +46883,7 @@ declare module BABYLON {
     }
     /**
      * Class used to load scene from various file formats using registered plugins
-     * @see http://doc.babylonjs.com/how_to/load_from_any_file_type
+     * @see https://doc.babylonjs.com/how_to/load_from_any_file_type
      */
     export class SceneLoader {
         /**
@@ -46467,7 +46964,7 @@ declare module BABYLON {
          * @param pluginExtension the extension used to determine the plugin
          * @returns The loaded plugin
          */
-        static ImportMesh(meshNames: any, rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, onSuccess?: Nullable<(meshes: AbstractMesh[], particleSystems: IParticleSystem[], skeletons: Skeleton[], animationGroups: AnimationGroup[]) => void>, onProgress?: Nullable<(event: SceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>, pluginExtension?: Nullable<string>): Nullable<ISceneLoaderPlugin | ISceneLoaderPluginAsync>;
+        static ImportMesh(meshNames: any, rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, onSuccess?: Nullable<(meshes: AbstractMesh[], particleSystems: IParticleSystem[], skeletons: Skeleton[], animationGroups: AnimationGroup[]) => void>, onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>, pluginExtension?: Nullable<string>): Nullable<ISceneLoaderPlugin | ISceneLoaderPluginAsync>;
         /**
          * Import meshes into a scene
          * @param meshNames an array of mesh names, a single mesh name, or empty string for all meshes that filter what meshes are imported
@@ -46478,7 +46975,7 @@ declare module BABYLON {
          * @param pluginExtension the extension used to determine the plugin
          * @returns The loaded list of imported meshes, particle systems, skeletons, and animation groups
          */
-        static ImportMeshAsync(meshNames: any, rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, onProgress?: Nullable<(event: SceneLoaderProgressEvent) => void>, pluginExtension?: Nullable<string>): Promise<{
+        static ImportMeshAsync(meshNames: any, rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>, pluginExtension?: Nullable<string>): Promise<{
             meshes: AbstractMesh[];
             particleSystems: IParticleSystem[];
             skeletons: Skeleton[];
@@ -46495,7 +46992,7 @@ declare module BABYLON {
          * @param pluginExtension the extension used to determine the plugin
          * @returns The loaded plugin
          */
-        static Load(rootUrl: string, sceneFilename?: string | File, engine?: Nullable<Engine>, onSuccess?: Nullable<(scene: Scene) => void>, onProgress?: Nullable<(event: SceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>, pluginExtension?: Nullable<string>): Nullable<ISceneLoaderPlugin | ISceneLoaderPluginAsync>;
+        static Load(rootUrl: string, sceneFilename?: string | File, engine?: Nullable<Engine>, onSuccess?: Nullable<(scene: Scene) => void>, onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>, pluginExtension?: Nullable<string>): Nullable<ISceneLoaderPlugin | ISceneLoaderPluginAsync>;
         /**
          * Load a scene
          * @param rootUrl a string that defines the root url for the scene and resources or the concatenation of rootURL and filename (e.g. http://example.com/test.glb)
@@ -46505,7 +47002,7 @@ declare module BABYLON {
          * @param pluginExtension the extension used to determine the plugin
          * @returns The loaded scene
          */
-        static LoadAsync(rootUrl: string, sceneFilename?: string | File, engine?: Nullable<Engine>, onProgress?: Nullable<(event: SceneLoaderProgressEvent) => void>, pluginExtension?: Nullable<string>): Promise<Scene>;
+        static LoadAsync(rootUrl: string, sceneFilename?: string | File, engine?: Nullable<Engine>, onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>, pluginExtension?: Nullable<string>): Promise<Scene>;
         /**
          * Append a scene
          * @param rootUrl a string that defines the root url for the scene and resources or the concatenation of rootURL and filename (e.g. http://example.com/test.glb)
@@ -46517,7 +47014,7 @@ declare module BABYLON {
          * @param pluginExtension the extension used to determine the plugin
          * @returns The loaded plugin
          */
-        static Append(rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, onSuccess?: Nullable<(scene: Scene) => void>, onProgress?: Nullable<(event: SceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>, pluginExtension?: Nullable<string>): Nullable<ISceneLoaderPlugin | ISceneLoaderPluginAsync>;
+        static Append(rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, onSuccess?: Nullable<(scene: Scene) => void>, onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>, pluginExtension?: Nullable<string>): Nullable<ISceneLoaderPlugin | ISceneLoaderPluginAsync>;
         /**
          * Append a scene
          * @param rootUrl a string that defines the root url for the scene and resources or the concatenation of rootURL and filename (e.g. http://example.com/test.glb)
@@ -46527,7 +47024,7 @@ declare module BABYLON {
          * @param pluginExtension the extension used to determine the plugin
          * @returns The given scene
          */
-        static AppendAsync(rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, onProgress?: Nullable<(event: SceneLoaderProgressEvent) => void>, pluginExtension?: Nullable<string>): Promise<Scene>;
+        static AppendAsync(rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>, pluginExtension?: Nullable<string>): Promise<Scene>;
         /**
          * Load a scene into an asset container
          * @param rootUrl a string that defines the root url for the scene and resources or the concatenation of rootURL and filename (e.g. http://example.com/test.glb)
@@ -46539,7 +47036,7 @@ declare module BABYLON {
          * @param pluginExtension the extension used to determine the plugin
          * @returns The loaded plugin
          */
-        static LoadAssetContainer(rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, onSuccess?: Nullable<(assets: AssetContainer) => void>, onProgress?: Nullable<(event: SceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>, pluginExtension?: Nullable<string>): Nullable<ISceneLoaderPlugin | ISceneLoaderPluginAsync>;
+        static LoadAssetContainer(rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, onSuccess?: Nullable<(assets: AssetContainer) => void>, onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>, pluginExtension?: Nullable<string>): Nullable<ISceneLoaderPlugin | ISceneLoaderPluginAsync>;
         /**
          * Load a scene into an asset container
          * @param rootUrl a string that defines the root url for the scene and resources or the concatenation of rootURL and filename (e.g. http://example.com/test.glb)
@@ -46549,7 +47046,7 @@ declare module BABYLON {
          * @param pluginExtension the extension used to determine the plugin
          * @returns The loaded asset container
          */
-        static LoadAssetContainerAsync(rootUrl: string, sceneFilename?: string, scene?: Nullable<Scene>, onProgress?: Nullable<(event: SceneLoaderProgressEvent) => void>, pluginExtension?: Nullable<string>): Promise<AssetContainer>;
+        static LoadAssetContainerAsync(rootUrl: string, sceneFilename?: string, scene?: Nullable<Scene>, onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>, pluginExtension?: Nullable<string>): Promise<AssetContainer>;
         /**
          * Import animations from a file into a scene
          * @param rootUrl a string that defines the root url for the scene and resources or the concatenation of rootURL and filename (e.g. http://example.com/test.glb)
@@ -46561,8 +47058,9 @@ declare module BABYLON {
          * @param onSuccess a callback with the scene when import succeeds
          * @param onProgress a callback with a progress event for each file being loaded
          * @param onError a callback with the scene, a message, and possibly an exception when import fails
+         * @param pluginExtension the extension used to determine the plugin
          */
-        static ImportAnimations(rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, overwriteAnimations?: boolean, animationGroupLoadingMode?: SceneLoaderAnimationGroupLoadingMode, targetConverter?: Nullable<(target: any) => any>, onSuccess?: Nullable<(scene: Scene) => void>, onProgress?: Nullable<(event: SceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>): void;
+        static ImportAnimations(rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, overwriteAnimations?: boolean, animationGroupLoadingMode?: SceneLoaderAnimationGroupLoadingMode, targetConverter?: Nullable<(target: any) => any>, onSuccess?: Nullable<(scene: Scene) => void>, onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>, pluginExtension?: Nullable<string>): void;
         /**
          * Import animations from a file into a scene
          * @param rootUrl a string that defines the root url for the scene and resources or the concatenation of rootURL and filename (e.g. http://example.com/test.glb)
@@ -46574,9 +47072,10 @@ declare module BABYLON {
          * @param onSuccess a callback with the scene when import succeeds
          * @param onProgress a callback with a progress event for each file being loaded
          * @param onError a callback with the scene, a message, and possibly an exception when import fails
+         * @param pluginExtension the extension used to determine the plugin
          * @returns the updated scene with imported animations
          */
-        static ImportAnimationsAsync(rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, overwriteAnimations?: boolean, animationGroupLoadingMode?: SceneLoaderAnimationGroupLoadingMode, targetConverter?: Nullable<(target: any) => any>, onSuccess?: Nullable<(scene: Scene) => void>, onProgress?: Nullable<(event: SceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>): Promise<Scene>;
+        static ImportAnimationsAsync(rootUrl: string, sceneFilename?: string | File, scene?: Nullable<Scene>, overwriteAnimations?: boolean, animationGroupLoadingMode?: SceneLoaderAnimationGroupLoadingMode, targetConverter?: Nullable<(target: any) => any>, onSuccess?: Nullable<(scene: Scene) => void>, onProgress?: Nullable<(event: ISceneLoaderProgressEvent) => void>, onError?: Nullable<(scene: Scene, message: string, exception?: any) => void>, pluginExtension?: Nullable<string>): Promise<Scene>;
     }
 }
 declare module BABYLON {
@@ -47185,8 +47684,8 @@ declare module BABYLON {
          */
         pointer: AbstractMesh;
         /**
-         * Creates the controller
-         * @see https://doc.babylonjs.com/how_to/webxr
+         * Creates the input source object
+         * @see https://doc.babylonjs.com/how_to/webxr_controllers_support
          * @param _scene the scene which the controller should be associated to
          * @param inputSource the underlying input source for the controller
          * @param _options options for this controller creation
@@ -47533,7 +48032,7 @@ declare module BABYLON {
         /**
          * Default color of the laser pointer
          */
-        lasterPointerDefaultColor: Color3;
+        laserPointerDefaultColor: Color3;
         /**
          * default color of the selection ring
          */
@@ -47590,6 +48089,8 @@ declare module BABYLON {
         private _generateNewMeshPair;
         private _pickingMoved;
         private _updatePointerDistance;
+        /** @hidden */
+        get lasterPointerDefaultColor(): Color3;
     }
 }
 declare module BABYLON {
@@ -47648,6 +48149,10 @@ declare module BABYLON {
          * A list of optional features to init the session with
          */
         optionalFeatures?: string[];
+        /**
+         * A list of optional features to init the session with
+         */
+        requiredFeatures?: string[];
     }
     /**
      * UI to allow the user to enter/exit XR mode
@@ -47767,6 +48272,157 @@ declare module BABYLON {
             instance?: LinesMesh;
             useVertexAlpha?: boolean;
         }, scene?: Nullable<Scene>): LinesMesh;
+    }
+}
+declare module BABYLON {
+    /**
+     * Construction options for a timer
+     */
+    export interface ITimerOptions<T> {
+        /**
+         * Time-to-end
+         */
+        timeout: number;
+        /**
+         * The context observable is used to calculate time deltas and provides the context of the timer's callbacks. Will usually be OnBeforeRenderObservable.
+         * Countdown calculation is done ONLY when the observable is notifying its observers, meaning that if
+         * you choose an observable that doesn't trigger too often, the wait time might extend further than the requested max time
+         */
+        contextObservable: Observable<T>;
+        /**
+         * Optional parameters when adding an observer to the observable
+         */
+        observableParameters?: {
+            mask?: number;
+            insertFirst?: boolean;
+            scope?: any;
+        };
+        /**
+         * An optional break condition that will stop the times prematurely. In this case onEnded will not be triggered!
+         */
+        breakCondition?: (data?: ITimerData<T>) => boolean;
+        /**
+         * Will be triggered when the time condition has met
+         */
+        onEnded?: (data: ITimerData<any>) => void;
+        /**
+         * Will be triggered when the break condition has met (prematurely ended)
+         */
+        onAborted?: (data: ITimerData<any>) => void;
+        /**
+         * Optional function to execute on each tick (or count)
+         */
+        onTick?: (data: ITimerData<any>) => void;
+    }
+    /**
+     * An interface defining the data sent by the timer
+     */
+    export interface ITimerData<T> {
+        /**
+         * When did it start
+         */
+        startTime: number;
+        /**
+         * Time now
+         */
+        currentTime: number;
+        /**
+         * Time passed since started
+         */
+        deltaTime: number;
+        /**
+         * How much is completed, in [0.0...1.0].
+         * Note that this CAN be higher than 1 due to the fact that we don't actually measure time but delta between observable calls
+         */
+        completeRate: number;
+        /**
+         * What the registered observable sent in the last count
+         */
+        payload: T;
+    }
+    /**
+     * The current state of the timer
+     */
+    export enum TimerState {
+        /**
+         * Timer initialized, not yet started
+         */
+        INIT = 0,
+        /**
+         * Timer started and counting
+         */
+        STARTED = 1,
+        /**
+         * Timer ended (whether aborted or time reached)
+         */
+        ENDED = 2
+    }
+    /**
+     * A simple version of the timer. Will take options and start the timer immediately after calling it
+     *
+     * @param options options with which to initialize this timer
+     */
+    export function setAndStartTimer(options: ITimerOptions<any>): Nullable<Observer<any>>;
+    /**
+     * An advanced implementation of a timer class
+     */
+    export class AdvancedTimer<T = any> implements IDisposable {
+        /**
+         * Will notify each time the timer calculates the remaining time
+         */
+        onEachCountObservable: Observable<ITimerData<T>>;
+        /**
+         * Will trigger when the timer was aborted due to the break condition
+         */
+        onTimerAbortedObservable: Observable<ITimerData<T>>;
+        /**
+         * Will trigger when the timer ended successfully
+         */
+        onTimerEndedObservable: Observable<ITimerData<T>>;
+        /**
+         * Will trigger when the timer state has changed
+         */
+        onStateChangedObservable: Observable<TimerState>;
+        private _observer;
+        private _contextObservable;
+        private _observableParameters;
+        private _startTime;
+        private _timer;
+        private _state;
+        private _breakCondition;
+        private _timeToEnd;
+        private _breakOnNextTick;
+        /**
+         * Will construct a new advanced timer based on the options provided. Timer will not start until start() is called.
+         * @param options construction options for this advanced timer
+         */
+        constructor(options: ITimerOptions<T>);
+        /**
+         * set a breaking condition for this timer. Default is to never break during count
+         * @param predicate the new break condition. Returns true to break, false otherwise
+         */
+        set breakCondition(predicate: (data: ITimerData<T>) => boolean);
+        /**
+         * Reset ALL associated observables in this advanced timer
+         */
+        clearObservables(): void;
+        /**
+         * Will start a new iteration of this timer. Only one instance of this timer can run at a time.
+         *
+         * @param timeToEnd how much time to measure until timer ended
+         */
+        start(timeToEnd?: number): void;
+        /**
+         * Will force a stop on the next tick.
+         */
+        stop(): void;
+        /**
+         * Dispose this timer, clearing all resources
+         */
+        dispose(): void;
+        private _setState;
+        private _tick;
+        private _stop;
     }
 }
 declare module BABYLON {
@@ -48132,7 +48788,7 @@ declare module BABYLON {
     }
     /**
      * Helps to quickly add VR support to an existing scene.
-     * See http://doc.babylonjs.com/how_to/webvr_helper
+     * See https://doc.babylonjs.com/how_to/webvr_helper
      */
     export class VRExperienceHelper {
         /** Options to modify the vr experience helper's behavior. */
@@ -48280,7 +48936,7 @@ declare module BABYLON {
         /**
          * The mesh used to display where the user is selecting, this mesh will be cloned and set as the gazeTracker for the left and right controller
          * when set bakeCurrentTransformIntoVertices will be called on the mesh.
-         * See http://doc.babylonjs.com/resources/baking_transformations
+         * See https://doc.babylonjs.com/resources/baking_transformations
          */
         get gazeTrackerMesh(): Mesh;
         set gazeTrackerMesh(value: Mesh);
@@ -48499,7 +49155,7 @@ declare module BABYLON {
     }
     /**
      * Class used to store a cell in an octree
-     * @see http://doc.babylonjs.com/how_to/optimizing_your_scene_with_octrees
+     * @see https://doc.babylonjs.com/how_to/optimizing_your_scene_with_octrees
      */
     export class OctreeBlock<T> {
         /**
@@ -48671,12 +49327,12 @@ declare module BABYLON {
             _selectionOctree: Octree<AbstractMesh>;
             /**
              * Gets the octree used to boost mesh selection (picking)
-             * @see http://doc.babylonjs.com/how_to/optimizing_your_scene_with_octrees
+             * @see https://doc.babylonjs.com/how_to/optimizing_your_scene_with_octrees
              */
             selectionOctree: Octree<AbstractMesh>;
             /**
              * Creates or updates the octree used to boost selection (picking)
-             * @see http://doc.babylonjs.com/how_to/optimizing_your_scene_with_octrees
+             * @see https://doc.babylonjs.com/how_to/optimizing_your_scene_with_octrees
              * @param maxCapacity defines the maximum capacity per leaf
              * @param maxDepth defines the maximum depth of the octree
              * @returns an octree of AbstractMesh
@@ -48696,7 +49352,7 @@ declare module BABYLON {
              * @param maxDepth defines the maximum depth to use (no more than 2 levels by default)
              * @returns the new octree
              * @see https://www.babylonjs-playground.com/#NA4OQ#12
-             * @see http://doc.babylonjs.com/how_to/optimizing_your_scene_with_octrees
+             * @see https://doc.babylonjs.com/how_to/optimizing_your_scene_with_octrees
              */
             createOrUpdateSubmeshesOctree(maxCapacity?: number, maxDepth?: number): Octree<SubMesh>;
         }
@@ -49179,7 +49835,7 @@ declare module BABYLON {
             _debugLayer: DebugLayer;
             /**
              * Gets the debug layer (aka Inspector) associated with the scene
-             * @see http://doc.babylonjs.com/features/playground_debuglayer
+             * @see https://doc.babylonjs.com/features/playground_debuglayer
              */
             debugLayer: DebugLayer;
         }
@@ -49211,7 +49867,7 @@ declare module BABYLON {
     /**
      * The debug layer (aka Inspector) is the go to tool in order to better understand
      * what is happening in your scene
-     * @see http://doc.babylonjs.com/features/playground_debuglayer
+     * @see https://doc.babylonjs.com/features/playground_debuglayer
      */
     export class DebugLayer {
         /**
@@ -49231,7 +49887,7 @@ declare module BABYLON {
          * Instantiates a new debug layer.
          * The debug layer (aka Inspector) is the go to tool in order to better understand
          * what is happening in your scene
-         * @see http://doc.babylonjs.com/features/playground_debuglayer
+         * @see https://doc.babylonjs.com/features/playground_debuglayer
          * @param scene Defines the scene to inspect
          */
         constructor(scene: Scene);
@@ -49240,9 +49896,9 @@ declare module BABYLON {
         /**
          * Select a specific entity in the scene explorer and highlight a specific block in that entity property grid
          * @param entity defines the entity to select
-         * @param lineContainerTitle defines the specific block to highlight
+         * @param lineContainerTitles defines the specific blocks to highlight (could be a string or an array of strings)
          */
-        select(entity: any, lineContainerTitle?: string): void;
+        select(entity: any, lineContainerTitles?: string | string[]): void;
         /** Get the inspector from bundle or global */
         private _getGlobalInspector;
         /**
@@ -49358,7 +50014,7 @@ declare module BABYLON {
     /**
      * As raycast might be hard to debug, the RayHelper can help rendering the different rays
      * in order to better appreciate the issue one might have.
-     * @see http://doc.babylonjs.com/babylon101/raycasts#debugging
+     * @see https://doc.babylonjs.com/babylon101/raycasts#debugging
      */
     export class RayHelper {
         /**
@@ -49385,7 +50041,7 @@ declare module BABYLON {
          * Instantiate a new ray helper.
          * As raycast might be hard to debug, the RayHelper can help rendering the different rays
          * in order to better appreciate the issue one might have.
-         * @see http://doc.babylonjs.com/babylon101/raycasts#debugging
+         * @see https://doc.babylonjs.com/babylon101/raycasts#debugging
          * @param ray Defines the ray we are currently tryin to visualize
          */
         constructor(ray: Ray);
@@ -49476,24 +50132,209 @@ declare module BABYLON.Debug {
 }
 declare module BABYLON {
     /**
+     * Enum for Device Types
+     */
+    export enum DeviceType {
+        /** Generic */
+        Generic = 0,
+        /** Keyboard */
+        Keyboard = 1,
+        /** Mouse */
+        Mouse = 2,
+        /** Touch Pointers */
+        Touch = 3,
+        /** PS4 Dual Shock */
+        DualShock = 4,
+        /** Xbox */
+        Xbox = 5,
+        /** Switch Controller */
+        Switch = 6
+    }
+    /**
+     * Enum for All Pointers (Touch/Mouse)
+     */
+    export enum PointerInput {
+        /** Horizontal Axis */
+        Horizontal = 0,
+        /** Vertical Axis */
+        Vertical = 1,
+        /** Left Click or Touch */
+        LeftClick = 2,
+        /** Middle Click */
+        MiddleClick = 3,
+        /** Right Click */
+        RightClick = 4,
+        /** Browser Back */
+        BrowserBack = 5,
+        /** Browser Forward */
+        BrowserForward = 6
+    }
+    /**
+     * Enum for Dual Shock Gamepad
+     */
+    export enum DualShockInput {
+        /** Cross */
+        Cross = 0,
+        /** Circle */
+        Circle = 1,
+        /** Square */
+        Square = 2,
+        /** Triangle */
+        Triangle = 3,
+        /** L1 */
+        L1 = 4,
+        /** R1 */
+        R1 = 5,
+        /** L2 */
+        L2 = 6,
+        /** R2 */
+        R2 = 7,
+        /** Share */
+        Share = 8,
+        /** Options */
+        Options = 9,
+        /** L3 */
+        L3 = 10,
+        /** R3 */
+        R3 = 11,
+        /** DPadUp */
+        DPadUp = 12,
+        /** DPadDown */
+        DPadDown = 13,
+        /** DPadLeft */
+        DPadLeft = 14,
+        /** DRight */
+        DPadRight = 15,
+        /** Home */
+        Home = 16,
+        /** TouchPad */
+        TouchPad = 17,
+        /** LStickXAxis */
+        LStickXAxis = 18,
+        /** LStickYAxis */
+        LStickYAxis = 19,
+        /** RStickXAxis */
+        RStickXAxis = 20,
+        /** RStickYAxis */
+        RStickYAxis = 21
+    }
+    /**
+     * Enum for Xbox Gamepad
+     */
+    export enum XboxInput {
+        /** A */
+        A = 0,
+        /** B */
+        B = 1,
+        /** X */
+        X = 2,
+        /** Y */
+        Y = 3,
+        /** LB */
+        LB = 4,
+        /** RB */
+        RB = 5,
+        /** LT */
+        LT = 6,
+        /** RT */
+        RT = 7,
+        /** Back */
+        Back = 8,
+        /** Start */
+        Start = 9,
+        /** LS */
+        LS = 10,
+        /** RS */
+        RS = 11,
+        /** DPadUp */
+        DPadUp = 12,
+        /** DPadDown */
+        DPadDown = 13,
+        /** DPadLeft */
+        DPadLeft = 14,
+        /** DRight */
+        DPadRight = 15,
+        /** Home */
+        Home = 16,
+        /** LStickXAxis */
+        LStickXAxis = 17,
+        /** LStickYAxis */
+        LStickYAxis = 18,
+        /** RStickXAxis */
+        RStickXAxis = 19,
+        /** RStickYAxis */
+        RStickYAxis = 20
+    }
+    /**
+     * Enum for Switch (Pro/JoyCon L+R) Gamepad
+     */
+    export enum SwitchInput {
+        /** B */
+        B = 0,
+        /** A */
+        A = 1,
+        /** Y */
+        Y = 2,
+        /** X */
+        X = 3,
+        /** L */
+        L = 4,
+        /** R */
+        R = 5,
+        /** ZL */
+        ZL = 6,
+        /** ZR */
+        ZR = 7,
+        /** Minus */
+        Minus = 8,
+        /** Plus */
+        Plus = 9,
+        /** LS */
+        LS = 10,
+        /** RS */
+        RS = 11,
+        /** DPadUp */
+        DPadUp = 12,
+        /** DPadDown */
+        DPadDown = 13,
+        /** DPadLeft */
+        DPadLeft = 14,
+        /** DRight */
+        DPadRight = 15,
+        /** Home */
+        Home = 16,
+        /** Capture */
+        Capture = 17,
+        /** LStickXAxis */
+        LStickXAxis = 18,
+        /** LStickYAxis */
+        LStickYAxis = 19,
+        /** RStickXAxis */
+        RStickXAxis = 20,
+        /** RStickYAxis */
+        RStickYAxis = 21
+    }
+}
+declare module BABYLON {
+    /**
      * This class will take all inputs from Keyboard, Pointer, and
      * any Gamepads and provide a polling system that all devices
      * will use.  This class assumes that there will only be one
      * pointer device and one keyboard.
      */
     export class DeviceInputSystem implements IDisposable {
-        /** POINTER_DEVICE */
-        static readonly POINTER_DEVICE: string;
-        /** KEYBOARD_DEVICE */
-        static readonly KEYBOARD_DEVICE: string;
         /**
-         * Observable to be triggered when a device is connected
+         * Callback to be triggered when a device is connected
          */
-        onDeviceConnectedObservable: Observable<string>;
+        onDeviceConnected: (deviceType: DeviceType, deviceSlot: number) => void;
         /**
-         * Observable to be triggered when a device is disconnected
+         * Callback to be triggered when a device is disconnected
          */
-        onDeviceDisconnectedObservable: Observable<string>;
+        onDeviceDisconnected: (deviceType: DeviceType, deviceSlot: number) => void;
+        /**
+         * Callback to be triggered when event driven input is updated
+         */
+        onInputChanged: (deviceType: DeviceType, deviceSlot: number, inputIndex: number, previousState: Nullable<number>, currentState: Nullable<number>) => void;
         private _inputs;
         private _gamepads;
         private _keyboardActive;
@@ -49508,31 +50349,42 @@ declare module BABYLON {
         private _gamepadDisconnectedEvent;
         private static _MAX_KEYCODES;
         private static _MAX_POINTER_INPUTS;
+        private constructor();
         /**
-         * Default Constructor
-         * @param engine - engine to pull input element from
+         * Creates a new DeviceInputSystem instance
+         * @param engine Engine to pull input element from
+         * @returns The new instance
          */
-        constructor(engine: Engine);
+        static Create(engine: Engine): DeviceInputSystem;
         /**
          * Checks for current device input value, given an id and input index
          * @param deviceName Id of connected device
          * @param inputIndex Index of device input
          * @returns Current value of input
          */
-        pollInput(deviceName: string, inputIndex: number): Nullable<number>;
         /**
-         * Dispose of all the eventlisteners and clears the observables
+         * Checks for current device input value, given an id and input index
+         * @param deviceType Enum specifiying device type
+         * @param deviceSlot "Slot" or index that device is referenced in
+         * @param inputIndex Id of input to be checked
+         * @returns Current value of input
+         */
+        pollInput(deviceType: DeviceType, deviceSlot: number, inputIndex: number): Nullable<number>;
+        /**
+         * Dispose of all the eventlisteners
          */
         dispose(): void;
         /**
-         * Add device and inputs to device map
-         * @param deviceName Assigned name of device (may be SN)
+         * Add device and inputs to device array
+         * @param deviceType Enum specifiying device type
+         * @param deviceSlot "Slot" or index that device is referenced in
          * @param numberOfInputs Number of input entries to create for given device
          */
         private _registerDevice;
         /**
          * Given a specific device name, remove that device from the device map
-         * @param deviceName Name of device to be removed
+         * @param deviceType Enum specifiying device type
+         * @param deviceSlot "Slot" or index that device is referenced in
          */
         private _unregisterDevice;
         /**
@@ -49549,8 +50401,135 @@ declare module BABYLON {
         private _handleGamepadActions;
         /**
          * Update all non-event based devices with each frame
+         * @param deviceType Enum specifiying device type
+         * @param deviceSlot "Slot" or index that device is referenced in
+         * @param inputIndex Id of input to be checked
          */
         private _updateDevice;
+        /**
+         * Gets DeviceType from the device name
+         * @param deviceName Name of Device from DeviceInputSystem
+         * @returns DeviceType enum value
+         */
+        private _getGamepadDeviceType;
+    }
+}
+declare module BABYLON {
+    /**
+     * Type to handle enforcement of inputs
+     */
+    export type DeviceInput<T extends DeviceType> = T extends DeviceType.Keyboard | DeviceType.Generic ? number : T extends DeviceType.Mouse | DeviceType.Touch ? PointerInput : T extends DeviceType.DualShock ? DualShockInput : T extends DeviceType.Xbox ? XboxInput : T extends DeviceType.Switch ? SwitchInput : never;
+}
+declare module BABYLON {
+    /**
+     * Class that handles all input for a specific device
+     */
+    export class DeviceSource<T extends DeviceType> {
+        /** Type of device */
+        readonly deviceType: DeviceType;
+        /** "Slot" or index that device is referenced in */
+        readonly deviceSlot: number;
+        /**
+         * Observable to handle device input changes per device
+         */
+        readonly onInputChangedObservable: Observable<{
+            inputIndex: DeviceInput<T>;
+            previousState: Nullable<number>;
+            currentState: Nullable<number>;
+        }>;
+        private readonly _deviceInputSystem;
+        /**
+         * Default Constructor
+         * @param deviceInputSystem Reference to DeviceInputSystem
+         * @param deviceType Type of device
+         * @param deviceSlot "Slot" or index that device is referenced in
+         */
+        constructor(deviceInputSystem: DeviceInputSystem, 
+        /** Type of device */
+        deviceType: DeviceType, 
+        /** "Slot" or index that device is referenced in */
+        deviceSlot?: number);
+        /**
+         * Get input for specific input
+         * @param inputIndex index of specific input on device
+         * @returns Input value from DeviceInputSystem
+         */
+        getInput(inputIndex: DeviceInput<T>): Nullable<number>;
+    }
+    /**
+     * Class to keep track of devices
+     */
+    export class DeviceSourceManager implements IDisposable {
+        /**
+         * Observable to be triggered when before a device is connected
+         */
+        readonly onBeforeDeviceConnectedObservable: Observable<{
+            deviceType: DeviceType;
+            deviceSlot: number;
+        }>;
+        /**
+         * Observable to be triggered when before a device is disconnected
+         */
+        readonly onBeforeDeviceDisconnectedObservable: Observable<{
+            deviceType: DeviceType;
+            deviceSlot: number;
+        }>;
+        /**
+         * Observable to be triggered when after a device is connected
+         */
+        readonly onAfterDeviceConnectedObservable: Observable<{
+            deviceType: DeviceType;
+            deviceSlot: number;
+        }>;
+        /**
+         * Observable to be triggered when after a device is disconnected
+         */
+        readonly onAfterDeviceDisconnectedObservable: Observable<{
+            deviceType: DeviceType;
+            deviceSlot: number;
+        }>;
+        private readonly _devices;
+        private readonly _firstDevice;
+        private readonly _deviceInputSystem;
+        /**
+         * Default Constructor
+         * @param engine engine to pull input element from
+         */
+        constructor(engine: Engine);
+        /**
+         * Gets a DeviceSource, given a type and slot
+         * @param deviceType Enum specifying device type
+         * @param deviceSlot "Slot" or index that device is referenced in
+         * @returns DeviceSource object
+         */
+        getDeviceSource<T extends DeviceType>(deviceType: T, deviceSlot?: number): Nullable<DeviceSource<T>>;
+        /**
+         * Gets an array of DeviceSource objects for a given device type
+         * @param deviceType Enum specifying device type
+         * @returns Array of DeviceSource objects
+         */
+        getDeviceSources<T extends DeviceType>(deviceType: T): ReadonlyArray<DeviceSource<T>>;
+        /**
+         * Dispose of DeviceInputSystem and other parts
+         */
+        dispose(): void;
+        /**
+         * Function to add device name to device list
+         * @param deviceType Enum specifying device type
+         * @param deviceSlot "Slot" or index that device is referenced in
+         */
+        private _addDevice;
+        /**
+         * Function to remove device name to device list
+         * @param deviceType Enum specifying device type
+         * @param deviceSlot "Slot" or index that device is referenced in
+         */
+        private _removeDevice;
+        /**
+         * Updates array storing first connected device of each type
+         * @param type Type of Device
+         */
+        private _updateFirstDevices;
     }
 }
 declare module BABYLON {
@@ -49589,13 +50568,13 @@ declare module BABYLON {
         private _options;
         /**
          * Gets a boolean indicating that the engine is running in deterministic lock step mode
-         * @see http://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
+         * @see https://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
          * @returns true if engine is in deterministic lock step mode
          */
         isDeterministicLockStep(): boolean;
         /**
          * Gets the max steps when engine is running in deterministic lock step
-         * @see http://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
+         * @see https://doc.babylonjs.com/babylon101/animations#deterministic-lockstep
          * @returns the max steps
          */
         getLockstepMaxSteps(): number;
@@ -49810,7 +50789,7 @@ declare module BABYLON {
          * Sets the current alpha mode
          * @param mode defines the mode to use (one of the Engine.ALPHA_XXX)
          * @param noDepthWriteChange defines if depth writing state should remains unchanged (false by default)
-         * @see http://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
+         * @see https://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
          */
         setAlphaMode(mode: number, noDepthWriteChange?: boolean): void;
         /**
@@ -50033,12 +51012,12 @@ declare module BABYLON {
              * @param algorithmType defines the algorithm to use
              * @param query defines the query to use
              * @returns the current engine
-             * @see http://doc.babylonjs.com/features/occlusionquery
+             * @see https://doc.babylonjs.com/features/occlusionquery
              */
             beginOcclusionQuery(algorithmType: number, query: WebGLQuery): Engine;
             /**
              * Ends an occlusion query
-             * @see http://doc.babylonjs.com/features/occlusionquery
+             * @see https://doc.babylonjs.com/features/occlusionquery
              * @param algorithmType defines the algorithm to use
              * @returns the current engine
              */
@@ -50082,7 +51061,7 @@ declare module BABYLON {
             /**
             * This number indicates the number of allowed retries before stop the occlusion query, this is useful if the occlusion query is taking long time before to the query result is retireved, the query result indicates if the object is visible within the scene or not and based on that Babylon.Js engine decideds to show or hide the object.
             * The default value is -1 which means don't break the query and wait till the result
-            * @see http://doc.babylonjs.com/features/occlusionquery
+            * @see https://doc.babylonjs.com/features/occlusionquery
             */
             occlusionRetryCount: number;
             /**
@@ -50090,24 +51069,24 @@ declare module BABYLON {
              * * OCCLUSION_TYPE_NONE (Default Value): this option means no occlusion query whith the Mesh.
              * * OCCLUSION_TYPE_OPTIMISTIC: this option is means use occlusion query and if occlusionRetryCount is reached and the query is broken show the mesh.
              * * OCCLUSION_TYPE_STRICT: this option is means use occlusion query and if occlusionRetryCount is reached and the query is broken restore the last state of the mesh occlusion if the mesh was visible then show the mesh if was hidden then hide don't show.
-             * @see http://doc.babylonjs.com/features/occlusionquery
+             * @see https://doc.babylonjs.com/features/occlusionquery
              */
             occlusionType: number;
             /**
             * This property determines the type of occlusion query algorithm to run in WebGl, you can use:
             * * AbstractMesh.OCCLUSION_ALGORITHM_TYPE_ACCURATE which is mapped to GL_ANY_SAMPLES_PASSED.
             * * AbstractMesh.OCCLUSION_ALGORITHM_TYPE_CONSERVATIVE (Default Value) which is mapped to GL_ANY_SAMPLES_PASSED_CONSERVATIVE which is a false positive algorithm that is faster than GL_ANY_SAMPLES_PASSED but less accurate.
-            * @see http://doc.babylonjs.com/features/occlusionquery
+            * @see https://doc.babylonjs.com/features/occlusionquery
             */
             occlusionQueryAlgorithmType: number;
             /**
             * Gets or sets whether the mesh is occluded or not, it is used also to set the intial state of the mesh to be occluded or not
-            * @see http://doc.babylonjs.com/features/occlusionquery
+            * @see https://doc.babylonjs.com/features/occlusionquery
             */
             isOccluded: boolean;
             /**
              * Flag to check the progress status of the query
-             * @see http://doc.babylonjs.com/features/occlusionquery
+             * @see https://doc.babylonjs.com/features/occlusionquery
              */
             isOcclusionQueryInProgress: boolean;
         }
@@ -50206,6 +51185,7 @@ declare module BABYLON {
         private _internalTextures;
         private _textures;
         private _multiRenderTargetOptions;
+        private _count;
         /**
          * Get if draw buffers are currently supported by the used hardware and browser.
          */
@@ -50214,6 +51194,10 @@ declare module BABYLON {
          * Get the list of textures generated by the multi render target.
          */
         get textures(): Texture[];
+        /**
+         * Gets the number of textures in this MRT. This number can be different from `_textures.length` in case a depth texture is generated.
+         */
+        get count(): number;
         /**
          * Get the depth texture generated by the multi render target if options.generateDepthTexture has been set
          */
@@ -50279,7 +51263,7 @@ declare module BABYLON {
             unBindMultiColorAttachmentFramebuffer(textures: InternalTexture[], disableGenerateMipMaps: boolean, onBeforeUnbind?: () => void): void;
             /**
              * Create a multi render target texture
-             * @see http://doc.babylonjs.com/features/webgl2#multiple-render-target
+             * @see https://doc.babylonjs.com/features/webgl2#multiple-render-target
              * @param size defines the size of the texture
              * @param options defines the creation options
              * @returns the cube texture as an InternalTexture
@@ -50287,12 +51271,17 @@ declare module BABYLON {
             createMultipleRenderTarget(size: any, options: IMultiRenderTargetOptions): InternalTexture[];
             /**
              * Update the sample count for a given multiple render target texture
-             * @see http://doc.babylonjs.com/features/webgl2#multisample-render-targets
+             * @see https://doc.babylonjs.com/features/webgl2#multisample-render-targets
              * @param textures defines the textures to update
              * @param samples defines the sample count to set
              * @returns the effective sample count (could be 0 if multisample render targets are not supported)
              */
             updateMultipleRenderTargetTextureSampleCount(textures: Nullable<InternalTexture[]>, samples: number): number;
+            /**
+             * Select a subsets of attachments to draw to.
+             * @param attachments gl attachments
+             */
+            bindAttachments(attachments: number[]): void;
         }
 }
 declare module BABYLON {
@@ -50624,20 +51613,39 @@ declare module BABYLON {
     }
 }
 declare module BABYLON {
-    /** @hidden */
-    export class NativeShaderProcessor extends WebGL2ShaderProcessor {
-        private _genericAttributeLocation;
-        private _varyingLocationCount;
-        private _varyingLocationMap;
-        private _replacements;
-        private _textureCount;
-        private _uniforms;
-        lineProcessor(line: string): string;
-        attributeProcessor(attribute: string): string;
-        varyingProcessor(varying: string, isFragment: boolean): string;
-        uniformProcessor(uniform: string): string;
-        preProcessor(code: string, defines: string[], isFragment: boolean): string;
-        postProcessor(code: string, defines: string[], isFragment: boolean): string;
+    /**
+     * Class used to inline functions in shader code
+    */
+    export class ShaderCodeInliner {
+        private static readonly _RegexpFindFunctionNameAndType;
+        private _sourceCode;
+        private _functionDescr;
+        private _numMaxIterations;
+        /** Gets or sets the token used to mark the functions to inline */
+        inlineToken: string;
+        /** Gets or sets the debug mode */
+        debug: boolean;
+        /** Gets the code after the inlining process */
+        get code(): string;
+        /**
+         * Initializes the inliner
+         * @param sourceCode shader code source to inline
+         * @param numMaxIterations maximum number of iterations (used to detect recursive calls)
+         */
+        constructor(sourceCode: string, numMaxIterations?: number);
+        /**
+         * Start the processing of the shader code
+         */
+        processCode(): void;
+        private _collectFunctions;
+        private _processInlining;
+        private _extractBetweenMarkers;
+        private _skipWhitespaces;
+        private _removeComments;
+        private _replaceFunctionCallsByCode;
+        private _findBackward;
+        private _escapeRegExp;
+        private _replaceNames;
     }
 }
 declare module BABYLON {
@@ -50686,8 +51694,8 @@ declare module BABYLON {
          */
         getHostDocument(): Nullable<Document>;
         clear(color: Nullable<IColor4Like>, backBuffer: boolean, depth: boolean, stencil?: boolean): void;
-        createIndexBuffer(indices: IndicesArray): NativeDataBuffer;
-        createVertexBuffer(data: DataArray): NativeDataBuffer;
+        createIndexBuffer(indices: IndicesArray, updateable?: boolean): NativeDataBuffer;
+        createVertexBuffer(data: DataArray, updateable?: boolean): NativeDataBuffer;
         recordVertexArrayObject(vertexBuffers: {
             [key: string]: VertexBuffer;
         }, indexBuffer: Nullable<NativeDataBuffer>, effect: Effect): WebGLVertexArrayObject;
@@ -50776,12 +51784,12 @@ declare module BABYLON {
          * Sets the current alpha mode
          * @param mode defines the mode to use (one of the BABYLON.Constants.ALPHA_XXX)
          * @param noDepthWriteChange defines if depth writing state should remains unchanged (false by default)
-         * @see http://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
+         * @see https://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
          */
         setAlphaMode(mode: number, noDepthWriteChange?: boolean): void;
         /**
          * Gets the current alpha mode
-         * @see http://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
+         * @see https://doc.babylonjs.com/resources/transparency_and_how_meshes_are_rendered
          * @returns the current alpha mode
          */
         getAlphaMode(): number;
@@ -52368,6 +53376,11 @@ declare module BABYLON {
          * Number of Simultaneous lights allowed on the material.
          */
         maxSimultaneousLights: int;
+        private _shadowOnly;
+        /**
+         * Make the material only render shadows
+         */
+        shadowOnly: boolean;
         /**
          * Default configuration related to image processing available in the Background Material.
          */
@@ -53448,7 +54461,7 @@ declare module BABYLON {
         /**
          * Stores the sheen tint values in a texture.
          * rgb is tint
-         * a is a intensity
+         * a is a intensity or roughness if roughness has been defined
          */
         texture: Nullable<BaseTexture>;
         private _roughness;
@@ -53570,7 +54583,7 @@ declare module BABYLON {
         SUBSURFACE: boolean;
         SS_REFRACTION: boolean;
         SS_TRANSLUCENCY: boolean;
-        SS_SCATERRING: boolean;
+        SS_SCATTERING: boolean;
         SS_THICKNESSANDMASK_TEXTURE: boolean;
         SS_THICKNESSANDMASK_TEXTUREDIRECTUV: number;
         SS_REFRACTIONMAP_3D: boolean;
@@ -53580,6 +54593,7 @@ declare module BABYLON {
         SS_RGBDREFRACTION: boolean;
         SS_LINEARSPECULARREFRACTION: boolean;
         SS_LINKREFRACTIONTOTRANSPARENCY: boolean;
+        SS_ALBEDOFORREFRACTIONTINT: boolean;
         SS_MASK_FROM_THICKNESS_TEXTURE: boolean;
         /** @hidden */
         _areTexturesDirty: boolean;
@@ -53600,6 +54614,17 @@ declare module BABYLON {
         isTranslucencyEnabled: boolean;
         private _isScatteringEnabled;
         /**
+         * Defines if the sub surface scattering is enabled in the material.
+         */
+        isScatteringEnabled: boolean;
+        private _scatteringDiffusionProfileIndex;
+        /**
+         * Diffusion profile for subsurface scattering.
+         * Useful for better scattering in the skins or foliages.
+         */
+        get scatteringDiffusionProfile(): Nullable<Color3>;
+        set scatteringDiffusionProfile(c: Nullable<Color3>);
+        /**
          * Defines the refraction intensity of the material.
          * The refraction when enabled replaces the Diffuse part of the material.
          * The intensity helps transitionning between diffuse and refraction.
@@ -53612,11 +54637,9 @@ declare module BABYLON {
          */
         translucencyIntensity: number;
         /**
-         * Defines the scattering intensity of the material.
-         * When scattering has been enabled, this defines how much of the "scattered light"
-         * is addded to the diffuse part of the material.
+         * When enabled, transparent surfaces will be tinted with the albedo colour (independent of thickness)
          */
-        scatteringIntensity: number;
+        useAlbedoToTintRefraction: boolean;
         private _thicknessTexture;
         /**
          * Stores the average thickness of a mesh in a texture (The texture is holding the values linearly).
@@ -53641,6 +54664,16 @@ declare module BABYLON {
          * From dielectric fresnel rules: F0 = square((iorT - iorI) / (iorT + iorI))
          */
         indexOfRefraction: number;
+        private _volumeIndexOfRefraction;
+        /**
+         * Index of refraction of the material's volume.
+         * https://en.wikipedia.org/wiki/List_of_refractive_indices
+         *
+         * This ONLY impacts refraction. If not provided or given a non-valid value,
+         * the volume will use the same IOR as the surface.
+         */
+        get volumeIndexOfRefraction(): number;
+        set volumeIndexOfRefraction(value: number);
         private _invertRefractionY;
         /**
          * Controls if refraction needs to be inverted on Y. This could be useful for procedural texture.
@@ -53684,15 +54717,21 @@ declare module BABYLON {
          * * the alpha channel is the refraction intensity.
          */
         useMaskFromThicknessTexture: boolean;
+        private _scene;
         /** @hidden */
         private _internalMarkAllSubMeshesAsTexturesDirty;
+        private _internalMarkScenePrePassDirty;
         /** @hidden */
         _markAllSubMeshesAsTexturesDirty(): void;
+        /** @hidden */
+        _markScenePrePassDirty(): void;
         /**
          * Instantiate a new istance of sub surface configuration.
          * @param markAllSubMeshesAsTexturesDirty Callback to flag the material to dirty
+         * @param markScenePrePassDirty Callback to flag the scene as prepass dirty
+         * @param scene The scene
          */
-        constructor(markAllSubMeshesAsTexturesDirty: () => void);
+        constructor(markAllSubMeshesAsTexturesDirty: () => void, markScenePrePassDirty: () => void, scene: Scene);
         /**
          * Gets wehter the submesh is ready to be used or not.
          * @param defines the list of "defines" to update.
@@ -53711,10 +54750,11 @@ declare module BABYLON {
          * @param uniformBuffer defines the Uniform buffer to fill in.
          * @param scene defines the scene the material belongs to.
          * @param engine defines the engine the material belongs to.
-         * @param isFrozen defines wether the material is frozen or not.
-         * @param lodBasedMicrosurface defines wether the material relies on lod based microsurface or not.
+         * @param isFrozen defines whether the material is frozen or not.
+         * @param lodBasedMicrosurface defines whether the material relies on lod based microsurface or not.
+         * @param realTimeFiltering defines whether the textures should be filtered on the fly.
          */
-        bindForSubMesh(uniformBuffer: UniformBuffer, scene: Scene, engine: Engine, isFrozen: boolean, lodBasedMicrosurface: boolean): void;
+        bindForSubMesh(uniformBuffer: UniformBuffer, scene: Scene, engine: Engine, isFrozen: boolean, lodBasedMicrosurface: boolean, realTimeFiltering: boolean): void;
         /**
          * Unbinds the material from the mesh.
          * @param activeEffect defines the effect that should be unbound from.
@@ -53812,6 +54852,13 @@ declare module BABYLON {
 }
 declare module BABYLON {
     /** @hidden */
+    export var prePassDeclaration: {
+        name: string;
+        shader: string;
+    };
+}
+declare module BABYLON {
+    /** @hidden */
     export var pbrFragmentDeclaration: {
         name: string;
         shader: string;
@@ -53834,6 +54881,13 @@ declare module BABYLON {
 declare module BABYLON {
     /** @hidden */
     export var pbrFragmentSamplersDeclaration: {
+        name: string;
+        shader: string;
+    };
+}
+declare module BABYLON {
+    /** @hidden */
+    export var subSurfaceScatteringFunctions: {
         name: string;
         shader: string;
     };
@@ -54067,7 +55121,7 @@ declare module BABYLON {
      * Manages the defines for the PBR Material.
      * @hidden
      */
-    export class PBRMaterialDefines extends MaterialDefines implements IImageProcessingConfigurationDefines, IMaterialClearCoatDefines, IMaterialAnisotropicDefines, IMaterialBRDFDefines, IMaterialSheenDefines, IMaterialSubSurfaceDefines {
+    export class PBRMaterialDefines extends MaterialDefines implements IImageProcessingConfigurationDefines, IMaterialClearCoatDefines, IMaterialAnisotropicDefines, IMaterialBRDFDefines, IMaterialSheenDefines, IMaterialSubSurfaceDefines, IMaterialDetailMapDefines {
         PBR: boolean;
         NUM_SAMPLES: string;
         REALTIME_FILTERING: boolean;
@@ -54079,6 +55133,9 @@ declare module BABYLON {
         GAMMAALBEDO: boolean;
         ALBEDODIRECTUV: number;
         VERTEXCOLOR: boolean;
+        DETAIL: boolean;
+        DETAILDIRECTUV: number;
+        DETAIL_NORMALBLENDMETHOD: number;
         AMBIENT: boolean;
         AMBIENTDIRECTUV: number;
         AMBIENTINGRAYSCALE: boolean;
@@ -54153,6 +55210,9 @@ declare module BABYLON {
         RADIANCEOCCLUSION: boolean;
         HORIZONOCCLUSION: boolean;
         INSTANCES: boolean;
+        THIN_INSTANCES: boolean;
+        PREPASS: boolean;
+        SCENE_MRT_COUNT: number;
         NUM_BONE_INFLUENCERS: number;
         BonesPerMesh: number;
         BONETEXTURE: boolean;
@@ -54216,7 +55276,7 @@ declare module BABYLON {
         SUBSURFACE: boolean;
         SS_REFRACTION: boolean;
         SS_TRANSLUCENCY: boolean;
-        SS_SCATERRING: boolean;
+        SS_SCATTERING: boolean;
         SS_THICKNESSANDMASK_TEXTURE: boolean;
         SS_THICKNESSANDMASK_TEXTUREDIRECTUV: number;
         SS_REFRACTIONMAP_3D: boolean;
@@ -54226,6 +55286,7 @@ declare module BABYLON {
         SS_RGBDREFRACTION: boolean;
         SS_LINEARSPECULARREFRACTION: boolean;
         SS_LINKREFRACTIONTOTRANSPARENCY: boolean;
+        SS_ALBEDOFORREFRACTIONTINT: boolean;
         SS_MASK_FROM_THICKNESS_TEXTURE: boolean;
         UNLIT: boolean;
         DEBUGMODE: number;
@@ -54546,6 +55607,22 @@ declare module BABYLON {
          * Force the shader to compute irradiance in the fragment shader in order to take bump in account.
          */
         protected _forceIrradianceInFragment: boolean;
+        private _realTimeFiltering;
+        /**
+         * Enables realtime filtering on the texture.
+         */
+        get realTimeFiltering(): boolean;
+        set realTimeFiltering(b: boolean);
+        private _realTimeFilteringQuality;
+        /**
+         * Quality switch for realtime filtering
+         */
+        get realTimeFilteringQuality(): number;
+        set realTimeFilteringQuality(n: number);
+        /**
+         * Should this material render to several textures at once
+         */
+        get shouldRenderToMRT(): boolean;
         /**
          * Force normal to face away from face.
          */
@@ -54629,6 +55706,10 @@ declare module BABYLON {
          * Defines the SubSurface parameters for the material.
          */
         readonly subSurface: PBRSubSurfaceConfiguration;
+        /**
+         * Defines the detail map parameters for the material.
+         */
+        readonly detailMap: DetailMapConfiguration;
         protected _rebuildInParallel: boolean;
         /**
          * Instantiates a new PBRMaterial instance.
@@ -55494,9 +56575,10 @@ declare module BABYLON {
         /**
          * This returns if the loader support the current file information.
          * @param extension defines the file extension of the file being loaded
+         * @param mimeType defines the optional mime type of the file being loaded
          * @returns true if the loader can load the specified file
          */
-        canLoad(extension: string): boolean;
+        canLoad(extension: string, mimeType?: string): boolean;
         /**
          * Uploads the cube texture data to the WebGL texture. It has already been bound.
          * @param data contains the texture data
@@ -55521,13 +56603,13 @@ declare module BABYLON {
         interface Scene {
             /**
              * Creates a default light for the scene.
-             * @see http://doc.babylonjs.com/How_To/Fast_Build#create-default-light
+             * @see https://doc.babylonjs.com/How_To/Fast_Build#create-default-light
              * @param replace has the default false, when true replaces the existing lights in the scene with a hemispheric light
              */
             createDefaultLight(replace?: boolean): void;
             /**
              * Creates a default camera for the scene.
-             * @see http://doc.babylonjs.com/How_To/Fast_Build#create-default-camera
+             * @see https://doc.babylonjs.com/How_To/Fast_Build#create-default-camera
              * @param createArcRotateCamera has the default false which creates a free camera, when true creates an arc rotate camera
              * @param replace has default false, when true replaces the active camera in the scene
              * @param attachCameraControls has default false, when true attaches camera controls to the canvas.
@@ -55535,7 +56617,7 @@ declare module BABYLON {
             createDefaultCamera(createArcRotateCamera?: boolean, replace?: boolean, attachCameraControls?: boolean): void;
             /**
              * Creates a default camera and a default light.
-             * @see http://doc.babylonjs.com/how_to/Fast_Build#create-default-camera-or-light
+             * @see https://doc.babylonjs.com/how_to/Fast_Build#create-default-camera-or-light
              * @param createArcRotateCamera has the default false which creates a free camera, when true creates an arc rotate camera
              * @param replace has the default false, when true replaces the active camera/light in the scene
              * @param attachCameraControls has the default false, when true attaches camera controls to the canvas.
@@ -55543,7 +56625,7 @@ declare module BABYLON {
             createDefaultCameraOrLight(createArcRotateCamera?: boolean, replace?: boolean, attachCameraControls?: boolean): void;
             /**
              * Creates a new sky box
-             * @see http://doc.babylonjs.com/how_to/Fast_Build#create-default-skybox
+             * @see https://doc.babylonjs.com/how_to/Fast_Build#create-default-skybox
              * @param environmentTexture defines the texture to use as environment texture
              * @param pbr has default false which requires the StandardMaterial to be used, when true PBRMaterial must be used
              * @param scale defines the overall scale of the skybox
@@ -55554,21 +56636,21 @@ declare module BABYLON {
             createDefaultSkybox(environmentTexture?: BaseTexture, pbr?: boolean, scale?: number, blur?: number, setGlobalEnvTexture?: boolean): Nullable<Mesh>;
             /**
              * Creates a new environment
-             * @see http://doc.babylonjs.com/How_To/Fast_Build#create-default-environment
+             * @see https://doc.babylonjs.com/How_To/Fast_Build#create-default-environment
              * @param options defines the options you can use to configure the environment
              * @returns the new EnvironmentHelper
              */
             createDefaultEnvironment(options?: Partial<IEnvironmentHelperOptions>): Nullable<EnvironmentHelper>;
             /**
              * Creates a new VREXperienceHelper
-             * @see http://doc.babylonjs.com/how_to/webvr_helper
+             * @see https://doc.babylonjs.com/how_to/webvr_helper
              * @param webVROptions defines the options used to create the new VREXperienceHelper
              * @returns a new VREXperienceHelper
              */
             createDefaultVRExperience(webVROptions?: VRExperienceHelperOptions): VRExperienceHelper;
             /**
              * Creates a new WebXRDefaultExperience
-             * @see http://doc.babylonjs.com/how_to/webxr
+             * @see https://doc.babylonjs.com/how_to/introduction_to_webxr
              * @param options experience options
              * @returns a promise for a new WebXRDefaultExperience
              */
@@ -55674,7 +56756,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * This class can be used to get instrumentation data from a Babylon engine
-     * @see http://doc.babylonjs.com/how_to/optimizing_your_scene#engineinstrumentation
+     * @see https://doc.babylonjs.com/how_to/optimizing_your_scene#engineinstrumentation
      */
     export class EngineInstrumentation implements IDisposable {
         /**
@@ -55717,7 +56799,7 @@ declare module BABYLON {
         /**
          * Instantiates a new engine instrumentation.
          * This class can be used to get instrumentation data from a Babylon engine
-         * @see http://doc.babylonjs.com/how_to/optimizing_your_scene#engineinstrumentation
+         * @see https://doc.babylonjs.com/how_to/optimizing_your_scene#engineinstrumentation
          * @param engine Defines the engine to instrument
          */
         constructor(
@@ -55734,7 +56816,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * This class can be used to get instrumentation data from a Babylon engine
-     * @see http://doc.babylonjs.com/how_to/optimizing_your_scene#sceneinstrumentation
+     * @see https://doc.babylonjs.com/how_to/optimizing_your_scene#sceneinstrumentation
      */
     export class SceneInstrumentation implements IDisposable {
         /**
@@ -55905,7 +56987,7 @@ declare module BABYLON {
         /**
          * Instantiates a new scene instrumentation.
          * This class can be used to get instrumentation data from a Babylon engine
-         * @see http://doc.babylonjs.com/how_to/optimizing_your_scene#sceneinstrumentation
+         * @see https://doc.babylonjs.com/how_to/optimizing_your_scene#sceneinstrumentation
          * @param scene Defines the scene to instrument
          */
         constructor(
@@ -56204,8 +57286,8 @@ declare module BABYLON {
         interface AbstractScene {
             /**
              * The list of effect layers (highlights/glow) added to the scene
-             * @see http://doc.babylonjs.com/how_to/highlight_layer
-             * @see http://doc.babylonjs.com/how_to/glow_layer
+             * @see https://doc.babylonjs.com/how_to/highlight_layer
+             * @see https://doc.babylonjs.com/how_to/glow_layer
              */
             effectLayers: Array<EffectLayer>;
             /**
@@ -56695,6 +57777,13 @@ declare module BABYLON {
          */
         protected _shouldRenderMesh(mesh: Mesh): boolean;
         /**
+         * Returns true if the mesh can be rendered, otherwise false.
+         * @param mesh The mesh to render
+         * @param material The material used on the mesh
+         * @returns true if it can be rendered otherwise false
+         */
+        protected _canRenderMesh(mesh: AbstractMesh, material: Material): boolean;
+        /**
          * Adds specific effects defines.
          * @param defines The defines to add specifics to.
          */
@@ -56979,7 +58068,7 @@ declare module BABYLON {
     /**
      * This represents a Lens Flare System or the shiny effect created by the light reflection on the  camera lenses.
      * It is usually composed of several `lensFlare`.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_lens_flares
+     * @see https://doc.babylonjs.com/how_to/how_to_use_lens_flares
      */
     export class LensFlareSystem {
         /**
@@ -57025,7 +58114,7 @@ declare module BABYLON {
          * Instantiates a lens flare system.
          * This represents a Lens Flare System or the shiny effect created by the light reflection on the  camera lenses.
          * It is usually composed of several `lensFlare`.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_lens_flares
+         * @see https://doc.babylonjs.com/how_to/how_to_use_lens_flares
          * @param name Define the name of the lens flare system in the scene
          * @param emitter Define the source (the emitter) of the lens flares (it can be a camera, a light or a mesh).
          * @param scene Define the scene the lens flare system belongs to
@@ -57096,7 +58185,7 @@ declare module BABYLON {
     /**
      * This represents one of the lens effect in a `lensFlareSystem`.
      * It controls one of the indiviual texture used in the effect.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_lens_flares
+     * @see https://doc.babylonjs.com/how_to/how_to_use_lens_flares
      */
     export class LensFlare {
         /**
@@ -57124,7 +58213,7 @@ declare module BABYLON {
          * Creates a new Lens Flare.
          * This represents one of the lens effect in a `lensFlareSystem`.
          * It controls one of the indiviual texture used in the effect.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_lens_flares
+         * @see https://doc.babylonjs.com/how_to/how_to_use_lens_flares
          * @param size Define the size of the lens flare (a floating value between 0 and 1)
          * @param position Define the position of the lens flare in the system. (a floating value between -1 and 1). A value of 0 is located on the emitter. A value greater than 0 is beyond the emitter and a value lesser than 0 is behind.
          * @param color Define the lens color
@@ -57137,7 +58226,7 @@ declare module BABYLON {
          * Instantiates a new Lens Flare.
          * This represents one of the lens effect in a `lensFlareSystem`.
          * It controls one of the indiviual texture used in the effect.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_lens_flares
+         * @see https://doc.babylonjs.com/how_to/how_to_use_lens_flares
          * @param size Define the size of the lens flare in the system (a floating value between 0 and 1)
          * @param position Define the position of the lens flare in the system. (a floating value between -1 and 1). A value of 0 is located on the emitter. A value greater than 0 is beyond the emitter and a value lesser than 0 is behind.
          * @param color Define the lens color
@@ -57163,7 +58252,7 @@ declare module BABYLON {
         interface AbstractScene {
             /**
              * The list of lens flare system added to the scene
-             * @see http://doc.babylonjs.com/how_to/how_to_use_lens_flares
+             * @see https://doc.babylonjs.com/how_to/how_to_use_lens_flares
              */
             lensFlareSystems: Array<LensFlareSystem>;
             /**
@@ -58107,7 +59196,7 @@ declare module BABYLON {
           * @param onFinished Callback when filtering is done
           * @return Promise called when prefiltering is done
           */
-        prefilter(texture: BaseTexture, onFinished?: Nullable<() => void>): Promise<unknown>;
+        prefilter(texture: BaseTexture, onFinished?: Nullable<() => void>): Promise<unknown> | undefined;
     }
 }
 declare module BABYLON {
@@ -58213,7 +59302,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to control physics engine
-     * @see http://doc.babylonjs.com/how_to/using_the_physics_engine
+     * @see https://doc.babylonjs.com/how_to/using_the_physics_engine
      */
     export class PhysicsEngine implements IPhysicsEngine {
         private _physicsPlugin;
@@ -58351,12 +59440,13 @@ declare module BABYLON {
         private _cannonRaycastResult;
         private _raycastResult;
         private _physicsBodysToRemoveAfterStep;
+        private _firstFrame;
         BJSCANNON: any;
         constructor(_useDeltaForWorldStep?: boolean, iterations?: number, cannonInjection?: any);
         setGravity(gravity: Vector3): void;
         setTimeStep(timeStep: number): void;
         getTimeStep(): number;
-        executeStep(delta: number): void;
+        executeStep(delta: number, impostors: Array<PhysicsImpostor>): void;
         private _removeMarkedPhysicsBodiesFromWorld;
         applyImpulse(impostor: PhysicsImpostor, force: Vector3, contactPoint: Vector3): void;
         applyForce(impostor: PhysicsImpostor, force: Vector3, contactPoint: Vector3): void;
@@ -58968,7 +60058,7 @@ declare module BABYLON {
         interface AbstractScene {
             /**
              * The list of reflection probes added to the scene
-             * @see http://doc.babylonjs.com/how_to/how_to_use_reflection_probes
+             * @see https://doc.babylonjs.com/how_to/how_to_use_reflection_probes
              */
             reflectionProbes: Array<ReflectionProbe>;
             /**
@@ -58985,7 +60075,7 @@ declare module BABYLON {
         }
     /**
      * Class used to generate realtime reflection / refraction cube textures
-     * @see http://doc.babylonjs.com/how_to/how_to_use_reflection_probes
+     * @see https://doc.babylonjs.com/how_to/how_to_use_reflection_probes
      */
     export class ReflectionProbe {
         /** defines the name of the probe */
@@ -59919,7 +61009,7 @@ declare module BABYLON {
     /**
      * Procedural texturing is a way to programmatically create a texture. There are 2 types of procedural textures: code-only, and code that references some classic 2D images, sometimes called 'refMaps' or 'sampler' images.
      * Custom Procedural textures are the easiest way to create your own procedural in your application.
-     * @see http://doc.babylonjs.com/how_to/how_to_use_procedural_textures#creating-custom-procedural-textures
+     * @see https://doc.babylonjs.com/how_to/how_to_use_procedural_textures#creating-custom-procedural-textures
      */
     export class CustomProceduralTexture extends ProceduralTexture {
         private _animate;
@@ -59930,7 +61020,7 @@ declare module BABYLON {
          * Instantiates a new Custom Procedural Texture.
          * Procedural texturing is a way to programmatically create a texture. There are 2 types of procedural textures: code-only, and code that references some classic 2D images, sometimes called 'refMaps' or 'sampler' images.
          * Custom Procedural textures are the easiest way to create your own procedural in your application.
-         * @see http://doc.babylonjs.com/how_to/how_to_use_procedural_textures#creating-custom-procedural-textures
+         * @see https://doc.babylonjs.com/how_to/how_to_use_procedural_textures#creating-custom-procedural-textures
          * @param name Define the name of the texture
          * @param texturePath Define the folder path containing all the cutom texture related files (config, shaders...)
          * @param size Define the size of the texture to create
@@ -60260,7 +61350,7 @@ declare module BABYLON {
          */
         get instanceID(): NodeMaterialConnectionPoint;
         autoConfigure(material: NodeMaterial): void;
-        prepareDefines(mesh: AbstractMesh, nodeMaterial: NodeMaterial, defines: NodeMaterialDefines, useInstances?: boolean): void;
+        prepareDefines(mesh: AbstractMesh, nodeMaterial: NodeMaterial, defines: NodeMaterialDefines, useInstances?: boolean, subMesh?: SubMesh): void;
         protected _buildBlock(state: NodeMaterialBuildState): this;
     }
 }
@@ -60536,6 +61626,87 @@ declare module BABYLON {
 }
 declare module BABYLON {
     /**
+     * Block used to make gl_FragCoord available
+     */
+    export class FragCoordBlock extends NodeMaterialBlock {
+        /**
+         * Creates a new FragCoordBlock
+         * @param name defines the block name
+         */
+        constructor(name: string);
+        /**
+         * Gets the current class name
+         * @returns the class name
+         */
+        getClassName(): string;
+        /**
+         * Gets the xy component
+         */
+        get xy(): NodeMaterialConnectionPoint;
+        /**
+         * Gets the xyz component
+         */
+        get xyz(): NodeMaterialConnectionPoint;
+        /**
+         * Gets the xyzw component
+         */
+        get xyzw(): NodeMaterialConnectionPoint;
+        /**
+         * Gets the x component
+         */
+        get x(): NodeMaterialConnectionPoint;
+        /**
+         * Gets the y component
+         */
+        get y(): NodeMaterialConnectionPoint;
+        /**
+         * Gets the z component
+         */
+        get z(): NodeMaterialConnectionPoint;
+        /**
+         * Gets the w component
+         */
+        get output(): NodeMaterialConnectionPoint;
+        protected writeOutputs(state: NodeMaterialBuildState): string;
+        protected _buildBlock(state: NodeMaterialBuildState): this;
+    }
+}
+declare module BABYLON {
+    /**
+     * Block used to get the screen sizes
+     */
+    export class ScreenSizeBlock extends NodeMaterialBlock {
+        private _varName;
+        private _scene;
+        /**
+         * Creates a new ScreenSizeBlock
+         * @param name defines the block name
+         */
+        constructor(name: string);
+        /**
+         * Gets the current class name
+         * @returns the class name
+         */
+        getClassName(): string;
+        /**
+         * Gets the xy component
+         */
+        get xy(): NodeMaterialConnectionPoint;
+        /**
+         * Gets the x component
+         */
+        get x(): NodeMaterialConnectionPoint;
+        /**
+         * Gets the y component
+         */
+        get y(): NodeMaterialConnectionPoint;
+        bind(effect: Effect, nodeMaterial: NodeMaterial, mesh?: Mesh): void;
+        protected writeOutputs(state: NodeMaterialBuildState, varName: string): string;
+        protected _buildBlock(state: NodeMaterialBuildState): this;
+    }
+}
+declare module BABYLON {
+    /**
      * Block used to add support for scene fog
      */
     export class FogBlock extends NodeMaterialBlock {
@@ -60691,6 +61862,10 @@ declare module BABYLON {
          */
         get rgb(): NodeMaterialConnectionPoint;
         /**
+         * Gets the rgba output component
+         */
+        get rgba(): NodeMaterialConnectionPoint;
+        /**
          * Gets the r output component
          */
         get r(): NodeMaterialConnectionPoint;
@@ -60702,6 +61877,10 @@ declare module BABYLON {
          * Gets the b output component
          */
         get b(): NodeMaterialConnectionPoint;
+        /**
+         * Gets the a output component
+         */
+        get a(): NodeMaterialConnectionPoint;
         autoConfigure(material: NodeMaterial): void;
         protected _buildBlock(state: NodeMaterialBuildState): this;
     }
@@ -62073,6 +63252,8 @@ declare module BABYLON {
         _vReflectionMicrosurfaceInfosName: string;
         /** @hidden */
         _vReflectionInfosName: string;
+        /** @hidden */
+        _vReflectionFilteringInfoName: string;
         private _scene;
         /**
          * The three properties below are set by the main PBR block prior to calling methods of this class.
@@ -62209,10 +63390,6 @@ declare module BABYLON {
          */
         get roughness(): NodeMaterialConnectionPoint;
         /**
-         * Gets the texture input component
-         */
-        get texture(): NodeMaterialConnectionPoint;
-        /**
          * Gets the sheen object output component
          */
         get sheen(): NodeMaterialConnectionPoint;
@@ -62234,6 +63411,15 @@ declare module BABYLON {
      * Block used to implement the reflectivity module of the PBR material
      */
     export class ReflectivityBlock extends NodeMaterialBlock {
+        private _metallicReflectanceColor;
+        private _metallicF0Factor;
+        /** @hidden */
+        _vMetallicReflectanceFactorsName: string;
+        /**
+         * The property below is set by the main PBR block prior to calling methods of this class.
+        */
+        /** @hidden */
+        indexOfRefractionConnectionPoint: Nullable<NodeMaterialConnectionPoint>;
         /**
          * Specifies if the metallic texture contains the ambient occlusion information in its red channel.
          */
@@ -62281,12 +63467,14 @@ declare module BABYLON {
          * Gets the reflectivity object output component
          */
         get reflectivity(): NodeMaterialConnectionPoint;
+        bind(effect: Effect, nodeMaterial: NodeMaterial, mesh?: Mesh, subMesh?: SubMesh): void;
         /**
          * Gets the main code of the block (fragment side)
+         * @param state current state of the node material building
          * @param aoIntensityVarName name of the variable with the ambient occlusion intensity
          * @returns the shader code
          */
-        getCode(aoIntensityVarName: string): string;
+        getCode(state: NodeMaterialBuildState, aoIntensityVarName: string): string;
         prepareDefines(mesh: AbstractMesh, nodeMaterial: NodeMaterial, defines: NodeMaterialDefines): void;
         protected _buildBlock(state: NodeMaterialBuildState): this;
         protected _dumpPropertiesCode(): string;
@@ -62416,10 +63604,6 @@ declare module BABYLON {
          * Gets the tint thickness input component
          */
         get tintThickness(): NodeMaterialConnectionPoint;
-        /**
-         * Gets the tint texture input component
-         */
-        get tintTexture(): NodeMaterialConnectionPoint;
         /**
          * Gets the world tangent input component
          */
@@ -62598,6 +63782,14 @@ declare module BABYLON {
          */
         enableSpecularAntiAliasing: boolean;
         /**
+         * Enables realtime filtering on the texture.
+         */
+        realTimeFiltering: boolean;
+        /**
+         * Quality switch for realtime filtering
+         */
+        realTimeFilteringQuality: number;
+        /**
          * Defines if the material uses energy conservation.
          */
         useEnergyConservation: boolean;
@@ -62666,10 +63858,6 @@ declare module BABYLON {
          * Gets the base color input component
          */
         get baseColor(): NodeMaterialConnectionPoint;
-        /**
-         * Gets the base texture input component
-         */
-        get baseTexture(): NodeMaterialConnectionPoint;
         /**
          * Gets the opacity texture input component
          */
@@ -64244,7 +65432,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * A simplifier interface for future simplification implementations
-     * @see http://doc.babylonjs.com/how_to/in-browser_mesh_simplification
+     * @see https://doc.babylonjs.com/how_to/in-browser_mesh_simplification
      */
     export interface ISimplifier {
         /**
@@ -64259,7 +65447,7 @@ declare module BABYLON {
     /**
      * Expected simplification settings.
      * Quality should be between 0 and 1 (1 being 100%, 0 being 0%)
-     * @see http://doc.babylonjs.com/how_to/in-browser_mesh_simplification
+     * @see https://doc.babylonjs.com/how_to/in-browser_mesh_simplification
      */
     export interface ISimplificationSettings {
         /**
@@ -64277,7 +65465,7 @@ declare module BABYLON {
     }
     /**
      * Class used to specify simplification options
-     * @see http://doc.babylonjs.com/how_to/in-browser_mesh_simplification
+     * @see https://doc.babylonjs.com/how_to/in-browser_mesh_simplification
      */
     export class SimplificationSettings implements ISimplificationSettings {
         /** expected quality */
@@ -64327,7 +65515,7 @@ declare module BABYLON {
     }
     /**
      * Queue used to order the simplification tasks
-     * @see http://doc.babylonjs.com/how_to/in-browser_mesh_simplification
+     * @see https://doc.babylonjs.com/how_to/in-browser_mesh_simplification
      */
     export class SimplificationQueue {
         private _simplificationArray;
@@ -64358,7 +65546,7 @@ declare module BABYLON {
     /**
      * The implemented types of simplification
      * At the moment only Quadratic Error Decimation is implemented
-     * @see http://doc.babylonjs.com/how_to/in-browser_mesh_simplification
+     * @see https://doc.babylonjs.com/how_to/in-browser_mesh_simplification
      */
     export enum SimplificationType {
         /** Quadratic error decimation */
@@ -64369,7 +65557,7 @@ declare module BABYLON {
      * Original paper : http://www1.cs.columbia.edu/~cs4162/html05s/garland97.pdf
      * Ported mostly from QSlim and http://voxels.blogspot.de/2014/05/quadric-mesh-simplification-with-source.html to babylon JS
      * @author RaananW
-     * @see http://doc.babylonjs.com/how_to/in-browser_mesh_simplification
+     * @see https://doc.babylonjs.com/how_to/in-browser_mesh_simplification
      */
     export class QuadraticErrorSimplification implements ISimplifier {
         private _mesh;
@@ -64416,7 +65604,7 @@ declare module BABYLON {
             _simplificationQueue: SimplificationQueue;
             /**
              * Gets or sets the simplification queue attached to the scene
-             * @see http://doc.babylonjs.com/how_to/in-browser_mesh_simplification
+             * @see https://doc.babylonjs.com/how_to/in-browser_mesh_simplification
              */
             simplificationQueue: SimplificationQueue;
         }
@@ -64465,6 +65653,85 @@ declare module BABYLON {
         dispose(): void;
         private _beforeCameraUpdate;
     }
+}
+declare module BABYLON {
+        interface Mesh {
+            /**
+             * Creates a new thin instance
+             * @param matrix the matrix or array of matrices (position, rotation, scale) of the thin instance(s) to create
+             * @param refresh true to refresh the underlying gpu buffer (default: true). If you do multiple calls to this method in a row, set refresh to true only for the last call to save performance
+             * @returns the thin instance index number. If you pass an array of matrices, other instance indexes are index+1, index+2, etc
+             */
+            thinInstanceAdd(matrix: DeepImmutableObject<Matrix> | Array<DeepImmutableObject<Matrix>>, refresh: boolean): number;
+            /**
+             * Adds the transformation (matrix) of the current mesh as a thin instance
+             * @param refresh true to refresh the underlying gpu buffer (default: true). If you do multiple calls to this method in a row, set refresh to true only for the last call to save performance
+             * @returns the thin instance index number
+             */
+            thinInstanceAddSelf(refresh: boolean): number;
+            /**
+             * Registers a custom attribute to be used with thin instances
+             * @param kind name of the attribute
+             * @param stride size in floats of the attribute
+             */
+            thinInstanceRegisterAttribute(kind: string, stride: number): void;
+            /**
+             * Sets the matrix of a thin instance
+             * @param index index of the thin instance
+             * @param matrix matrix to set
+             * @param refresh true to refresh the underlying gpu buffer (default: true). If you do multiple calls to this method in a row, set refresh to true only for the last call to save performance
+             */
+            thinInstanceSetMatrixAt(index: number, matrix: DeepImmutableObject<Matrix>, refresh: boolean): void;
+            /**
+             * Sets the value of a custom attribute for a thin instance
+             * @param kind name of the attribute
+             * @param index index of the thin instance
+             * @param value value to set
+             * @param refresh true to refresh the underlying gpu buffer (default: true). If you do multiple calls to this method in a row, set refresh to true only for the last call to save performance
+             */
+            thinInstanceSetAttributeAt(kind: string, index: number, value: Array<number>, refresh: boolean): void;
+            /**
+             * Gets / sets the number of thin instances to display. Note that you can't set a number higher than what the underlying buffer can handle.
+             */
+            thinInstanceCount: number;
+            /**
+             * Sets a buffer to be used with thin instances. This method is a faster way to setup multiple instances than calling thinInstanceAdd repeatedly
+             * @param kind name of the attribute. Use "matrix" to setup the buffer of matrices
+             * @param buffer buffer to set
+             * @param stride size in floats of each value of the buffer
+             * @param staticBuffer indicates that the buffer is static, so that you won't change it after it is set (better performances - false by default)
+             */
+            thinInstanceSetBuffer(kind: string, buffer: Nullable<Float32Array>, stride: number, staticBuffer: boolean): void;
+            /**
+             * Synchronize the gpu buffers with a thin instance buffer. Call this method if you update later on the buffers passed to thinInstanceSetBuffer
+             * @param kind name of the attribute to update. Use "matrix" to update the buffer of matrices
+             */
+            thinInstanceBufferUpdated(kind: string): void;
+            /**
+             * Refreshes the bounding info, taking into account all the thin instances defined
+             * @param forceRefreshParentInfo true to force recomputing the mesh bounding info and use it to compute the aggregated bounding info
+             */
+            thinInstanceRefreshBoundingInfo(forceRefreshParentInfo: boolean): void;
+            /** @hidden */
+            _thinInstanceInitializeUserStorage(): void;
+            /** @hidden */
+            _thinInstanceUpdateBufferSize(kind: string, numInstances: number): void;
+            /** @hidden */
+            _userThinInstanceBuffersStorage: {
+                data: {
+                    [key: string]: Float32Array;
+                };
+                sizes: {
+                    [key: string]: number;
+                };
+                vertexBuffers: {
+                    [key: string]: Nullable<VertexBuffer>;
+                };
+                strides: {
+                    [key: string]: number;
+                };
+            };
+        }
 }
 declare module BABYLON {
     /**
@@ -65024,7 +66291,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to enable access to IndexedDB
-     * @see http://doc.babylonjs.com/how_to/caching_resources_in_indexeddb
+     * @see https://doc.babylonjs.com/how_to/caching_resources_in_indexeddb
      */
     export class Database implements IOfflineProvider {
         private _callbackManifestChecked;
@@ -65439,7 +66706,7 @@ declare module BABYLON {
         /**
          * Not supported by GPUParticleSystem
          * Gets or sets a boolean indicating that ramp gradients must be used
-         * @see http://doc.babylonjs.com/babylon101/particles#ramp-gradients
+         * @see https://doc.babylonjs.com/babylon101/particles#ramp-gradients
          */
         get useRampGradients(): boolean;
         set useRampGradients(value: boolean);
@@ -65637,14 +66904,14 @@ declare module BABYLON {
         static ExportSet(systems: IParticleSystem[]): ParticleSystemSet;
         /**
          * Creates a particle system from a snippet saved in a remote file
-         * @param name defines the name of the  particle system to create
+         * @param name defines the name of the particle system to create (can be null or empty to use the one from the json data)
          * @param url defines the url to load from
          * @param scene defines the hosting scene
          * @param gpu If the system will use gpu
          * @param rootUrl defines the root URL to use to load textures and relative dependencies
-         * @returns a promise that will resolve to the new  particle system
+         * @returns a promise that will resolve to the new particle system
          */
-        static ParseFromFileAsync(name: string, url: string, scene: Scene, gpu?: boolean, rootUrl?: string): Promise<IParticleSystem>;
+        static ParseFromFileAsync(name: Nullable<string>, url: string, scene: Scene, gpu?: boolean, rootUrl?: string): Promise<IParticleSystem>;
         /**
          * Creates a particle system from a snippet saved by the particle system editor
          * @param snippetId defines the snippet to load
@@ -65686,10 +66953,6 @@ declare module BABYLON {
              */
             getHierarchyEmittedParticleSystems(): IParticleSystem[];
         }
-    /**
-     * @hidden
-     */
-    export var _IDoNeedToBeInTheBuild: number;
 }
 declare module BABYLON {
     /** Defines the 4 color options */
@@ -66153,12 +67416,12 @@ declare module BABYLON {
             _physicsImpostor: Nullable<PhysicsImpostor>;
             /**
              * Gets or sets impostor used for physic simulation
-             * @see http://doc.babylonjs.com/features/physics_engine
+             * @see https://doc.babylonjs.com/features/physics_engine
              */
             physicsImpostor: Nullable<PhysicsImpostor>;
             /**
              * Gets the current physics impostor
-             * @see http://doc.babylonjs.com/features/physics_engine
+             * @see https://doc.babylonjs.com/features/physics_engine
              * @returns a physics impostor or null
              */
             getPhysicsImpostor(): Nullable<PhysicsImpostor>;
@@ -66166,7 +67429,7 @@ declare module BABYLON {
              * @param force defines the force to apply
              * @param contactPoint defines where to apply the force
              * @returns the current mesh
-             * @see http://doc.babylonjs.com/how_to/using_the_physics_engine
+             * @see https://doc.babylonjs.com/how_to/using_the_physics_engine
              */
             applyImpulse(force: Vector3, contactPoint: Vector3): AbstractMesh;
             /**
@@ -67870,8 +69133,8 @@ declare module BABYLON {
             _postProcessRenderPipelineManager: PostProcessRenderPipelineManager;
             /**
              * Gets the postprocess render pipeline manager
-             * @see http://doc.babylonjs.com/how_to/how_to_use_postprocessrenderpipeline
-             * @see http://doc.babylonjs.com/how_to/using_default_rendering_pipeline
+             * @see https://doc.babylonjs.com/how_to/how_to_use_postprocessrenderpipeline
+             * @see https://doc.babylonjs.com/how_to/using_default_rendering_pipeline
              */
             readonly postProcessRenderPipelineManager: PostProcessRenderPipelineManager;
         }
@@ -69454,6 +70717,277 @@ declare module BABYLON {
 }
 declare module BABYLON {
     /** @hidden */
+    export var fibonacci: {
+        name: string;
+        shader: string;
+    };
+}
+declare module BABYLON {
+    /** @hidden */
+    export var diffusionProfile: {
+        name: string;
+        shader: string;
+    };
+}
+declare module BABYLON {
+    /** @hidden */
+    export var subSurfaceScatteringPixelShader: {
+        name: string;
+        shader: string;
+    };
+}
+declare module BABYLON {
+    /**
+     * Sub surface scattering post process
+     */
+    export class SubSurfaceScatteringPostProcess extends PostProcess {
+        /** @hidden */
+        texelWidth: number;
+        /** @hidden */
+        texelHeight: number;
+        constructor(name: string, scene: Scene, options: number | PostProcessOptions, camera?: Nullable<Camera>, samplingMode?: number, engine?: Engine, reusable?: boolean, textureType?: number);
+    }
+}
+declare module BABYLON {
+    /**
+     * Contains all parameters needed for the prepass to perform
+     * screen space subsurface scattering
+     */
+    export class SubSurfaceConfiguration {
+        private _ssDiffusionS;
+        private _ssFilterRadii;
+        private _ssDiffusionD;
+        /**
+         * Diffusion profile color for subsurface scattering
+         */
+        get ssDiffusionS(): number[];
+        /**
+         * Diffusion profile max color channel value for subsurface scattering
+         */
+        get ssDiffusionD(): number[];
+        /**
+         * Diffusion profile filter radius for subsurface scattering
+         */
+        get ssFilterRadii(): number[];
+        /**
+         * Diffusion profile colors for subsurface scattering
+         * You can add one diffusion color using `addDiffusionProfile` on `scene.prePassRenderer`
+         * See ...
+         * Note that you can only store up to 5 of them
+         */
+        ssDiffusionProfileColors: Color3[];
+        /**
+         * Defines the ratio real world => scene units.
+         * Used for subsurface scattering
+         */
+        metersPerUnit: number;
+        /**
+         * Builds a subsurface configuration object
+         * @param scene The scene
+         */
+        constructor();
+        /**
+         * Adds a new diffusion profile.
+         * Useful for more realistic subsurface scattering on diverse materials.
+         * @param color The color of the diffusion profile. Should be the average color of the material.
+         * @return The index of the diffusion profile for the material subsurface configuration
+         */
+        addDiffusionProfile(color: Color3): number;
+        /**
+         * Deletes all diffusion profiles.
+         * Note that in order to render subsurface scattering, you should have at least 1 diffusion profile.
+         */
+        clearAllDiffusionProfiles(): void;
+        /**
+         * Disposes this object
+         */
+        dispose(): void;
+        /**
+         * @hidden
+         * https://zero-radiance.github.io/post/sampling-diffusion/
+         *
+         * Importance sample the normalized diffuse reflectance profile for the computed value of 's'.
+         * ------------------------------------------------------------------------------------
+         * R[r, phi, s]   = s * (Exp[-r * s] + Exp[-r * s / 3]) / (8 * Pi * r)
+         * PDF[r, phi, s] = r * R[r, phi, s]
+         * CDF[r, s]      = 1 - 1/4 * Exp[-r * s] - 3/4 * Exp[-r * s / 3]
+         * ------------------------------------------------------------------------------------
+         * We importance sample the color channel with the widest scattering distance.
+         */
+        getDiffusionProfileParameters(color: Color3): number;
+        /**
+         * Performs sampling of a Normalized Burley diffusion profile in polar coordinates.
+         * 'u' is the random number (the value of the CDF): [0, 1).
+         * rcp(s) = 1 / ShapeParam = ScatteringDistance.
+         * Returns the sampled radial distance, s.t. (u = 0 -> r = 0) and (u = 1 -> r = Inf).
+         */
+        private _sampleBurleyDiffusionProfile;
+    }
+}
+declare module BABYLON {
+    /**
+     * Renders a pre pass of the scene
+     * This means every mesh in the scene will be rendered to a render target texture
+     * And then this texture will be composited to the rendering canvas with post processes
+     * It is necessary for effects like subsurface scattering or deferred shading
+     */
+    export class PrePassRenderer {
+        /** @hidden */
+        static _SceneComponentInitialization: (scene: Scene) => void;
+        private _scene;
+        private _engine;
+        private _isDirty;
+        /**
+         * Number of textures in the multi render target texture where the scene is directly rendered
+         */
+        readonly mrtCount: number;
+        /**
+         * The render target where the scene is directly rendered
+         */
+        prePassRT: MultiRenderTarget;
+        private _mrtTypes;
+        private _multiRenderAttachments;
+        private _defaultAttachments;
+        private _clearAttachments;
+        private readonly _clearColor;
+        /**
+         * Image processing post process for composition
+         */
+        imageProcessingPostProcess: ImageProcessingPostProcess;
+        /**
+         * Post process for subsurface scattering
+         */
+        subSurfaceScatteringPostProcess: SubSurfaceScatteringPostProcess;
+        /**
+         * Configuration for sub surface scattering post process
+         */
+        subSurfaceConfiguration: SubSurfaceConfiguration;
+        private _enabled;
+        /**
+         * Indicates if the prepass is enabled
+         */
+        get enabled(): boolean;
+        /**
+         * How many samples are used for MSAA of the scene render target
+         */
+        get samples(): number;
+        set samples(n: number);
+        /**
+         * Instanciates a prepass renderer
+         * @param scene The scene
+         */
+        constructor(scene: Scene);
+        private _initializeAttachments;
+        private _createEffects;
+        /**
+         * Indicates if rendering a prepass is supported
+         */
+        get isSupported(): boolean;
+        /**
+         * Sets the proper output textures to draw in the engine.
+         * @param effect The effect that is drawn. It can be or not be compatible with drawing to several output textures.
+         */
+        bindAttachmentsForEffect(effect: Effect): void;
+        /**
+         * @hidden
+         */
+        _beforeCameraDraw(): void;
+        /**
+         * @hidden
+         */
+        _afterCameraDraw(): void;
+        private _checkRTSize;
+        private _bindFrameBuffer;
+        /**
+         * Clears the scene render target (in the sense of settings pixels to the scene clear color value)
+         */
+        clear(): void;
+        private _setState;
+        private _enable;
+        private _disable;
+        /**
+         * Marks the prepass renderer as dirty, triggering a check if the prepass is necessary for the next rendering.
+         */
+        markAsDirty(): void;
+        private _update;
+        /**
+         * Disposes the prepass renderer.
+         */
+        dispose(): void;
+    }
+}
+declare module BABYLON {
+        interface AbstractScene {
+            /** @hidden (Backing field) */
+            _prePassRenderer: Nullable<PrePassRenderer>;
+            /**
+             * Gets or Sets the current prepass renderer associated to the scene.
+             */
+            prePassRenderer: Nullable<PrePassRenderer>;
+            /**
+             * Enables the prepass and associates it with the scene
+             * @returns the PrePassRenderer
+             */
+            enablePrePassRenderer(): Nullable<PrePassRenderer>;
+            /**
+             * Disables the prepass associated with the scene
+             */
+            disablePrePassRenderer(): void;
+        }
+    /**
+     * Defines the Geometry Buffer scene component responsible to manage a G-Buffer useful
+     * in several rendering techniques.
+     */
+    export class PrePassRendererSceneComponent implements ISceneSerializableComponent {
+        /**
+         * The component name helpful to identify the component in the list of scene components.
+         */
+        readonly name: string;
+        /**
+         * The scene the component belongs to.
+         */
+        scene: Scene;
+        /**
+         * Creates a new instance of the component for the given scene
+         * @param scene Defines the scene to register the component in
+         */
+        constructor(scene: Scene);
+        /**
+         * Registers the component in a given scene
+         */
+        register(): void;
+        private _beforeCameraDraw;
+        private _afterCameraDraw;
+        private _beforeClearStage;
+        /**
+         * Serializes the component data to the specified json object
+         * @param serializationObject The object to serialize to
+         */
+        serialize(serializationObject: any): void;
+        /**
+         * Adds all the elements from the container to the scene
+         * @param container the container holding the elements
+         */
+        addFromContainer(container: AbstractScene): void;
+        /**
+         * Removes all the elements in the container from the scene
+         * @param container contains the elements to remove
+         * @param dispose if the removed element should be disposed (default: false)
+         */
+        removeFromContainer(container: AbstractScene, dispose?: boolean): void;
+        /**
+         * Rebuilds the elements related to this component in case of
+         * context lost for instance.
+         */
+        rebuild(): void;
+        /**
+         * Disposes the component and the associated ressources
+         */
+        dispose(): void;
+    }
+}
+declare module BABYLON {
+    /** @hidden */
     export var outlinePixelShader: {
         name: string;
         shader: string;
@@ -69830,7 +71364,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Class used to manage multiple sprites of different sizes on the same spritesheet
-     * @see http://doc.babylonjs.com/babylon101/sprites
+     * @see https://doc.babylonjs.com/babylon101/sprites
      */
     export class SpritePackedManager extends SpriteManager {
         /** defines the packed manager's name */
@@ -70522,7 +72056,7 @@ declare module BABYLON {
     }
     /**
      * This class can be used to easily import assets into a scene
-     * @see http://doc.babylonjs.com/how_to/how_to_use_assetsmanager
+     * @see https://doc.babylonjs.com/how_to/how_to_use_assetsmanager
      */
     export class AssetsManager {
         private _scene;
@@ -70564,7 +72098,7 @@ declare module BABYLON {
         onProgressObservable: Observable<IAssetsProgressEvent>;
         /**
          * Gets or sets a boolean defining if the AssetsManager should use the default loading screen
-         * @see http://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
+         * @see https://doc.babylonjs.com/how_to/creating_a_custom_loading_screen
          */
         useDefaultLoadingScreen: boolean;
         /**
@@ -70752,7 +72286,7 @@ declare module BABYLON {
         /**
          * Callback called when a file is processed
          */
-        onProcessFileCallback: (file: File, name: string, extension: string) => true;
+        onProcessFileCallback: (file: File, name: string, extension: string) => boolean;
         private _engine;
         private _currentScene;
         private _sceneLoadedCallback;
@@ -70777,7 +72311,7 @@ declare module BABYLON {
          * @param onReloadCallback callback called when a reload is requested
          * @param errorCallback callback call if an error occurs
          */
-        constructor(engine: Engine, scene: Scene, sceneLoadedCallback: (sceneFile: File, scene: Scene) => void, progressCallback: (progress: SceneLoaderProgressEvent) => void, additionalRenderLoopLogicCallback: () => void, textureLoadingCallback: (remaining: number) => void, startingProcessingFilesCallback: (files?: File[]) => void, onReloadCallback: (sceneFile: File) => void, errorCallback: (sceneFile: File, scene: Scene, message: string) => void);
+        constructor(engine: Engine, scene: Nullable<Scene>, sceneLoadedCallback: Nullable<(sceneFile: File, scene: Scene) => void>, progressCallback: Nullable<(progress: ISceneLoaderProgressEvent) => void>, additionalRenderLoopLogicCallback: Nullable<() => void>, textureLoadingCallback: Nullable<(remaining: number) => void>, startingProcessingFilesCallback: Nullable<(files?: File[]) => void>, onReloadCallback: Nullable<(sceneFile: File) => void>, errorCallback: Nullable<(sceneFile: File, scene: Nullable<Scene>, message: string) => void>);
         private _dragEnterHandler;
         private _dragOverHandler;
         private _dropHandler;
@@ -70786,6 +72320,8 @@ declare module BABYLON {
          * @param elementToMonitor defines the DOM element to track
          */
         monitorElementForDragNDrop(elementToMonitor: HTMLElement): void;
+        /** Gets the current list of files to load */
+        get filesToLoad(): File[];
         /**
          * Release all associated resources
          */
@@ -70810,7 +72346,7 @@ declare module BABYLON {
 declare module BABYLON {
     /**
      * Defines the root class used to create scene optimization to use with SceneOptimizer
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class SceneOptimization {
         /**
@@ -70842,7 +72378,7 @@ declare module BABYLON {
     }
     /**
      * Defines an optimization used to reduce the size of render target textures
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class TextureOptimization extends SceneOptimization {
         /**
@@ -70891,7 +72427,7 @@ declare module BABYLON {
     }
     /**
      * Defines an optimization used to increase or decrease the rendering resolution
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class HardwareScalingOptimization extends SceneOptimization {
         /**
@@ -70942,7 +72478,7 @@ declare module BABYLON {
     }
     /**
      * Defines an optimization used to remove shadows
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class ShadowsOptimization extends SceneOptimization {
         /**
@@ -70960,7 +72496,7 @@ declare module BABYLON {
     }
     /**
      * Defines an optimization used to turn post-processes off
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class PostProcessesOptimization extends SceneOptimization {
         /**
@@ -70978,7 +72514,7 @@ declare module BABYLON {
     }
     /**
      * Defines an optimization used to turn lens flares off
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class LensFlaresOptimization extends SceneOptimization {
         /**
@@ -70996,7 +72532,7 @@ declare module BABYLON {
     }
     /**
      * Defines an optimization based on user defined callback.
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class CustomOptimization extends SceneOptimization {
         /**
@@ -71022,7 +72558,7 @@ declare module BABYLON {
     }
     /**
      * Defines an optimization used to turn particles off
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class ParticlesOptimization extends SceneOptimization {
         /**
@@ -71040,7 +72576,7 @@ declare module BABYLON {
     }
     /**
      * Defines an optimization used to turn render targets off
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class RenderTargetsOptimization extends SceneOptimization {
         /**
@@ -71058,7 +72594,7 @@ declare module BABYLON {
     }
     /**
      * Defines an optimization used to merge meshes with compatible materials
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class MergeMeshesOptimization extends SceneOptimization {
         private static _UpdateSelectionTree;
@@ -71087,7 +72623,7 @@ declare module BABYLON {
     }
     /**
      * Defines a list of options used by SceneOptimizer
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class SceneOptimizerOptions {
         /**
@@ -71151,7 +72687,7 @@ declare module BABYLON {
     }
     /**
      * Class used to run optimizations in order to reach a target frame rate
-     * @description More details at http://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
+     * @description More details at https://doc.babylonjs.com/how_to/how_to_use_sceneoptimizer
      */
     export class SceneOptimizer implements IDisposable {
         private _isRunning;
@@ -71303,7 +72839,7 @@ declare module BABYLON {
      * This can help with recording videos from BabylonJS.
      * This is based on the available WebRTC functionalities of the browser.
      *
-     * @see http://doc.babylonjs.com/how_to/render_scene_on_a_video
+     * @see https://doc.babylonjs.com/how_to/render_scene_on_a_video
      */
     export class VideoRecorder {
         private static readonly _defaultOptions;
@@ -71359,7 +72895,7 @@ declare module BABYLON {
     export class ScreenshotTools {
         /**
          * Captures a screenshot of the current rendering
-         * @see http://doc.babylonjs.com/how_to/render_scene_on_a_png
+         * @see https://doc.babylonjs.com/how_to/render_scene_on_a_png
          * @param engine defines the rendering engine
          * @param camera defines the source camera
          * @param size This parameter can be set to a single number or to an object with the
@@ -71376,7 +72912,7 @@ declare module BABYLON {
         static CreateScreenshot(engine: Engine, camera: Camera, size: IScreenshotSize | number, successCallback?: (data: string) => void, mimeType?: string): void;
         /**
          * Captures a screenshot of the current rendering
-         * @see http://doc.babylonjs.com/how_to/render_scene_on_a_png
+         * @see https://doc.babylonjs.com/how_to/render_scene_on_a_png
          * @param engine defines the rendering engine
          * @param camera defines the source camera
          * @param size This parameter can be set to a single number or to an object with the
@@ -71392,7 +72928,7 @@ declare module BABYLON {
         static CreateScreenshotAsync(engine: Engine, camera: Camera, size: any, mimeType?: string): Promise<string>;
         /**
          * Generates an image screenshot from the specified camera.
-         * @see http://doc.babylonjs.com/how_to/render_scene_on_a_png
+         * @see https://doc.babylonjs.com/how_to/render_scene_on_a_png
          * @param engine The engine to use for rendering
          * @param camera The camera to use for rendering
          * @param size This parameter can be set to a single number or to an object with the
@@ -71413,7 +72949,7 @@ declare module BABYLON {
         static CreateScreenshotUsingRenderTarget(engine: Engine, camera: Camera, size: IScreenshotSize | number, successCallback?: (data: string) => void, mimeType?: string, samples?: number, antialiasing?: boolean, fileName?: string, renderSprites?: boolean): void;
         /**
          * Generates an image screenshot from the specified camera.
-         * @see http://doc.babylonjs.com/how_to/render_scene_on_a_png
+         * @see https://doc.babylonjs.com/how_to/render_scene_on_a_png
          * @param engine The engine to use for rendering
          * @param camera The camera to use for rendering
          * @param size This parameter can be set to a single number or to an object with the
@@ -71554,6 +73090,15 @@ declare module BABYLON {
 }
 declare module BABYLON {
     /**
+     * An interface for all Hit test features
+     */
+    export interface IWebXRHitTestFeature<T extends IWebXRLegacyHitResult> extends IWebXRFeature {
+        /**
+         * Triggered when new babylon (transformed) hit test results are available
+         */
+        onHitTestResultObservable: Observable<T[]>;
+    }
+    /**
      * Options used for hit testing
      */
     export interface IWebXRLegacyHitTestOptions {
@@ -71584,7 +73129,7 @@ declare module BABYLON {
      * Hit test (or Ray-casting) is used to interact with the real world.
      * For further information read here - https://github.com/immersive-web/hit-test
      */
-    export class WebXRHitTestLegacy extends WebXRAbstractFeature {
+    export class WebXRHitTestLegacy extends WebXRAbstractFeature implements IWebXRHitTestFeature<IWebXRLegacyHitResult> {
         /**
          * options to use when constructing this feature
          */
@@ -71663,6 +73208,260 @@ declare module BABYLON {
 }
 declare module BABYLON {
     /**
+     * Options used for hit testing (version 2)
+     */
+    export interface IWebXRHitTestOptions extends IWebXRLegacyHitTestOptions {
+        /**
+         * Do not create a permanent hit test. Will usually be used when only
+         * transient inputs are needed.
+         */
+        disablePermanentHitTest?: boolean;
+        /**
+         * Enable transient (for example touch-based) hit test inspections
+         */
+        enableTransientHitTest?: boolean;
+        /**
+         * Offset ray for the permanent hit test
+         */
+        offsetRay?: Vector3;
+        /**
+         * Offset ray for the transient hit test
+         */
+        transientOffsetRay?: Vector3;
+        /**
+         * Instead of using viewer space for hit tests, use the reference space defined in the session manager
+         */
+        useReferenceSpace?: boolean;
+    }
+    /**
+     * Interface defining the babylon result of hit-test
+     */
+    export interface IWebXRHitResult extends IWebXRLegacyHitResult {
+        /**
+         * The input source that generated this hit test (if transient)
+         */
+        inputSource?: XRInputSource;
+        /**
+         * Is this a transient hit test
+         */
+        isTransient?: boolean;
+        /**
+         * Position of the hit test result
+         */
+        position: Vector3;
+        /**
+         * Rotation of the hit test result
+         */
+        rotationQuaternion: Quaternion;
+        /**
+         * The native hit test result
+         */
+        xrHitResult: XRHitTestResult;
+    }
+    /**
+     * The currently-working hit-test module.
+     * Hit test (or Ray-casting) is used to interact with the real world.
+     * For further information read here - https://github.com/immersive-web/hit-test
+     *
+     * Tested on chrome (mobile) 80.
+     */
+    export class WebXRHitTest extends WebXRAbstractFeature implements IWebXRHitTestFeature<IWebXRHitResult> {
+        /**
+         * options to use when constructing this feature
+         */
+        readonly options: IWebXRHitTestOptions;
+        private _tmpMat;
+        private _tmpPos;
+        private _tmpQuat;
+        private _transientXrHitTestSource;
+        private _xrHitTestSource;
+        private initHitTestSource;
+        /**
+         * The module's name
+         */
+        static readonly Name: string;
+        /**
+         * The (Babylon) version of this module.
+         * This is an integer representing the implementation version.
+         * This number does not correspond to the WebXR specs version
+         */
+        static readonly Version: number;
+        /**
+         * When set to true, each hit test will have its own position/rotation objects
+         * When set to false, position and rotation objects will be reused for each hit test. It is expected that
+         * the developers will clone them or copy them as they see fit.
+         */
+        autoCloneTransformation: boolean;
+        /**
+         * Triggered when new babylon (transformed) hit test results are available
+         */
+        onHitTestResultObservable: Observable<IWebXRHitResult[]>;
+        /**
+         * Use this to temporarily pause hit test checks.
+         */
+        paused: boolean;
+        /**
+         * Creates a new instance of the hit test feature
+         * @param _xrSessionManager an instance of WebXRSessionManager
+         * @param options options to use when constructing this feature
+         */
+        constructor(_xrSessionManager: WebXRSessionManager, 
+        /**
+         * options to use when constructing this feature
+         */
+        options?: IWebXRHitTestOptions);
+        /**
+         * attach this feature
+         * Will usually be called by the features manager
+         *
+         * @returns true if successful.
+         */
+        attach(): boolean;
+        /**
+         * detach this feature.
+         * Will usually be called by the features manager
+         *
+         * @returns true if successful.
+         */
+        detach(): boolean;
+        /**
+         * Dispose this feature and all of the resources attached
+         */
+        dispose(): void;
+        protected _onXRFrame(frame: XRFrame): void;
+        private _processWebXRHitTestResult;
+    }
+}
+declare module BABYLON {
+    /**
+     * Configuration options of the anchor system
+     */
+    export interface IWebXRAnchorSystemOptions {
+        /**
+         * a node that will be used to convert local to world coordinates
+         */
+        worldParentNode?: TransformNode;
+        /**
+         * If set to true a reference of the created anchors will be kept until the next session starts
+         * If not defined, anchors will be removed from the array when the feature is detached or the session ended.
+         */
+        doNotRemoveAnchorsOnSessionEnded?: boolean;
+    }
+    /**
+     * A babylon container for an XR Anchor
+     */
+    export interface IWebXRAnchor {
+        /**
+         * A babylon-assigned ID for this anchor
+         */
+        id: number;
+        /**
+         * Transformation matrix to apply to an object attached to this anchor
+         */
+        transformationMatrix: Matrix;
+        /**
+         * The native anchor object
+         */
+        xrAnchor: XRAnchor;
+        /**
+         * if defined, this object will be constantly updated by the anchor's position and rotation
+         */
+        attachedNode?: TransformNode;
+    }
+    /**
+     * An implementation of the anchor system for WebXR.
+     * For further information see https://github.com/immersive-web/anchors/
+     */
+    export class WebXRAnchorSystem extends WebXRAbstractFeature {
+        private _options;
+        private _lastFrameDetected;
+        private _trackedAnchors;
+        private _referenceSpaceForFrameAnchors;
+        private _futureAnchors;
+        /**
+         * The module's name
+         */
+        static readonly Name: string;
+        /**
+         * The (Babylon) version of this module.
+         * This is an integer representing the implementation version.
+         * This number does not correspond to the WebXR specs version
+         */
+        static readonly Version: number;
+        /**
+         * Observers registered here will be executed when a new anchor was added to the session
+         */
+        onAnchorAddedObservable: Observable<IWebXRAnchor>;
+        /**
+         * Observers registered here will be executed when an anchor was removed from the session
+         */
+        onAnchorRemovedObservable: Observable<IWebXRAnchor>;
+        /**
+         * Observers registered here will be executed when an existing anchor updates
+         * This can execute N times every frame
+         */
+        onAnchorUpdatedObservable: Observable<IWebXRAnchor>;
+        /**
+         * Set the reference space to use for anchor creation, when not using a hit test.
+         * Will default to the session's reference space if not defined
+         */
+        set referenceSpaceForFrameAnchors(referenceSpace: XRReferenceSpace);
+        /**
+         * constructs a new anchor system
+         * @param _xrSessionManager an instance of WebXRSessionManager
+         * @param _options configuration object for this feature
+         */
+        constructor(_xrSessionManager: WebXRSessionManager, _options?: IWebXRAnchorSystemOptions);
+        private _tmpVector;
+        private _tmpQuaternion;
+        private _populateTmpTransformation;
+        /**
+         * Create a new anchor point using a hit test result at a specific point in the scene
+         * An anchor is tracked only after it is added to the trackerAnchors in xrFrame. The promise returned here does not yet guaranty that.
+         * Use onAnchorAddedObservable to get newly added anchors if you require tracking guaranty.
+         *
+         * @param hitTestResult The hit test result to use for this anchor creation
+         * @param position an optional position offset for this anchor
+         * @param rotationQuaternion an optional rotation offset for this anchor
+         * @returns A promise that fulfills when the XR anchor was registered in the system (but not necessarily added to the tracked anchors)
+         */
+        addAnchorPointUsingHitTestResultAsync(hitTestResult: IWebXRHitResult, position?: Vector3, rotationQuaternion?: Quaternion): Promise<XRAnchor>;
+        /**
+         * Add a new anchor at a specific position and rotation
+         * This function will add a new anchor per default in the next available frame. Unless forced, the createAnchor function
+         * will be called in the next xrFrame loop to make sure that the anchor can be created correctly.
+         * An anchor is tracked only after it is added to the trackerAnchors in xrFrame. The promise returned here does not yet guaranty that.
+         * Use onAnchorAddedObservable to get newly added anchors if you require tracking guaranty.
+         *
+         * @param position the position in which to add an anchor
+         * @param rotationQuaternion an optional rotation for the anchor transformation
+         * @param forceCreateInCurrentFrame force the creation of this anchor in the current frame. Must be called inside xrFrame loop!
+         * @returns A promise that fulfills when the XR anchor was registered in the system (but not necessarily added to the tracked anchors)
+         */
+        addAnchorAtPositionAndRotationAsync(position: Vector3, rotationQuaternion?: Quaternion, forceCreateInCurrentFrame?: boolean): Promise<XRAnchor>;
+        /**
+         * detach this feature.
+         * Will usually be called by the features manager
+         *
+         * @returns true if successful.
+         */
+        detach(): boolean;
+        /**
+         * Dispose this feature and all of the resources attached
+         */
+        dispose(): void;
+        protected _onXRFrame(frame: XRFrame): void;
+        /**
+         * avoiding using Array.find for global support.
+         * @param xrAnchor the plane to find in the array
+         */
+        private _findIndexInAnchorArray;
+        private _updateAnchorWithXRFrame;
+        private _createAnchorAtTransformation;
+    }
+}
+declare module BABYLON {
+    /**
      * Options used in the plane detector module
      */
     export interface IWebXRPlaneDetectorOptions {
@@ -71670,6 +73469,11 @@ declare module BABYLON {
          * The node to use to transform the local results to world coordinates
          */
         worldParentNode?: TransformNode;
+        /**
+         * If set to true a reference of the created planes will be kept until the next session starts
+         * If not defined, planes will be removed from the array when the feature is detached or the session ended.
+         */
+        doNotRemovePlanesOnSessionEnded?: boolean;
     }
     /**
      * A babylon interface for a WebXR plane.
@@ -71735,6 +73539,13 @@ declare module BABYLON {
          */
         constructor(_xrSessionManager: WebXRSessionManager, _options?: IWebXRPlaneDetectorOptions);
         /**
+         * detach this feature.
+         * Will usually be called by the features manager
+         *
+         * @returns true if successful.
+         */
+        detach(): boolean;
+        /**
          * Dispose this feature and all of the resources attached
          */
         dispose(): void;
@@ -71746,131 +73557,6 @@ declare module BABYLON {
          * @param xrPlane the plane to find in the array
          */
         private findIndexInPlaneArray;
-    }
-}
-declare module BABYLON {
-    /**
-     * Configuration options of the anchor system
-     */
-    export interface IWebXRAnchorSystemOptions {
-        /**
-         * Should a new anchor be added every time a select event is triggered
-         */
-        addAnchorOnSelect?: boolean;
-        /**
-         * should the anchor system use plane detection.
-         * If set to true, the plane-detection feature should be set using setPlaneDetector
-         */
-        usePlaneDetection?: boolean;
-        /**
-         * a node that will be used to convert local to world coordinates
-         */
-        worldParentNode?: TransformNode;
-    }
-    /**
-     * A babylon container for an XR Anchor
-     */
-    export interface IWebXRAnchor {
-        /**
-         * A babylon-assigned ID for this anchor
-         */
-        id: number;
-        /**
-         * Transformation matrix to apply to an object attached to this anchor
-         */
-        transformationMatrix: Matrix;
-        /**
-         * The native anchor object
-         */
-        xrAnchor: XRAnchor;
-    }
-    /**
-     * An implementation of the anchor system of WebXR.
-     * Note that the current documented implementation is not available in any browser. Future implementations
-     * will use the frame to create an anchor and not the session or a detected plane
-     * For further information see https://github.com/immersive-web/anchors/
-     */
-    export class WebXRAnchorSystem extends WebXRAbstractFeature {
-        private _options;
-        private _enabled;
-        private _hitTestModule;
-        private _lastFrameDetected;
-        private _onSelect;
-        private _planeDetector;
-        private _trackedAnchors;
-        /**
-         * The module's name
-         */
-        static readonly Name: string;
-        /**
-         * The (Babylon) version of this module.
-         * This is an integer representing the implementation version.
-         * This number does not correspond to the WebXR specs version
-         */
-        static readonly Version: number;
-        /**
-         * Observers registered here will be executed when a new anchor was added to the session
-         */
-        onAnchorAddedObservable: Observable<IWebXRAnchor>;
-        /**
-         * Observers registered here will be executed when an anchor was removed from the session
-         */
-        onAnchorRemovedObservable: Observable<IWebXRAnchor>;
-        /**
-         * Observers registered here will be executed when an existing anchor updates
-         * This can execute N times every frame
-         */
-        onAnchorUpdatedObservable: Observable<IWebXRAnchor>;
-        /**
-         * constructs a new anchor system
-         * @param _xrSessionManager an instance of WebXRSessionManager
-         * @param _options configuration object for this feature
-         */
-        constructor(_xrSessionManager: WebXRSessionManager, _options?: IWebXRAnchorSystemOptions);
-        /**
-         * Add anchor at a specific XR point.
-         *
-         * @param xrRigidTransformation xr-coordinates where a new anchor should be added
-         * @param anchorCreator the object o use to create an anchor with. either a session or a plane
-         * @returns a promise the fulfills when the anchor was created
-         */
-        addAnchorAtRigidTransformation(xrRigidTransformation: XRRigidTransform, anchorCreator?: XRAnchorCreator): Promise<XRAnchor>;
-        /**
-         * attach this feature
-         * Will usually be called by the features manager
-         *
-         * @returns true if successful.
-         */
-        attach(): boolean;
-        /**
-         * detach this feature.
-         * Will usually be called by the features manager
-         *
-         * @returns true if successful.
-         */
-        detach(): boolean;
-        /**
-         * Dispose this feature and all of the resources attached
-         */
-        dispose(): void;
-        /**
-         * If set, it will improve performance by using the current hit-test results instead of executing a new hit-test
-         * @param hitTestModule the hit-test module to use.
-         */
-        setHitTestModule(hitTestModule: WebXRHitTestLegacy): void;
-        /**
-         * set the plane detector to use in order to create anchors from frames
-         * @param planeDetector the plane-detector module to use
-         * @param enable enable plane-anchors. default is true
-         */
-        setPlaneDetector(planeDetector: WebXRPlaneDetector, enable?: boolean): void;
-        protected _onXRFrame(frame: XRFrame): void;
-        /**
-         * avoiding using Array.find for global support.
-         * @param xrAnchor the plane to find in the array
-         */
-        private _findIndexInAnchorArray;
-        private _updateAnchorWithXRFrame;
     }
 }
 declare module BABYLON {
@@ -72107,132 +73793,6 @@ declare module BABYLON {
         }): void;
         protected _onXRFrame(_xrFrame: any): void;
         private _detachController;
-    }
-}
-declare module BABYLON {
-    /**
-     * Options used for hit testing (version 2)
-     */
-    export interface IWebXRHitTestOptions extends IWebXRLegacyHitTestOptions {
-        /**
-         * Do not create a permanent hit test. Will usually be used when only
-         * transient inputs are needed.
-         */
-        disablePermanentHitTest?: boolean;
-        /**
-         * Enable transient (for example touch-based) hit test inspections
-         */
-        enableTransientHitTest?: boolean;
-        /**
-         * Offset ray for the permanent hit test
-         */
-        offsetRay?: Vector3;
-        /**
-         * Offset ray for the transient hit test
-         */
-        transientOffsetRay?: Vector3;
-        /**
-         * Instead of using viewer space for hit tests, use the reference space defined in the session manager
-         */
-        useReferenceSpace?: boolean;
-    }
-    /**
-     * Interface defining the babylon result of hit-test
-     */
-    export interface IWebXRHitResult extends IWebXRLegacyHitResult {
-        /**
-         * The input source that generated this hit test (if transient)
-         */
-        inputSource?: XRInputSource;
-        /**
-         * Is this a transient hit test
-         */
-        isTransient?: boolean;
-        /**
-         * Position of the hit test result
-         */
-        position: Vector3;
-        /**
-         * Rotation of the hit test result
-         */
-        rotationQuaternion: Quaternion;
-    }
-    /**
-     * The currently-working hit-test module.
-     * Hit test (or Ray-casting) is used to interact with the real world.
-     * For further information read here - https://github.com/immersive-web/hit-test
-     *
-     * Tested on chrome (mobile) 80.
-     */
-    export class WebXRHitTest extends WebXRAbstractFeature {
-        /**
-         * options to use when constructing this feature
-         */
-        readonly options: IWebXRHitTestOptions;
-        private _tmpMat;
-        private _tmpPos;
-        private _tmpQuat;
-        private _transientXrHitTestSource;
-        private _xrHitTestSource;
-        private initHitTestSource;
-        /**
-         * The module's name
-         */
-        static readonly Name: string;
-        /**
-         * The (Babylon) version of this module.
-         * This is an integer representing the implementation version.
-         * This number does not correspond to the WebXR specs version
-         */
-        static readonly Version: number;
-        /**
-         * When set to true, each hit test will have its own position/rotation objects
-         * When set to false, position and rotation objects will be reused for each hit test. It is expected that
-         * the developers will clone them or copy them as they see fit.
-         */
-        autoCloneTransformation: boolean;
-        /**
-         * Populated with the last native XR Hit Results
-         */
-        lastNativeXRHitResults: XRHitResult[];
-        /**
-         * Triggered when new babylon (transformed) hit test results are available
-         */
-        onHitTestResultObservable: Observable<IWebXRHitResult[]>;
-        /**
-         * Use this to temporarily pause hit test checks.
-         */
-        paused: boolean;
-        /**
-         * Creates a new instance of the hit test feature
-         * @param _xrSessionManager an instance of WebXRSessionManager
-         * @param options options to use when constructing this feature
-         */
-        constructor(_xrSessionManager: WebXRSessionManager, 
-        /**
-         * options to use when constructing this feature
-         */
-        options?: IWebXRHitTestOptions);
-        /**
-         * attach this feature
-         * Will usually be called by the features manager
-         *
-         * @returns true if successful.
-         */
-        attach(): boolean;
-        /**
-         * detach this feature.
-         * Will usually be called by the features manager
-         *
-         * @returns true if successful.
-         */
-        detach(): boolean;
-        /**
-         * Dispose this feature and all of the resources attached
-         */
-        dispose(): void;
-        protected _onXRFrame(frame: XRFrame): void;
-        private _processWebXRHitTestResult;
     }
 }
 declare module BABYLON {
@@ -73040,7 +74600,7 @@ interface XRSessionInit {
     requiredFeatures?: string[];
 }
 
-interface XRSession extends XRAnchorCreator {
+interface XRSession {
     addEventListener: Function;
     removeEventListener: Function;
     requestReferenceSpace(type: XRReferenceSpaceType): Promise<XRReferenceSpace>;
@@ -73081,6 +74641,7 @@ interface XRFrame {
     getHitTestResultsForTransientInput(hitTestSource: XRTransientInputHitTestSource): Array<XRTransientInputHitTestResult>;
     // Anchors
     trackedAnchors?: XRAnchorSet;
+    createAnchor(pose: XRRigidTransform, space: XRSpace): Promise<XRAnchor>;
     // Planes
     worldInformation: {
         detectedPlanes?: XRPlaneSet;
@@ -73165,6 +74726,8 @@ interface XRTransientInputHitTestResult {
 
 interface XRHitTestResult {
     getPose(baseSpace: XRSpace): XRPose | undefined;
+    // When anchor system is enabled
+    createAnchor?(pose: XRRigidTransform): Promise<XRAnchor>;
 }
 
 interface XRHitTestSource {
@@ -73188,21 +74751,13 @@ interface XRTransientInputHitTestOptionsInit {
 }
 
 interface XRAnchor {
-    // remove?
-    id?: string;
     anchorSpace: XRSpace;
-    lastChangedTime: number;
-    detach(): void;
+    delete(): void;
 }
 
-interface XRPlane extends XRAnchorCreator {
+interface XRPlane {
     orientation: "Horizontal" | "Vertical";
     planeSpace: XRSpace;
     polygon: Array<DOMPointReadOnly>;
     lastChangedTime: number;
-}
-
-interface XRAnchorCreator {
-    // AR Anchors
-    createAnchor(pose: XRPose | XRRigidTransform, referenceSpace: XRReferenceSpace): Promise<XRAnchor>;
 }

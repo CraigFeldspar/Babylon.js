@@ -5,6 +5,7 @@ import { Ray } from '../Culling/ray';
 import { Scene } from '../scene';
 import { WebXRAbstractMotionController } from './motionController/webXRAbstractMotionController';
 import { WebXRMotionControllerManager } from './motionController/webXRMotionControllerManager';
+import { Tools } from '../Misc/tools';
 
 let idCount = 0;
 
@@ -72,8 +73,8 @@ export class WebXRInputSource {
     public pointer: AbstractMesh;
 
     /**
-     * Creates the controller
-     * @see https://doc.babylonjs.com/how_to/webxr
+     * Creates the input source object
+     * @see https://doc.babylonjs.com/how_to/webxr_controllers_support
      * @param _scene the scene which the controller should be associated to
      * @param inputSource the underlying input source for the controller
      * @param _options options for this controller creation
@@ -115,6 +116,8 @@ export class WebXRInputSource {
                         }
                     });
                 }
+            }, () => {
+                Tools.Warn(`Could not find a matching motion controller for the registered input source`);
             });
         }
     }
@@ -170,8 +173,10 @@ export class WebXRInputSource {
 
         // Update the pointer mesh
         if (pose) {
-            this.pointer.position.copyFrom(<any>(pose.transform.position));
-            this.pointer.rotationQuaternion!.copyFrom(<any>(pose.transform.orientation));
+            const pos = pose.transform.position;
+            this.pointer.position.set(pos.x, pos.y, pos.z);
+            const orientation = pose.transform.orientation;
+            this.pointer.rotationQuaternion!.set(orientation.x, orientation.y, orientation.z, orientation.w);
             if (!this._scene.useRightHandedSystem) {
                 this.pointer.position.z *= -1;
                 this.pointer.rotationQuaternion!.z *= -1;
@@ -183,8 +188,10 @@ export class WebXRInputSource {
         if (this.inputSource.gripSpace && this.grip) {
             let pose = xrFrame.getPose(this.inputSource.gripSpace, referenceSpace);
             if (pose) {
-                this.grip.position.copyFrom(<any>(pose.transform.position));
-                this.grip.rotationQuaternion!.copyFrom(<any>(pose.transform.orientation));
+                const pos = pose.transform.position;
+                const orientation = pose.transform.orientation;
+                this.grip.position.set(pos.x, pos.y, pos.z);
+                this.grip.rotationQuaternion!.set(orientation.x, orientation.y, orientation.z, orientation.w);
                 if (!this._scene.useRightHandedSystem) {
                     this.grip.position.z *= -1;
                     this.grip.rotationQuaternion!.z *= -1;

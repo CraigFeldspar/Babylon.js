@@ -10,7 +10,7 @@ import { Logger } from '../Misc/logger';
 
 /**
  * Base set of functionality needed to create an XR experience (WebXRSessionManager, Camera, StateManagement, etc.)
- * @see https://doc.babylonjs.com/how_to/webxr
+ * @see https://doc.babylonjs.com/how_to/webxr_experience_helpers
  */
 export class WebXRExperienceHelper implements IDisposable {
     private _nonVRCamera: Nullable<Camera> = null;
@@ -108,12 +108,7 @@ export class WebXRExperienceHelper implements IDisposable {
             Logger.Warn("We recommend using 'unbounded' reference space type when using 'immersive-ar' session mode");
         }
         // make sure that the session mode is supported
-        return this.sessionManager.isSessionSupportedAsync(sessionMode).then((supported) => {
-            if (!supported) {
-                throw new Error(`Session mode "${sessionMode}" not supported in browser`);
-            }
-            return this.sessionManager.initializeSessionAsync(sessionMode, sessionCreationOptions);
-        }).then(() => {
+        return this.sessionManager.initializeSessionAsync(sessionMode, sessionCreationOptions).then(() => {
             return this.sessionManager.setReferenceSpaceTypeAsync(referenceSpaceType);
         }).then(() => {
             return renderTarget.initializeXRLayerAsync(this.sessionManager.session);

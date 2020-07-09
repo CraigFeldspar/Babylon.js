@@ -372,8 +372,9 @@ export class NodeMaterialBlock {
      * @param nodeMaterial defines the node material requesting the update
      * @param defines defines the material defines to update
      * @param useInstances specifies that instances should be used
+     * @param subMesh defines which submesh to render
      */
-    public prepareDefines(mesh: AbstractMesh, nodeMaterial: NodeMaterial, defines: NodeMaterialDefines, useInstances: boolean = false) {
+    public prepareDefines(mesh: AbstractMesh, nodeMaterial: NodeMaterial, defines: NodeMaterialDefines, useInstances: boolean = false, subMesh?: SubMesh) {
         // Do nothing
     }
 
@@ -677,10 +678,10 @@ export class NodeMaterialBlock {
     public _deserialize(serializationObject: any, scene: Scene, rootUrl: string) {
         this.name = serializationObject.name;
         this.comments = serializationObject.comments;
-        this._deserializePortDisplayNames(serializationObject);
+        this._deserializePortDisplayNamesAndExposedOnFrame(serializationObject);
     }
 
-    private _deserializePortDisplayNames(serializationObject: any) {
+    private _deserializePortDisplayNamesAndExposedOnFrame(serializationObject: any) {
         const serializedInputs = serializationObject.inputs;
         const serializedOutputs = serializationObject.outputs;
         if (serializedInputs) {
@@ -688,12 +689,18 @@ export class NodeMaterialBlock {
                 if (port.displayName) {
                     this.inputs[i].displayName = port.displayName;
                 }
+                if (port.isExposedOnFrame) {
+                    this.inputs[i].isExposedOnFrame = port.isExposedOnFrame;
+                }
             });
         }
         if (serializedOutputs) {
             serializedOutputs.forEach((port: any, i: number) => {
                 if (port.displayName) {
                     this.outputs[i].displayName = port.displayName;
+                }
+                if (port.isExposedOnFrame) {
+                    this.outputs[i].isExposedOnFrame = port.isExposedOnFrame;
                 }
             });
         }

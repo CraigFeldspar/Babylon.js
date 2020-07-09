@@ -407,16 +407,19 @@ class Main {
             }.bind(this));
         }
         // Safe mode
+        this.parent.settingsPG.restoreSafeMode();
         this.parent.utils.setToMultipleID("safemodeToggle", 'click', function () {
             document.getElementById("safemodeToggle1280").classList.toggle('checked');
-            if (document.getElementById("safemodeToggle1280").classList.contains('checked')) {
-                this.parent.utils.setToMultipleID("safemodeToggle", "innerHTML", 'Safe mode <i class="fa fa-check-square" aria-hidden="true"></i>');
-            } else {
-                this.parent.utils.setToMultipleID("safemodeToggle", "innerHTML", 'Safe mode <i class="fa fa-square" aria-hidden="true"></i>');
-            }
+            this.parent.settingsPG.setSafeMode(document.getElementById("safemodeToggle1280").classList.contains('checked'));
         }.bind(this));
         // Editor
         this.parent.utils.setToMultipleID("editorButton", "click", this.toggleEditor.bind(this));
+        // CTRL + S        
+        this.parent.settingsPG.restoreCTRLS();
+        this.parent.utils.setToMultipleID("ctrlsToggle", 'click', function () {
+            document.getElementById("ctrlsToggle1280").classList.toggle('checked');            
+            this.parent.settingsPG.setCTRLS(document.getElementById("ctrlsToggle1280").classList.contains('checked'));
+        }.bind(this));        
         // FullScreen
         this.parent.utils.setToMultipleID("fullscreenButton", "click", function () {
             this.parent.menuPG.removeAllOptions();
@@ -457,7 +460,7 @@ class Main {
         this.parent.menuPG.resizeBigCanvas();
 
         // HotKeys
-        document.onkeydown = function (e) {
+        document.onkeydown = (e) => {
             // Alt+Enter to Run
             if (e.altKey && (e.key === 'Enter' || event.which === 13)) {
                 handleRun();
@@ -476,6 +479,9 @@ class Main {
                 (e.key === 'S' || event.which === 83)
             ) {
                 e.preventDefault();
+                if (!this.checkCTRLSMode()) {
+                    return;
+                }
                 handleSave();
             }
         };
@@ -687,7 +693,9 @@ class Main {
                                         newPG = "";
                                         break;
                                 }
-                                window.location.href = location.protocol + "//" + location.host + location.pathname + "#" + newPG;
+                                // reset pathname if it is a 'pg/' location
+                                const pathname = location.pathname.match(/\/pg\//) ? '/' : location.pathname;
+                                window.location.href = location.protocol + "//" + location.host + pathname + "#" + newPG;
                             } else if (query.indexOf("=") === -1) {
                                 this.loadScript("scripts/" + query + ".js", query);
                             } else if (query.indexOf('pg=') === -1 && !location.pathname.match(/\/pg\//)) {
@@ -711,6 +719,10 @@ class Main {
         // Check if safe mode is on, and ask if it is
         if (!this.checkSafeMode("Are you sure you want to create a new playground?")) return;
         location.hash = "";
+        if(location.pathname.indexOf('pg/') !== -1) {
+            // reload to create a new pg if in full-path playground mode.
+            window.location.pathname = '';
+        }
         this.currentSnippetToken = null;
         this.currentSnippetTitle = null;
         this.currentSnippetDescription = null;
@@ -761,6 +773,14 @@ class Main {
         } else {
             return true;
         }
+    };
+
+    checkCTRLSMode() {
+        if (document.getElementById("ctrlsToggle" + this.parent.utils.getCurrentSize()) &&
+            document.getElementById("ctrlsToggle" + this.parent.utils.getCurrentSize()).classList.contains('checked')) {
+            return true;
+        }
+        return false;
     };
 
     /**
