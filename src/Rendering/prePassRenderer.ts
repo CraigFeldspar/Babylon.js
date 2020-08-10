@@ -4,7 +4,7 @@ import { Scene } from "../scene";
 import { Engine } from "../Engines/engine";
 import { Constants } from "../Engines/constants";
 import { ImageProcessingPostProcess } from "../PostProcesses/imageProcessingPostProcess";
-import { SubSurfaceScatteringPostProcess } from "../PostProcesses/subSurfaceScatteringPostProcess";
+import { PostProcess } from "../PostProcesses/postProcess";
 import { Effect } from "../Materials/effect";
 import { _DevTools } from '../Misc/devTools';
 import { Color4 } from "../Maths/math.color";
@@ -48,14 +48,14 @@ export class PrePassRenderer {
     private readonly _clearColor = new Color4(0, 0, 0, 0);
 
     /**
+     * Post processes that should be applied before the color composition of the scene
+     */
+    public beforeCompositionPostProcesses: PostProcess[];
+
+    /**
      * Image processing post process for composition
      */
     public imageProcessingPostProcess: ImageProcessingPostProcess;
-
-    /**
-     * Post process for subsurface scattering
-     */
-    public subSurfaceScatteringPostProcess: SubSurfaceScatteringPostProcess;
 
     /**
      * Configuration for sub surface scattering post process
@@ -79,7 +79,7 @@ export class PrePassRenderer {
     }
 
     public set samples(n: number) {
-        if (!this.subSurfaceScatteringPostProcess) {
+        if (!this.imageProcessingPostProcess) {
             this._createEffects();
         }
 
@@ -124,9 +124,8 @@ export class PrePassRenderer {
         this._initializeAttachments();
 
         this.imageProcessingPostProcess = new ImageProcessingPostProcess("sceneCompositionPass", 1, null, undefined, this._engine);
-        this.subSurfaceScatteringPostProcess = new SubSurfaceScatteringPostProcess("subSurfaceScattering", this._scene, 1, null, undefined, this._engine);
-        this.subSurfaceScatteringPostProcess.inputTexture = this.prePassRT.getInternalTexture()!;
-        this.subSurfaceScatteringPostProcess.autoClear = false;
+        // TODO : inputTexture
+        // this.subSurfaceScatteringPostProcess.inputTexture = this.prePassRT.getInternalTexture()!;
     }
 
     /**
@@ -166,9 +165,11 @@ export class PrePassRenderer {
      */
     public _afterCameraDraw() {
         if (this._enabled) {
-            this.subSurfaceScatteringPostProcess.activate(this._scene.activeCamera);
+            if (this.beforeCompositionPostProcesses[0]) {
+                this.beforeCompositionPostProcesses[0].activate(this._scene.activeCamera);
+            }
             this.imageProcessingPostProcess.activate(this._scene.activeCamera);
-            this._scene.postProcessManager.directRender([this.subSurfaceScatteringPostProcess], this.imageProcessingPostProcess.inputTexture);
+            this._scene.postProcessManager.directRender(this.beforeCompositionPostProcesses, this.imageProcessingPostProcess.inputTexture);
             this._scene.postProcessManager.directRender([this.imageProcessingPostProcess], null, false, 0, 0, false);
         }
     }
@@ -222,7 +223,7 @@ export class PrePassRenderer {
     }
 
     private _enable() {
-        if (!this.subSurfaceScatteringPostProcess) {
+        if (!this.imageProcessingPostProcess) {
             this._createEffects();
         }
 
