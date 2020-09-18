@@ -130,6 +130,8 @@ void main(void) {
         aoOut
     );
 
+    #include<pbrBlockLightmapInit>
+
 #ifdef UNLIT
     vec3 diffuseBase = vec3(1., 1., 1.);
 #else
@@ -500,25 +502,33 @@ void main(void) {
     #define CUSTOM_FRAGMENT_BEFORE_FRAGCOLOR
 
 #ifdef PREPASS
-    vec3 irradiance = finalDiffuse;
-    #ifndef UNLIT
-        #ifdef REFLECTION
-            irradiance += finalIrradiance;
+    #ifdef PREPASS_IRRADIANCE
+        vec3 irradiance = finalDiffuse;
+        #ifndef UNLIT
+            #ifdef REFLECTION
+                irradiance += finalIrradiance;
+            #endif
         #endif
-    #endif
 
-    vec3 sqAlbedo = sqrt(surfaceAlbedo); // for pre and post scatter
-
-    // Irradiance is diffuse * surfaceAlbedo
-    gl_FragData[0] = vec4(finalColor.rgb - irradiance, finalColor.a); // Lit without irradiance
-    irradiance /= sqAlbedo;
-    #ifdef SS_SCATTERING
-    gl_FragData[1] = vec4(tagLightingForSSS(irradiance), scatteringDiffusionProfile / 255.); // Irradiance + SS diffusion profile
+        vec3 sqAlbedo = sqrt(surfaceAlbedo); // for pre and post scatter
+        gl_FragData[0] = vec4(finalColor.rgb - irradiance, finalColor.a); // Split irradiance from final color
+        irradiance /= sqAlbedo;
+        
+        #ifndef SS_SCATTERING
+            float scatteringDiffusionProfile = 255.;
+        #endif
+        gl_FragData[PREPASS_IRRADIANCE_INDEX] = vec4(tagLightingForSSS(irradiance), scatteringDiffusionProfile / 255.); // Irradiance + SS diffusion profile
     #else
-    gl_FragData[1] = vec4(irradiance, 1.0); // Irradiance
+        gl_FragData[0] = vec4(finalColor.rgb, finalColor.a);
     #endif
-    gl_FragData[2] = vec4(vViewPos.z, 0.0, 0.0, 1.0); // Linear depth
-    gl_FragData[3] = vec4(sqAlbedo, 1.0); // albedo, for pre and post scatter
+
+    #ifdef PREPASS_DEPTHNORMAL
+        gl_FragData[PREPASS_DEPTHNORMAL_INDEX] = vec4(vViewPos.z, (view * vec4(normalW, 0.0)).rgb); // Linear depth + normal
+    #endif
+
+    #ifdef PREPASS_ALBEDO
+        gl_FragData[PREPASS_ALBEDO_INDEX] = vec4(sqAlbedo, 1.0); // albedo, for pre and post scatter
+    #endif
 #endif
 
     gl_FragColor = finalColor;

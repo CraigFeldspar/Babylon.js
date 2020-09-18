@@ -32,6 +32,9 @@ import { AnimationGridComponent } from '../animations/animationPropertyGridCompo
 import { RenderingManager } from 'babylonjs/Rendering/renderingManager';
 import { CommonPropertyGridComponent } from '../commonPropertyGridComponent';
 import { VariantsPropertyGridComponent } from '../variantsPropertyGridComponent';
+import { HexLineComponent } from '../../../lines/hexLineComponent';
+import { SkeletonViewer } from 'babylonjs/Debug/skeletonViewer';
+import { ShaderMaterial } from 'babylonjs/Materials/shaderMaterial';
 
 interface IMeshPropertyGridComponentProps {
     globalState: GlobalState;
@@ -43,14 +46,19 @@ interface IMeshPropertyGridComponentProps {
 
 export class MeshPropertyGridComponent extends React.Component<IMeshPropertyGridComponentProps, {
     displayNormals: boolean,
-    displayVertexColors: boolean
+    displayVertexColors: boolean,
+    displayBoneWeights: boolean,
+    displayBoneIndex: number,
+    displaySkeletonMap:boolean
 }> {
     constructor(props: IMeshPropertyGridComponentProps) {
         super(props);
-
         this.state = {
             displayNormals: false,
-            displayVertexColors: false
+            displayVertexColors: false,
+            displayBoneWeights: false,
+            displayBoneIndex: 0,
+            displaySkeletonMap: false
         };
     }
 
@@ -164,6 +172,7 @@ export class MeshPropertyGridComponent extends React.Component<IMeshPropertyGrid
             if (!mesh.reservedDataStore.originalMaterial) {
                 mesh.reservedDataStore.originalMaterial = mesh.material;
             }
+
             const normalMaterial = new (BABYLON as any).NormalMaterial("normalMaterial", scene);
             normalMaterial.disableLighting = true;
             if (mesh.material) {
@@ -204,6 +213,69 @@ export class MeshPropertyGridComponent extends React.Component<IMeshPropertyGrid
             mesh.useVertexColors = true;
             mesh.material = vertexColorMaterial;
             this.setState({ displayVertexColors: true });
+        }
+    }
+
+    displayBoneWeights() {
+        const mesh = this.props.mesh;
+        const scene = mesh.getScene();
+
+        if (mesh.material && mesh.material.getClassName() === "BoneWeightShader") {
+            mesh.material.dispose();
+            mesh.material = mesh.reservedDataStore.originalMaterial;
+            mesh.reservedDataStore.originalMaterial = null;
+            this.setState({ displayBoneWeights: false });
+        } else {
+          
+            if (!mesh.reservedDataStore) {
+                mesh.reservedDataStore = {};
+            }
+            if (!mesh.reservedDataStore.originalMaterial) {
+                mesh.reservedDataStore.originalMaterial = mesh.material;
+            }
+            if (!mesh.reservedDataStore.displayBoneIndex) {
+                mesh.reservedDataStore.displayBoneIndex = this.state.displayBoneIndex;
+            }
+            if (mesh.skeleton){
+                const boneWeightsShader = SkeletonViewer.CreateBoneWeightShader({skeleton:mesh.skeleton}, scene)
+                boneWeightsShader.reservedDataStore = { hidden: true };
+                mesh.material = boneWeightsShader;
+                this.setState({ displayBoneWeights: true });
+            }            
+        }
+    }
+
+    displaySkeletonMap() {
+        const mesh = this.props.mesh;
+        const scene = mesh.getScene();
+
+        if (mesh.material && mesh.material.getClassName() === "SkeletonMapShader") {
+            mesh.material.dispose();
+            mesh.material = mesh.reservedDataStore.originalMaterial;
+            mesh.reservedDataStore.originalMaterial = null;
+            this.setState({ displaySkeletonMap: false });
+        } else {          
+            if (!mesh.reservedDataStore) {
+                mesh.reservedDataStore = {};
+            }
+            if (!mesh.reservedDataStore.originalMaterial) {
+                mesh.reservedDataStore.originalMaterial = mesh.material;
+            }  
+            if (mesh.skeleton){
+                const skeletonMapShader = SkeletonViewer.CreateSkeletonMapShader({skeleton:mesh.skeleton}, scene)
+                skeletonMapShader.reservedDataStore = { hidden: true };
+                mesh.material = skeletonMapShader;
+                this.setState({ displaySkeletonMap: true });
+            }            
+        }
+    }
+
+    onBoneDisplayIndexChange(value:number):void{
+        let mesh = this.props.mesh
+        mesh.reservedDataStore.displayBoneIndex = value
+        this.setState({ displayBoneIndex: value });
+        if (mesh.material && mesh.material.getClassName() === "BoneWeightShader") {
+            (mesh.material as ShaderMaterial).setFloat('targetBoneIndex', value)
         }
     }
 
@@ -272,6 +344,8 @@ export class MeshPropertyGridComponent extends React.Component<IMeshPropertyGrid
         const displayVertexColors = !!(mesh.material != null && mesh.material.reservedDataStore && mesh.material.reservedDataStore.isVertexColorMaterial);
         const renderNormalVectors = (mesh.reservedDataStore && mesh.reservedDataStore.normalLines) ? true : false;
         const renderWireframeOver = (mesh.reservedDataStore && mesh.reservedDataStore.wireframeOver) ? true : false;
+        const displayBoneWeights = mesh.material != null && mesh.material.getClassName() === "BoneWeightShader";
+        const displaySkeletonMap = mesh.material != null && mesh.material.getClassName() === "SkeletonMapShader";
 
         var morphTargets: MorphTarget[] = [];
 
@@ -395,7 +469,7 @@ export class MeshPropertyGridComponent extends React.Component<IMeshPropertyGrid
                         <CheckBoxLineComponent label="Infinite distance" target={mesh} propertyName="infiniteDistance" onPropertyChangedObservable={this.props.onPropertyChangedObservable} />
                     }
                     <SliderLineComponent label="Rendering group ID" decimalCount={0} target={mesh} propertyName="renderingGroupId" minimum={RenderingManager.MIN_RENDERINGGROUPS} maximum={RenderingManager.MAX_RENDERINGGROUPS - 1} step={1} onPropertyChangedObservable={this.props.onPropertyChangedObservable} />                    
-                    <FloatLineComponent isInteger lockObject={this.props.lockObject} label="Layer mask" target={mesh} propertyName="layerMask" onPropertyChangedObservable={this.props.onPropertyChangedObservable} />
+                    <HexLineComponent isInteger lockObject={this.props.lockObject} label="Layer mask" target={mesh} propertyName="layerMask" onPropertyChangedObservable={this.props.onPropertyChangedObservable} />
                 </LineContainerComponent>
                 {
                     mesh.morphTargetManager != null &&
@@ -479,6 +553,20 @@ export class MeshPropertyGridComponent extends React.Component<IMeshPropertyGrid
                         !mesh.isAnInstance &&
                         <CheckBoxLineComponent label="Render wireframe over mesh" isSelected={() => renderWireframeOver} onSelect={() => this.renderWireframeOver()} />
                     }
+                    {
+                        !mesh.isAnInstance && mesh.skeleton &&
+                        <CheckBoxLineComponent label="Display BoneWeights" isSelected={() => displayBoneWeights} onSelect={() => this.displayBoneWeights()} />
+                    }
+                    {
+                        !mesh.isAnInstance && this.state.displayBoneWeights && mesh.skeleton &&
+                        <SliderLineComponent label="Target Bone" decimalCount={0} target={mesh.reservedDataStore} propertyName="displayBoneIndex" minimum={0} maximum={mesh.skeleton.bones.length-1 || 0} step={1} onChange={(value)=>{this.onBoneDisplayIndexChange(value)}} />
+                        
+                    }
+                    {
+                        !mesh.isAnInstance && mesh.skeleton &&
+                        <CheckBoxLineComponent label="Display SkeletonMap" isSelected={() => displaySkeletonMap } onSelect={() => this.displaySkeletonMap()} />
+                    }                
+
                 </LineContainerComponent>
             </div>
         );

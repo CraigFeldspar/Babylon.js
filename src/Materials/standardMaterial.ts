@@ -126,6 +126,12 @@ export class StandardMaterialDefines extends MaterialDefines implements IImagePr
     public ALPHABLEND = true;
 
     public PREPASS = false;
+    public PREPASS_IRRADIANCE = false;
+    public PREPASS_IRRADIANCE_INDEX = -1;
+    public PREPASS_ALBEDO = false;
+    public PREPASS_ALBEDO_INDEX = -1;
+    public PREPASS_DEPTHNORMAL = false;
+    public PREPASS_DEPTHNORMAL_INDEX = -1;
     public SCENE_MRT_COUNT = 0;
 
     public RGBDLIGHTMAP = false;
@@ -677,6 +683,13 @@ export class StandardMaterial extends PushMaterial {
     }
 
     /**
+     * Can this material render to several textures at once
+     */
+    public get canRenderToMRT() {
+        return true;
+    }
+
+    /**
      * Defines the detail map parameters for the material.
      */
     public readonly detailMap = new DetailMapConfiguration(this._markAllSubMeshesAsTexturesDirty.bind(this));
@@ -824,6 +837,9 @@ export class StandardMaterial extends PushMaterial {
 
         // Multiview
         MaterialHelper.PrepareDefinesForMultiview(scene, defines);
+
+        // PrePass
+        MaterialHelper.PrepareDefinesForPrePass(scene, defines, this.canRenderToMRT);
 
         // Textures
         if (defines._areTexturesDirty) {
@@ -1207,6 +1223,7 @@ export class StandardMaterial extends PushMaterial {
                 onError: this.onError,
                 indexParameters: { maxSimultaneousLights: this._maxSimultaneousLights, maxSimultaneousMorphTargets: defines.NUM_MORPH_INFLUENCERS },
                 processFinalCode: csnrOptions.processFinalCode,
+                multiTarget: defines.PREPASS
             }, engine);
 
             if (effect) {

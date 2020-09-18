@@ -4,6 +4,8 @@
 #extension GL_OES_standard_derivatives : enable
 #endif
 
+#include<prePassDeclaration>[SCENE_MRT_COUNT]
+
 #define CUSTOM_FRAGMENT_BEGIN
 
 #ifdef LOGARITHMICDEPTH
@@ -33,6 +35,10 @@ varying vec4 vColor;
 
 #ifdef MAINUV2
 	varying vec2 vMainUV2;
+#endif
+
+#ifdef PREPASS
+	varying vec3 vViewPos;
 #endif
 
 // Helper functions
@@ -474,6 +480,21 @@ color.rgb = max(color.rgb, 0.);
 #endif
 
 #define CUSTOM_FRAGMENT_BEFORE_FRAGCOLOR
+#ifdef PREPASS
+    gl_FragData[0] = color; // We can't split irradiance on std material
+
+    #ifdef PREPASS_IRRADIANCE
+        gl_FragData[PREPASS_IRRADIANCE_INDEX] = vec4(0.0, 0.0, 0.0, 1.0); //  We can't split irradiance on std material
+    #endif
+
+    #ifdef PREPASS_DEPTHNORMAL
+    	gl_FragData[PREPASS_DEPTHNORMAL_INDEX] = vec4(vViewPos.z, (view * vec4(normalW, 0.0)).rgb); // Linear depth + normal
+    #endif
+
+    #ifdef PREPASS_ALBEDO
+        gl_FragData[PREPASS_ALBEDO_INDEX] = vec4(0.0, 0.0, 0.0, 1.0); // We can't split albedo on std material
+    #endif
+#endif
 	gl_FragColor = color;
 
 }
