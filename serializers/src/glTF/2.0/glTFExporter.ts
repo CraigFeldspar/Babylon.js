@@ -144,6 +144,11 @@ export class _Exporter {
     */
     public _includeCoordinateSystemConversionNodes: boolean = false;
 
+    /*
+    * Specifies if root Babylon empty nodes that act as a coordinate space transform should be included in export
+    */
+    private _shallowExportList: Node[];
+
     /**
      * Baked animation sample rate
      */
@@ -299,6 +304,7 @@ export class _Exporter {
         this._options = options || {};
         this._animationSampleRate = options && options.animationSampleRate ? options.animationSampleRate : 1 / 60;
         this._includeCoordinateSystemConversionNodes = options && options.includeCoordinateSystemConversionNodes ? true : false;
+        this._shallowExportList = options && options.shallowExportList || [];
 
         this._glTFMaterialExporter = new _GLTFMaterialExporter(this);
         this._loadExtensions();
@@ -1053,13 +1059,15 @@ export class _Exporter {
                 const bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, kind + " - " + bufferMesh.name);
                 this._bufferViews.push(bufferView);
 
-                this.writeAttributeData(
-                    kind,
-                    vertexData,
-                    byteStride,
-                    binaryWriter,
-                    convertToRightHandedSystem
-                );
+                if (this._shallowExportList.indexOf(babylonTransformNode) !== -1) {
+                    this.writeAttributeData(
+                        kind,
+                        vertexData,
+                        byteStride,
+                        binaryWriter,
+                        convertToRightHandedSystem
+                    );
+                }
             }
         }
     }

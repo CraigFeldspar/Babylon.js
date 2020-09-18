@@ -35,6 +35,11 @@ export interface IExportOptions {
      * Indicates if coordinate system swapping root nodes should be included in export
      */
     includeCoordinateSystemConversionNodes?: boolean;
+
+    /**
+     * List of meshes that only need to be exported by reference
+     */
+    shallowExportList?: Node[];
 }
 
 /**
