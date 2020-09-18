@@ -97,10 +97,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ({
 
 /***/ "../../node_modules/tslib/tslib.es6.js":
-/*!***********************************************************!*\
-  !*** D:/Repos/Babylon.js/node_modules/tslib/tslib.es6.js ***!
-  \***********************************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
+/*!****************************************************************!*\
+  !*** C:/Users/Ben/git/babylon/node_modules/tslib/tslib.es6.js ***!
+  \****************************************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -113,7 +113,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__createBinding", function() { return __createBinding; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
@@ -126,21 +125,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
 
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
 
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
@@ -196,11 +193,10 @@ function __metadata(metadataKey, metadataValue) {
 }
 
 function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 }
@@ -233,28 +229,19 @@ function __generator(thisArg, body) {
     }
 }
 
-var __createBinding = Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-});
-
 function __exportStar(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 
 function __values(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
     if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
+    return {
         next: function () {
             if (o && i >= o.length) o = void 0;
             return { value: o && o[i++], done: !o };
         }
     };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 }
 
 function __read(o, n) {
@@ -323,37 +310,16 @@ function __makeTemplateObject(cooked, raw) {
     return cooked;
 };
 
-var __setModuleDefault = Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-};
-
 function __importStar(mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result.default = mod;
     return result;
 }
 
 function __importDefault(mod) {
     return (mod && mod.__esModule) ? mod : { default: mod };
-}
-
-function __classPrivateFieldGet(receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to get private field on non-instance");
-    }
-    return privateMap.get(receiver);
-}
-
-function __classPrivateFieldSet(receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to set private field on non-instance");
-    }
-    privateMap.set(receiver, value);
-    return value;
 }
 
 
@@ -2076,6 +2042,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * Converts Babylon Scene into glTF 2.0.
  * @hidden
@@ -2099,6 +2066,7 @@ var _Exporter = /** @class */ (function () {
         this._bufferViews = [];
         this._accessors = [];
         this._meshes = [];
+        this._cameras = [];
         this._scenes = [];
         this._nodes = [];
         this._images = [];
@@ -2113,6 +2081,7 @@ var _Exporter = /** @class */ (function () {
         this._options = options || {};
         this._animationSampleRate = options && options.animationSampleRate ? options.animationSampleRate : 1 / 60;
         this._includeCoordinateSystemConversionNodes = options && options.includeCoordinateSystemConversionNodes ? true : false;
+        this._shallowExportList = options && options.shallowExportList || [];
         this._glTFMaterialExporter = new _glTFMaterialExporter__WEBPACK_IMPORTED_MODULE_2__["_GLTFMaterialExporter"](this);
         this._loadExtensions();
     }
@@ -2799,6 +2768,9 @@ var _Exporter = /** @class */ (function () {
         if (this._meshes && this._meshes.length) {
             this._glTF.meshes = this._meshes;
         }
+        if (this._cameras && this._cameras.length) {
+            this._glTF.cameras = this._cameras;
+        }
         if (this._scenes && this._scenes.length) {
             this._glTF.scenes = this._scenes;
             this._glTF.scene = 0;
@@ -2995,11 +2967,17 @@ var _Exporter = /** @class */ (function () {
      * @param convertToRightHandedSystem Converts the values to right-handed
      */
     _Exporter.prototype.setNodeTransformation = function (node, babylonTransformNode, convertToRightHandedSystem) {
+        var pivot;
         if (!babylonTransformNode.getPivotPoint().equalsToFloats(0, 0, 0)) {
             babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Tools"].Warn("Pivot points are not supported in the glTF serializer");
+            pivot = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(babylonTransformNode.getPivotPoint().clone()) : babylonTransformNode.getPivotPoint().clone();
         }
-        if (!babylonTransformNode.position.equalsToFloats(0, 0, 0)) {
-            node.translation = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(babylonTransformNode.position).asArray() : babylonTransformNode.position.asArray();
+        if (!babylonTransformNode.position.equalsToFloats(0, 0, 0) || pivot) {
+            var translation = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(babylonTransformNode.position) : babylonTransformNode.position;
+            if (pivot) {
+                translation.subtractInPlace(pivot);
+            }
+            node.translation = translation.asArray();
         }
         if (!babylonTransformNode.scaling.equalsToFloats(1, 1, 1)) {
             node.scale = babylonTransformNode.scaling.asArray();
@@ -3044,17 +3022,19 @@ var _Exporter = /** @class */ (function () {
                 var byteLength = vertexData.length * typeByteLength;
                 var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, kind + " - " + bufferMesh.name);
                 this._bufferViews.push(bufferView);
-                this.writeAttributeData(kind, attributeComponentKind, vertexData, byteStride / typeByteLength, binaryWriter, convertToRightHandedSystem, babylonTransformNode);
+                if (this._shallowExportList.indexOf(babylonTransformNode) !== -1) {
+                    this.writeAttributeData(kind, attributeComponentKind, vertexData, byteStride / typeByteLength, binaryWriter, convertToRightHandedSystem, babylonTransformNode);
+                }
             }
         }
     };
     /**
- * Creates a bufferview based on the vertices type for the Babylon mesh
- * @param babylonSubMesh The Babylon submesh that the morph target is applied to
- * @param babylonMorphTarget the morph target to be exported
- * @param binaryWriter The buffer to write the bufferview data to
- * @param convertToRightHandedSystem Converts the values to right-handed
- */
+     * Creates a bufferview based on the vertices type for the Babylon mesh
+     * @param babylonSubMesh The Babylon submesh that the morph target is applied to
+     * @param babylonMorphTarget the morph target to be exported
+     * @param binaryWriter The buffer to write the bufferview data to
+     * @param convertToRightHandedSystem Converts the values to right-handed
+     */
     _Exporter.prototype.setMorphTargetAttributes = function (babylonSubMesh, meshPrimitive, babylonMorphTarget, binaryWriter, convertToRightHandedSystem) {
         if (babylonMorphTarget) {
             if (!meshPrimitive.targets) {
@@ -3436,7 +3416,7 @@ var _Exporter = /** @class */ (function () {
         var glTFNodeIndex;
         var glTFNode;
         var directDescendents;
-        var nodes = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spreadArrays"])(babylonScene.transformNodes, babylonScene.meshes, babylonScene.lights);
+        var nodes = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__spreadArrays"])(babylonScene.transformNodes, babylonScene.meshes, babylonScene.lights, babylonScene.cameras);
         var rootNodesToLeftHanded = [];
         this._convertToRightHandedSystem = !babylonScene.useRightHandedSystem;
         this._convertToRightHandedSystemMap = {};
@@ -3617,6 +3597,23 @@ var _Exporter = /** @class */ (function () {
             if (babylonNode.name) {
                 node.name = babylonNode.name;
             }
+            if (babylonNode instanceof babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["TargetCamera"]) {
+                var camera = {};
+                if (babylonNode.mode === babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["TargetCamera"].ORTHOGRAPHIC_CAMERA) {
+                    camera.type = "orthographic" /* ORTHOGRAPHIC */;
+                    // TODO
+                }
+                else {
+                    camera.type = "perspective" /* PERSPECTIVE */;
+                    camera.perspective = {};
+                    camera.perspective.aspectRatio = _this._babylonScene.getEngine().getRenderWidth() / _this._babylonScene.getEngine().getRenderHeight();
+                    camera.perspective.yfov = babylonNode.fov;
+                    camera.perspective.zfar = babylonNode.maxZ;
+                    camera.perspective.znear = babylonNode.minZ;
+                }
+                _this._cameras.push(camera);
+                return _this.createCameraNode(node, babylonNode, convertToRightHandedSystem, _this._cameras.length - 1);
+            }
             if (babylonNode instanceof babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["TransformNode"]) {
                 // Set transformation
                 _this.setNodeTransformation(node, babylonNode, convertToRightHandedSystem);
@@ -3641,6 +3638,47 @@ var _Exporter = /** @class */ (function () {
                 return node;
             }
         });
+    };
+    _Exporter.prototype.createCameraNode = function (node, cameraNode, convertToRightHandedSystem, index) {
+        if (!cameraNode.position.equalsToFloats(0, 0, 0)) {
+            node.translation = convertToRightHandedSystem ? _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedPositionVector3(cameraNode.position).asArray() : cameraNode.position.asArray();
+        }
+        var target = cameraNode.getTarget();
+        var position = cameraNode.position;
+        var up = cameraNode.upVector;
+        var matrix = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Matrix"]();
+        var rotation = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"]();
+        var rotationQuaternion = new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"]();
+        if (position.z === target.z) {
+            position.z += 1e-5;
+        }
+        babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Matrix"].LookAtLHToRef(position, target, up, matrix);
+        matrix.invert();
+        rotation.x = Math.atan(matrix.m[6] / matrix.m[10]);
+        var vDir = target.subtract(position);
+        if (vDir.x >= 0.0) {
+            rotation.y = (-Math.atan(vDir.z / vDir.x) + Math.PI / 2.0);
+        }
+        else {
+            rotation.y = (-Math.atan(vDir.z / vDir.x) - Math.PI / 2.0);
+        }
+        rotation.z = 0;
+        if (isNaN(rotation.x)) {
+            rotation.x = 0;
+        }
+        if (isNaN(rotation.y)) {
+            rotation.y = 0;
+        }
+        if (isNaN(rotation.z)) {
+            rotation.z = 0;
+        }
+        babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"].RotationYawPitchRollToRef(rotation.y, rotation.x, rotation.z, rotationQuaternion);
+        if (convertToRightHandedSystem) {
+            _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._GetRightHandedQuaternionFromRef(rotationQuaternion);
+        }
+        node.rotation = rotationQuaternion.normalize().asArray();
+        node.camera = index;
+        return node;
     };
     /**
      * Creates a glTF skin from a Babylon skeleton

@@ -1231,18 +1231,19 @@ export class _Exporter {
                         binaryWriter,
                         convertToRightHandedSystem,
                         babylonTransformNode
-                );
+                    );
+                }
             }
         }
     }
 
     /**
- * Creates a bufferview based on the vertices type for the Babylon mesh
- * @param babylonSubMesh The Babylon submesh that the morph target is applied to
- * @param babylonMorphTarget the morph target to be exported
- * @param binaryWriter The buffer to write the bufferview data to
- * @param convertToRightHandedSystem Converts the values to right-handed
- */
+     * Creates a bufferview based on the vertices type for the Babylon mesh
+     * @param babylonSubMesh The Babylon submesh that the morph target is applied to
+     * @param babylonMorphTarget the morph target to be exported
+     * @param binaryWriter The buffer to write the bufferview data to
+     * @param convertToRightHandedSystem Converts the values to right-handed
+     */
     private setMorphTargetAttributes(babylonSubMesh: SubMesh, meshPrimitive: IMeshPrimitive, babylonMorphTarget: MorphTarget, binaryWriter: _BinaryWriter, convertToRightHandedSystem: boolean) {
         if (babylonMorphTarget) {
             if (!meshPrimitive.targets) {
@@ -1271,10 +1272,10 @@ export class _Exporter {
                     vertexNormals,
                     morphNormals,
                     byteStride / 4,
-                        binaryWriter,
-                        convertToRightHandedSystem
-                    );
-                }
+                    binaryWriter,
+                    convertToRightHandedSystem
+                );
+            }
             if (babylonMorphTarget.hasPositions) {
                 const vertexPositions = babylonSubMesh.getMesh().getVerticesData(VertexBuffer.PositionKind)!;
                 const morphPositions = babylonMorphTarget.getPositions()!;
@@ -1332,7 +1333,6 @@ export class _Exporter {
                 );
             }
             meshPrimitive.targets.push(target);
-            }
         }
     }
 
@@ -1917,7 +1917,7 @@ export class _Exporter {
         });
     }
 
-    private createCameraNode(node: INode, cameraNode: TargetCamera, convertToRightHandedSystem: boolean, index: number) : INode {
+    private createCameraNode(node: INode, cameraNode: TargetCamera, convertToRightHandedSystem: boolean, index: number): INode {
         if (!cameraNode.position.equalsToFloats(0, 0, 0)) {
             node.translation = convertToRightHandedSystem ? _GLTFUtilities._GetRightHandedPositionVector3(cameraNode.position).asArray() : cameraNode.position.asArray();
         }
@@ -1964,7 +1964,7 @@ export class _Exporter {
         if (convertToRightHandedSystem) {
             _GLTFUtilities._GetRightHandedQuaternionFromRef(rotationQuaternion);
         }
-        
+
         node.rotation = rotationQuaternion.normalize().asArray();
         node.camera = index;
 
@@ -1987,7 +1987,7 @@ export class _Exporter {
             const inverseBindMatrices: Matrix[] = [];
             const skeletonMesh = babylonScene.meshes.find((mesh) => { mesh.skeleton === skeleton; });
             skin.skeleton = skeleton.overrideMesh === null ? (skeletonMesh ? nodeMap[skeletonMesh.uniqueId] : undefined) : nodeMap[skeleton.overrideMesh.uniqueId];
-            const boneIndexMap: {[index: number]: Bone} = {};
+            const boneIndexMap: { [index: number]: Bone } = {};
             let boneIndexMax: number = -1;
             let boneIndex: number = -1;
             for (let bone of skeleton.bones) {

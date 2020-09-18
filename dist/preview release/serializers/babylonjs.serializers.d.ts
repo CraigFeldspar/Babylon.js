@@ -380,6 +380,10 @@ declare module BABYLON {
          * Indicates if coordinate system swapping root nodes should be included in export
          */
         includeCoordinateSystemConversionNodes?: boolean;
+        /**
+         * List of meshes that only need to be exported by reference
+         */
+        shallowExportList?: Node[];
     }
     /**
      * Class for generating glTF data from a Babylon scene.
@@ -533,6 +537,10 @@ declare module BABYLON.GLTF2.Exporter {
          */
         private _meshes;
         /**
+         * Stores all the cameras information.
+         */
+        private _cameras;
+        /**
          * Stores all the generated material information, which represents the appearance of each primitive
          */
         _materials: IMaterial[];
@@ -601,6 +609,7 @@ declare module BABYLON.GLTF2.Exporter {
             [nodeId: number]: boolean;
         };
         _includeCoordinateSystemConversionNodes: boolean;
+        private _shallowExportList;
         /**
          * Baked animation sample rate
          */
@@ -781,12 +790,12 @@ declare module BABYLON.GLTF2.Exporter {
          */
         private createBufferViewKind;
         /**
-     * Creates a bufferview based on the vertices type for the Babylon mesh
-     * @param babylonSubMesh The Babylon submesh that the morph target is applied to
-     * @param babylonMorphTarget the morph target to be exported
-     * @param binaryWriter The buffer to write the bufferview data to
-     * @param convertToRightHandedSystem Converts the values to right-handed
-     */
+         * Creates a bufferview based on the vertices type for the Babylon mesh
+         * @param babylonSubMesh The Babylon submesh that the morph target is applied to
+         * @param babylonMorphTarget the morph target to be exported
+         * @param binaryWriter The buffer to write the bufferview data to
+         * @param convertToRightHandedSystem Converts the values to right-handed
+         */
         private setMorphTargetAttributes;
         /**
          * The primitive mode of the Babylon mesh
@@ -844,6 +853,7 @@ declare module BABYLON.GLTF2.Exporter {
          * @returns glTF node
          */
         private createNodeAsync;
+        private createCameraNode;
         /**
          * Creates a glTF skin from a Babylon skeleton
          * @param babylonScene Babylon Scene
