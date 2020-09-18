@@ -1222,7 +1222,7 @@ export class _Exporter {
                 const bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, kind + " - " + bufferMesh.name);
                 this._bufferViews.push(bufferView);
 
-                if (this._shallowExportList.indexOf(babylonTransformNode) !== -1) {
+                if (this._shallowExportList.indexOf(babylonTransformNode) === -1) {
                     this.writeAttributeData(
                         kind,
                         attributeComponentKind,
