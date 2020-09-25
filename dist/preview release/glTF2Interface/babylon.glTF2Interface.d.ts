@@ -847,6 +847,10 @@ declare module BABYLON.GLTF2 {
          * An array of textures
          */
         textures?: ITexture[];
+        /**
+         * Shallow export data
+         */
+        shallowExport?: any[]
     }
 
     /**

@@ -115,6 +115,10 @@ export class _Exporter {
      */
     public _skins: ISkin[];
     /**
+     * Shallow export data
+     */
+    public _shallowExport: any[];
+    /**
      * Stores all the generated animation samplers, which is referenced by glTF animations
      */
     /**
@@ -322,6 +326,7 @@ export class _Exporter {
         this._includeCoordinateSystemConversionNodes = options && options.includeCoordinateSystemConversionNodes ? true : false;
         this._shallowExportList = options && options.shallowExportList || [];
         this._shallowByteOffset = 0;
+        this._shallowExport = [];
 
         this._glTFMaterialExporter = new _GLTFMaterialExporter(this);
         this._loadExtensions();
@@ -961,6 +966,9 @@ export class _Exporter {
         if (this._skins && this._skins.length) {
             this._glTF.skins = this._skins;
         }
+        if (this._shallowExport && this._shallowExport.length) {
+            this._glTF.shallowExport = this._shallowExport;
+        }
         if (this._images && this._images.length) {
             if (!shouldUseGlb) {
                 this._glTF.images = this._images;
@@ -1235,6 +1243,11 @@ export class _Exporter {
                         babylonTransformNode
                     );
                 } else {
+                    this._shallowExport.push({
+                        bufferViewIndex: this._bufferViews.length - 1,
+                        uniqueMeshId: bufferMesh.uniqueId,
+                        attribute: this.convertAttributeKind(kind),
+                    });
                     this._shallowByteOffset += byteLength;
                 }
             }
@@ -1446,6 +1459,54 @@ export class _Exporter {
         }
     }
 
+    private convertAttributeKind(attributeKind: string) {
+        switch (attributeKind) {
+            case VertexBuffer.PositionKind: {
+                return "POSITION";
+                break;
+            }
+            case VertexBuffer.NormalKind: {
+                return "NORMAL";
+                break;
+            }
+            case VertexBuffer.ColorKind: {
+                return "COLOR_0";
+                break;
+            }
+            case VertexBuffer.TangentKind: {
+                return "TANGENT";
+                break;
+            }
+            case VertexBuffer.UVKind: {
+                return "TEXCOORD_0";
+                break;
+            }
+            case VertexBuffer.UV2Kind: {
+                return "TEXCOORD_1";
+                break;
+            }
+            case VertexBuffer.MatricesIndicesKind: {
+                return "JOINTS_0";
+                break;
+            }
+            case VertexBuffer.MatricesIndicesExtraKind: {
+                return "JOINTS_1";
+                break;
+            }
+            case VertexBuffer.MatricesWeightsKind: {
+                return "WEIGHTS_0";
+                break;
+            }
+            case VertexBuffer.MatricesWeightsExtraKind: {
+                return "WEIGHTS_1";
+                break;
+            }
+            default: {
+                Tools.Warn("Unsupported Vertex Buffer Type: " + attributeKind);
+                return "";
+            }
+        }
+    }
     /**
      * Sets data for the primitive attributes of each submesh
      * @param mesh glTF Mesh object to store the primitive attribute information
