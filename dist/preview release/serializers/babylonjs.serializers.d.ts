@@ -610,6 +610,7 @@ declare module BABYLON.GLTF2.Exporter {
         };
         _includeCoordinateSystemConversionNodes: boolean;
         private _shallowExportList;
+        private _shallowByteOffset;
         /**
          * Baked animation sample rate
          */

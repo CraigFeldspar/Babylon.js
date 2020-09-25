@@ -161,6 +161,7 @@ export class _Exporter {
     * Specifies if root Babylon empty nodes that act as a coordinate space transform should be included in export
     */
     private _shallowExportList: Node[];
+    private _shallowByteOffset: number;
 
     /**
      * Baked animation sample rate
@@ -320,6 +321,7 @@ export class _Exporter {
         this._animationSampleRate = options && options.animationSampleRate ? options.animationSampleRate : 1 / 60;
         this._includeCoordinateSystemConversionNodes = options && options.includeCoordinateSystemConversionNodes ? true : false;
         this._shallowExportList = options && options.shallowExportList || [];
+        this._shallowByteOffset = 0;
 
         this._glTFMaterialExporter = new _GLTFMaterialExporter(this);
         this._loadExtensions();
@@ -920,7 +922,7 @@ export class _Exporter {
         let imageName: string;
         let imageData: { data: Uint8Array, mimeType: ImageMimeType };
         let bufferView: IBufferView;
-        let byteOffset: number = this._totalByteLength;
+        let byteOffset: number = this._totalByteLength + this._shallowByteOffset;
 
         if (buffer.byteLength) {
             this._glTF.buffers = [buffer];
@@ -1219,7 +1221,7 @@ export class _Exporter {
             if (vertexBuffer && vertexData) {
                 const typeByteLength = VertexBuffer.GetTypeByteLength(attributeComponentKind);
                 const byteLength = vertexData.length * typeByteLength;
-                const bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, kind + " - " + bufferMesh.name);
+                const bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset() + this._shallowByteOffset, byteLength, byteStride, kind + " - " + bufferMesh.name);
                 this._bufferViews.push(bufferView);
 
                 if (this._shallowExportList.indexOf(babylonTransformNode) === -1) {
@@ -1232,6 +1234,8 @@ export class _Exporter {
                         convertToRightHandedSystem,
                         babylonTransformNode
                     );
+                } else {
+                    this._shallowByteOffset += byteLength;
                 }
             }
         }
@@ -1256,7 +1260,7 @@ export class _Exporter {
                 const count = babylonSubMesh.verticesCount;
                 const byteStride = 12; // 3 x 4 byte floats
                 const byteLength = count * byteStride;
-                const bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, babylonMorphTarget.name + "_NORMAL");
+                const bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset() + this._shallowByteOffset, byteLength, byteStride, babylonMorphTarget.name + "_NORMAL");
                 this._bufferViews.push(bufferView);
 
                 let bufferViewIndex = this._bufferViews.length - 1;
@@ -1282,7 +1286,7 @@ export class _Exporter {
                 const count = babylonSubMesh.verticesCount;
                 const byteStride = 12; // 3 x 4 byte floats
                 const byteLength = count * byteStride;
-                const bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, babylonMorphTarget.name + "_POSITION");
+                const bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset() + this._shallowByteOffset, byteLength, byteStride, babylonMorphTarget.name + "_POSITION");
                 this._bufferViews.push(bufferView);
 
                 let bufferViewIndex = this._bufferViews.length - 1;
@@ -1312,7 +1316,7 @@ export class _Exporter {
                 const count = babylonSubMesh.verticesCount;
                 const byteStride = 12; // 3 x 4 byte floats
                 const byteLength = count * byteStride;
-                const bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, babylonMorphTarget.name + "_NORMAL");
+                const bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset() + this._shallowByteOffset, byteLength, byteStride, babylonMorphTarget.name + "_NORMAL");
                 this._bufferViews.push(bufferView);
 
                 let bufferViewIndex = this._bufferViews.length - 1;
@@ -1501,7 +1505,7 @@ export class _Exporter {
                 const indices = bufferMesh.getIndices();
                 if (indices) {
                     const byteLength = indices.length * 4;
-                    bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, undefined, "Indices - " + bufferMesh.name);
+                    bufferView = _GLTFUtilities._CreateBufferView(0, binaryWriter.getByteOffset() + this._shallowByteOffset, byteLength, undefined, "Indices - " + bufferMesh.name);
                     this._bufferViews.push(bufferView);
                     indexBufferViewIndex = this._bufferViews.length - 1;
 
@@ -2013,7 +2017,7 @@ export class _Exporter {
             const byteStride = 64; // 4 x 4 matrix of 32 bit float
             const byteLength = inverseBindMatrices.length * byteStride;
             const bufferViewOffset = binaryWriter.getByteOffset();
-            const bufferView = _GLTFUtilities._CreateBufferView(0, bufferViewOffset, byteLength, byteStride, "InverseBindMatrices" + " - " + skeleton.name);
+            const bufferView = _GLTFUtilities._CreateBufferView(0, bufferViewOffset + this._shallowByteOffset, byteLength, byteStride, "InverseBindMatrices" + " - " + skeleton.name);
             this._bufferViews.push(bufferView);
             const bufferViewIndex = this._bufferViews.length - 1;
             const bindMatrixAccessor = _GLTFUtilities._CreateAccessor(bufferViewIndex, "InverseBindMatrices" + " - " + skeleton.name, AccessorType.MAT4, AccessorComponentType.FLOAT, inverseBindMatrices.length, null, null, null);

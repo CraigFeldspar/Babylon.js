@@ -1897,6 +1897,7 @@ var _Exporter = /** @class */ (function () {
         this._animationSampleRate = options && options.animationSampleRate ? options.animationSampleRate : 1 / 60;
         this._includeCoordinateSystemConversionNodes = options && options.includeCoordinateSystemConversionNodes ? true : false;
         this._shallowExportList = options && options.shallowExportList || [];
+        this._shallowByteOffset = 0;
         this._glTFMaterialExporter = new _glTFMaterialExporter__WEBPACK_IMPORTED_MODULE_2__["_GLTFMaterialExporter"](this);
         this._loadExtensions();
     }
@@ -2573,7 +2574,7 @@ var _Exporter = /** @class */ (function () {
         var imageName;
         var imageData;
         var bufferView;
-        var byteOffset = this._totalByteLength;
+        var byteOffset = this._totalByteLength + this._shallowByteOffset;
         if (buffer.byteLength) {
             this._glTF.buffers = [buffer];
         }
@@ -2835,10 +2836,13 @@ var _Exporter = /** @class */ (function () {
             if (vertexBuffer && vertexData) {
                 var typeByteLength = babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["VertexBuffer"].GetTypeByteLength(attributeComponentKind);
                 var byteLength = vertexData.length * typeByteLength;
-                var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, kind + " - " + bufferMesh.name);
+                var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset() + this._shallowByteOffset, byteLength, byteStride, kind + " - " + bufferMesh.name);
                 this._bufferViews.push(bufferView);
-                if (this._shallowExportList.indexOf(babylonTransformNode) !== -1) {
+                if (this._shallowExportList.indexOf(babylonTransformNode) === -1) {
                     this.writeAttributeData(kind, attributeComponentKind, vertexData, byteStride / typeByteLength, binaryWriter, convertToRightHandedSystem, babylonTransformNode);
+                }
+                else {
+                    this._shallowByteOffset += byteLength;
                 }
             }
         }
@@ -2862,7 +2866,7 @@ var _Exporter = /** @class */ (function () {
                 var count = babylonSubMesh.verticesCount;
                 var byteStride = 12; // 3 x 4 byte floats
                 var byteLength = count * byteStride;
-                var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, babylonMorphTarget.name + "_NORMAL");
+                var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset() + this._shallowByteOffset, byteLength, byteStride, babylonMorphTarget.name + "_NORMAL");
                 this._bufferViews.push(bufferView);
                 var bufferViewIndex = this._bufferViews.length - 1;
                 var accessor = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateAccessor(bufferViewIndex, babylonMorphTarget.name + " - " + "NORMAL", "VEC3" /* VEC3 */, 5126 /* FLOAT */, count, 0, null, null);
@@ -2876,7 +2880,7 @@ var _Exporter = /** @class */ (function () {
                 var count = babylonSubMesh.verticesCount;
                 var byteStride = 12; // 3 x 4 byte floats
                 var byteLength = count * byteStride;
-                var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, babylonMorphTarget.name + "_POSITION");
+                var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset() + this._shallowByteOffset, byteLength, byteStride, babylonMorphTarget.name + "_POSITION");
                 this._bufferViews.push(bufferView);
                 var bufferViewIndex = this._bufferViews.length - 1;
                 var minMax = { min: new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"](Infinity, Infinity, Infinity), max: new babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Vector3"](-Infinity, -Infinity, -Infinity) };
@@ -2893,7 +2897,7 @@ var _Exporter = /** @class */ (function () {
                 var count = babylonSubMesh.verticesCount;
                 var byteStride = 12; // 3 x 4 byte floats
                 var byteLength = count * byteStride;
-                var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, byteStride, babylonMorphTarget.name + "_NORMAL");
+                var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset() + this._shallowByteOffset, byteLength, byteStride, babylonMorphTarget.name + "_NORMAL");
                 this._bufferViews.push(bufferView);
                 var bufferViewIndex = this._bufferViews.length - 1;
                 var accessor = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateAccessor(bufferViewIndex, babylonMorphTarget.name + " - " + "TANGENT", "VEC3" /* VEC3 */, 5126 /* FLOAT */, count, 0, null, null);
@@ -3063,7 +3067,7 @@ var _Exporter = /** @class */ (function () {
                 var indices = bufferMesh.getIndices();
                 if (indices) {
                     var byteLength = indices.length * 4;
-                    bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset(), byteLength, undefined, "Indices - " + bufferMesh.name);
+                    bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, binaryWriter.getByteOffset() + this._shallowByteOffset, byteLength, undefined, "Indices - " + bufferMesh.name);
                     this._bufferViews.push(bufferView);
                     indexBufferViewIndex = this._bufferViews.length - 1;
                     for (var k = 0, length_9 = indices.length; k < length_9; ++k) {
@@ -3538,7 +3542,7 @@ var _Exporter = /** @class */ (function () {
             var byteStride = 64; // 4 x 4 matrix of 32 bit float
             var byteLength = inverseBindMatrices.length * byteStride;
             var bufferViewOffset = binaryWriter.getByteOffset();
-            var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, bufferViewOffset, byteLength, byteStride, "InverseBindMatrices" + " - " + skeleton.name);
+            var bufferView = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateBufferView(0, bufferViewOffset + this_2._shallowByteOffset, byteLength, byteStride, "InverseBindMatrices" + " - " + skeleton.name);
             this_2._bufferViews.push(bufferView);
             var bufferViewIndex = this_2._bufferViews.length - 1;
             var bindMatrixAccessor = _glTFUtilities__WEBPACK_IMPORTED_MODULE_3__["_GLTFUtilities"]._CreateAccessor(bufferViewIndex, "InverseBindMatrices" + " - " + skeleton.name, "MAT4" /* MAT4 */, 5126 /* FLOAT */, inverseBindMatrices.length, null, null, null);
