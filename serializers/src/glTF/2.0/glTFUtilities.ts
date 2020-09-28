@@ -16,7 +16,7 @@ export class _GLTFUtilities {
      * @param name name of the buffer view
      * @returns bufferView for glTF
      */
-    public static _CreateBufferView(bufferIndex: number, byteOffset: number, byteLength: number, byteStride?: number, name?: string): IBufferView {
+    public static _CreateBufferView(bufferIndex: number, byteOffset: number, byteLength: number, byteStride?: number, name?: string, realOffset?: number): IBufferView {
         let bufferview: IBufferView = { buffer: bufferIndex, byteLength: byteLength };
         if (byteOffset) {
             bufferview.byteOffset = byteOffset;
@@ -26,6 +26,9 @@ export class _GLTFUtilities {
         }
         if (byteStride) {
             bufferview.byteStride = byteStride;
+        }
+        if (realOffset) {
+            bufferview.realOffset = realOffset;
         }
 
         return bufferview;

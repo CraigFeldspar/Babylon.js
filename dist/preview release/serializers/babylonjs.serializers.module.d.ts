@@ -452,7 +452,7 @@ declare module "babylonjs-serializers/glTF/2.0/glTFUtilities" {
          * @param name name of the buffer view
          * @returns bufferView for glTF
          */
-        static _CreateBufferView(bufferIndex: number, byteOffset: number, byteLength: number, byteStride?: number, name?: string): IBufferView;
+        static _CreateBufferView(bufferIndex: number, byteOffset: number, byteLength: number, byteStride?: number, name?: string, realOffset?: number): IBufferView;
         /**
          * Creates an accessor based on the supplied arguments
          * @param bufferviewIndex The index of the bufferview referenced by this accessor
@@ -607,6 +607,10 @@ declare module "babylonjs-serializers/glTF/2.0/glTFExporter" {
          * Stores all the generated glTF skins
          */
         _skins: ISkin[];
+        /**
+         * Shallow export data
+         */
+        _shallowExport: any[];
         /**
          * Stores all the generated animation samplers, which is referenced by glTF animations
          */
@@ -860,6 +864,7 @@ declare module "babylonjs-serializers/glTF/2.0/glTFExporter" {
          * @returns boolean specifying if uv coordinates are present
          */
         private setAttributeKind;
+        private convertAttributeKind;
         /**
          * Sets data for the primitive attributes of each submesh
          * @param mesh glTF Mesh object to store the primitive attribute information
@@ -1811,7 +1816,7 @@ declare module BABYLON.GLTF2.Exporter {
          * @param name name of the buffer view
          * @returns bufferView for glTF
          */
-        static _CreateBufferView(bufferIndex: number, byteOffset: number, byteLength: number, byteStride?: number, name?: string): IBufferView;
+        static _CreateBufferView(bufferIndex: number, byteOffset: number, byteLength: number, byteStride?: number, name?: string, realOffset?: number): IBufferView;
         /**
          * Creates an accessor based on the supplied arguments
          * @param bufferviewIndex The index of the bufferview referenced by this accessor
@@ -1950,6 +1955,10 @@ declare module BABYLON.GLTF2.Exporter {
          * Stores all the generated glTF skins
          */
         _skins: ISkin[];
+        /**
+         * Shallow export data
+         */
+        _shallowExport: any[];
         /**
          * Stores all the generated animation samplers, which is referenced by glTF animations
          */
@@ -2203,6 +2212,7 @@ declare module BABYLON.GLTF2.Exporter {
          * @returns boolean specifying if uv coordinates are present
          */
         private setAttributeKind;
+        private convertAttributeKind;
         /**
          * Sets data for the primitive attributes of each submesh
          * @param mesh glTF Mesh object to store the primitive attribute information

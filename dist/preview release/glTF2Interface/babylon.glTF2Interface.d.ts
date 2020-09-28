@@ -462,6 +462,10 @@ declare module BABYLON.GLTF2 {
          * The stride, in bytes
          */
         byteStride?: number;
+        /**
+         * The real offset, in bytes
+         */
+        realOffset?: number;
     }
     /**
      * An orthographic camera containing properties to create an orthographic projection matrix
