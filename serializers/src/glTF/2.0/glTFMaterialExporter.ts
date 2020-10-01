@@ -84,6 +84,7 @@ export class _GLTFMaterialExporter {
      * Mapping to store textures
      */
     private _textureMap: { [textureId: string]: ITextureInfo } = {};
+    private _texturePromises: { [textureId: string]: Promise<Nullable<ITextureInfo>> } = {};
 
     /**
      * Numeric tolerance value
@@ -97,6 +98,7 @@ export class _GLTFMaterialExporter {
 
     constructor(exporter: _Exporter) {
         this._textureMap = {};
+        this._texturePromises = {};
         this._exporter = exporter;
     }
 
@@ -1159,6 +1161,11 @@ export class _GLTFMaterialExporter {
      * @return glTF texture info, or null if the texture format is not supported
      */
     public _exportTextureAsync(babylonTexture: BaseTexture, mimeType: ImageMimeType): Promise<Nullable<ITextureInfo>> {
+        if (this._exporter._shallowTextureList.filter(elt => elt.uid === babylonTexture.uid).length) {
+            // do not export
+            return Promise.resolve(null);
+        }
+
         const extensionPromise = this._exporter._extensionsPreExportTextureAsync("exporter", babylonTexture as Texture, mimeType);
         if (!extensionPromise) {
             return this._exportTextureInfoAsync(babylonTexture, mimeType);
@@ -1175,8 +1182,8 @@ export class _GLTFMaterialExporter {
     public _exportTextureInfoAsync(babylonTexture: BaseTexture, mimeType: ImageMimeType): Promise<Nullable<ITextureInfo>> {
         return Promise.resolve().then(() => {
             const textureUid = babylonTexture.uid;
-            if (textureUid in this._textureMap) {
-                return this._textureMap[textureUid];
+            if (textureUid in this._texturePromises) {
+                return this._texturePromises[textureUid];
             }
             else {
                 const pixels = this.getPixelsFromTexture(babylonTexture);
@@ -1221,7 +1228,7 @@ export class _GLTFMaterialExporter {
 
                 }
 
-                return this._createBase64FromCanvasAsync(pixels, size.width, size.height, mimeType).then((base64Data) => {
+                this._texturePromises[textureUid] = this._createBase64FromCanvasAsync(pixels, size.width, size.height, mimeType).then((base64Data) => {
                     const textureInfo = this._getTextureInfoFromBase64(base64Data, babylonTexture.name.replace(/\.\/|\/|\.\\|\\/g, "_"), mimeType, babylonTexture.coordinatesIndex, samplerIndex);
                     if (textureInfo) {
                         this._textureMap[textureUid] = textureInfo;
@@ -1230,6 +1237,7 @@ export class _GLTFMaterialExporter {
 
                     return textureInfo;
                 });
+                return this._texturePromises[textureUid];
             }
         });
     }

@@ -164,7 +164,8 @@ export class _Exporter {
     /*
     * Specifies if root Babylon empty nodes that act as a coordinate space transform should be included in export
     */
-    private _shallowExportList: Node[];
+    public _shallowExportList: Node[];
+    public _shallowTextureList: any[];
     private _shallowByteOffset: number;
 
     /**
@@ -325,6 +326,7 @@ export class _Exporter {
         this._animationSampleRate = options && options.animationSampleRate ? options.animationSampleRate : 1 / 60;
         this._includeCoordinateSystemConversionNodes = options && options.includeCoordinateSystemConversionNodes ? true : false;
         this._shallowExportList = options && options.shallowExportList || [];
+        this._shallowTextureList = options && options.shallowTextureList || [];
         this._shallowByteOffset = 0;
         this._shallowExport = [];
 

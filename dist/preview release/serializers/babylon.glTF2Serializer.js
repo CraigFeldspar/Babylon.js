@@ -97,10 +97,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ({
 
 /***/ "../../node_modules/tslib/tslib.es6.js":
-/*!****************************************************************!*\
-  !*** C:/Users/Ben/git/babylon/node_modules/tslib/tslib.es6.js ***!
-  \****************************************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault */
+/*!****************************************************!*\
+  !*** E:/babylonjs/node_modules/tslib/tslib.es6.js ***!
+  \****************************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -125,6 +125,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -193,10 +195,11 @@ function __metadata(metadataKey, metadataValue) {
 }
 
 function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 }
@@ -234,14 +237,15 @@ function __exportStar(m, exports) {
 }
 
 function __values(o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
     if (m) return m.call(o);
-    return {
+    if (o && typeof o.length === "number") return {
         next: function () {
             if (o && i >= o.length) o = void 0;
             return { value: o && o[i++], done: !o };
         }
     };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 }
 
 function __read(o, n) {
@@ -320,6 +324,21 @@ function __importStar(mod) {
 
 function __importDefault(mod) {
     return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function __classPrivateFieldGet(receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+}
+
+function __classPrivateFieldSet(receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
 }
 
 
@@ -1897,6 +1916,7 @@ var _Exporter = /** @class */ (function () {
         this._animationSampleRate = options && options.animationSampleRate ? options.animationSampleRate : 1 / 60;
         this._includeCoordinateSystemConversionNodes = options && options.includeCoordinateSystemConversionNodes ? true : false;
         this._shallowExportList = options && options.shallowExportList || [];
+        this._shallowTextureList = options && options.shallowTextureList || [];
         this._shallowByteOffset = 0;
         this._shallowExport = [];
         this._glTFMaterialExporter = new _glTFMaterialExporter__WEBPACK_IMPORTED_MODULE_2__["_GLTFMaterialExporter"](this);
@@ -2803,7 +2823,7 @@ var _Exporter = /** @class */ (function () {
         if (!babylonTransformNode.scaling.equalsToFloats(1, 1, 1)) {
             node.scale = babylonTransformNode.scaling.asArray();
             if (this._shallowExportList.indexOf(babylonTransformNode) !== -1) {
-                node.scale[1] *= -1;
+                node.scale[2] *= -1;
             }
         }
         var rotationQuaternion = babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_1__["Quaternion"].RotationYawPitchRoll(babylonTransformNode.rotation.y, babylonTransformNode.rotation.x, babylonTransformNode.rotation.z);
@@ -3880,7 +3900,9 @@ var _GLTFMaterialExporter = /** @class */ (function () {
          * Mapping to store textures
          */
         this._textureMap = {};
+        this._texturePromises = {};
         this._textureMap = {};
+        this._texturePromises = {};
         this._exporter = exporter;
     }
     /**
@@ -4835,6 +4857,10 @@ var _GLTFMaterialExporter = /** @class */ (function () {
      */
     _GLTFMaterialExporter.prototype._exportTextureAsync = function (babylonTexture, mimeType) {
         var _this = this;
+        if (this._exporter._shallowTextureList.filter(function (elt) { return elt.uid === babylonTexture.uid; }).length) {
+            // do not export
+            return Promise.resolve(null);
+        }
         var extensionPromise = this._exporter._extensionsPreExportTextureAsync("exporter", babylonTexture, mimeType);
         if (!extensionPromise) {
             return this._exportTextureInfoAsync(babylonTexture, mimeType);
@@ -4850,8 +4876,8 @@ var _GLTFMaterialExporter = /** @class */ (function () {
         var _this = this;
         return Promise.resolve().then(function () {
             var textureUid = babylonTexture.uid;
-            if (textureUid in _this._textureMap) {
-                return _this._textureMap[textureUid];
+            if (textureUid in _this._texturePromises) {
+                return _this._texturePromises[textureUid];
             }
             else {
                 var pixels = _this.getPixelsFromTexture(babylonTexture);
@@ -4890,7 +4916,7 @@ var _GLTFMaterialExporter = /** @class */ (function () {
                             break;
                     }
                 }
-                return _this._createBase64FromCanvasAsync(pixels, size.width, size.height, mimeType).then(function (base64Data) {
+                _this._texturePromises[textureUid] = _this._createBase64FromCanvasAsync(pixels, size.width, size.height, mimeType).then(function (base64Data) {
                     var textureInfo = _this._getTextureInfoFromBase64(base64Data, babylonTexture.name.replace(/\.\/|\/|\.\\|\\/g, "_"), mimeType, babylonTexture.coordinatesIndex, samplerIndex_1);
                     if (textureInfo) {
                         _this._textureMap[textureUid] = textureInfo;
@@ -4898,6 +4924,7 @@ var _GLTFMaterialExporter = /** @class */ (function () {
                     }
                     return textureInfo;
                 });
+                return _this._texturePromises[textureUid];
             }
         });
     };

@@ -40,6 +40,11 @@ export interface IExportOptions {
      * List of meshes that only need to be exported by reference
      */
     shallowExportList?: Node[];
+
+    /**
+     * List of textures that only need to be exported by reference
+     */
+    shallowTextureList?: any[];
 }
 
 /**

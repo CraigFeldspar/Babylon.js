@@ -148,6 +148,7 @@ declare module "babylonjs-serializers/glTF/2.0/glTFMaterialExporter" {
          * Mapping to store textures
          */
         private _textureMap;
+        private _texturePromises;
         /**
          * Numeric tolerance value
          */
@@ -409,6 +410,10 @@ declare module "babylonjs-serializers/glTF/2.0/glTFSerializer" {
          * List of meshes that only need to be exported by reference
          */
         shallowExportList?: Node[];
+        /**
+         * List of textures that only need to be exported by reference
+         */
+        shallowTextureList?: any[];
     }
     /**
      * Class for generating glTF data from a Babylon scene.
@@ -657,7 +662,8 @@ declare module "babylonjs-serializers/glTF/2.0/glTFExporter" {
             [nodeId: number]: boolean;
         };
         _includeCoordinateSystemConversionNodes: boolean;
-        private _shallowExportList;
+        _shallowExportList: Node[];
+        _shallowTextureList: any[];
         private _shallowByteOffset;
         /**
          * Baked animation sample rate
@@ -1518,6 +1524,7 @@ declare module BABYLON.GLTF2.Exporter {
          * Mapping to store textures
          */
         private _textureMap;
+        private _texturePromises;
         /**
          * Numeric tolerance value
          */
@@ -1776,6 +1783,10 @@ declare module BABYLON {
          * List of meshes that only need to be exported by reference
          */
         shallowExportList?: Node[];
+        /**
+         * List of textures that only need to be exported by reference
+         */
+        shallowTextureList?: any[];
     }
     /**
      * Class for generating glTF data from a Babylon scene.
@@ -2005,7 +2016,8 @@ declare module BABYLON.GLTF2.Exporter {
             [nodeId: number]: boolean;
         };
         _includeCoordinateSystemConversionNodes: boolean;
-        private _shallowExportList;
+        _shallowExportList: Node[];
+        _shallowTextureList: any[];
         private _shallowByteOffset;
         /**
          * Baked animation sample rate
