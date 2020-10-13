@@ -97,10 +97,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ({
 
 /***/ "../../node_modules/tslib/tslib.es6.js":
-/*!****************************************************!*\
-  !*** E:/babylonjs/node_modules/tslib/tslib.es6.js ***!
-  \****************************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
+/*!****************************************************************!*\
+  !*** C:/Users/Ben/git/babylon/node_modules/tslib/tslib.es6.js ***!
+  \****************************************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __exportStar, __values, __read, __spread, __spreadArrays, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -125,8 +125,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -195,11 +193,10 @@ function __metadata(metadataKey, metadataValue) {
 }
 
 function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 }
@@ -237,15 +234,14 @@ function __exportStar(m, exports) {
 }
 
 function __values(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
     if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
+    return {
         next: function () {
             if (o && i >= o.length) o = void 0;
             return { value: o && o[i++], done: !o };
         }
     };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 }
 
 function __read(o, n) {
@@ -324,21 +320,6 @@ function __importStar(mod) {
 
 function __importDefault(mod) {
     return (mod && mod.__esModule) ? mod : { default: mod };
-}
-
-function __classPrivateFieldGet(receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to get private field on non-instance");
-    }
-    return privateMap.get(receiver);
-}
-
-function __classPrivateFieldSet(receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to set private field on non-instance");
-    }
-    privateMap.set(receiver, value);
-    return value;
 }
 
 
@@ -4025,6 +4006,45 @@ var _GLTFMaterialExporter = /** @class */ (function () {
         var opacity = babylonStandardMaterial.alpha;
         var specularPower = babylonjs_Maths_math_vector__WEBPACK_IMPORTED_MODULE_0__["Scalar"].Clamp(babylonStandardMaterial.specularPower, 0, _GLTFMaterialExporter._MaxSpecularPower);
         var roughness = _solveForRoughness(specularPower);
+        var metallicFactor = 0;
+        // Kazaplan addition
+        switch (babylonStandardMaterial.__exportType) {
+            case "matt":
+            case "matte wood":
+                roughness = 0.8;
+                break;
+            case "color":
+            case "fabric":
+            case "tile":
+            case "white":
+                roughness = 0.8;
+                break;
+            case "wood":
+            case "semi matt wood":
+                roughness = 0.5;
+                break;
+            case "aluminium":
+                roughness = 0.3;
+                metallicFactor = 0.8;
+                break;
+            case "plastic":
+            case "ceramics":
+            case "porcelain":
+                roughness = 0.1;
+                break;
+            case "steel":
+                roughness = 0.15;
+                metallicFactor = 0.95;
+                break;
+            case "stainless steel":
+                roughness = 0.75;
+                metallicFactor = 0.95;
+                break;
+            case "metal":
+                roughness = 0.02;
+                metallicFactor = 0.95;
+                break;
+        }
         var glTFPbrMetallicRoughness = {
             baseColorFactor: [
                 diffuse.r,
@@ -4032,7 +4052,7 @@ var _GLTFMaterialExporter = /** @class */ (function () {
                 diffuse.b,
                 opacity
             ],
-            metallicFactor: 0,
+            metallicFactor: metallicFactor,
             roughnessFactor: roughness,
         };
         return glTFPbrMetallicRoughness;
@@ -4857,8 +4877,79 @@ var _GLTFMaterialExporter = /** @class */ (function () {
      */
     _GLTFMaterialExporter.prototype._exportTextureAsync = function (babylonTexture, mimeType) {
         var _this = this;
-        if (this._exporter._shallowTextureList.filter(function (elt) { return elt.uid === babylonTexture.uid; }).length) {
+        // TODO : remove backoffice test
+        var shallow = this._exporter._shallowTextureList.filter(function (elt) { return elt.uid === babylonTexture.uid; });
+        if (shallow.length) {
             // do not export
+            var samplers = this._exporter._samplers;
+            var sampler = this._getGLTFTextureSampler(babylonTexture);
+            var samplerIndex = null;
+            //  if a pre-existing sampler with identical parameters exists, then reuse the previous sampler
+            var foundSamplerIndex = null;
+            for (var i = 0; i < samplers.length; ++i) {
+                var s = samplers[i];
+                if (s.minFilter === sampler.minFilter && s.magFilter === sampler.magFilter &&
+                    s.wrapS === sampler.wrapS && s.wrapT === sampler.wrapT) {
+                    foundSamplerIndex = i;
+                    break;
+                }
+            }
+            if (foundSamplerIndex == null) {
+                samplers.push(sampler);
+                samplerIndex = samplers.length - 1;
+            }
+            else {
+                samplerIndex = foundSamplerIndex;
+            }
+            // Preserve texture mime type if defined
+            if (babylonTexture.mimeType) {
+                switch (babylonTexture.mimeType) {
+                    case "image/jpeg":
+                        mimeType = "image/jpeg" /* JPEG */ /* JPEG */;
+                        break;
+                    case "image/png":
+                        mimeType = "image/png" /* PNG */ /* PNG */;
+                        break;
+                }
+            }
+            var textures = this._exporter._textures;
+            var images = this._exporter._images;
+            var textureInfo = null;
+            var glTFTexture = {
+                source: images.length,
+                name: babylonTexture.name
+            };
+            if (samplerIndex != null) {
+                glTFTexture.sampler = samplerIndex;
+            }
+            if (mimeType === "image/jpeg" /* JPEG */ || mimeType === "image/png" /* PNG */) {
+                var glTFImage = {
+                    name: babylonTexture.name,
+                    uri: shallow[0].localPath
+                };
+                var foundIndex = null;
+                for (var i = 0; i < images.length; ++i) {
+                    if (images[i].uri === shallow[0].localPath) {
+                        foundIndex = i;
+                        break;
+                    }
+                }
+                if (foundIndex == null) {
+                    images.push(glTFImage);
+                    glTFTexture.source = images.length - 1;
+                }
+                else {
+                    glTFTexture.source = foundIndex;
+                }
+                textures.push(glTFTexture);
+                textureInfo = {
+                    index: textures.length - 1
+                };
+                if (babylonTexture.coordinatesIndex != null) {
+                    textureInfo.texCoord = babylonTexture.coordinatesIndex;
+                }
+                return Promise.resolve(textureInfo);
+            }
             return Promise.resolve(null);
         }
         var extensionPromise = this._exporter._extensionsPreExportTextureAsync("exporter", babylonTexture, mimeType);
@@ -5042,7 +5133,7 @@ var GLTF2Export = /** @class */ (function () {
      * as keys and their data and paths as values
      */
     GLTF2Export.GLTFAsync = function (scene, filePrefix, options) {
-        return scene.whenReadyAsync().then(function () {
+        return Promise.resolve().then(function () {
             var glTFPrefix = filePrefix.replace(/\.[^/.]+$/, "");
             var gltfGenerator = new _glTFExporter__WEBPACK_IMPORTED_MODULE_0__["_Exporter"](scene, options);
             return gltfGenerator._generateGLTFAsync(glTFPrefix);

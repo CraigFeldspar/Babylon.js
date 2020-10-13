@@ -60,7 +60,7 @@ export class GLTF2Export {
      * as keys and their data and paths as values
      */
     public static GLTFAsync(scene: Scene, filePrefix: string, options?: IExportOptions): Promise<GLTFData> {
-        return scene.whenReadyAsync().then(() => {
+        return Promise.resolve().then(() => {
             const glTFPrefix = filePrefix.replace(/\.[^/.]+$/, "");
             const gltfGenerator = new _Exporter(scene, options);
             return gltfGenerator._generateGLTFAsync(glTFPrefix);
