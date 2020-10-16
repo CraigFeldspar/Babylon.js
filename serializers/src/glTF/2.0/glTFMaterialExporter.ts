@@ -1274,6 +1274,9 @@ export class _GLTFMaterialExporter {
                 if (babylonTexture.coordinatesIndex != null) {
                     textureInfo.texCoord = babylonTexture.coordinatesIndex;
                 }
+
+                this._exporter._extensionsPostExportTextures("linkTextureInfo", textureInfo, babylonTexture);
+                
                 return Promise.resolve(textureInfo);
             }
            return Promise.resolve(null);

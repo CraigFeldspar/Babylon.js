@@ -1226,15 +1226,6 @@ declare module "babylonjs-serializers/glTF/2.0/Extensions/KHR_texture_transform"
         get wasUsed(): boolean;
         postExportTexture?(context: string, textureInfo: ITextureInfo, babylonTexture: Texture): void;
         preExportTextureAsync(context: string, babylonTexture: Texture, mimeType: ImageMimeType): Promise<Texture>;
-        /**
-         * Transform the babylon texture by the offset, rotation and scale parameters using a procedural texture
-         * @param babylonTexture
-         * @param offset
-         * @param rotation
-         * @param scale
-         * @param scene
-         */
-        private _textureTransformTextureAsync;
     }
 }
 declare module "babylonjs-serializers/glTF/2.0/Extensions/KHR_lights_punctual" {
@@ -2568,15 +2559,6 @@ declare module BABYLON.GLTF2.Exporter.Extensions {
         get wasUsed(): boolean;
         postExportTexture?(context: string, textureInfo: ITextureInfo, babylonTexture: Texture): void;
         preExportTextureAsync(context: string, babylonTexture: Texture, mimeType: ImageMimeType): Promise<Texture>;
-        /**
-         * Transform the babylon texture by the offset, rotation and scale parameters using a procedural texture
-         * @param babylonTexture
-         * @param offset
-         * @param rotation
-         * @param scale
-         * @param scene
-         */
-        private _textureTransformTextureAsync;
     }
 }
 declare module BABYLON.GLTF2.Exporter.Extensions {

@@ -727,12 +727,8 @@ _glTFExporter__WEBPACK_IMPORTED_MODULE_0__["_Exporter"].RegisterExtension(NAME, 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KHR_texture_transform", function() { return KHR_texture_transform; });
-/* harmony import */ var babylonjs_Misc_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! babylonjs/Misc/tools */ "babylonjs/Maths/math.vector");
-/* harmony import */ var babylonjs_Misc_tools__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(babylonjs_Misc_tools__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _glTFExporter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../glTFExporter */ "./glTF/2.0/glTFExporter.ts");
-/* harmony import */ var _shaders_textureTransform_fragment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shaders/textureTransform.fragment */ "./glTF/2.0/shaders/textureTransform.fragment.ts");
-
-
+/* harmony import */ var _glTFExporter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../glTFExporter */ "./glTF/2.0/glTFExporter.ts");
+/* harmony import */ var _shaders_textureTransform_fragment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shaders/textureTransform.fragment */ "./glTF/2.0/shaders/textureTransform.fragment.ts");
 
 var NAME = "KHR_texture_transform";
 
@@ -766,107 +762,48 @@ var KHR_texture_transform = /** @class */ (function () {
         configurable: true
     });
     KHR_texture_transform.prototype.postExportTexture = function (context, textureInfo, babylonTexture) {
-        var canUseExtension = babylonTexture && ((babylonTexture.uAng === 0 && babylonTexture.wAng === 0 && babylonTexture.vAng === 0) || (babylonTexture.uRotationCenter === 0 && babylonTexture.vRotationCenter === 0));
-        if (canUseExtension) {
-            var textureTransform = {};
-            var transformIsRequired = false;
-            if (babylonTexture.uOffset !== 0 || babylonTexture.vOffset !== 0) {
-                textureTransform.offset = [babylonTexture.uOffset, babylonTexture.vOffset];
-                transformIsRequired = true;
-            }
-            if (babylonTexture.uScale !== 1 || babylonTexture.vScale !== 1) {
-                textureTransform.scale = [babylonTexture.uScale, babylonTexture.vScale];
-                transformIsRequired = true;
-            }
-            if (babylonTexture.wAng !== 0) {
-                textureTransform.rotation = babylonTexture.wAng;
-                transformIsRequired = true;
-            }
-            if (babylonTexture.coordinatesIndex !== 0) {
-                textureTransform.texCoord = babylonTexture.coordinatesIndex;
-                transformIsRequired = true;
-            }
-            if (!transformIsRequired) {
-                return;
-            }
-            this._wasUsed = true;
-            if (!textureInfo.extensions) {
-                textureInfo.extensions = {};
-            }
-            textureInfo.extensions[NAME] = textureTransform;
+        var textureTransform = {};
+        var transformIsRequired = false;
+        if (babylonTexture.uOffset !== 0 || babylonTexture.vOffset !== 0 || babylonTexture.wAng !== 0) {
+            textureTransform.offset = [babylonTexture.uOffset + (babylonTexture.uRotationCenter - babylonTexture.uRotationCenter * Math.cos(babylonTexture.wAng) + babylonTexture.vRotationCenter * Math.sin(babylonTexture.wAng)) * babylonTexture.uScale,
+                babylonTexture.vOffset + (babylonTexture.vRotationCenter - babylonTexture.uRotationCenter * Math.sin(babylonTexture.wAng) - babylonTexture.vRotationCenter * Math.cos(babylonTexture.wAng)) * babylonTexture.vScale];
+            transformIsRequired = true;
         }
+        if (babylonTexture.uScale !== 1 || babylonTexture.vScale !== 1) {
+            textureTransform.scale = [babylonTexture.uScale, babylonTexture.vScale];
+            transformIsRequired = true;
+        }
+        if (babylonTexture.wAng !== 0) {
+            textureTransform.rotation = babylonTexture.wAng;
+            transformIsRequired = true;
+        }
+        if (babylonTexture.coordinatesIndex !== 0) {
+            textureTransform.texCoord = babylonTexture.coordinatesIndex;
+            transformIsRequired = true;
+        }
+        if (!transformIsRequired) {
+            return;
+        }
+        this._wasUsed = true;
+        if (!textureInfo.extensions) {
+            textureInfo.extensions = {};
+        }
+        textureInfo.extensions[NAME] = textureTransform;
     };
     KHR_texture_transform.prototype.preExportTextureAsync = function (context, babylonTexture, mimeType) {
-        var _this = this;
         return new Promise(function (resolve, reject) {
             var scene = babylonTexture.getScene();
             if (!scene) {
                 reject(context + ": \"scene\" is not defined for Babylon texture " + babylonTexture.name + "!");
                 return;
             }
-            var bakeTextureTransform = false;
-            /*
-            * The KHR_texture_transform schema only supports rotation around the origin.
-            * the texture must be baked to preserve appearance.
-            * see: https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_texture_transform#gltf-schema-updates
-            */
-            if ((babylonTexture.uAng !== 0 || babylonTexture.wAng !== 0 || babylonTexture.vAng !== 0) && (babylonTexture.uRotationCenter !== 0 || babylonTexture.vRotationCenter !== 0)) {
-                bakeTextureTransform = true;
-            }
-            if (!bakeTextureTransform) {
-                resolve(babylonTexture);
-                return;
-            }
-            return _this._textureTransformTextureAsync(babylonTexture, scene)
-                .then(function (proceduralTexture) {
-                resolve(proceduralTexture);
-            })
-                .catch(function (e) {
-                reject(e);
-            });
-        });
-    };
-    /**
-     * Transform the babylon texture by the offset, rotation and scale parameters using a procedural texture
-     * @param babylonTexture
-     * @param offset
-     * @param rotation
-     * @param scale
-     * @param scene
-     */
-    KHR_texture_transform.prototype._textureTransformTextureAsync = function (babylonTexture, scene) {
-        var _this = this;
-        return new Promise(function (resolve) {
-            var proceduralTexture = new babylonjs_Misc_tools__WEBPACK_IMPORTED_MODULE_0__["ProceduralTexture"]("" + babylonTexture.name, babylonTexture.getSize(), "textureTransform", scene);
-            if (!proceduralTexture) {
-                babylonjs_Misc_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].Log("Cannot create procedural texture for " + babylonTexture.name + "!");
-                resolve(babylonTexture);
-            }
-            proceduralTexture.reservedDataStore = {
-                hidden: true,
-                source: babylonTexture
-            };
-            _this._recordedTextures.push(proceduralTexture);
-            proceduralTexture.coordinatesIndex = babylonTexture.coordinatesIndex;
-            proceduralTexture.setTexture("textureSampler", babylonTexture);
-            proceduralTexture.setMatrix("textureTransformMat", babylonTexture.getTextureMatrix());
-            // isReady trigger creation of effect if it doesnt exist yet
-            if (proceduralTexture.isReady()) {
-                proceduralTexture.render();
-                resolve(proceduralTexture);
-            }
-            else {
-                proceduralTexture.getEffect().executeWhenCompiled(function () {
-                    proceduralTexture.render();
-                    resolve(proceduralTexture);
-                });
-            }
+            resolve(babylonTexture);
         });
     };
     return KHR_texture_transform;
 }());
 
-_glTFExporter__WEBPACK_IMPORTED_MODULE_1__["_Exporter"].RegisterExtension(NAME, function (exporter) { return new KHR_texture_transform(exporter); });
+_glTFExporter__WEBPACK_IMPORTED_MODULE_0__["_Exporter"].RegisterExtension(NAME, function (exporter) { return new KHR_texture_transform(exporter); });
 
 
 /***/ }),
@@ -4905,10 +4842,10 @@ var _GLTFMaterialExporter = /** @class */ (function () {
             if (babylonTexture.mimeType) {
                 switch (babylonTexture.mimeType) {
                     case "image/jpeg":
-                        mimeType = "image/jpeg" /* JPEG */ /* JPEG */;
+                        mimeType = "image/jpeg" /* JPEG */;
                         break;
                     case "image/png":
-                        mimeType = "image/png" /* PNG */ /* PNG */;
+                        mimeType = "image/png" /* PNG */;
                         break;
                 }
             }
@@ -4922,7 +4859,7 @@ var _GLTFMaterialExporter = /** @class */ (function () {
             if (samplerIndex != null) {
                 glTFTexture.sampler = samplerIndex;
             }
-            if (mimeType === "image/jpeg" /* JPEG */ || mimeType === "image/png" /* PNG */) {
+            if (mimeType === "image/jpeg" || mimeType === "image/png") {
                 var glTFImage = {
                     name: babylonTexture.name,
                     uri: shallow[0].localPath
@@ -4948,6 +4885,7 @@ var _GLTFMaterialExporter = /** @class */ (function () {
                 if (babylonTexture.coordinatesIndex != null) {
                     textureInfo.texCoord = babylonTexture.coordinatesIndex;
                 }
+                this._exporter._extensionsPostExportTextures("linkTextureInfo", textureInfo, babylonTexture);
                 return Promise.resolve(textureInfo);
             }
             return Promise.resolve(null);
