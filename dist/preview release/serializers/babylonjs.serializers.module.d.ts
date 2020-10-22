@@ -414,6 +414,10 @@ declare module "babylonjs-serializers/glTF/2.0/glTFSerializer" {
          * List of textures that only need to be exported by reference
          */
         shallowTextureList?: any[];
+        /**
+         * Callback after export
+         */
+        postExportCallback?: (gltf: any) => void;
     }
     /**
      * Class for generating glTF data from a Babylon scene.
@@ -1778,6 +1782,10 @@ declare module BABYLON {
          * List of textures that only need to be exported by reference
          */
         shallowTextureList?: any[];
+        /**
+         * Callback after export
+         */
+        postExportCallback?: (gltf: any) => void;
     }
     /**
      * Class for generating glTF data from a Babylon scene.

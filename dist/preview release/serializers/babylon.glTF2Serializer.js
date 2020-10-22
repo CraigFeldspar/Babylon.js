@@ -774,7 +774,7 @@ var KHR_texture_transform = /** @class */ (function () {
             transformIsRequired = true;
         }
         if (babylonTexture.wAng !== 0) {
-            textureTransform.rotation = babylonTexture.wAng;
+            textureTransform.rotation = -babylonTexture.wAng;
             transformIsRequired = true;
         }
         if (babylonTexture.coordinatesIndex !== 0) {
@@ -2585,6 +2585,9 @@ var _Exporter = /** @class */ (function () {
         buffer.byteLength += this._shallowByteOffset;
         if (!shouldUseGlb) {
             buffer.uri = glTFPrefix + ".bin";
+        }
+        if (this._options.postExportCallback) {
+            this._options.postExportCallback(this._glTF);
         }
         var jsonText = prettyPrint ? JSON.stringify(this._glTF, null, 2) : JSON.stringify(this._glTF);
         return jsonText;
