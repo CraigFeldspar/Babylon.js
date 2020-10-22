@@ -1007,6 +1007,10 @@ export class _Exporter {
             buffer.uri = glTFPrefix + ".bin";
         }
 
+        if (this._options.postExportCallback) {
+            this._options.postExportCallback(this._glTF);
+        }
+
         const jsonText = prettyPrint ? JSON.stringify(this._glTF, null, 2) : JSON.stringify(this._glTF);
 
         return jsonText;

@@ -45,6 +45,10 @@ export interface IExportOptions {
      * List of textures that only need to be exported by reference
      */
     shallowTextureList?: any[];
+    /**
+     * Callback after export
+     */
+    postExportCallback?: (gltf: any) => void;
 }
 
 /**
