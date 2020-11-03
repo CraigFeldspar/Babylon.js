@@ -1197,6 +1197,9 @@ export class _Exporter {
                 node.scale[2] *= -1;
             }
         }
+        if (this._shallowExportList.indexOf(babylonTransformNode) !== -1) {
+            node.scale = [1, 1, -1];
+        }
 
         let rotationQuaternion = Quaternion.RotationYawPitchRoll(babylonTransformNode.rotation.y, babylonTransformNode.rotation.x, babylonTransformNode.rotation.z);
         if (babylonTransformNode.rotationQuaternion) {
