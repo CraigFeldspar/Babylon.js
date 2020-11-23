@@ -228,8 +228,11 @@ export class _GLTFMaterialExporter {
             return _cubicBezierCurve(t, P0.y, P1.y, P2.y, P3.y);
         }
 
-        let diffuse = babylonStandardMaterial.diffuseColor.toLinearSpace().scale(0.5);
         let opacity = babylonStandardMaterial.alpha;
+        let diffuse = babylonStandardMaterial.diffuseColor.toLinearSpace().scale(0.5);
+        if (opacity < 1) {
+            diffuse = diffuse.scale(2);
+        }
         let specularPower = Scalar.Clamp(babylonStandardMaterial.specularPower, 0, _GLTFMaterialExporter._MaxSpecularPower);
 
         let roughness = _solveForRoughness(specularPower);
