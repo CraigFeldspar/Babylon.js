@@ -86,6 +86,9 @@ struct subSurfaceOutParams
             #endif
         #else
             const in sampler2D refractionSampler,
+            #ifdef REALTIME_FILTERING
+                #define radiance(x, y, z, t) radiance2D(x, y, z, t)
+            #endif
             #ifndef LODBASEDMICROSFURACE
                 const in sampler2D refractionSamplerLow,
                 const in sampler2D refractionSamplerHigh,
@@ -181,8 +184,12 @@ struct subSurfaceOutParams
             refractionCoords = vec3(refractionMatrix * vec4(refractionCoords, 0));
         #else
             vec3 vRefractionUVW = vec3(refractionMatrix * (view * vec4(vPositionW + refractionVector * vRefractionInfos.z, 1.0)));
+            #ifdef REALTIME_FILTERING
+            vec3 refractionCoords = vRefractionUVW;
+            #else
             vec2 refractionCoords = vRefractionUVW.xy / vRefractionUVW.z;
             refractionCoords.y = 1.0 - refractionCoords.y;
+            #endif
         #endif
 
         #ifdef SS_LODINREFRACTIONALPHA
