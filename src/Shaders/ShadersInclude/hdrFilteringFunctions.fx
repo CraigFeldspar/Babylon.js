@@ -53,7 +53,7 @@
         const float NUM_SAMPLES_FLOAT_INVERSED = 1. / NUM_SAMPLES_FLOAT;
 
         const float K = 4.;
-
+        const float MIP_OFFSET_2D = 6.0;
         //
         //
         // Importance sampling GGX - Trowbridge-Reitz
@@ -264,12 +264,12 @@
 
                         float omegaS = NUM_SAMPLES_FLOAT_INVERSED * pdf_inversed;
                         float l = log4(omegaS) - log4(omegaP) + log4(K);
-                        float mipLevel = 0.0;//clamp(float(l), 0.0, maxLevel);
+                        float mipLevel = clamp(float(l) - MIP_OFFSET_2D, 0.0, maxLevel);
 
                         weight += NoL;
 
-                        vec3 viewPos = inputN + 100.0 * tbn * L;
-                        vec2 coords = inputN.xy / inputN.z;
+                        vec3 viewPos = inputN + tbn * L;
+                        vec2 coords = viewPos.xy / viewPos.z;
                         coords.y = 1.0 - coords.y;
                         vec3 c = texture2DLodEXT(inputTexture, coords, mipLevel).rgb;
                         #ifdef GAMMA_INPUT

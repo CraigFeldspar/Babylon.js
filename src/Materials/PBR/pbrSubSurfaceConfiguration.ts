@@ -173,6 +173,7 @@ export class PBRSubSurfaceConfiguration {
         return this._indexOfRefraction;
     }
     public set volumeIndexOfRefraction(value: number) {
+        debugger;
         if (value >= 1.0) {
             this._volumeIndexOfRefraction = value;
         } else {
