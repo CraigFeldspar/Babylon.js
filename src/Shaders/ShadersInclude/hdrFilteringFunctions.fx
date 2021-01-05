@@ -220,70 +220,21 @@
         }
 
         #define inline
-        vec3 radiance2D(float alphaG, sampler2D inputTexture, vec3 inputN, vec2 filteringInfo)
+        vec3 refractionScreenSpace(float alphaG, sampler2D inputTexture, vec3 refractionVectorW, vec3 worldPos, mat4 view, mat4 refractionMatrix, vec2 filteringInfo)
         {
-            if (alphaG == 0.) {
-                vec2 coords = inputN.xy / inputN.z;
-                coords.y = 1.0 - coords.y;
-                vec3 c = texture2D(inputTexture, coords).rgb;
-                #ifdef GAMMA_INPUT
-                    c = toLinearSpace(c);
-                #endif
-                return c;
-            } else {
-                vec3 n = normalize(inputN);
-                vec3 result = vec3(0.);
-                vec3 tangent = vec3(1., 0., 0.);
-                tangent = normalize(cross(tangent, n));
-                vec3 bitangent = cross(n, tangent);
-                mat3 tbn = mat3(tangent, bitangent, n);
+            vec3 viewP = vec3(refractionMatrix * view * vec4(worldPos, 1.0));
+            vec2 refractionCoords = viewP.xy / viewP.z;
+            refractionCoords.y = 1.0 - refractionCoords.y;
 
-                float maxLevel = filteringInfo.y;
-                float dim0 = filteringInfo.x;
-                float omegaP = (4. * PI) / (6. * dim0 * dim0);
-
-                float weight = 0.;
-                #if defined(WEBGL2) || defined(WEBGPU)
-                for(uint i = 0u; i < NUM_SAMPLES; ++i)
-                #else
-                for(int i = 0; i < NUM_SAMPLES; ++i)
-                #endif
-                {
-                    vec2 Xi = hammersley(i, NUM_SAMPLES);
-                    vec3 H = hemisphereImportanceSampleDggx(Xi, alphaG);
-
-                    float NoV = 1.;
-                    float NoH = H.z;
-                    float NoH2 = H.z * H.z;
-                    float NoL = 2. * NoH2 - 1.;
-                    vec3 L = vec3(2. * NoH * H.x, 2. * NoH * H.y, NoL);
-                    L = normalize(L);
-
-                    if (NoL > 0.) {
-                        float pdf_inversed = 4. / normalDistributionFunction_TrowbridgeReitzGGX(NoH, alphaG);
-
-                        float omegaS = NUM_SAMPLES_FLOAT_INVERSED * pdf_inversed;
-                        float l = log4(omegaS) - log4(omegaP) + log4(K);
-                        float mipLevel = clamp(float(l) - MIP_OFFSET_2D, 0.0, maxLevel);
-
-                        weight += NoL;
-
-                        vec3 viewPos = inputN + tbn * L;
-                        vec2 coords = viewPos.xy / viewPos.z;
-                        coords.y = 1.0 - coords.y;
-                        vec3 c = texture2DLodEXT(inputTexture, coords, mipLevel).rgb;
-                        #ifdef GAMMA_INPUT
-                            c = toLinearSpace(c);
-                        #endif
-                        result += c * NoL;
-                    }
-                }
-
-                result = result / weight;
-
-                return result;
-            }
+            return texture2D(inputTexture, refractionCoords).xyz;
+            // return vec3(refractionCoords, 1.0);
         }
+
+        vec3 viewIntersectPlane(vec3 viewRay, float depth) {
+            return viewRay * (depth / viewRay.z);
+        }
+
+        // vec3 findDepth(sampler2D depthTexture,)
 
         #define inline
         vec3 radiance(float alphaG, samplerCube inputTexture, vec3 inputN, vec2 filteringInfo)

@@ -431,11 +431,17 @@ export class PBRSubSurfaceConfiguration {
             if (refractionTexture && MaterialFlags.RefractionTextureEnabled) {
                 if (lodBasedMicrosurface) {
                     uniformBuffer.setTexture("refractionSampler", refractionTexture);
+                    if ((<any>refractionTexture).depthRefractionTexture) {
+                        uniformBuffer.setTexture("refractionDepthSampler", (<any>refractionTexture).depthRefractionTexture);
+                    }
                 }
                 else {
                     uniformBuffer.setTexture("refractionSampler", refractionTexture._lodTextureMid || refractionTexture);
                     uniformBuffer.setTexture("refractionSamplerLow", refractionTexture._lodTextureLow || refractionTexture);
                     uniformBuffer.setTexture("refractionSamplerHigh", refractionTexture._lodTextureHigh || refractionTexture);
+                    if ((<any>refractionTexture).depthRefractionTexture) {
+                        uniformBuffer.setTexture("refractionDepthSampler", (<any>refractionTexture).depthRefractionTexture);
+                    }
                 }
             }
         }
@@ -606,7 +612,7 @@ export class PBRSubSurfaceConfiguration {
      */
     public static AddSamplers(samplers: string[]): void {
         samplers.push("thicknessSampler",
-            "refractionSampler", "refractionSamplerLow", "refractionSamplerHigh");
+            "refractionSampler", "refractionSamplerLow", "refractionSamplerHigh", "depthRefractionSampler");
     }
 
     /**

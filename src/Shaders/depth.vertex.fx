@@ -9,7 +9,7 @@ attribute vec3 position;
 #include<instancesDeclaration>
 
 uniform mat4 viewProjection;
-uniform vec2 depthValues;
+uniform mat4 view;
 
 #if defined(ALPHATEST) || defined(NEED_UV)
 varying vec2 vUV;
@@ -22,7 +22,7 @@ attribute vec2 uv2;
 #endif
 #endif
 
-varying float vDepthMetric;
+varying vec3 vViewPos;
 
 void main(void)
 {
@@ -38,7 +38,7 @@ void main(void)
 
 	gl_Position = viewProjection * finalWorld * vec4(positionUpdated, 1.0);
 	
-	vDepthMetric = ((gl_Position.z + depthValues.x) / (depthValues.y));
+	vViewPos = vec3(view * finalWorld * vec4(positionUpdated, 1.0));
 
 #if defined(ALPHATEST) || defined(BASIC_RENDER)
 #ifdef UV1

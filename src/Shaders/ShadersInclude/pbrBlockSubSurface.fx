@@ -222,7 +222,7 @@ struct subSurfaceOutParams
             #endif
 
             #ifdef REALTIME_FILTERING
-                environmentRefraction = vec4(radiance(alphaG, refractionSampler, refractionCoords, vRefractionFilteringInfo), 1.0);
+                environmentRefraction = vec4(refractionScreenSpace(alphaG, refractionDepthSampler, refractionVector, vPositionW, view, refractionMatrix, vRefractionFilteringInfo), 1.0);
             #else
                 environmentRefraction = sampleRefractionLod(refractionSampler, refractionCoords, requestedRefractionLOD);
             #endif

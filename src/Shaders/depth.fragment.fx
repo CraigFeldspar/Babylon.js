@@ -3,7 +3,7 @@ varying vec2 vUV;
 uniform sampler2D diffuseSampler;
 #endif
 
-varying float vDepthMetric;
+varying vec3 vViewPos;
 
 #ifdef PACKED
 	#include<packingFunctions>
@@ -24,9 +24,9 @@ void main(void)
 	#endif
 #else
 	#ifdef PACKED
-		gl_FragColor = pack(vDepthMetric);
+		gl_FragColor = pack(vViewPos.z);
 	#else
-		gl_FragColor = vec4(vDepthMetric, 0.0, 0.0, 1.0);
+		gl_FragColor = vec4(vViewPos.z, 0.0, 0.0, 1.0);
 	#endif
 #endif
 }

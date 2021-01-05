@@ -12,6 +12,9 @@ import { Mesh } from "babylonjs/Meshes/mesh";
 import { Texture } from "babylonjs/Materials/Textures/texture";
 import { RenderTargetTexture } from "babylonjs/Materials/Textures/renderTargetTexture";
 import { Observable } from "babylonjs/Misc/observable";
+import { ShaderMaterial } from "babylonjs/Materials/shaderMaterial";
+import { Color4 } from "babylonjs/Maths/math.color";
+import { Constants } from "babylonjs/Engines/constants";
 
 interface ITransmissionHelperHolder {
     /**
@@ -49,6 +52,7 @@ class TransmissionHelper {
     private _options: ITransmissionHelperOptions;
 
     private _opaqueRenderTarget: Nullable<RenderTargetTexture> = null;
+    private _opaqueDepthRenderTarget: Nullable<RenderTargetTexture> = null;
     private _opaqueMeshesCache: Mesh[] = [];
     private _transparentMeshesCache: Mesh[] = [];
 
@@ -163,6 +167,7 @@ class TransmissionHelper {
             if (useTransmission) {
                 if (mesh.material instanceof PBRMaterial) {
                     mesh.material.subSurface.refractionTexture = this._opaqueRenderTarget;
+                    (<any>mesh.material.refractionTexture).depthRefractionTexture = this._opaqueDepthRenderTarget;
                 }
                 if (opaqueIdx !== -1) {
                     this._opaqueMeshesCache.splice(opaqueIdx, 1);
@@ -206,7 +211,35 @@ class TransmissionHelper {
         }
 
         this._opaqueRenderTarget = new RenderTargetTexture("opaqueSceneTexture", this._options.renderSize, this._scene, true);
+        this._opaqueDepthRenderTarget = new RenderTargetTexture("opaqueSceneDepthTexture", this._options.renderSize, this._scene, true, undefined, Constants.TEXTURETYPE_FLOAT);
         this._opaqueRenderTarget.renderList = this._opaqueMeshesCache;
+        this._opaqueDepthRenderTarget.renderList = this._opaqueMeshesCache;
+
+        var depthMaterial = new ShaderMaterial("depth", this._scene, "depth", {
+            uniforms: ["viewProjection", "view", "world"]
+        });
+
+        this._opaqueDepthRenderTarget.onBeforeRender = () => {
+            for (let i = 0; i < this._opaqueDepthRenderTarget!.renderList!.length; i++) {
+                const mesh = this._opaqueDepthRenderTarget!.renderList![i];
+                if (mesh.material) {
+                    (<any>mesh).__savedMaterial = mesh.material;
+                    mesh.material = depthMaterial;
+                }
+            }
+        }
+
+        this._opaqueDepthRenderTarget.onAfterRender = () => {
+            for (let i = 0; i < this._opaqueDepthRenderTarget!.renderList!.length; i++) {
+                const mesh = this._opaqueDepthRenderTarget!.renderList![i];
+                if ((<any>mesh).__savedMaterial) {
+                    mesh.material = (<any>mesh).__savedMaterial;
+                }
+            }
+        }
+
+        this._opaqueDepthRenderTarget.clearColor = new Color4(0.0, 0.0, 0.0, 0.0);
+
         // this._opaqueRenderTarget.clearColor = new Color4(0.0, 0.0, 0.0, 0.0);
         this._opaqueRenderTarget.gammaSpace = true;
         this._opaqueRenderTarget.lodGenerationScale = 1;
@@ -218,6 +251,7 @@ class TransmissionHelper {
         } else {
             opaqueRTIndex = this._scene.customRenderTargets.length;
             this._scene.customRenderTargets.push(this._opaqueRenderTarget);
+            this._scene.customRenderTargets.push(this._opaqueDepthRenderTarget);
         }
 
         // If there are other layers, they should be included in the render of the opaque background.
@@ -230,6 +264,7 @@ class TransmissionHelper {
         this._transparentMeshesCache.forEach((mesh: AbstractMesh) => {
             if (this.shouldRenderAsTransmission(mesh.material) && mesh.material instanceof PBRMaterial) {
                 mesh.material.refractionTexture = this._opaqueRenderTarget;
+                (<any>mesh.material.refractionTexture).depthRefractionTexture = this._opaqueDepthRenderTarget;
             }
         });
     }
@@ -306,7 +341,7 @@ export class KHR_materials_transmission implements IGLTFLoaderExtension {
         pbrMaterial.subSurface.isRefractionEnabled = true;
 
         // Since this extension models thin-surface transmission only, we must make IOR = 1.0
-        pbrMaterial.subSurface.volumeIndexOfRefraction = 1.0;
+        pbrMaterial.subSurface.volumeIndexOfRefraction = 1.3;
 
         // Albedo colour will tint transmission.
         pbrMaterial.subSurface.useAlbedoToTintRefraction = true;
