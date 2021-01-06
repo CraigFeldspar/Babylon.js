@@ -53,6 +53,8 @@ class TransmissionHelper {
 
     private _opaqueRenderTarget: Nullable<RenderTargetTexture> = null;
     private _opaqueDepthRenderTarget: Nullable<RenderTargetTexture> = null;
+    private _backDepthRenderTarget: Nullable<RenderTargetTexture> = null;
+    private _backNormalRenderTarget: Nullable<RenderTargetTexture> = null;
     private _opaqueMeshesCache: Mesh[] = [];
     private _transparentMeshesCache: Mesh[] = [];
 
@@ -172,8 +174,16 @@ class TransmissionHelper {
                 if (opaqueIdx !== -1) {
                     this._opaqueMeshesCache.splice(opaqueIdx, 1);
                     this._transparentMeshesCache.push(mesh);
+                    if (this._backDepthRenderTarget!.renderList!.indexOf(mesh) === -1) {
+                        this._backDepthRenderTarget!.renderList!.push(mesh);
+                        this._backNormalRenderTarget!.renderList!.push(mesh);
+                    }
                 } else if (transparentIdx === -1) {
                     this._transparentMeshesCache.push(mesh);
+                    if (this._backDepthRenderTarget!.renderList!.indexOf(mesh) === -1) {
+                        this._backDepthRenderTarget!.renderList!.push(mesh);
+                        this._backNormalRenderTarget!.renderList!.push(mesh);
+                    }
                 }
                 // If the material is opaque, make sure that it's added to the opaque list and removed from the transparent list
             } else {
@@ -183,6 +193,25 @@ class TransmissionHelper {
                 } else if (opaqueIdx === -1) {
                     this._opaqueMeshesCache.push(mesh);
                 }
+            }
+        }
+    }
+
+    private _enableRenderMat(meshes: AbstractMesh[], mat: Material) {
+        for (let i = 0; i < meshes.length; i++) {
+            const mesh = meshes[i];
+            if (mesh.material) {
+                (<any>mesh).__savedMaterial = mesh.material;
+                mesh.material = mat;
+            }
+        }
+    }
+
+    private _disableRenderMat(meshes: AbstractMesh[]) {
+        for (let i = 0; i < meshes.length; i++) {
+            const mesh = meshes[i];
+            if ((<any>mesh).__savedMaterial) {
+                mesh.material = (<any>mesh).__savedMaterial;
             }
         }
     }
@@ -212,30 +241,50 @@ class TransmissionHelper {
 
         this._opaqueRenderTarget = new RenderTargetTexture("opaqueSceneTexture", this._options.renderSize, this._scene, true);
         this._opaqueDepthRenderTarget = new RenderTargetTexture("opaqueSceneDepthTexture", this._options.renderSize, this._scene, true, undefined, Constants.TEXTURETYPE_FLOAT);
+        this._backDepthRenderTarget = new RenderTargetTexture("backDepthRenderTarget", this._options.renderSize, this._scene, true, undefined, Constants.TEXTURETYPE_FLOAT);
+        this._backNormalRenderTarget = new RenderTargetTexture("backNormalRenderTarget", this._options.renderSize, this._scene, true);
+
         this._opaqueRenderTarget.renderList = this._opaqueMeshesCache;
         this._opaqueDepthRenderTarget.renderList = this._opaqueMeshesCache;
+
+        var normalMaterial = new ShaderMaterial("normalTest", this._scene, "normal", {
+            uniforms: ["viewProjection", "view", "world"]
+        });
 
         var depthMaterial = new ShaderMaterial("depth", this._scene, "depth", {
             uniforms: ["viewProjection", "view", "world"]
         });
 
+        this._backDepthRenderTarget.onBeforeRender = () => {
+            const gl = this._scene.getEngine()._gl;
+            gl.enable(gl.CULL_FACE);
+            gl.cullFace(gl.FRONT);
+            this._enableRenderMat(this._backDepthRenderTarget!.renderList!, normalMaterial);
+        };
+        this._backDepthRenderTarget.onAfterRender = () => {
+            const gl = this._scene.getEngine()._gl;
+            gl.cullFace(gl.BACK);
+            this._disableRenderMat(this._backDepthRenderTarget!.renderList!);
+        };
+
+        this._backNormalRenderTarget.onBeforeRender = () => {
+            const gl = this._scene.getEngine()._gl;
+            gl.enable(gl.CULL_FACE);
+            gl.cullFace(gl.FRONT);
+            this._enableRenderMat(this._backNormalRenderTarget!.renderList!, depthMaterial);
+        };
+        this._backNormalRenderTarget.onAfterRender = () => {
+            const gl = this._scene.getEngine()._gl;
+            gl.cullFace(gl.BACK);
+            this._disableRenderMat(this._backNormalRenderTarget!.renderList!);
+        };
+
         this._opaqueDepthRenderTarget.onBeforeRender = () => {
-            for (let i = 0; i < this._opaqueDepthRenderTarget!.renderList!.length; i++) {
-                const mesh = this._opaqueDepthRenderTarget!.renderList![i];
-                if (mesh.material) {
-                    (<any>mesh).__savedMaterial = mesh.material;
-                    mesh.material = depthMaterial;
-                }
-            }
+            this._enableRenderMat(this._opaqueDepthRenderTarget!.renderList!, depthMaterial);
         };
 
         this._opaqueDepthRenderTarget.onAfterRender = () => {
-            for (let i = 0; i < this._opaqueDepthRenderTarget!.renderList!.length; i++) {
-                const mesh = this._opaqueDepthRenderTarget!.renderList![i];
-                if ((<any>mesh).__savedMaterial) {
-                    mesh.material = (<any>mesh).__savedMaterial;
-                }
-            }
+            this._disableRenderMat(this._opaqueDepthRenderTarget!.renderList!);
         };
 
         this._opaqueDepthRenderTarget.clearColor = new Color4(10., 0.0, 0.0, 1.0);
@@ -252,6 +301,8 @@ class TransmissionHelper {
             opaqueRTIndex = this._scene.customRenderTargets.length;
             this._scene.customRenderTargets.push(this._opaqueRenderTarget);
             this._scene.customRenderTargets.push(this._opaqueDepthRenderTarget);
+            this._scene.customRenderTargets.push(this._backDepthRenderTarget);
+            this._scene.customRenderTargets.push(this._backNormalRenderTarget);
         }
 
         // If there are other layers, they should be included in the render of the opaque background.
@@ -265,6 +316,8 @@ class TransmissionHelper {
             if (this.shouldRenderAsTransmission(mesh.material) && mesh.material instanceof PBRMaterial) {
                 mesh.material.refractionTexture = this._opaqueRenderTarget;
                 (<any>mesh.material.refractionTexture).depthRefractionTexture = this._opaqueDepthRenderTarget;
+                (<any>mesh.material.refractionTexture).backDepthRefractionTexture = this._backDepthRenderTarget;
+                (<any>mesh.material.refractionTexture).backNormalRefractionTexture = this._backNormalRenderTarget;
             }
         });
     }
