@@ -433,6 +433,8 @@ export class PBRSubSurfaceConfiguration {
                     uniformBuffer.setTexture("refractionSampler", refractionTexture);
                     if ((<any>refractionTexture).depthRefractionTexture) {
                         uniformBuffer.setTexture("refractionDepthSampler", (<any>refractionTexture).depthRefractionTexture);
+                        uniformBuffer.setTexture("backNormalTexture", (<any>refractionTexture).backNormalRefractionTexture);
+                        uniformBuffer.setTexture("backDepthTexture", (<any>refractionTexture).backDepthRefractionTexture);
                     }
                 }
                 else {
@@ -441,6 +443,8 @@ export class PBRSubSurfaceConfiguration {
                     uniformBuffer.setTexture("refractionSamplerHigh", refractionTexture._lodTextureHigh || refractionTexture);
                     if ((<any>refractionTexture).depthRefractionTexture) {
                         uniformBuffer.setTexture("refractionDepthSampler", (<any>refractionTexture).depthRefractionTexture);
+                        uniformBuffer.setTexture("backNormalTexture", (<any>refractionTexture).backNormalRefractionTexture);
+                        uniformBuffer.setTexture("backDepthTexture", (<any>refractionTexture).backDepthRefractionTexture);
                     }
                 }
             }
@@ -612,7 +616,7 @@ export class PBRSubSurfaceConfiguration {
      */
     public static AddSamplers(samplers: string[]): void {
         samplers.push("thicknessSampler",
-            "refractionSampler", "refractionSamplerLow", "refractionSamplerHigh", "refractionDepthSampler");
+            "refractionSampler", "refractionSamplerLow", "refractionSamplerHigh", "refractionDepthSampler", "backNormalTexture", "backDepthTexture");
     }
 
     /**

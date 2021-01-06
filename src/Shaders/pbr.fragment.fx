@@ -490,6 +490,8 @@ void main(void) {
             #endif
             refractionSampler,
             refractionDepthSampler,
+            backNormalTexture,
+            backDepthTexture,
             #ifndef LODBASEDMICROSFURACE
                 refractionSamplerLow,
                 refractionSamplerHigh,

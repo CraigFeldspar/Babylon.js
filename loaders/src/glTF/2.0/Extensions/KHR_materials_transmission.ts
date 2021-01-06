@@ -170,6 +170,8 @@ class TransmissionHelper {
                 if (mesh.material instanceof PBRMaterial) {
                     mesh.material.subSurface.refractionTexture = this._opaqueRenderTarget;
                     (<any>mesh.material.refractionTexture).depthRefractionTexture = this._opaqueDepthRenderTarget;
+                    (<any>mesh.material.refractionTexture).backDepthRefractionTexture = this._backDepthRenderTarget;
+                    (<any>mesh.material.refractionTexture).backNormalRefractionTexture = this._backNormalRenderTarget;
                 }
                 if (opaqueIdx !== -1) {
                     this._opaqueMeshesCache.splice(opaqueIdx, 1);
@@ -242,12 +244,12 @@ class TransmissionHelper {
         this._opaqueRenderTarget = new RenderTargetTexture("opaqueSceneTexture", this._options.renderSize, this._scene, true);
         this._opaqueDepthRenderTarget = new RenderTargetTexture("opaqueSceneDepthTexture", this._options.renderSize, this._scene, true, undefined, Constants.TEXTURETYPE_FLOAT);
         this._backDepthRenderTarget = new RenderTargetTexture("backDepthRenderTarget", this._options.renderSize, this._scene, true, undefined, Constants.TEXTURETYPE_FLOAT);
-        this._backNormalRenderTarget = new RenderTargetTexture("backNormalRenderTarget", this._options.renderSize, this._scene, true);
+        this._backNormalRenderTarget = new RenderTargetTexture("backNormalRenderTarget", this._options.renderSize, this._scene, true, undefined, Constants.TEXTURETYPE_FLOAT);
 
         this._opaqueRenderTarget.renderList = this._opaqueMeshesCache;
         this._opaqueDepthRenderTarget.renderList = this._opaqueMeshesCache;
 
-        var normalMaterial = new ShaderMaterial("normalTest", this._scene, "normal", {
+        var normalMaterial = new ShaderMaterial("normalTest", this._scene, "normalTest", {
             uniforms: ["viewProjection", "view", "world"]
         });
 
@@ -259,7 +261,7 @@ class TransmissionHelper {
             const gl = this._scene.getEngine()._gl;
             gl.enable(gl.CULL_FACE);
             gl.cullFace(gl.FRONT);
-            this._enableRenderMat(this._backDepthRenderTarget!.renderList!, normalMaterial);
+            this._enableRenderMat(this._backDepthRenderTarget!.renderList!, depthMaterial);
         };
         this._backDepthRenderTarget.onAfterRender = () => {
             const gl = this._scene.getEngine()._gl;
@@ -271,7 +273,7 @@ class TransmissionHelper {
             const gl = this._scene.getEngine()._gl;
             gl.enable(gl.CULL_FACE);
             gl.cullFace(gl.FRONT);
-            this._enableRenderMat(this._backNormalRenderTarget!.renderList!, depthMaterial);
+            this._enableRenderMat(this._backNormalRenderTarget!.renderList!, normalMaterial);
         };
         this._backNormalRenderTarget.onAfterRender = () => {
             const gl = this._scene.getEngine()._gl;

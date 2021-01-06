@@ -87,6 +87,8 @@ struct subSurfaceOutParams
         #else
             const in sampler2D refractionSampler,
             const in sampler2D refractionDepthSampler,
+            const in sampler2D backNormalTexture, 
+            const in sampler2D backDepthTexture,
             #ifdef REALTIME_FILTERING
                 #define radiance(x, y, z, t) radiance2D(x, y, z, t)
             #endif
@@ -223,7 +225,8 @@ struct subSurfaceOutParams
             #endif
 
             #ifdef REALTIME_FILTERING
-                environmentRefraction = vec4(refractionScreenSpace(alphaG, refractionSampler, refractionDepthSampler, refractionVector, vPositionW, view, refractionMatrix, vRefractionFilteringInfo), 1.0);
+        // vec3 refractionCoords, sampler2D refractionSampler, sampler2D depthTexture, sampler2D backNormalTexture, sampler2D backDepthTexture, vec3 refractionVectorW, vec3 worldPos, mat4 view, mat4 refractionMatrix, vec4 vRefractionInfos
+                environmentRefraction = vec4(refractionScreenSpace(refractionCoords, refractionSampler, refractionDepthSampler, backNormalTexture, backDepthTexture, refractionVector, vPositionW, view, refractionMatrix, vRefractionInfos), 1.0);
             #else
                 environmentRefraction = sampleRefractionLod(refractionSampler, refractionCoords, requestedRefractionLOD);
             #endif

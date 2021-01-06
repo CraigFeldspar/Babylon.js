@@ -247,6 +247,8 @@
             
             uniform sampler2D refractionSampler;
             uniform sampler2D refractionDepthSampler;
+            uniform sampler2D backNormalTexture;
+            uniform sampler2D backDepthTexture;
 
             #ifdef LODBASEDMICROSFURACE
                 #define sampleRefractionLod(s, c, l) texture2DLodEXT(s, c, l)
