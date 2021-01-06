@@ -227,7 +227,7 @@ class TransmissionHelper {
                     mesh.material = depthMaterial;
                 }
             }
-        }
+        };
 
         this._opaqueDepthRenderTarget.onAfterRender = () => {
             for (let i = 0; i < this._opaqueDepthRenderTarget!.renderList!.length; i++) {
@@ -236,9 +236,9 @@ class TransmissionHelper {
                     mesh.material = (<any>mesh).__savedMaterial;
                 }
             }
-        }
+        };
 
-        this._opaqueDepthRenderTarget.clearColor = new Color4(0.0, 0.0, 0.0, 0.0);
+        this._opaqueDepthRenderTarget.clearColor = new Color4(10., 0.0, 0.0, 1.0);
 
         // this._opaqueRenderTarget.clearColor = new Color4(0.0, 0.0, 0.0, 0.0);
         this._opaqueRenderTarget.gammaSpace = true;
@@ -341,7 +341,7 @@ export class KHR_materials_transmission implements IGLTFLoaderExtension {
         pbrMaterial.subSurface.isRefractionEnabled = true;
 
         // Since this extension models thin-surface transmission only, we must make IOR = 1.0
-        pbrMaterial.subSurface.volumeIndexOfRefraction = 1.3;
+        // pbrMaterial.subSurface.volumeIndexOfRefraction = 1.3;
 
         // Albedo colour will tint transmission.
         pbrMaterial.subSurface.useAlbedoToTintRefraction = true;

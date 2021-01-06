@@ -612,7 +612,7 @@ export class PBRSubSurfaceConfiguration {
      */
     public static AddSamplers(samplers: string[]): void {
         samplers.push("thicknessSampler",
-            "refractionSampler", "refractionSamplerLow", "refractionSamplerHigh", "depthRefractionSampler");
+            "refractionSampler", "refractionSamplerLow", "refractionSamplerHigh", "refractionDepthSampler");
     }
 
     /**

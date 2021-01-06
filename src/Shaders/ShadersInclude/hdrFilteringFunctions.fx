@@ -219,22 +219,42 @@
             return result;
         }
 
-        #define inline
-        vec3 refractionScreenSpace(float alphaG, sampler2D inputTexture, vec3 refractionVectorW, vec3 worldPos, mat4 view, mat4 refractionMatrix, vec2 filteringInfo)
-        {
-            vec3 viewP = vec3(refractionMatrix * view * vec4(worldPos, 1.0));
-            vec2 refractionCoords = viewP.xy / viewP.z;
+        vec3 viewIntersectPlane(vec3 viewRayW, vec3 worldPos, float depth) {
+            vec3 viewPos = (view * vec4(worldPos, 1.0)).xyz;
+            vec3 viewRay = (mat3(view) * viewRayW).xyz;
+
+            return viewPos + (depth - viewPos.z) / viewRay.z * viewRay;
+        }
+
+        vec3 iterateIntersection(vec3 viewRayW, vec3 worldPos, sampler2D colorTexture, sampler2D depthTexture, mat4 refractionMatrix) {
+            int iterations = 7;
+            vec3 viewP;
+            vec2 refractionCoords;
+            viewP = vec3(refractionMatrix * (view * vec4(worldPos, 1.0)));
+            refractionCoords = viewP.xy / viewP.z;
             refractionCoords.y = 1.0 - refractionCoords.y;
 
-            return texture2D(inputTexture, refractionCoords).xyz;
+            float depth = 10.; //texture2D(depthTexture, refractionCoords).r;
+            // return vec3(depth * 10.);
+
+            for (int i = 0; i < iterations; i++) {
+                vec3 intersect = viewIntersectPlane(viewRayW, worldPos, depth);
+                viewP = vec3(refractionMatrix * vec4(intersect, 1.0));
+                refractionCoords = viewP.xy / viewP.z;
+                refractionCoords.y = 1.0 - refractionCoords.y;
+
+                depth = texture2D(depthTexture, refractionCoords).r;
+
+            }
+
+            return texture2D(colorTexture, refractionCoords).xyz;
+        }
+
+        vec3 refractionScreenSpace(float alphaG, sampler2D colorTexture, sampler2D depthTexture, vec3 refractionVectorW, vec3 worldPos, mat4 view, mat4 refractionMatrix, vec2 filteringInfo)
+        {
+            return iterateIntersection(refractionVectorW, worldPos, colorTexture, depthTexture, refractionMatrix);
             // return vec3(refractionCoords, 1.0);
         }
-
-        vec3 viewIntersectPlane(vec3 viewRay, float depth) {
-            return viewRay * (depth / viewRay.z);
-        }
-
-        // vec3 findDepth(sampler2D depthTexture,)
 
         #define inline
         vec3 radiance(float alphaG, samplerCube inputTexture, vec3 inputN, vec2 filteringInfo)

@@ -489,6 +489,7 @@ void main(void) {
                 alphaG,
             #endif
             refractionSampler,
+            refractionDepthSampler,
             #ifndef LODBASEDMICROSFURACE
                 refractionSamplerLow,
                 refractionSamplerHigh,
