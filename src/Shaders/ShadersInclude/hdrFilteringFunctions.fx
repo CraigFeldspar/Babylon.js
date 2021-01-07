@@ -223,7 +223,8 @@
             float backDepth = texture2D(backDepthTexture, coords).r;
             float depthDiff = abs(depth - backDepth);
             // New position for out ray
-            newPos = worldPos + normalize(refractedRayWorld) * 0.5 * depthDiff;
+            // Travel in the medium
+            newPos = worldPos + normalize(refractedRayWorld) * 0.8 * depthDiff; // multiplying by half is a dirty approximation to avoid to precompute thickness
             vec3 newPosView = vec3(refractionMatrix * (view * vec4(newPos, 1.0)));
             vec2 refractionCoords = newPosView.xy / newPosView.z;
             refractionCoords.y = 1.0 - refractionCoords.y;
@@ -232,7 +233,8 @@
             // New direction for out ray
             newRefraction = refract(normalize(refractedRayWorld), normalize(-newNormal), vRefractionInfos.y);
 
-            return vec3(newRefraction - refractedRayWorld);
+            // Return value only for debug purposes
+            return vec3(newPos - worldPos);
         }
 
         vec3 viewIntersectPlane(vec3 viewRayW, vec3 worldPos, float depth) {
@@ -243,7 +245,7 @@
         }
 
         vec3 iterateIntersection(vec3 viewRayW, vec3 worldPos, sampler2D colorTexture, sampler2D depthTexture, mat4 refractionMatrix) {
-            int iterations = 5;
+            int iterations = 2;
             vec3 viewP;
             vec2 refractionCoords;
             viewP = vec3(refractionMatrix * (view * vec4(worldPos, 1.0)));
@@ -266,7 +268,7 @@
             return texture2D(colorTexture, refractionCoords).xyz;
         }
 
-        vec3 refractionScreenSpace(vec3 refractionCoords2, sampler2D refractionSampler, sampler2D depthTexture, sampler2D backNormalTexture, sampler2D backDepthTexture, vec3 refractionVectorW, vec3 worldPos, mat4 view, mat4 refractionMatrix, vec4 vRefractionInfos)
+        vec3 refractionScreenSpace(vec3 normalW, sampler2D refractionSampler, sampler2D depthTexture, sampler2D backNormalTexture, sampler2D backDepthTexture, vec3 refractionVectorW, vec3 worldPos, mat4 view, mat4 refractionMatrix, vec4 vRefractionInfos)
         {
             vec3 pos;
             vec3 dir;
@@ -277,6 +279,8 @@
             refractionCoords = viewP.xy / viewP.z;
             refractionCoords.y = 1.0 - refractionCoords.y;
 
+            // return normalize(texture2D(backNormalTexture, refractionCoords).xyz) + normalize(normalW);
+            // return normalize(getRefractionOut(normalize(viewPos), depth, refractionVectorW, refractionCoords, worldPos, backNormalTexture, backDepthTexture, refractionMatrix, vRefractionInfos, dir, pos) - normalize(refractionVectorW));
             getRefractionOut(normalize(viewPos), depth, refractionVectorW, refractionCoords, worldPos, backNormalTexture, backDepthTexture, refractionMatrix, vRefractionInfos, dir, pos);
             return iterateIntersection(dir, pos, refractionSampler, depthTexture, refractionMatrix);
             // return vec3(refractionCoords, 1.0);

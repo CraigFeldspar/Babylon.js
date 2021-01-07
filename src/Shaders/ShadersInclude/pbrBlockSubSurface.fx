@@ -226,7 +226,7 @@ struct subSurfaceOutParams
 
             #ifdef REALTIME_FILTERING
         // vec3 refractionCoords, sampler2D refractionSampler, sampler2D depthTexture, sampler2D backNormalTexture, sampler2D backDepthTexture, vec3 refractionVectorW, vec3 worldPos, mat4 view, mat4 refractionMatrix, vec4 vRefractionInfos
-                environmentRefraction = vec4(refractionScreenSpace(refractionCoords, refractionSampler, refractionDepthSampler, backNormalTexture, backDepthTexture, refractionVector, vPositionW, view, refractionMatrix, vRefractionInfos), 1.0);
+                environmentRefraction = vec4(refractionScreenSpace(normalW, refractionSampler, refractionDepthSampler, backNormalTexture, backDepthTexture, refractionVector, vPositionW, view, refractionMatrix, vRefractionInfos), 1.0);
             #else
                 environmentRefraction = sampleRefractionLod(refractionSampler, refractionCoords, requestedRefractionLOD);
             #endif
