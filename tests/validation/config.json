@@ -1145,7 +1145,7 @@
         {
             "title": "Prepass SSAO + on/off post-process",
             "renderCount": 10,
-            "playgroundId": "#1VI6WV#20",
+            "playgroundId": "#1VI6WV#21",
             "excludedEngines": ["webgl1"],
             "referenceImage": "prepass-ssao-on-off-pp.png"
         },
