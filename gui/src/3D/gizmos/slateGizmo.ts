@@ -144,7 +144,7 @@ export class SlateGizmo extends Gizmo {
             node.parent = this._handlesParent;
             this._assignDragBehavior(
                 node,
-                (originStart: Vector3, dimensionsStart: Vector3, offset: Vector3, masks: HandleMasks) => this._moveHandle(originStart, dimensionsStart, offset, masks, true),
+                (originStart: Vector3, dimensionsStart: Vector3, backPlateDimensionsStart: Vector3, offset: Vector3, masks: HandleMasks) => this._moveHandle(originStart, dimensionsStart, backPlateDimensionsStart, offset, masks, true),
                 masksCorners[i]
             );
         }
@@ -157,7 +157,7 @@ export class SlateGizmo extends Gizmo {
             node.parent = this._handlesParent;
             this._assignDragBehavior(
                 node,
-                (originStart: Vector3, dimensionsStart: Vector3, offset: Vector3, masks: HandleMasks) => this._moveHandle(originStart, dimensionsStart, offset, masks, false),
+                (originStart: Vector3, dimensionsStart: Vector3, backPlateDimensionsStart: Vector3, offset: Vector3, masks: HandleMasks) => this._moveHandle(originStart, dimensionsStart, backPlateDimensionsStart, offset, masks, false),
                 masksSides[i]
             );
         }
@@ -175,16 +175,17 @@ export class SlateGizmo extends Gizmo {
         vector.copyFrom(axis).scaleInPlace(dot);
     }
 
-    private _clampDimensions(vector: Vector3, dimensions: Vector3, mask: Vector3, keepAspectRatio: boolean = false) {
+    private _clampDimensions(vector: Vector3, dimensions: Vector3, backPlateDimensions: Vector3, mask: Vector3, keepAspectRatio: boolean = false) {
         const impact = TmpVectors.Vector3[0];
         impact.copyFrom(vector).multiplyInPlace(mask);
 
         const clampedDimensions = TmpVectors.Vector3[1];
         clampedDimensions.copyFromFloats(
-            Math.max(this._attachedSlate!.minDimensions.x, impact.x + dimensions.x),
-            Math.max(this._attachedSlate!.minDimensions.y, impact.y + dimensions.y),
+            Math.max(this._attachedSlate!.minDimensionsContent.x, impact.x + dimensions.x),
+            Math.max(this._attachedSlate!.minDimensionsContent.y, impact.y + dimensions.y - backPlateDimensions.y - this.attachedSlate!.backPlateMargin),
             0
         );
+        clampedDimensions.y += backPlateDimensions.y + this.attachedSlate!.backPlateMargin;
 
         // Calculating the real impact of vector on clamped dimensions
         impact.copyFrom(clampedDimensions).subtractInPlace(dimensions);
@@ -201,7 +202,7 @@ export class SlateGizmo extends Gizmo {
         vector.y = Math.sign(vector.y) * Math.abs(factor.y);
     }
 
-    private _moveHandle(originStart: Vector3, dimensionsStart: Vector3, offset: Vector3, masks: HandleMasks, isCorner: boolean) {
+    private _moveHandle(originStart: Vector3, dimensionsStart: Vector3, backPlateDimensionsStart: Vector3, offset: Vector3, masks: HandleMasks, isCorner: boolean) {
         if (!this._attachedSlate) {
             return;
         }
@@ -210,7 +211,7 @@ export class SlateGizmo extends Gizmo {
             const aspectRatio = dimensionsStart.x / dimensionsStart.y;
             this._keepAspectRatio(offset, aspectRatio, masks.dimensions.x * masks.dimensions.y < 0);
         }
-        this._clampDimensions(offset, dimensionsStart, masks.dimensions, isCorner);
+        this._clampDimensions(offset, dimensionsStart, backPlateDimensionsStart, masks.dimensions, isCorner);
 
         const offsetOriginMasked = TmpVectors.Vector3[0];
         const offsetDimensionsMasked = TmpVectors.Vector3[1];
@@ -220,9 +221,13 @@ export class SlateGizmo extends Gizmo {
         this._attachedSlate.origin.copyFrom(originStart).addInPlace(offsetOriginMasked);
         this._attachedSlate.dimensions.copyFrom(dimensionsStart).addInPlace(offsetDimensionsMasked);
         this._attachedSlate.backplateDimensions.x = this._attachedSlate.dimensions.x;
+
+        if (isCorner) {
+            this._attachedSlate.backplateDimensions.y = backPlateDimensionsStart.y * this._attachedSlate.dimensions.y / dimensionsStart.y;
+        }
     }
 
-    private _assignDragBehavior(node: Node, moveFn: (originStart: Vector3, dimensionsStart: Vector3, offset: Vector3, masks: HandleMasks) => void, masks: HandleMasks) {
+    private _assignDragBehavior(node: Node, moveFn: (originStart: Vector3, dimensionsStart: Vector3, backPlateDimensionsStart: Vector3, offset: Vector3, masks: HandleMasks) => void, masks: HandleMasks) {
         var dragBehavior = new PointerDragBehavior({
             dragPlaneNormal: this._dragPlaneNormal,
         });
@@ -231,6 +236,7 @@ export class SlateGizmo extends Gizmo {
         node.addBehavior(dragBehavior);
 
         let dimensionsStart = new Vector3();
+        let backPlateDimensionsStart = new Vector3();
         let originStart = new Vector3();
         let dragOrigin = new Vector3();
         let toObjectFrame = new Matrix();
@@ -239,6 +245,7 @@ export class SlateGizmo extends Gizmo {
         this._dragStartObserver = dragBehavior.onDragStartObservable.add((event) => {
             if (this.attachedSlate && this.attachedMesh) {
                 dimensionsStart.copyFrom(this.attachedSlate.dimensions);
+                backPlateDimensionsStart.copyFrom(this.attachedSlate.backplateDimensions);
                 originStart.copyFrom(this.attachedSlate.origin);
                 dragOrigin.copyFrom(event.dragPlanePoint);
                 toObjectFrame.copyFrom(this.attachedMesh.computeWorldMatrix(true));
@@ -254,7 +261,7 @@ export class SlateGizmo extends Gizmo {
                 this._tmpVector.subtractInPlace(dragOrigin);
                 Vector3.TransformNormalToRef(this._tmpVector, toObjectFrame, this._tmpVector);
 
-                moveFn(originStart, dimensionsStart, this._tmpVector, masks);
+                moveFn(originStart, dimensionsStart, backPlateDimensionsStart, this._tmpVector, masks);
                 this.attachedSlate._positionElements();
                 this.updateBoundingBox();
             }

@@ -39,9 +39,9 @@ export class HolographicSlate extends ContentDisplay3D {
     public dimensions = new Vector3(5, 3, 0.04);
 
     /**
-     * Minimum dimensions of the slate
+     * Minimum dimensions of the content plate of the slate
      */
-    public minDimensions = new Vector3(3, 1.5, 0.04);
+    public minDimensionsContent = new Vector3(3, 1.5, 0.04);
 
     /**
      * Dimensions of the backplate
